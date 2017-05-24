@@ -21,5 +21,4 @@ module.exports = (app) => {
   app.post('/users/signin', (req, res) => {
     signInUser(req, res, firebase);
   });
-
 };
