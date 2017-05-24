@@ -5,12 +5,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 
-//const routes = require('./Server/Routes/postItRoutes');
-
+//const controllers = require('./Server/Controllers/postItController');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//routes(app);
+
+
+controllers(app);
 
 app.listen(port, () => {
   console.log('we are live on '+ port);
