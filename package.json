@@ -4,7 +4,8 @@
   "description": "Post It App",
   "main": "index.js",
   "scripts": {
-    "start": "babel-watch server.js",
+    "build:dist": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./server/test,./client/test,./screenshots,./reports,./migrations,./coverage,docs,testSetup.js --copy-files",
+    "start": "npm run build:dist && npm run webpack && node dist/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nnamso Edemenang",
@@ -16,6 +17,7 @@
     "firebase": "^4.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "rimraf": "^2.6.1",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
   },
