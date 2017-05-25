@@ -11,5 +11,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 controllers(app);
 app.listen(port, () => {
-  console.log(`we are live on ${port}`);
+  console.log(`We are live on ${port}`);
 });

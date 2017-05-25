@@ -1,5 +1,7 @@
 const registerNewUser = require('../Routes/registerNewUser');
 const signInUser = require('../Routes/signInUser');
+const createNewGroup = require('../Routes/createNewGroup');
+ // const addUserToGroup = require('../Routes/addUserToGroup');
 
 const firebase = require('firebase');
 
@@ -21,4 +23,11 @@ module.exports = (app) => {
   app.post('/users/signin', (req, res) => {
     signInUser(req, res, firebase);
   });
+  app.post('/group', (req, res) => {
+    createNewGroup(req, res, firebase);
+  });
+
+ // app.post('/group/:groupId/user', (req, res) => {
+  //  addUserToGroup(req, res, firebase);
+  // });
 };
