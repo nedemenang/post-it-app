@@ -1,1 +1,1 @@
-web: babel-watch server.js
+web: npm start
