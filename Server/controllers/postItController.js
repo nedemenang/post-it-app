@@ -1,9 +1,8 @@
-const registerNewUser = require('../Routes/registerNewUser');
-const signInUser = require('../Routes/signInUser');
-const createNewGroup = require('../Routes/createNewGroup');
-const addUserToGroup = require('../Routes/addUserToGroup');
-
-const firebase = require('firebase');
+import firebase from 'firebase';
+import * as registerNewUser from '../Routes/registerNewUser';
+import * as signInUser from '../Routes/signInUser';
+import * as createNewGroup from '../Routes/createNewGroup';
+import * as addUserToGroup from '../Routes/addUserToGroup';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',

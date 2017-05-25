@@ -1,32 +1,31 @@
-
-module.exports = (req, res, firebase) => {
+module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
       const newKey = firebase.database().ref('groups/').push({
-        groupname: req.body.groupname,
+        groupname: request.body.groupname,
         createdby: userlogin.email,
       }).key;
-      const gRef = firebase.database().ref(`groups/${newKey}/users/`);
-      gRef.child(userlogin.uid).set({
+      const groupRef = firebase.database().ref(`groups/${newKey}/users/`);
+      groupRef.child(userlogin.uid).set({
         userId: userlogin.uid,
       })
      .then(() => {
-       const uRef = firebase.database().ref(`users/${userlogin.uid}/groups/`);
-       uRef.child(newKey).set({
+       const userRef = firebase.database()
+       .ref(`users/${userlogin.uid}/groups/`);
+       userRef.child(newKey).set({
          groupId: newKey,
-        // groupName: req.body.groupname,
        });
-       res.send({
+       result.send({
          message: 'All operations completed successfully',
        });
      })
-     .catch((e) => {
-       res.send({
-         message: `Error occurred ${e.message}`,
+     .catch((error) => {
+       result.send({
+         message: `Error occurred ${error.message}`,
        });
      });
     } else {
-      res.send({
+      result.send({
         message: 'Only logged users can create groups'
       });
     }

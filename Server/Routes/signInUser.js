@@ -1,14 +1,13 @@
-
-module.exports = (req, res, firebase) => {
-  const email = req.body.email;
-  const password = req.body.password;
+module.exports = (request, result, firebase) => {
+  const email = request.body.email;
+  const password = request.body.password;
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then((user) => {
-    res.send({
+    result.send({
       message: `Welcome ${user.displayName}`
     });
   }).catch((e) => {
-    res.send({
+    result.send({
       message: `Error occured while login in:  ${e.message}`
     });
   });

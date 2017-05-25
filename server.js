@@ -1,11 +1,9 @@
-
-const express = require('express');
+import express from 'express';
+import bodyParser from 'body-parser';
+import controllers from './Server/controllers/postItController';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const bodyParser = require('body-parser');
-
-const controllers = require('./Server/controllers/postItController');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
