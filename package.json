@@ -4,13 +4,16 @@
   "description": "Post It App",
   "main": "index.js",
   "scripts": {
-    "build:dist": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./server/test,./client/test,./screenshots,./reports,./migrations,./coverage,docs,testSetup.js --copy-files",
-    "start": "npm run build:dist && npm run webpack && node dist/server.js",
+    //"build:dist": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./server/test,./client/test,./screenshots,./reports,./migrations,./coverage,docs,testSetup.js --copy-files",
+   // "start": "npm run build:dist && npm run webpack && node dist/server.js",
+   "build" : "babel *.js -d dist",
+    "start" : "node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nnamso Edemenang",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.24.1",
     "babel-watch": "^2.0.6",
     "body-parser": "^1.17.2",
     "express": "*",
