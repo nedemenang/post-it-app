@@ -1,6 +1,4 @@
 
-
-
 module.exports = (req, res, firebase) => {
   const email = req.body.email;
   const password = req.body.password;

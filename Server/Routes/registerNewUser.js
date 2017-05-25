@@ -1,5 +1,4 @@
 
-
 module.exports = (req, res, firebase) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -10,13 +9,13 @@ module.exports = (req, res, firebase) => {
       displayName: userName,
     }).then(() => {
       // console.log(user);
-});
+    });
     res.send({
       message: `Welcome ${user.email}`
     });
   }).catch((e) => {
     res.send({
-      message: `Error occured ${ e.message}`
+      message: `Error occured ${e.message}`
     });
   });
 };
