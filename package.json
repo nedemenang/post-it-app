@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:dist": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./server/test,./client/test,./screenshots,./reports,./migrations,./coverage,docs,testSetup.js --copy-files",
-    "start": "npm run build:dist && npm run webpack && node dist/server/index.js",
+    "start": "npm run build:dist && npm run webpack && node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nnamso Edemenang",
