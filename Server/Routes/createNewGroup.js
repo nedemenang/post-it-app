@@ -6,13 +6,15 @@ module.exports = (req, res, firebase) => {
         groupname: req.body.groupname,
         createdby: userlogin.email,
       }).key;
-      firebase.database().ref(`groups/${newKey}`).child('users').push({
+      const gRef = firebase.database().ref(`groups/${newKey}/users/`);
+      gRef.child(userlogin.uid).set({
         userId: userlogin.uid,
       })
      .then(() => {
-       firebase.database().ref(`users/${userlogin.uid}`).child('groups').push({
+       const uRef = firebase.database().ref(`users/${userlogin.uid}/groups/`);
+       uRef.child(newKey).set({
          groupId: newKey,
-         groupName: req.body.groupname,
+        // groupName: req.body.groupname,
        });
        res.send({
          message: 'All operations completed successfully',
