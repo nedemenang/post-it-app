@@ -1,20 +1,18 @@
-
-module.exports = (req, res, firebase) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const userName = req.body.userName;
+module.exports = (request, result, firebase) => {
+  const email = request.body.email;
+  const password = request.body.password;
+  const userName = request.body.userName;
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then((user) => {
     user.updateProfile({
       displayName: userName,
     }).then(() => {
-      // console.log(user);
-    });
-    res.send({
-      message: `Welcome ${user.email}`
+      result.send({
+        message: `Welcome ${user.email}`
+      });
     });
   }).catch((e) => {
-    res.send({
+    result.send({
       message: `Error occured ${e.message}`
     });
   });
