@@ -8,7 +8,9 @@ PostIt is a simple application that allows friends and colleagues create groups 
 ## Features
 
 Users can sign up / log in to the Application
+
 Users can Create broad cast groups
+
 Users can add registered users to broadcast groups they have created
 
 
@@ -20,15 +22,25 @@ It enables proper and easy dissemination of information by allowing users to bro
 ### Dependencies
 
 Node.js 
+
 babel-cli
+
 babel-core
+
 babel-eslint
+
 babel-loader
+
 babel-preset-es2015
+
 babel-watch
+
 body-parser
+
 express
+
 firebase
+
 eslint 
 
 ### Installing and setup
