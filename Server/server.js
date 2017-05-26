@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import controllers from './controllers/postItController';
 
-const app = express();
+var app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
