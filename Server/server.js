@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 controllers(app);
 app.listen(port, () => {
   console.log(`We are live on ${port}`);
