@@ -6,9 +6,9 @@ module.exports = (request, result, firebase) => {
     result.send({
       message: `Welcome ${user.displayName}`
     });
-  }).catch((e) => {
-    result.send({
-      message: `Error occured while login in:  ${e.message}`
+  }).catch((error) => {
+    result.status(500).send({
+      message: `Error occured while login in:  ${error.message}`
     });
   });
 };

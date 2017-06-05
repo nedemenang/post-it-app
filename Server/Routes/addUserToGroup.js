@@ -13,16 +13,16 @@ module.exports = (request, result, firebase) => {
          groupId: request.params.groupId,
        });
        result.send({
-         message: 'All operations completed successfully',
+         message: 'User successfully added',
        });
      })
      .catch((error) => {
-       result.send({
+       result.status(500).send({
          message: `Error occurred ${error.message}`,
        });
      });
     } else {
-      result.send({
+      result.status(403).send({
         message: 'Only logged users can add users to groups'
       });
     }

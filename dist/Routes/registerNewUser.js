@@ -12,9 +12,9 @@ module.exports = function (request, result, firebase) {
         message: "Welcome " + user.email
       });
     });
-  }).catch(function (e) {
-    result.send({
-      message: "Error occured " + e.message
+  }).catch(function (error) {
+    result.status(500).send({
+      message: "Error occured " + error.message
     });
   });
 };

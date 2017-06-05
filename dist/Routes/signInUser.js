@@ -7,9 +7,9 @@ module.exports = function (request, result, firebase) {
     result.send({
       message: "Welcome " + user.displayName
     });
-  }).catch(function (e) {
-    result.send({
-      message: "Error occured while login in:  " + e.message
+  }).catch(function (error) {
+    result.status(500).send({
+      message: "Error occured while login in:  " + error.message
     });
   });
 };
