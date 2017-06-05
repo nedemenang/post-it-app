@@ -7,7 +7,7 @@
     "dev": "babel-watch server.js",
     "start": "node ./dist/server.js",
     "build": "babel server/ -d dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 10000 dist/tests/test.js"
   },
   "author": "Nnamso Edemenang",
   "license": "ISC",
@@ -25,7 +25,9 @@
     "react-dom": "^15.5.4",
     "rimraf": "^2.6.1",
     "webpack": "^2.5.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "should": "^11.2.1",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
@@ -34,6 +36,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "flux": "*",
+    "mocha": "^3.4.2",
     "nodemon": "^1.11.0"
   },
   "repository": {
