@@ -11,9 +11,9 @@ module.exports = (request, result, firebase) => {
         message: `Welcome ${user.email}`
       });
     });
-  }).catch((e) => {
-    result.send({
-      message: `Error occured ${e.message}`
+  }).catch((error) => {
+    result.status(500).send({
+      message: `Error occured ${error.message}`
     });
   });
 };

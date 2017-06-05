@@ -16,16 +16,16 @@ module.exports = (request, result, firebase) => {
          groupId: newKey,
        });
        result.send({
-         message: 'All operations completed successfully',
+         message: 'New group successfully created',
        });
      })
      .catch((error) => {
-       result.send({
+       result.status(500).send({
          message: `Error occurred ${error.message}`,
        });
      });
     } else {
-      result.send({
+      result.status(403).send({
         message: 'Only logged users can create groups'
       });
     }

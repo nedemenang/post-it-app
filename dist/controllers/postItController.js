@@ -20,6 +20,10 @@ var _addUserToGroup = require('../Routes/addUserToGroup');
 
 var _addUserToGroup2 = _interopRequireDefault(_addUserToGroup);
 
+var _signOutUser = require('../Routes/signOutUser');
+
+var _signOutUser2 = _interopRequireDefault(_signOutUser);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var config = {
@@ -40,6 +44,11 @@ module.exports = function (app) {
   app.post('/users/signin', function (req, res) {
     (0, _signInUser2.default)(req, res, _firebase2.default);
   });
+
+  app.post('/users/signout', function (req, res) {
+    (0, _signOutUser2.default)(req, res, _firebase2.default);
+  });
+
   app.post('/group', function (req, res) {
     (0, _createNewGroup2.default)(req, res, _firebase2.default);
   });
