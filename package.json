@@ -27,6 +27,7 @@
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5",
     "should": "^11.2.1",
+    "mocha": "^3.4.2",
     "supertest": "^3.0.0"
   },
   "devDependencies": {
@@ -36,7 +37,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "flux": "*",
-    "mocha": "^3.4.2",
+    "node-rest-client": "^3.1.0",
     "nodemon": "^1.11.0"
   },
   "repository": {
