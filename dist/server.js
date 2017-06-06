@@ -19,6 +19,7 @@ var port = process.env.PORT || 3000;
 
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
+
 (0, _postItController2.default)(app);
 app.listen(port, function () {
   console.log('We are live on ' + port);
