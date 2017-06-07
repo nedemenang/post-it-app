@@ -4,6 +4,7 @@ import signInUser from '../Routes/signInUser';
 import createNewGroup from '../Routes/createNewGroup';
 import addUserToGroup from '../Routes/addUserToGroup';
 import signOutUser from '../Routes/signOutUser';
+import postMessage from '../Routes/postMessage';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',
@@ -34,5 +35,9 @@ module.exports = (app) => {
 
   app.post('/group/:groupId/user', (req, res) => {
     addUserToGroup(req, res, firebase);
+  });
+
+  app.post('/group/:groupId/addmessage', (req, res) => {
+    postMessage(req, res, firebase);
   });
 };
