@@ -10,7 +10,7 @@ const config = {
   },
 
   devServer: {
-    contentBase: './public',
+    contentBase: './Client/public',
     inline: true,
     hot: true,
     port: 8080

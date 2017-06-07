@@ -1,27 +1,27 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var AppConstants = require('../constants/AppConstants');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var AppAPI = require('../utils/AppAPI.js');
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import AppConstants from '../constants/AppConstants';
+import {EventEmitter} from 'events';
+import assign from 'object-assign';
+import AppAPI from '../utils/AppAPI.js';
 
-var CHANGE_EVENT = 'change';
+const CHANGE_EVENT = 'change';
 
-var _items = [];
+const _items = [];
 
-var AppStore = assign({}, EventEmitter.prototype, {
-	emitChange: function(){
+const AppStore = assign({}, EventEmitter.prototype, {
+	emitChange() {
 		this.emit(CHANGE_EVENT);
 	},
-	addChangeListener: function(callback){
+	addChangeListener(callback) {
 		this.on('change', callback);
 	},
-	removeChangeListener: function(callback){
+	removeChangeListener(callback) {
 		this.removeListener('change', callback);
 	}
 });
 
-AppDispatcher.register(function(payload){
-	var action = payload.action;
+AppDispatcher.register(payload => {
+	const action = payload.action;
 
 	switch(action.actionType){
 		
@@ -30,4 +30,4 @@ AppDispatcher.register(function(payload){
 	return true;
 });
 
-module.exports = AppStore;
+export default AppStore;
