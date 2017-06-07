@@ -109,7 +109,7 @@ describe('API test for adding user to group route', () => {
     .end(() => {
       done();
     });
-});
+  });
 
 
 });
