@@ -1,5 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { render } from 'react-dom';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+import {Route, BrowserRouter, Switch} from 'react-router-dom';
+import App from './components/App';
+import Signup from './components/Signup';
+import AppApI from './utils/AppAPI';
+
+AppApI.getUsers();
+
+render((
+     <BrowserRouter>
+      <Switch>
+          <Route path="/" component={App}/>
+          <Route path="/signup" component={Signup} />
+        </Switch>
+     </BrowserRouter>
+     ),
+     document.getElementById('app')
+);
