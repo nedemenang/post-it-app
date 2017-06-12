@@ -1,31 +1,38 @@
-const path = require('path');
+import path from 'path';
+import webpack from 'webpack';
 
 const config = {
-  entry: './Client/index.jsx',
-
+  entry: [
+    './Client/index.jsx',
+    'webpack-hot-middleware/client'
+  ],
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'Client/public'),
     publicPath: '/',
     filename: 'bundle.js',
   },
-
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   devServer: {
-    contentBase: './public',
+    contentBase: './Client/public',
     inline: true,
     hot: true,
     port: 8080
   },
-
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loaders: ['react-hot-loader',
+          'babel-loader?presets[]=es2015,presets[]=react']
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -33,5 +40,4 @@ const config = {
     extensions: ['*', '.js', '.jsx']
   },
 };
-
 module.exports = config;
