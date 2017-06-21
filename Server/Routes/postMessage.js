@@ -1,12 +1,13 @@
 module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
-      const groupRef = firebase.database()
-      .ref(`groups/${request.params.groupId}/messages/`);
-      groupRef.child(request.body.userId).set({
+      const messageRef = firebase.database()
+      .ref(`groups/${request.body.groupId}/messages/`);
+      messageRef.push({
         message: request.body.message,
         postedBy: request.body.username,
-        postedon: request.body.messageDate
+        postedon: request.body.messageDate,
+        priority: request.body.priority
       })
      .then(() => {
        // update all user profiles with appropriate message. Add isRead flag
@@ -15,9 +16,9 @@ module.exports = (request, result, firebase) => {
       // userRef.child(request.params.groupId).set({
         // groupId: request.params.groupId,
        // });
-      // result.send({
-      //   message: 'Message successfully added',
-     //  });
+       result.send({
+         message: 'Message successfully added',
+       });
      })
      .catch((error) => {
        result.status(500).send({

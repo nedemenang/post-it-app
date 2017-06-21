@@ -19,14 +19,6 @@ const AppActions = {
     });
   },
 
-  receiveUsers(users) {
-    AppDispatcher.handleViewAction({
-      actionType: AppConstants.RECEIVE_USER_RESULTS,
-      users
-
-    });
-  },
-
   receiveErrors(errors) {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_ERRORS,
@@ -42,10 +34,66 @@ const AppActions = {
     });
   },
 
-  receiveLogInError(message) {
+  createGroup(group) {
     AppDispatcher.handleViewAction({
-      actionType: AppConstants.RECEIVE_LOGIN_ERRORS,
+      actionType: AppConstants.CREATE_GROUP,
+      group
+
+    });
+  },
+
+  addUserToGroup(usergroup) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.ADDUSER_GROUP,
+      usergroup
+
+    });
+  },
+
+  addMessage(message) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.ADD_MESSAGE,
       message
+
+    });
+  },
+
+  signOutUser(user) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.SIGNOUT_USER,
+      user
+
+    });
+  },
+
+  receiveUserInGroupResults(users) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RECEIVE_USER_IN_GROUP_RESULTS,
+      users
+
+    });
+  },
+
+  receiveUserNotInGroupResults(users) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RECEIVE_USER_NOT_IN_GROUP_RESULTS,
+      users
+
+    });
+  },
+
+  receiveGroupMessages(messages) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RECEIVE_MESSAGE_RESULTS,
+      messages
+
+    });
+  },
+
+  receiveUserGroups(groups) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RECEIVE_GROUP_RESULTS,
+      groups
 
     });
   }

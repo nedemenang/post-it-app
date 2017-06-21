@@ -6,7 +6,7 @@ import App from './components/App';
 import Signup from './components/Signup';
 import AppApI from './utils/AppAPI';
 
-AppApI.getUsers();
+//AppApI.getUsers();
 
 render((
      <BrowserRouter>
