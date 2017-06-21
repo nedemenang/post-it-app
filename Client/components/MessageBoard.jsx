@@ -19,9 +19,9 @@ function getAppState() {
       success: AppStore.getSuccess(),
       loggedInUser: AppStore.getLoggedInUser(),
       registeredUser: AppStore.getRegisteredUser(),
-      users: AppStore.getUsers(),
-      groups: AppStore.getGroups(),
-      messages: AppStore.getMessages()
+      users: AppStore.getUsersInGroup(),
+      groups: AppStore.getUserGroups(),
+      messages: AppStore.getGroupMessages()
     };
 }
 
@@ -47,15 +47,16 @@ componentUnmount() {
   render(){
     return(
       <div className="row">
-      <div className="col-md-4">
+        <div className="leftColumn">
           <GroupList groups = {this.state.groups} />
           <UserList users = {this.state.users} />
-      </div>
-      <div className="col-md-8">
+        </div>
+        <div className="rightColumn">
           <MessageList messages = {this.state.messages}/>
           <MessageForm />
+          </div>
+        
       </div>
-</div>
     );
   }
 

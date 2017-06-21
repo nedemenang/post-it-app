@@ -8,24 +8,51 @@ import '../public/style.css';
 import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
 import User from './User';
+import {List, Card} from 'material-ui';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {green100, green500, green700} from 'material-ui/styles/colors';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: green500,
+    primary2Color: green700,
+    primary3Color: green100,
+  },
+}, {
+  avatar: {
+    borderColor: null,
+  },
+  //userAgent: req.headers['user-agent'],
+});
 
 
 class UserList extends Component {
 
   constructor(props){
     super(props);
-    this.state= {};
+    this.state= {
+      users: [
+        'Nnamso',
+        'Edemenang',
+        'Paul'
+      ]
+    };
   }
   render(){
     return(
-      <div className="well">
-          <h3>Users</h3>
+      <div>
+      <MuiThemeProvider muiTheme={muiTheme}>
+       <Card>
+        <List>
           {
-            this.props.users.map((user, i) => {
+            this.state.users.map((user, i) => {
                   return <User user={user} key={i} />
               })
           }
-          
+          </List>
+       </Card>
+          </MuiThemeProvider>
       </div>
       //button to add to group....
     );

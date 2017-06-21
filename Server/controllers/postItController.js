@@ -1,4 +1,4 @@
-import * as firebase from 'firebase-admin';
+import * as firebase from 'firebase';
 import registerNewUser from '../Routes/registerNewUser';
 import signInUser from '../Routes/signInUser';
 import createNewGroup from '../Routes/createNewGroup';
