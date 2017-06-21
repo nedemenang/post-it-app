@@ -36,6 +36,10 @@
   cursor: pointer;
 }
 
+p {
+  color: #F44336;
+}
+
 .googleButton {
 
   font-family: "Roboto", sans-serif;
@@ -96,15 +100,21 @@ body {
 }
 
 .col-md-8 {
-    width: 66.66666667%;
+    width: 61.66666667%;
   }
 
 .col-md-4 {
     width: 33.33333333%;
   }
 
+  @media (min-width: 992px) {
+ .col-md-8 {
+    float: right;
+  }
+}
+
 @media (min-width: 992px) {
-.col-md-4, .col-md-8 {
+.col-md-4 {
     float: left;
   }
 }
@@ -112,7 +122,7 @@ body {
 .form-control {
   font-family: "Roboto", sans-serif;
   display: block;
-  width: 100%;
+  width: 97%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;

@@ -7,13 +7,12 @@ import AppConstants from '../constants/AppConstants';
 
 const CHANGE_EVENT = 'change';
 
-let _users = [];
-const _groups = [];
-const _messages = [];
-const _errors = [];
-const _logInErrors = [];
-const _registerUserErrors = [];
-const _success = [];
+let _usersInGroup = [];
+let _usersNotInGroup = [];
+let _userGroups = [];
+let _groupMessages = [];
+let _errors = '';
+let _success = '';
 const _loggedInUser = [];
 const _registeredUser = [];
 
@@ -22,35 +21,78 @@ const AppStore = assign({}, EventEmitter.prototype, {
 
   registerNewUser(user) {
     _registeredUser.push(user);
-    console.log(_registeredUser);
   },
 
-  recieveError(error) {
-    _errors.push(error);
+  addUserToGroup(user) {
+    _usersInGroup.push(user);
   },
 
-  receiveSuccess(message) {
-    _success.push(message);
+  postMessage(message) {
+    _groupMessages.push(message);
+  },
+
+  createNewGroup(group) {
+    _userGroups.push(group);
   },
 
   signinUser(user) {
-    _users.push(user);
+    _loggedInUser.push(user);
   },
 
-  getUser() {
-    return _users;
+  recieveError(error) {
+    _errors = error;
   },
 
-
-  setUsers(users) {
-    _users = users;
+  receiveSuccess(message) {
+    _success = message;
   },
 
-  getGroups() {
-    return _groups;
+  getErrors() {
+    return _errors;
   },
-  getMessages() {
-    return _messages;
+
+  getLoggedInUser() {
+    return _loggedInUser;
+  },
+
+  getRegisteredUser() {
+    return _registeredUser;
+  },
+
+  getUserGroups() {
+    return _userGroups;
+  },
+
+  getGroupMessages() {
+    return _groupMessages;
+  },
+
+  getUsersInGroup() {
+    return _usersInGroup;
+  },
+
+  getUsersNotInGroup() {
+    return _usersNotInGroup;
+  },
+
+  getSuccess() {
+    return _success;
+  },
+
+  setUserGroups(groups) {
+    _userGroups = groups;
+  },
+
+  setGroupMessages(messages) {
+    _groupMessages = messages;
+  },
+
+  setUsersInGroup(users) {
+    _usersInGroup = users;
+  },
+
+  setUsersNotInGroup(users) {
+    _usersNotInGroup = users;
   },
 
   emitChange() {
@@ -69,22 +111,113 @@ AppDispatcher.register((payload) => {
 
   switch (action.actionType) {
   case AppConstants.REGISTER_USER:
-    console.log('Registering user...');
-
-    // store save
-    AppStore.registerNewUser(action.user);
-
+    // console.log('Registering user...');
     // save to API
     AppAPI.registerNewUser(action.user);
+
+    if (_errors === '') {
+      // store save
+      AppStore.registerNewUser(action.user);
+    }
 
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
 
-  case AppConstants.RECEIVE_ERRORS:
-    // store save
-    AppStore.recieveError(action.errors);
+  case AppConstants.LOGIN_USER:
+    // console.log('logging in user...');
+    // console.log(action.user);
 
+    // save to API
+    AppAPI.signinUser(action.user);
+    if (_errors === '') {
+    // store save
+      // console.log('errors');
+      AppStore.signinUser(action.user);
+    }
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.CREATE_GROUP:
+
+    // API store
+    AppAPI.createNewGroup(action.group);
+
+    // store save
+    AppStore.createNewGroup(action.group);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.ADDUSER_GROUP:
+
+    // API store
+    AppAPI.addUserToGroup(action.userGroup);
+
+    // store save
+    AppStore.addUserToGroup(action.userGroup);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.ADD_MESSAGE:
+
+    // API store
+    AppAPI.postMessage(action.message);
+
+    // store save
+    AppStore.postMessage(action.message);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.SIGNOUT_USER:
+
+    // API store
+    AppAPI.signOutUser();
+
+
+    // store save
+    AppStore.signOutUser();
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RECEIVE_USER_IN_GROUP_RESULTS:
+   // console.log('logging in user...');
+
+    // store save
+    AppStore.setUsersInGroup(action.users);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RECEIVE_USER_NOT_IN_GROUP_RESULTS:
+    // store save
+    AppStore.setUsersNotInGroup(action.users);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RECEIVE_MESSAGE_RESULTS:
+    // store save
+    AppStore.setGroupMessages(action.messages);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RECEIVE_GROUP_RESULTS:
+    // store save
+    AppStore.setUserGroups(action.errors);
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
@@ -92,31 +225,6 @@ AppDispatcher.register((payload) => {
   case AppConstants.RECEIVE_SUCCESS:
     // store save
     AppStore.receiveSuccess(action.message);
-
-    // emit change
-    AppStore.emit(CHANGE_EVENT);
-    break;
-
-  case AppConstants.LOGIN_USER:
-    console.log('logging in user...');
-
-    // store save
-    AppStore.signinUser(action.user);
-
-    // save to API
-    AppAPI.signinUser(action.user);
-
-    // emit change
-    AppStore.emit(CHANGE_EVENT);
-    break;
-
-  case AppConstants.RECEIVE_USER_RESULTS:
-    console.log('logging in user...');
-
-    // store save
-    AppStore.setUsers(action.users);
-
-    // save to API
 
     // emit change
     AppStore.emit(CHANGE_EVENT);
