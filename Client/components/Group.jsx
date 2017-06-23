@@ -39,7 +39,7 @@ class Group extends Component {
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
         <ListItem>
-          <strong>Group</strong>
+          <strong>{this.props.group.groupname}</strong>
         </ListItem>
       </MuiThemeProvider>
     );

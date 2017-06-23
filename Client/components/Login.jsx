@@ -9,7 +9,6 @@ import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 
-
 class Login extends Component {
   
 login(event){
@@ -21,9 +20,10 @@ login(event){
   let user = {
     email : email,
     password: password,
-    isAuthenticated: false
+    isAuthenticated: false,
+    profilePic: ''
   }
-  
+  //console.log(user)
   AppActions.login(user); 
   //this.setState({error : AppStore.getErrors()});
   //console.log(AppStore.getErrors());

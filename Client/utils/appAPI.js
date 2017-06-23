@@ -23,12 +23,20 @@ module.exports = {
       email: user.email,
       password: user.password
     }).then((response) => {
+      //console.log(response);
+      const authuser = {
+        id: response.data.user.uid,
+        email: user.email,
+        profilePic: response.data.user.photoURL,
+        isAuthenticated: true
+      };
       AppActions.receiveSuccess(response.message);
-      // console.log(response.status);
+      AppActions.receiveAuthenticatedUser(authuser);
+      console.log(authuser);
     })
   .catch((error) => {
-    AppActions.receiveErrors(error.message);
-    // console.log('receiveErrors');
+    AppActions.receiveErrors(error);
+    console.log(error);
     // console.log(user);
   });
   },
@@ -45,14 +53,16 @@ module.exports = {
   },
 
   createNewGroup(group) {
+    console.log(group);
     axios.post('/group', {
       groupName: group.groupname,
-      createdyBy: group.createdby,
       dateCreated: group.datecreated
     }).then((response) => {
+      console.log('create group success');
       AppActions.receiveSuccess(response.message);
     })
     .catch((error) => {
+      console.log('create group error');
       AppActions.receiveErrors(error.message);
     });
   },
@@ -62,11 +72,11 @@ module.exports = {
       userId: userGroup.userId
     }).then((response) => {
       AppActions.receiveSuccess(response.message);
-      // console.log(response);
+      console.log(response);
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
-    // console.log(error);
+    console.log(error);
   });
     // console.log('Adding user to group....');
   },
@@ -93,6 +103,7 @@ module.exports = {
       }
     })
    .then((response) => {
+     console.log(response);
      AppActions.receiveSuccess(response.message);
      AppActions.receiveUserGroups(response.groups);
    })

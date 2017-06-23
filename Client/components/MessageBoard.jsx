@@ -11,6 +11,7 @@ import GroupList from './GroupList';
 import UserList from './UserList';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
+import GroupForm from './GroupForm';
 import AppStore from '../stores/AppStore';
 
 function getAppState() {
@@ -21,7 +22,8 @@ function getAppState() {
       registeredUser: AppStore.getRegisteredUser(),
       users: AppStore.getUsersInGroup(),
       groups: AppStore.getUserGroups(),
-      messages: AppStore.getGroupMessages()
+      messages: AppStore.getGroupMessages(),
+      selectedGroupId: AppStore.getSelectedGroupId()
     };
 }
 
@@ -42,6 +44,7 @@ componentUnmount() {
 
   constructor(props){
     super(props);
+    AppActions.receiveUserGroups();
     this.state = getAppState();
   }
   render(){
@@ -49,6 +52,7 @@ componentUnmount() {
       <div className="row">
         <div className="leftColumn">
           <GroupList groups = {this.state.groups} />
+          <GroupForm />
           <UserList users = {this.state.users} />
         </div>
         <div className="rightColumn">

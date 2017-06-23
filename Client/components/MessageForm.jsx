@@ -8,12 +8,25 @@ import '../public/style.css';
 import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
 
-
-
 class MessageForm extends Component {
 
 submit(event){
   event.preventDefault();
+
+  const messagebody = this.refs.message.value.trim();
+  const priority = this.ref.priority.value();
+  const postedon = Date.now;
+  
+  let message = {
+    message : messagebody,
+    postedon: postedon,
+    priority: priority,
+    groupId: this.props.selectedGroupId
+  }
+  
+  AppActions.addMessage(message); 
+  //this.setState({error : AppStore.getErrors()});
+  //console.log(AppStore.getErrors());
   
 }
 
@@ -25,8 +38,15 @@ submit(event){
   render(){
     return(
       <div>
-         <form onSubmit={this.submit}>
-              <input type="text" className="form-control" ref="message" placeholder="Please type a message" />
+         <form>
+              <input type="text" className="form-control" ref="message" placeholder="Please type a message. Press enter to submit." />
+              <select ref="priority" className="form-select" placeholder="select message priority">
+              <option>Select Message Priority ....</option>
+              <option>High</option>
+              <option>Normal</option>
+              <option>Low</option>
+              </select>
+              <button className="messageButton" onClick={this.submit}>Submit</button>
          </form>
       </div>
     );

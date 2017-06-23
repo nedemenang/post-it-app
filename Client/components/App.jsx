@@ -35,7 +35,8 @@ function getAppState() {
       errors: AppStore.getErrors(),
       success: AppStore.getSuccess(),
       loggedInUser: AppStore.getLoggedInUser(),
-      registeredUser: AppStore.getRegisteredUser()
+      registeredUser: AppStore.getRegisteredUser(),
+      isAuthenticated: AppStore.getIsAuthenticated()
     };
 }
 
@@ -61,12 +62,19 @@ componentUnmount() {
    render() {
      //console.log(this.state.errors)
      //<Login errors = {this.state.errors} />
+     //console.log(this.state.isAuthenticated);
+     if(this.state.isAuthenticated == false) {
+       var componentToMount = <Login {...this.state} />
+     } else {
+       var componentToMount = <MessageBoard />
+     }
+
       return (
          <div>
          <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar title="Post It App" />
             </MuiThemeProvider>
-             <MessageBoard />
+             {componentToMount}
          </div>
       );
    }

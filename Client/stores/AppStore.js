@@ -13,8 +13,10 @@ let _userGroups = [];
 let _groupMessages = [];
 let _errors = '';
 let _success = '';
-const _loggedInUser = [];
-const _registeredUser = [];
+let _loggedInUser = [];
+const _registeredUser = '';
+let _selectedGroupId = '';
+let _isAuthenticated = false;
 
 
 const AppStore = assign({}, EventEmitter.prototype, {
@@ -36,10 +38,17 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   signinUser(user) {
-    _loggedInUser.push(user);
+    _loggedInUser.push(user); 
+    // console.log(_loggedInUser)
+    // _isAuthenticated = true;
+  },
+
+  setIsAuthenticated(value) {
+    _isAuthenticated = value;
   },
 
   recieveError(error) {
+    console.log(error);
     _errors = error;
   },
 
@@ -51,12 +60,21 @@ const AppStore = assign({}, EventEmitter.prototype, {
     return _errors;
   },
 
+  getSelectedGroupId() {
+    return _selectedGroupId;
+  },
+
   getLoggedInUser() {
+    // this.signinUser();
     return _loggedInUser;
   },
 
   getRegisteredUser() {
     return _registeredUser;
+  },
+
+  getIsAuthenticated() {
+    return _isAuthenticated;
   },
 
   getUserGroups() {
@@ -85,6 +103,10 @@ const AppStore = assign({}, EventEmitter.prototype, {
 
   setGroupMessages(messages) {
     _groupMessages = messages;
+  },
+
+  setSelectedGroupId(groupId) {
+    _selectedGroupId = groupId;
   },
 
   setUsersInGroup(users) {
@@ -126,22 +148,21 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.LOGIN_USER:
     // console.log('logging in user...');
-    // console.log(action.user);
+    //console.log(action.user);
 
     // save to API
     AppAPI.signinUser(action.user);
-    if (_errors === '') {
+    // if (_errors === '') {
     // store save
       // console.log('errors');
-      AppStore.signinUser(action.user);
-    }
-
+    //  AppStore.signinUser(action.user);
+    // }
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
 
   case AppConstants.CREATE_GROUP:
-
+    //console.log('create user group');
     // API store
     AppAPI.createNewGroup(action.group);
 
@@ -153,7 +174,7 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.ADDUSER_GROUP:
-
+   // console.log('add user group');
     // API store
     AppAPI.addUserToGroup(action.userGroup);
 
@@ -217,7 +238,7 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_GROUP_RESULTS:
     // store save
-    AppStore.setUserGroups(action.errors);
+    AppStore.setUserGroups(action.groups);
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
@@ -225,6 +246,31 @@ AppDispatcher.register((payload) => {
   case AppConstants.RECEIVE_SUCCESS:
     // store save
     AppStore.receiveSuccess(action.message);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RECEIVE_ERROR:
+    // store save
+    AppStore.receiveError(action.message);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RECEIVE_AUTHENTICATED_USER:
+    // store save
+    AppStore.signinUser(action.user);
+    AppStore.setIsAuthenticated(true);
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.SELECT_GROUP:
+
+    // store save
+    AppStore.setSelectedGroupId(action.selectedGroupId);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);

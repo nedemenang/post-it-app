@@ -20,10 +20,11 @@ const AppActions = {
   },
 
   receiveErrors(errors) {
+    //console.log(errors);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_ERRORS,
       errors
-
+      
     });
   },
   receiveSuccess(message) {
@@ -94,6 +95,22 @@ const AppActions = {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_GROUP_RESULTS,
       groups
+
+    });
+  },
+
+  receiveAuthenticatedUser(user) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RECEIVE_AUTHENTICATED_USER,
+      user
+
+    });
+  },
+
+  selectGroup(selectedGroupId) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.SELECT_GROUP,
+      selectedGroupId
 
     });
   }

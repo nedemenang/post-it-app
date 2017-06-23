@@ -2,8 +2,9 @@ module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
       const newKey = firebase.database().ref('groups/').push({
-        groupname: request.body.groupname,
-        createdby: userlogin.email,
+        groupName: request.body.groupName,
+        createdBy: userlogin.email,
+        dateCreated: request.body.dateCreated
       }).key;
       const groupRef = firebase.database().ref(`groups/${newKey}/users/`);
       groupRef.child(userlogin.uid).set({
