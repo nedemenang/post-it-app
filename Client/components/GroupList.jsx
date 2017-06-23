@@ -35,9 +35,14 @@ class GroupList extends Component {
     //this.props.errors = '';
   };
 
+ // groupClicked() {
+   // console.log('click me jooorr')
+ // }
+
   constructor(props){
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
+   // this.groupClicked = this.groupClicked.bind(this);
     this.state= {};
   }
   render(){

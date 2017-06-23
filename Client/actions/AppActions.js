@@ -20,11 +20,10 @@ const AppActions = {
   },
 
   receiveErrors(errors) {
-    //console.log(errors);
+    // console.log(errors);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_ERRORS,
       errors
-      
     });
   },
   receiveSuccess(message) {

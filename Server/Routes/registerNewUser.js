@@ -1,4 +1,5 @@
 module.exports = (request, result, firebase) => {
+  console.log('registering user...');
   const email = request.body.email;
   const password = request.body.password;
   const userName = request.body.userName;

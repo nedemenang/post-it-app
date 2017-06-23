@@ -14,7 +14,7 @@ let _groupMessages = [];
 let _errors = '';
 let _success = '';
 let _loggedInUser = [];
-const _registeredUser = '';
+const _registeredUser = [];
 let _selectedGroupId = '';
 let _isAuthenticated = false;
 
@@ -136,11 +136,8 @@ AppDispatcher.register((payload) => {
     // console.log('Registering user...');
     // save to API
     AppAPI.registerNewUser(action.user);
-
-    if (_errors === '') {
       // store save
-      AppStore.registerNewUser(action.user);
-    }
+    AppStore.registerNewUser(action.user);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);

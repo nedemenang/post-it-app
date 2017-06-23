@@ -55,7 +55,6 @@ signupGoogle(event){
     password: this.refs.password.value.trim(),
     username: this.refs.username.value.trim()
   }
-
   //AppActions.registerUser(user); 
 }
 

@@ -11,6 +11,7 @@ module.exports = (request, result, firebase) => {
        .ref(`users/${request.body.userId}/groups/`);
        userRef.child(request.params.groupId).set({
          groupId: request.params.groupId,
+         groupName: request.body.groupName
        });
        result.send({
          message: 'User successfully added',

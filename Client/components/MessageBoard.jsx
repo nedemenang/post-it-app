@@ -12,6 +12,7 @@ import UserList from './UserList';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
 import GroupForm from './GroupForm';
+import AppAPI from '../utils/AppAPI';
 import AppStore from '../stores/AppStore';
 
 function getAppState() {
@@ -35,6 +36,8 @@ getInitialState(){
   }
 
 componentDidMount(){
+    //console.log(this.state.loggedInUser);
+    AppAPI.getUserGroups();
     AppStore.addChangeListener(this._onChange.bind(this));
   }
 
@@ -44,8 +47,10 @@ componentUnmount() {
 
   constructor(props){
     super(props);
-    AppActions.receiveUserGroups();
+    //AppActions.receiveUserGroups();
+    
     this.state = getAppState();
+    //console.log(this.state.loggedInUser);
   }
   render(){
     return(

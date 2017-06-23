@@ -5,6 +5,7 @@ import AppActions from '../actions/AppActions';
 
 module.exports = {
   registerNewUser(user) {
+    console.log(user);
     axios.post('/users/signup', {
       email: user.email,
       password: user.password,
@@ -95,17 +96,13 @@ module.exports = {
     });
   },
 
-  getUserGroups(user) {
-    // console.log('getting group info...');
-    axios.get('user/groups', {
-      params: {
-        userId: user.userId
-      }
-    })
+  getUserGroups() {
+    console.log('getting group info...');
+    axios.get('user/groups')
    .then((response) => {
      console.log(response);
      AppActions.receiveSuccess(response.message);
-     AppActions.receiveUserGroups(response.groups);
+     AppActions.receiveUserGroups(response.data.groups);
    })
    .catch((error) => {
      AppActions.receiveErrors(error.message);
