@@ -1,6 +1,7 @@
 "use strict";
 
 module.exports = function (request, result, firebase) {
+  //console.log('registering user...');
   var email = request.body.email;
   var password = request.body.password;
   var userName = request.body.userName;
@@ -9,7 +10,7 @@ module.exports = function (request, result, firebase) {
       displayName: userName
     }).then(function () {
       result.send({
-        message: "Welcome " + user.email
+        message: "Welcome " + user.email + ". Please proceed to log in"
       });
     });
   }).catch(function (error) {

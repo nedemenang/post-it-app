@@ -70,3 +70,21 @@ describe('API test create new group route', function () {
     });
   });
 });
+
+describe('API test for sign out route', function () {
+  it('should return 200 for successful signout', function (done) {
+    server.post('/users/signout').expect(200).end(function (err, res) {
+      res.status.should.equal(200);
+      res.body.message.should.equal('User successfully signed out.');
+      done();
+    });
+  });
+});
+
+describe('API test for adding user to group route', function () {
+  beforeEach(function (done) {
+    server.post('/users/signin').send({ email: 'udo.udoson@gmail.com', password: 'password' }).expect('Content-type', /json/).end(function () {
+      done();
+    });
+  });
+});
