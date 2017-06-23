@@ -76,7 +76,7 @@ signupGoogle(event){
     <h3>LOG IN</h3>
       <input type="text" ref="loginEmail" placeholder="email"/>
       <input type="password" ref="loginPassword" placeholder="password"/>
-      <p>{this.props.errors}</p>
+      <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.login}>Log In</button>
       <p className="message">Not registered? <a onClick={this.handleToggle} href="#">Create an account</a></p>
     </form>
@@ -85,8 +85,8 @@ signupGoogle(event){
       <input type="text" ref="email" placeholder="email address"/>
       <input type="password" ref="password" placeholder="password"/>
       <input type="text" ref="username" placeholder="username"/>
-      <p>{this.props.success}</p>
-      <p>{this.props.error}</p>
+      <p className="success">{this.props.success}</p>
+      <p className="error">{this.props.error}</p>
       <button className="button" onClick={this.signup}>Register</button>
       <br/>
       <button className="googleButton" onClick={this.signupGoogle}>Register with Google</button>

@@ -51,8 +51,12 @@
   margin-top: 10px
 }
 
-p {
+.error {
   color: #F44336;
+}
+
+.success {
+  color:#4CAF50;
 }
 
 .googleButton {
