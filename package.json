@@ -7,7 +7,7 @@
     "dev": "babel-watch server.js",
     "start": "webpack && babel-node ./server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
-    "build": "babel webpack.config.js -d dist && babel client/ -d dist && babel server/ -d dist",
+    "build": "babel client/ -d dist && babel server/ -d dist",
     "test": "mocha --timeout 10000 dist/tests/test.js"
   },
   "author": "Nnamso Edemenang",
