@@ -11,7 +11,8 @@ module.exports = {
       password: user.password,
       userName: user.username
     }).then((response) => {
-      AppActions.receiveSuccess(response.message);
+      // console.log(response.data.message);
+      AppActions.receiveSuccess(response.data.message);
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);

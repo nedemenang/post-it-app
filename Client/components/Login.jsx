@@ -85,7 +85,8 @@ signupGoogle(event){
       <input type="text" ref="email" placeholder="email address"/>
       <input type="password" ref="password" placeholder="password"/>
       <input type="text" ref="username" placeholder="username"/>
-      <p>{this.props.errors}</p>
+      <p>{this.props.success}</p>
+      <p>{this.props.error}</p>
       <button className="button" onClick={this.signup}>Register</button>
       <br/>
       <button className="googleButton" onClick={this.signupGoogle}>Register with Google</button>
