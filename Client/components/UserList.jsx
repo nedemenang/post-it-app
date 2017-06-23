@@ -8,7 +8,7 @@ import '../public/style.css';
 import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
 import User from './User';
-import {List, Card} from 'material-ui';
+import {List, Card, Subheader} from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {green100, green500, green700} from 'material-ui/styles/colors';
@@ -31,13 +31,7 @@ class UserList extends Component {
 
   constructor(props){
     super(props);
-    this.state= {
-      users: [
-        'Nnamso',
-        'Edemenang',
-        'Paul'
-      ]
-    };
+    this.state= {};
   }
   render(){
     return(
@@ -45,8 +39,9 @@ class UserList extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
        <Card>
         <List>
+        <Subheader><strong>User List</strong></Subheader>
           {
-            this.state.users.map((user, i) => {
+            this.props.users.map((user, i) => {
                   return <User user={user} key={i} />
               })
           }

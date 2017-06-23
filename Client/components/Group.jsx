@@ -31,15 +31,20 @@ const muiTheme = getMuiTheme({
 
 class Group extends Component {
 
+groupClicked() {
+    console.log('click me jooorr')
+  }
+  
   constructor(props){
     super(props);
+    this.groupClicked = this.groupClicked.bind(this);
     this.state= {};
   }
   render(){
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
-        <ListItem>
-          <strong>Group</strong>
+        <ListItem onTouchTap={this.groupClicked}>
+          <strong>{this.props.group.groupname}</strong>
         </ListItem>
       </MuiThemeProvider>
     );

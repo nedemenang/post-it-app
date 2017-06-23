@@ -5,7 +5,8 @@ module.exports = function (request, result, firebase) {
   var password = request.body.password;
   firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
     result.send({
-      message: "Welcome " + user.displayName
+      message: "Welcome " + user.displayName,
+      user: user
     });
   }).catch(function (error) {
     result.status(500).send({

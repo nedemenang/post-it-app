@@ -4,7 +4,8 @@ module.exports = (request, result, firebase) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then((user) => {
     result.send({
-      message: `Welcome ${user.displayName}`
+      message: `Welcome ${user.displayName}`,
+      user
     });
   }).catch((error) => {
     result.status(500).send({

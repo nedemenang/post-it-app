@@ -58,7 +58,7 @@ module.exports = (app) => {
     getUsersInGroups(req, res, firebase);
   });
 
-  app.get('/group/notusers', (req, res) => {
-    getUsersNotInGroups(req, res, firebase);
-  });
+ // app.get('/group/notusers', (req, res) => {
+  //  getUsersNotInGroups(req, res, firebase);
+ // });
 };
