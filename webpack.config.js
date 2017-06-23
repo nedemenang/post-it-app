@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 const config = {
   entry: [
-    './Client/index.jsx',
+    path.join(__dirname, './Client/index.jsx'),
     'webpack-hot-middleware/client'
   ],
   output: {
