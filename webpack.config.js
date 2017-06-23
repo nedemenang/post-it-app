@@ -1,5 +1,7 @@
-import path from 'path';
-import webpack from 'webpack';
+const path = require('path');
+const webpack = require('webpack');
+// import path from 'path';
+// import webpack from 'webpack';
 
 const config = {
   entry: [
@@ -7,7 +9,7 @@ const config = {
     'webpack-hot-middleware/client'
   ],
   output: {
-    path: path.join(__dirname, 'Client/public'),
+    path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
