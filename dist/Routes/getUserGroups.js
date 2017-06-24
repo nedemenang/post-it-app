@@ -8,7 +8,7 @@ module.exports = function (request, result, firebase) {
       groupRef.orderByKey().once('value', function (snapshot) {
         snapshot.forEach(function (childSnapShot) {
           var group = {
-            id: childSnapShot.Key,
+            groupId: childSnapShot.key,
             groupname: childSnapShot.val().groupName
             // createdby: childSnapShot.val().createdby
           };

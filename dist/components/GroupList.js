@@ -89,7 +89,7 @@ var GroupList = function (_Component) {
   _createClass(GroupList, [{
     key: 'render',
     value: function render() {
-      console.log(this.props.groups);
+      //console.log(this.props.groups)
       return _react2.default.createElement(
         'div',
         { className: 'bottomMargin' },

@@ -34,6 +34,14 @@ var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
 
 var _colors = require('material-ui/styles/colors');
 
+var _AppStore = require('../stores/AppStore');
+
+var _AppStore2 = _interopRequireDefault(_AppStore);
+
+var _AppAPI = require('../utils/AppAPI');
+
+var _AppAPI2 = _interopRequireDefault(_AppAPI);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61,7 +69,10 @@ var Group = function (_Component) {
   _createClass(Group, [{
     key: 'groupClicked',
     value: function groupClicked() {
-      console.log('click me jooorr');
+      //console.log(this.props.group.groupId)
+      _AppAPI2.default.getGroupMessages(this.props.group.groupId);
+      _AppActions2.default.selectGroup(this.props.group.groupId);
+      //console.log('Selected group Id ' + this.props.group.groupId);
     }
   }]);
 
@@ -83,7 +94,7 @@ var Group = function (_Component) {
         { muiTheme: muiTheme },
         _react2.default.createElement(
           _List.ListItem,
-          { onTouchTap: this.groupClicked },
+          { onClick: this.groupClicked },
           _react2.default.createElement(
             'strong',
             null,

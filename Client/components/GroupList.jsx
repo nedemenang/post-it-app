@@ -46,7 +46,7 @@ class GroupList extends Component {
     this.state= {};
   }
   render(){
-    console.log(this.props.groups)
+    //console.log(this.props.groups)
     return(
       <div className="bottomMargin">
       <MuiThemeProvider muiTheme={muiTheme}>

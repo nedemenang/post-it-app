@@ -42,7 +42,7 @@ module.exports = (app) => {
     addUserToGroup(req, res, firebase);
   });
 
-  app.post('/group/:groupId/addmessage', (req, res) => {
+  app.post('/group/:groupId/message', (req, res) => {
     postMessage(req, res, firebase);
   });
 

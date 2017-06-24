@@ -4,20 +4,20 @@ module.exports = function (request, result, firebase) {
   firebase.auth().onAuthStateChanged(function (userlogin) {
     if (userlogin) {
       var messageRef = firebase.database().ref('groups/' + request.params.groupId + '/messages/');
-      var messages = [];
+      var groupMessages = [];
       messageRef.orderByKey().on('child_added', function (snapshot) {
         snapshot.forEach(function (childSnapShot) {
           var message = {
-            id: childSnapShot.key(),
+            id: childSnapShot.key,
             message: childSnapShot.val().groupname,
             postedby: childSnapShot.val().postedby,
             postedon: childSnapShot.val().postedon,
             priority: childSnapShot.val().priority
           };
-          messages.push(message);
+          groupMessages.push(message);
         }).then(function () {
           result.send({
-            messages: messages
+            groupMessages: groupMessages
           });
         }).catch(function (error) {
           result.status(500).send({

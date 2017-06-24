@@ -38,18 +38,38 @@ var MessageForm = function (_Component) {
     value: function submit(event) {
       event.preventDefault();
 
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+
+      today = mm + '/' + dd + '/' + yyyy;
+
       var messagebody = this.refs.message.value.trim();
-      var priority = this.ref.priority.value();
-      var postedon = Date.now;
+      var priority = this.refs.priority.value.trim();
+      var postedon = today;
+
+      //console.log('Selected Group ' + this.props.selectedGroupId);
 
       var message = {
         message: messagebody,
         postedon: postedon,
         priority: priority,
-        groupId: this.props.selectedGroupId
+        groupId: this.props.selectedGroupId,
+        userProfilePic: this.props.loggedInUser.photoURL
       };
 
+      //console.log(message)
       _AppActions2.default.addMessage(message);
+      //console.log(this.props.selectedGroupId) 
       //this.setState({error : AppStore.getErrors()});
       //console.log(AppStore.getErrors());
     }

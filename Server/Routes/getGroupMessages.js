@@ -3,21 +3,21 @@ module.exports = (request, result, firebase) => {
     if (userlogin) {
       const messageRef = firebase.database()
       .ref(`groups/${request.params.groupId}/messages/`);
-      const messages = [];
+      const groupMessages = [];
       messageRef.orderByKey().on('child_added', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const message = {
-            id: childSnapShot.key(),
+            id: childSnapShot.key,
             message: childSnapShot.val().groupname,
             postedby: childSnapShot.val().postedby,
             postedon: childSnapShot.val().postedon,
             priority: childSnapShot.val().priority
           };
-          messages.push(message);
+          groupMessages.push(message);
         })
         .then(() => {
           result.send({
-            messages,
+            groupMessages,
           });
         })
         .catch((error) => {

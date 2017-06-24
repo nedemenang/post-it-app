@@ -45,6 +45,7 @@ var AppStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
     _usersInGroup.push(user);
   },
   postMessage: function postMessage(message) {
+    // console.log(message);
     _groupMessages.push(message);
   },
   createNewGroup: function createNewGroup(group) {
@@ -139,7 +140,7 @@ _AppDispatcher2.default.register(function (payload) {
 
     case _AppConstants2.default.LOGIN_USER:
       // console.log('logging in user...');
-      //console.log(action.user);
+      // console.log(action.user);
 
       // save to API
       _AppAPI2.default.signinUser(action.user);
@@ -153,7 +154,7 @@ _AppDispatcher2.default.register(function (payload) {
       break;
 
     case _AppConstants2.default.CREATE_GROUP:
-      //console.log('create user group');
+      // console.log('create user group');
       // API store
       _AppAPI2.default.createNewGroup(action.group);
 
@@ -258,7 +259,7 @@ _AppDispatcher2.default.register(function (payload) {
       break;
 
     case _AppConstants2.default.SELECT_GROUP:
-
+      // console.log(`sets selected group from appstore ${action.selectedGroupId}`);
       // store save
       AppStore.setSelectedGroupId(action.selectedGroupId);
 
