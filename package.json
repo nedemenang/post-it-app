@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-watch server.js",
-    "start": "webpack && babel-node ./server/server.js",
+    "start": "webpack && babel-node ./dist/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
     "build": "babel client/ -d dist && babel server/ -d dist",
     "test": "mocha --timeout 10000 dist/tests/test.js"
