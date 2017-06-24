@@ -78,7 +78,7 @@ module.exports = function (app) {
     (0, _addUserToGroup2.default)(req, res, firebase);
   });
 
-  app.post('/group/:groupId/addmessage', function (req, res) {
+  app.post('/group/:groupId/message', function (req, res) {
     (0, _postMessage2.default)(req, res, firebase);
   });
 

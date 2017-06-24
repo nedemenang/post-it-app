@@ -81,7 +81,7 @@ module.exports = {
     // console.log('Adding user to group....');
   },
   postMessage: function postMessage(message) {
-    _axios2.default.post('/group/' + message.groupId + '/addmessage', {
+    _axios2.default.post('/group/' + message.groupId + '/message', {
       groupId: message.groupId,
       messageBody: message.messagebody,
       postedBy: message.postedby,
@@ -103,23 +103,15 @@ module.exports = {
     });
   },
   getGroupMessages: function getGroupMessages(group) {
-    _axios2.default.get('group/messages', {
-      params: {
-        groupId: group.groupId
-      }
-    }).then(function (response) {
+    _axios2.default.get('group/' + group.groupId + '/messages').then(function (response) {
       _AppActions2.default.receiveSuccess(response.message);
-      _AppActions2.default.receiveGroupMessages(response.messages);
+      _AppActions2.default.receiveGroupMessages(response.data.groupMessages);
     }).catch(function (error) {
       _AppActions2.default.receiveErrors(error.message);
     });
   },
   getUsersInGroups: function getUsersInGroups(group) {
-    _axios2.default.get('group/users', {
-      params: {
-        groupId: group.groupId
-      }
-    }).then(function (response) {
+    _axios2.default.get('group/' + group.groupId + '/users').then(function (response) {
       _AppActions2.default.receiveSuccess(response.message);
       _AppActions2.default.receiveUserInGroupResults(response.users);
     }).catch(function (error) {

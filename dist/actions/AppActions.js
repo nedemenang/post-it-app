@@ -59,6 +59,7 @@ var AppActions = {
     });
   },
   addMessage: function addMessage(message) {
+    //console.log(message);
     _AppDispatcher2.default.handleViewAction({
       actionType: _AppConstants2.default.ADD_MESSAGE,
       message: message

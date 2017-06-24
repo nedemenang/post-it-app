@@ -122,7 +122,7 @@ var MessageBoard = function (_Component) {
           'div',
           { className: 'rightColumn' },
           _react2.default.createElement(_MessageList2.default, { messages: this.state.messages }),
-          _react2.default.createElement(_MessageForm2.default, null)
+          _react2.default.createElement(_MessageForm2.default, this.state)
         )
       );
     }

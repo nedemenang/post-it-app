@@ -80,14 +80,14 @@ var Message = function (_Component) {
         _react2.default.createElement(
           _List.ListItem,
           { leftAvatar: _react2.default.createElement(_Avatar2.default, {
-              src: 'images/uxceo-128.jpg',
+              src: this.props.message.userProfilePic,
               size: 30,
               style: style
             }) },
           _react2.default.createElement(
             'strong',
             null,
-            'this.props.message'
+            'this.props.message.message'
           )
         )
       );
