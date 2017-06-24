@@ -50,7 +50,7 @@ app.use((0, _webpackHotMiddleware2.default)(compiler));
 (0, _postItController2.default)(app);
 
 app.get('/*', function (req, res) {
-  res.sendFile(_path2.default.join(__dirname, 'index.html'));
+  res.sendFile(_path2.default.join(__dirname, './public/index.html'));
 });
 
 app.listen(port, function () {
