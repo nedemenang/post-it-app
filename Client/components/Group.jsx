@@ -11,7 +11,8 @@ import {ListItem} from 'material-ui/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {green100, green500, green700} from 'material-ui/styles/colors';
-
+import AppStore from '../stores/AppStore';
+import AppAPI from '../utils/AppAPI';
 
 const style = {margin: 5};
 const muiTheme = getMuiTheme({
@@ -32,7 +33,10 @@ const muiTheme = getMuiTheme({
 class Group extends Component {
 
 groupClicked() {
-    console.log('click me jooorr')
+   //console.log(this.props.group.groupId)
+    AppAPI.getGroupMessages(this.props.group.groupId);
+    AppActions.selectGroup(this.props.group.groupId);
+    //console.log('Selected group Id ' + this.props.group.groupId);
   }
   
   constructor(props){
@@ -43,7 +47,7 @@ groupClicked() {
   render(){
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
-        <ListItem onTouchTap={this.groupClicked}>
+        <ListItem onClick={this.groupClicked}>
           <strong>{this.props.group.groupname}</strong>
         </ListItem>
       </MuiThemeProvider>

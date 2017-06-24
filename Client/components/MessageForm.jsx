@@ -13,18 +13,38 @@ class MessageForm extends Component {
 submit(event){
   event.preventDefault();
 
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //January is 0!
+  let yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd = '0'+dd
+  } 
+
+  if(mm<10) {
+      mm = '0'+mm
+  } 
+
+  today = mm + '/' + dd + '/' + yyyy;
+
   const messagebody = this.refs.message.value.trim();
-  const priority = this.ref.priority.value();
-  const postedon = Date.now;
+  const priority = this.refs.priority.value.trim();
+  const postedon = today;
   
+  //console.log('Selected Group ' + this.props.selectedGroupId);
+
   let message = {
     message : messagebody,
     postedon: postedon,
     priority: priority,
-    groupId: this.props.selectedGroupId
+    groupId: this.props.selectedGroupId,
+    userProfilePic: this.props.loggedInUser.photoURL
   }
   
-  AppActions.addMessage(message); 
+  //console.log(message)
+  AppActions.addMessage(message);
+  //console.log(this.props.selectedGroupId) 
   //this.setState({error : AppStore.getErrors()});
   //console.log(AppStore.getErrors());
   

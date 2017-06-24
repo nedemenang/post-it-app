@@ -14,7 +14,7 @@ let _groupMessages = [];
 let _errors = '';
 let _success = '';
 let _loggedInUser = [];
-const _registeredUser = [];
+let _registeredUser = [];
 let _selectedGroupId = '';
 let _isAuthenticated = false;
 
@@ -30,6 +30,7 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   postMessage(message) {
+    // console.log(message);
     _groupMessages.push(message);
   },
 
@@ -38,7 +39,7 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   signinUser(user) {
-    _loggedInUser.push(user); 
+    _loggedInUser.push(user);
     // console.log(_loggedInUser)
     // _isAuthenticated = true;
   },
@@ -120,9 +121,11 @@ const AppStore = assign({}, EventEmitter.prototype, {
   emitChange() {
     this.emit(CHANGE_EVENT);
   },
+
   addChangeListener(callback) {
     this.on('change', callback);
   },
+
   removeChangeListener(callback) {
     this.removeListener('change', callback);
   }
@@ -145,7 +148,7 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.LOGIN_USER:
     // console.log('logging in user...');
-    //console.log(action.user);
+    // console.log(action.user);
 
     // save to API
     AppAPI.signinUser(action.user);
@@ -159,7 +162,7 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.CREATE_GROUP:
-    //console.log('create user group');
+    // console.log('create user group');
     // API store
     AppAPI.createNewGroup(action.group);
 
@@ -265,7 +268,7 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.SELECT_GROUP:
-
+  // console.log(`sets selected group from appstore ${action.selectedGroupId}`);
     // store save
     AppStore.setSelectedGroupId(action.selectedGroupId);
 

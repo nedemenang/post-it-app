@@ -51,6 +51,7 @@ const AppActions = {
   },
 
   addMessage(message) {
+    //console.log(message);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADD_MESSAGE,
       message

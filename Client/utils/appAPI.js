@@ -84,7 +84,7 @@ module.exports = {
   },
 
   postMessage(message) {
-    axios.post(`/group/${message.groupId}/addmessage`, {
+    axios.post(`/group/${message.groupId}/message`, {
       groupId: message.groupId,
       messageBody: message.messagebody,
       postedBy: message.postedby,
@@ -111,14 +111,10 @@ module.exports = {
   },
 
   getGroupMessages(group) {
-    axios.get('group/messages', {
-      params: {
-        groupId: group.groupId
-      }
-    })
+    axios.get(`group/${group.groupId}/messages`)
    .then((response) => {
      AppActions.receiveSuccess(response.message);
-     AppActions.receiveGroupMessages(response.messages);
+     AppActions.receiveGroupMessages(response.data.groupMessages);
    })
    .catch((error) => {
      AppActions.receiveErrors(error.message);
@@ -126,11 +122,7 @@ module.exports = {
   },
 
   getUsersInGroups(group) {
-    axios.get('group/users', {
-      params: {
-        groupId: group.groupId
-      }
-    })
+    axios.get(`group/${group.groupId}/users`)
    .then((response) => {
      AppActions.receiveSuccess(response.message);
      AppActions.receiveUserInGroupResults(response.users);

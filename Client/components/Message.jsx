@@ -41,12 +41,12 @@ class Message extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <ListItem leftAvatar={
         <Avatar
-          src="images/uxceo-128.jpg"
+          src={this.props.message.userProfilePic}
           size={30}
           style={style}
         />
       }>
-          <strong>this.props.message</strong>
+          <strong>this.props.message.message</strong>
         </ListItem>
       </MuiThemeProvider>
     );

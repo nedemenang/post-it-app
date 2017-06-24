@@ -62,7 +62,7 @@ componentUnmount() {
         </div>
         <div className="rightColumn">
           <MessageList messages = {this.state.messages}/>
-          <MessageForm />
+          <MessageForm {...this.state} />
           </div>
         
       </div>
