@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a0e4eb3026254efe7e4c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "53b051346f799a836b79"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -79138,7 +79138,9 @@ var Message = function (_Component) {
             _react2.default.createElement(
               'small',
               null,
-              this.props.message.postedBy
+              this.props.message.postedBy,
+              ' - ',
+              this.props.message.postedon
             )
           )
         )
@@ -79368,21 +79370,21 @@ var MessageForm = function (_Component) {
       var priority = this.refs.priority.value.trim();
       var postedon = today;
 
-      //console.log('Selected Group ' + this.props.selectedGroupId);
-
       var messageObject = {
         messageBody: messagebody,
         postedon: postedon,
         priority: priority,
-        postedBy: "",
+        postedBy: this.props.loggedInUser[0].email,
         postedByDisplayName: "",
         profilePic: "",
         groupId: this.props.selectedGroupId
       };
 
-      // console.log(messageObject);
+      console.log(this.props.selectedGroupId);
       _AppActions2.default.addMessage(messageObject);
       //console.log(this.props.selectedGroupId) 
+      this.refs.message.value = "";
+      this.refs.priority.value = "Select Message Priority ...";
       //this.setState({error : AppStore.getErrors()});
       //console.log(AppStore.getErrors());
     }
