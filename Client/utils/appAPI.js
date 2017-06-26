@@ -25,7 +25,7 @@ module.exports = {
       email: user.email,
       password: user.password
     }).then((response) => {
-      //console.log(response);
+      // console.log(response);
       const authuser = {
         id: response.data.user.uid,
         email: user.email,
@@ -84,11 +84,12 @@ module.exports = {
   },
 
   postMessage(message) {
+    // console.log(message);
     axios.post(`/group/${message.groupId}/message`, {
       groupId: message.groupId,
-      messageBody: message.messagebody,
-      postedBy: message.postedby,
-      priority: message.priority
+      messageBody: message.messageBody,
+      priority: message.priority,
+      postedon: message.postedon
     }).then((response) => {
       AppActions.receiveSuccess(response.message);
     })
@@ -111,11 +112,12 @@ module.exports = {
   },
 
   getGroupMessages(group) {
-    axios.get(`group/${group.groupId}/messages`)
-   .then((response) => {
-     AppActions.receiveSuccess(response.message);
-     AppActions.receiveGroupMessages(response.data.groupMessages);
-   })
+    axios.get(`/group/${group.groupId}/messages`)
+    .then((response) => {
+      // console.log(response);
+      AppActions.receiveSuccess(response.message);
+      AppActions.receiveGroupMessages(response.data.groupMessages);
+    })
    .catch((error) => {
      AppActions.receiveErrors(error.message);
    });

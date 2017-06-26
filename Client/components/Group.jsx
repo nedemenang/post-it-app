@@ -34,7 +34,7 @@ class Group extends Component {
 
 groupClicked() {
    //console.log(this.props.group.groupId)
-    AppAPI.getGroupMessages(this.props.group.groupId);
+    AppAPI.getGroupMessages(this.props.group);
     AppActions.selectGroup(this.props.group.groupId);
     //console.log('Selected group Id ' + this.props.group.groupId);
   }

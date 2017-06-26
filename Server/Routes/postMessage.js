@@ -3,13 +3,13 @@ module.exports = (request, result, firebase) => {
     if (userlogin) {
       const messageRef = firebase.database()
       .ref(`groups/${request.body.groupId}/messages/`);
-      messageRef.push({
-        message: request.body.message,
+      messageRef.push().set({
+        messageBody: request.body.messageBody,
         postedBy: userlogin.email,
         postedByDisplayName: userlogin.displayName,
-        postedon: request.body.messageDate,
-        priority: request.body.priority
-       // profilePic: userlogin.profilePic
+        postedon: request.body.postedon,
+        priority: request.body.priority,
+        //profilePic: userlogin.photoUrl
       })
      .then(() => {
        // update all user profiles with appropriate message. Add isRead flag

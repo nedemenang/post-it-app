@@ -37,6 +37,7 @@ class Message extends Component {
     };
   }
   render(){
+    console.log(this.props.message);
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
         <ListItem leftAvatar={
@@ -46,7 +47,8 @@ class Message extends Component {
           style={style}
         />
       }>
-          <strong>this.props.message.message</strong>
+          <strong>{this.props.message.messageBody}</strong><br/>
+          <p><small>{this.props.message.postedBy} - {this.props.message.postedon}</small></p>
         </ListItem>
       </MuiThemeProvider>
     );

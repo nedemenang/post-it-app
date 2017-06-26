@@ -32,19 +32,21 @@ submit(event){
   const priority = this.refs.priority.value.trim();
   const postedon = today;
   
-  //console.log('Selected Group ' + this.props.selectedGroupId);
-
-  let message = {
-    message : messagebody,
+  let messageObject = {
+    messageBody : messagebody,
     postedon: postedon,
     priority: priority,
+    postedBy: this.props.loggedInUser[0].email,
+    postedByDisplayName: "",
+    profilePic: "",
     groupId: this.props.selectedGroupId,
-    userProfilePic: this.props.loggedInUser.photoURL
   }
   
-  //console.log(message)
-  AppActions.addMessage(message);
+  console.log(this.props.selectedGroupId);
+  AppActions.addMessage(messageObject);
   //console.log(this.props.selectedGroupId) 
+  this.refs.message.value = "";
+  this.refs.priority.value = "Select Message Priority ...";
   //this.setState({error : AppStore.getErrors()});
   //console.log(AppStore.getErrors());
   

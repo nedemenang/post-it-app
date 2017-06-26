@@ -13,8 +13,8 @@ let _userGroups = [];
 let _groupMessages = [];
 let _errors = '';
 let _success = '';
-let _loggedInUser = [];
-let _registeredUser = [];
+const _loggedInUser = [];
+const _registeredUser = [];
 let _selectedGroupId = '';
 let _isAuthenticated = false;
 
@@ -30,7 +30,7 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   postMessage(message) {
-    // console.log(message);
+     // console.log(message);
     _groupMessages.push(message);
   },
 
@@ -99,10 +99,12 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   setUserGroups(groups) {
+    console.log(groups);
     _userGroups = groups;
   },
 
   setGroupMessages(messages) {
+  //  console.log(messages);
     _groupMessages = messages;
   },
 
@@ -190,6 +192,7 @@ AppDispatcher.register((payload) => {
     // API store
     AppAPI.postMessage(action.message);
 
+
     // store save
     AppStore.postMessage(action.message);
 
@@ -230,8 +233,9 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_MESSAGE_RESULTS:
     // store save
+    //console.log(action.messages);
     AppStore.setGroupMessages(action.messages);
-
+  
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;

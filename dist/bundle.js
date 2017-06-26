@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7230ed5e929a3176052d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a0e4eb3026254efe7e4c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -20018,9 +20018,11 @@ module.exports = exports['default'];
         return _success;
       },
       setUserGroups: function setUserGroups(groups) {
+        console.log(groups);
         _userGroups = groups;
       },
       setGroupMessages: function setGroupMessages(messages) {
+        //  console.log(messages);
         _groupMessages = messages;
       },
       setSelectedGroupId: function setSelectedGroupId(groupId) {
@@ -20141,6 +20143,7 @@ module.exports = exports['default'];
 
         case _AppConstants2.default.RECEIVE_MESSAGE_RESULTS:
           // store save
+          //console.log(action.messages);
           AppStore.setGroupMessages(action.messages);
 
           // emit change
@@ -22877,7 +22880,7 @@ module.exports = defaults;
           email: user.email,
           password: user.password
         }).then(function (response) {
-          //console.log(response);
+          // console.log(response);
           var authuser = {
             id: response.data.user.uid,
             email: user.email,
@@ -22928,11 +22931,12 @@ module.exports = defaults;
         // console.log('Adding user to group....');
       },
       postMessage: function postMessage(message) {
+        // console.log(message);
         _axios2.default.post('/group/' + message.groupId + '/message', {
           groupId: message.groupId,
-          messageBody: message.messagebody,
-          postedBy: message.postedby,
-          priority: message.priority
+          messageBody: message.messageBody,
+          priority: message.priority,
+          postedon: message.postedon
         }).then(function (response) {
           _AppActions2.default.receiveSuccess(response.message);
         }).catch(function (error) {
@@ -22950,7 +22954,8 @@ module.exports = defaults;
         });
       },
       getGroupMessages: function getGroupMessages(group) {
-        _axios2.default.get('group/' + group.groupId + '/messages').then(function (response) {
+        _axios2.default.get('/group/' + group.groupId + '/messages').then(function (response) {
+          // console.log(response);
           _AppActions2.default.receiveSuccess(response.message);
           _AppActions2.default.receiveGroupMessages(response.data.groupMessages);
         }).catch(function (error) {
@@ -78519,7 +78524,7 @@ var Group = function (_Component) {
     key: 'groupClicked',
     value: function groupClicked() {
       //console.log(this.props.group.groupId)
-      _AppAPI2.default.getGroupMessages(this.props.group.groupId);
+      _AppAPI2.default.getGroupMessages(this.props.group);
       _AppActions2.default.selectGroup(this.props.group.groupId);
       //console.log('Selected group Id ' + this.props.group.groupId);
     }
@@ -78758,8 +78763,8 @@ var GroupList = function (_Component) {
     }
   }]);
 
-  // groupClicked() {
-  // console.log('click me jooorr')
+  //groupClicked() {
+  //  console.log(this.props.group)
   // }
 
   function GroupList(props) {
@@ -79110,6 +79115,7 @@ var Message = function (_Component) {
   _createClass(Message, [{
     key: 'render',
     value: function render() {
+      console.log(this.props.message);
       return _react2.default.createElement(
         _MuiThemeProvider2.default,
         { muiTheme: muiTheme },
@@ -79123,7 +79129,17 @@ var Message = function (_Component) {
           _react2.default.createElement(
             'strong',
             null,
-            'this.props.message.message'
+            this.props.message.messageBody
+          ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              'small',
+              null,
+              this.props.message.postedBy
+            )
           )
         )
       );
@@ -79354,16 +79370,18 @@ var MessageForm = function (_Component) {
 
       //console.log('Selected Group ' + this.props.selectedGroupId);
 
-      var message = {
-        message: messagebody,
+      var messageObject = {
+        messageBody: messagebody,
         postedon: postedon,
         priority: priority,
-        groupId: this.props.selectedGroupId,
-        userProfilePic: this.props.loggedInUser.photoURL
+        postedBy: "",
+        postedByDisplayName: "",
+        profilePic: "",
+        groupId: this.props.selectedGroupId
       };
 
-      //console.log(message)
-      _AppActions2.default.addMessage(message);
+      // console.log(messageObject);
+      _AppActions2.default.addMessage(messageObject);
       //console.log(this.props.selectedGroupId) 
       //this.setState({error : AppStore.getErrors()});
       //console.log(AppStore.getErrors());
