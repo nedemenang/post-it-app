@@ -50,7 +50,7 @@ module.exports = (app) => {
     getUserGroups(req, res, firebase);
   });
 
-  app.get('/group/messages', (req, res) => {
+  app.get('/group/:groupId/messages', (req, res) => {
     getGroupMessages(req, res, firebase);
   });
 
