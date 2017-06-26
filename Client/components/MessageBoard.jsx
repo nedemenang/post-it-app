@@ -12,7 +12,7 @@ import UserList from './UserList';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
 import GroupForm from './GroupForm';
-import AppAPI from '../utils/AppAPI';
+import AppAPI from '../utils/appAPI';
 import AppStore from '../stores/AppStore';
 
 function getAppState() {

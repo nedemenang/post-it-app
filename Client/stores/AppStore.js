@@ -1,7 +1,7 @@
 
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
-import AppAPI from '../utils/AppAPI.js';
+import AppAPI from '../utils/appAPI.js';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
 
