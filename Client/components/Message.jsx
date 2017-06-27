@@ -37,7 +37,7 @@ class Message extends Component {
     };
   }
   render(){
-    console.log(this.props.message);
+    //console.log(this.props.message);
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
         <ListItem leftAvatar={

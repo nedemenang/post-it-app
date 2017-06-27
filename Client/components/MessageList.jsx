@@ -34,11 +34,16 @@ class MessageList extends Component {
     this.state= {};
   }
   render(){
+    let groupsname = '';
+    if (this.props.selectedGroup.length !== 0)
+    {
+      groupsname = this.props.selectedGroup[0].groupname;
+    }
     return(
       <div className="bottomMargin">
       <MuiThemeProvider muiTheme={muiTheme}>
        <Card>
-       <Subheader><strong>Message List</strong></Subheader>
+       <Subheader><strong>{groupsname} Message List</strong></Subheader>
         <List>
           {
             this.props.messages.map((message, i) => {

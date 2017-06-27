@@ -34,10 +34,11 @@ module.exports = {
       };
       AppActions.receiveSuccess(response.message);
       AppActions.receiveAuthenticatedUser(authuser);
-      console.log(authuser);
+      AppActions.receiveErrors('');
+      //console.log(authuser);
     })
   .catch((error) => {
-    AppActions.receiveErrors(error);
+    AppActions.receiveErrors('Invalid username or password');
     console.log(error);
     // console.log(user);
   });

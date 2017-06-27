@@ -23,19 +23,28 @@ login(event){
     isAuthenticated: false,
     profilePic: ''
   }
-  //console.log(user)
-  AppActions.login(user); 
-  //this.setState({error : AppStore.getErrors()});
-  //console.log(AppStore.getErrors());
+
+  if(this.refs.loginEmail.value === ''){
+    AppActions.receiveErrors('Please insert email');
+  }else if (this.refs.loginPassword.value === '')
+  {
+    AppActions.receiveErrors('Please insert password');
+  } else{
+    AppActions.login(user); 
+  }
 }
 
 handleToggle(){
     $('form').slideToggle();
-    //this.props.errors = '';
+    AppActions.receiveErrors('');
+    this.refs.email.value = '';
+    this.refs.username.value = '';
+    this.refs.password.value = '';
+    this.refs.loginEmail.value = '';
+    this.refs.loginPassword.value = '';
   };
 
 signup(event){
-  // 
   event.preventDefault();
   let user = {
     email : this.refs.email.value.trim(),
@@ -43,19 +52,31 @@ signup(event){
     username: this.refs.username.value.trim()
   }
 
-  AppActions.registerUser(user); 
+  if(this.refs.email.value === ''){
+    AppActions.receiveErrors('Please insert email');
+  }else if (this.refs.password.value === '')
+  {
+    AppActions.receiveErrors('Please insert password');
+  }else if (this.refs.username.value === ''){
+    AppActions.receiveErrors('Please insert username');
+  } 
+  else{
+    AppActions.registerUser(user);
+    this.refs.email.value === '';
+    this.refs.username.value === '';
+    this.refs.password.value === '';
+  }
 }
 
 
 signupGoogle(event){
-  // 
   event.preventDefault();
   let user = {
     email : this.refs.email.value.trim(),
     password: this.refs.password.value.trim(),
     username: this.refs.username.value.trim()
   }
-  //AppActions.registerUser(user); 
+   
 }
 
 
@@ -86,7 +107,7 @@ signupGoogle(event){
       <input type="password" ref="password" placeholder="password"/>
       <input type="text" ref="username" placeholder="username"/>
       <p className="success">{this.props.success}</p>
-      <p className="error">{this.props.error}</p>
+      <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.signup}>Register</button>
       <br/>
       <button className="googleButton" onClick={this.signupGoogle}>Register with Google</button>
