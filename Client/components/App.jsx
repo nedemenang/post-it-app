@@ -5,7 +5,7 @@ import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 import MessageBoard from './MessageBoard';
 import '../public/style.css';
-import AppBar from 'material-ui/AppBar'
+import {AppBar, FlatButton} from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -54,9 +54,15 @@ componentUnmount() {
   AppStore.removeChangeListener(this._onChange.bind(this));
 }
 
+signOut(event){
+  event.preventDefault();
+  AppActions.signOutUser();
+}
+
   constructor(props){
     super(props);
     this.state = getAppState();
+    this.signOut = this.signOut.bind(this);
   }
 
    render() {
@@ -69,10 +75,16 @@ componentUnmount() {
        var componentToMount = <MessageBoard />
      }
 
+     const rightButtons = (
+      <div>
+        <FlatButton label="Sign Out" />
+      </div>
+    );
+
       return (
          <div>
          <MuiThemeProvider muiTheme={muiTheme}>
-          <AppBar title="Post It App" />
+          <AppBar title="Post It App" iconElementRight={<button className="googleButton" onClick={this.signOut}>Sign Out</button>}/>
             </MuiThemeProvider>
              {componentToMount}
          </div>

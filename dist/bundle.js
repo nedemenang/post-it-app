@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "47c4549854961dca917f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "223f3d5ee0e9a220e872"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22893,9 +22893,10 @@ module.exports = defaults;
           };
           _AppActions2.default.receiveSuccess(response.message);
           _AppActions2.default.receiveAuthenticatedUser(authuser);
-          console.log(authuser);
+          _AppActions2.default.receiveErrors('');
+          //console.log(authuser);
         }).catch(function (error) {
-          _AppActions2.default.receiveErrors(error);
+          _AppActions2.default.receiveErrors('Invalid username or password');
           console.log(error);
           // console.log(user);
         });
@@ -78424,13 +78425,19 @@ var App = function (_Component) {
         var componentToMount = _react2.default.createElement(_MessageBoard2.default, null);
       }
 
+      var rightButtons = _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(FlatButton, { label: 'Sign Out', style: buttonStyle })
+      );
+
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           _MuiThemeProvider2.default,
           { muiTheme: muiTheme },
-          _react2.default.createElement(_AppBar2.default, { title: 'Post It App' })
+          _react2.default.createElement(_AppBar2.default, { title: 'Post It App', iconRightElement: rightButtons })
         ),
         componentToMount
       );
@@ -78889,21 +78896,29 @@ var Login = function (_Component) {
         isAuthenticated: false,
         profilePic: ''
       };
-      //console.log(user)
-      _AppActions2.default.login(user);
-      //this.setState({error : AppStore.getErrors()});
-      //console.log(AppStore.getErrors());
+
+      if (this.refs.loginEmail.value === '') {
+        _AppActions2.default.receiveErrors('Please insert email');
+      } else if (this.refs.loginPassword.value === '') {
+        _AppActions2.default.receiveErrors('Please insert password');
+      } else {
+        _AppActions2.default.login(user);
+      }
     }
   }, {
     key: 'handleToggle',
     value: function handleToggle() {
       (0, _jquery2.default)('form').slideToggle();
-      //this.props.errors = '';
+      _AppActions2.default.receiveErrors('');
+      this.refs.email.value = '';
+      this.refs.username.value = '';
+      this.refs.password.value = '';
+      this.refs.loginEmail.value = '';
+      this.refs.loginPassword.value = '';
     }
   }, {
     key: 'signup',
     value: function signup(event) {
-      // 
       event.preventDefault();
       var user = {
         email: this.refs.email.value.trim(),
@@ -78911,19 +78926,28 @@ var Login = function (_Component) {
         username: this.refs.username.value.trim()
       };
 
-      _AppActions2.default.registerUser(user);
+      if (this.refs.email.value === '') {
+        _AppActions2.default.receiveErrors('Please insert email');
+      } else if (this.refs.password.value === '') {
+        _AppActions2.default.receiveErrors('Please insert password');
+      } else if (this.refs.username.value === '') {
+        _AppActions2.default.receiveErrors('Please insert username');
+      } else {
+        _AppActions2.default.registerUser(user);
+        this.refs.email.value === '';
+        this.refs.username.value === '';
+        this.refs.password.value === '';
+      }
     }
   }, {
     key: 'signupGoogle',
     value: function signupGoogle(event) {
-      // 
       event.preventDefault();
       var user = {
         email: this.refs.email.value.trim(),
         password: this.refs.password.value.trim(),
         username: this.refs.username.value.trim()
       };
-      //AppActions.registerUser(user); 
     }
   }]);
 
@@ -79000,7 +79024,7 @@ var Login = function (_Component) {
             _react2.default.createElement(
               'p',
               { className: 'error' },
-              this.props.error
+              this.props.errors
             ),
             _react2.default.createElement(
               'button',
@@ -79377,8 +79401,12 @@ var MessageForm = function (_Component) {
       //console.log(this.props.selectedGroupId);
 
       if (this.props.selectedGroup.length === 0) {
-        _AppActions2.default.receiveErrors('Please select a group');
+        _AppActions2.default.receiveErrors('Please select a group to post a message');
         //console.log(this.props.errors);
+      } else if (this.refs.message.value === '') {
+        _AppActions2.default.receiveErrors('Please type in a message');
+      } else if (this.refs.priority.value === 'Select Message Priority ....') {
+        _AppActions2.default.receiveErrors('Please select a message priority');
       } else {
         var messageObject = {
           messageBody: messagebody,
@@ -79391,8 +79419,8 @@ var MessageForm = function (_Component) {
         };
         _AppActions2.default.addMessage(messageObject);
         //console.log(this.props.selectedGroupId) 
-        this.refs.message.value = "";
-        this.refs.priority.value = "Select Message Priority ....";
+        this.refs.message.value = '';
+        this.refs.priority.value = 'Select Message Priority ....';
         _AppActions2.default.receiveErrors('');
         //this.setState({error : AppStore.getErrors()});
         //console.log(AppStore.getErrors());

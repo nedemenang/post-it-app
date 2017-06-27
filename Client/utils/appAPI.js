@@ -35,7 +35,7 @@ module.exports = {
       AppActions.receiveSuccess(response.message);
       AppActions.receiveAuthenticatedUser(authuser);
       AppActions.receiveErrors('');
-      //console.log(authuser);
+      // console.log(authuser);
     })
   .catch((error) => {
     AppActions.receiveErrors('Invalid username or password');
@@ -44,10 +44,8 @@ module.exports = {
   });
   },
 
-  signoutUser(user) {
-    axios.post('/users/signout', {
-      userId: user.userId
-    }).then((response) => {
+  signoutUser() {
+    axios.post('/users/signout').then((response) => {
       AppActions.receiveSuccess(response.message);
     })
     .catch((error) => {

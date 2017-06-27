@@ -44,6 +44,11 @@ const AppStore = assign({}, EventEmitter.prototype, {
     // _isAuthenticated = true;
   },
 
+  signOutUser() {
+    console.log('signing out...');
+    _loggedInUser.pop();
+  },
+
   setIsAuthenticated(value) {
     _isAuthenticated = value;
   },
@@ -206,12 +211,13 @@ AppDispatcher.register((payload) => {
   case AppConstants.SIGNOUT_USER:
 
     // API store
-    AppAPI.signOutUser();
+    AppAPI.signoutUser();
 
 
     // store save
     AppStore.signOutUser();
-
+    //AppStore.setIsAuthenticated(false);
+    // console.log(_isAuthenticated);
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
