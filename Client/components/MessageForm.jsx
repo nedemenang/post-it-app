@@ -32,23 +32,38 @@ submit(event){
   const priority = this.refs.priority.value.trim();
   const postedon = today;
   
-  let messageObject = {
-    messageBody : messagebody,
-    postedon: postedon,
-    priority: priority,
-    postedBy: this.props.loggedInUser[0].email,
-    postedByDisplayName: "",
-    profilePic: "",
-    groupId: this.props.selectedGroupId,
-  }
+  //console.log(this.props.selectedGroupId);
   
-  console.log(this.props.selectedGroupId);
-  AppActions.addMessage(messageObject);
-  //console.log(this.props.selectedGroupId) 
-  this.refs.message.value = "";
-  this.refs.priority.value = "Select Message Priority ...";
-  //this.setState({error : AppStore.getErrors()});
-  //console.log(AppStore.getErrors());
+  if(this.props.selectedGroup.length === 0)
+  {
+    AppActions.receiveErrors('Please select a group to post a message');
+    //console.log(this.props.errors);
+
+  }else if(this.refs.message.value === '')
+  {
+    AppActions.receiveErrors('Please type in a message');
+  }
+  else if (this.refs.priority.value === 'Select Message Priority ....')
+  {
+    AppActions.receiveErrors('Please select a message priority');
+  }else{
+    let messageObject = {
+      messageBody : messagebody,
+      postedon: postedon,
+      priority: priority,
+      postedBy: this.props.loggedInUser[0].email,
+      postedByDisplayName: "",
+      profilePic: "",
+      groupId: this.props.selectedGroup[0].groupId,
+    }
+    AppActions.addMessage(messageObject);
+    //console.log(this.props.selectedGroupId) 
+    this.refs.message.value = '';
+    this.refs.priority.value = 'Select Message Priority ....';
+    AppActions.receiveErrors('');
+    //this.setState({error : AppStore.getErrors()});
+    //console.log(AppStore.getErrors());
+  }
   
 }
 
@@ -68,6 +83,7 @@ submit(event){
               <option value="urgent">Urgent</option>
               <option value="critical">Critical</option>
              </select>
+             <p className="error">{this.props.errors}</p>
               <button className="messageButton" onClick={this.submit}>Submit</button>
          </form>
       </div>

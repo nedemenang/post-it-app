@@ -15,7 +15,7 @@ let _errors = '';
 let _success = '';
 const _loggedInUser = [];
 const _registeredUser = [];
-let _selectedGroupId = '';
+let _selectedGroup = [];
 let _isAuthenticated = false;
 
 
@@ -44,11 +44,16 @@ const AppStore = assign({}, EventEmitter.prototype, {
     // _isAuthenticated = true;
   },
 
+  signOutUser() {
+    console.log('signing out...');
+    _loggedInUser.pop();
+  },
+
   setIsAuthenticated(value) {
     _isAuthenticated = value;
   },
 
-  recieveError(error) {
+  receiveErrors(error) {
     console.log(error);
     _errors = error;
   },
@@ -61,8 +66,8 @@ const AppStore = assign({}, EventEmitter.prototype, {
     return _errors;
   },
 
-  getSelectedGroupId() {
-    return _selectedGroupId;
+  getSelectedGroup() {
+    return _selectedGroup;
   },
 
   getLoggedInUser() {
@@ -99,7 +104,7 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   setUserGroups(groups) {
-    console.log(groups);
+    //console.log(groups);
     _userGroups = groups;
   },
 
@@ -108,8 +113,11 @@ const AppStore = assign({}, EventEmitter.prototype, {
     _groupMessages = messages;
   },
 
-  setSelectedGroupId(groupId) {
-    _selectedGroupId = groupId;
+  setSelectedGroup(group) {
+    //console.log(_selectedGroup);
+    _selectedGroup.pop();
+    _selectedGroup.push(group);
+    //console.log(_selectedGroup);
   },
 
   setUsersInGroup(users) {
@@ -203,12 +211,13 @@ AppDispatcher.register((payload) => {
   case AppConstants.SIGNOUT_USER:
 
     // API store
-    AppAPI.signOutUser();
+    AppAPI.signoutUser();
 
 
     // store save
     AppStore.signOutUser();
-
+    //AppStore.setIsAuthenticated(false);
+    // console.log(_isAuthenticated);
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
@@ -255,9 +264,10 @@ AppDispatcher.register((payload) => {
     AppStore.emit(CHANGE_EVENT);
     break;
 
-  case AppConstants.RECEIVE_ERROR:
+  case AppConstants.RECEIVE_ERRORS:
     // store save
-    AppStore.receiveError(action.message);
+    //console.log(action.errors);
+    AppStore.receiveErrors(action.errors);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);
@@ -274,7 +284,7 @@ AppDispatcher.register((payload) => {
   case AppConstants.SELECT_GROUP:
   // console.log(`sets selected group from appstore ${action.selectedGroupId}`);
     // store save
-    AppStore.setSelectedGroupId(action.selectedGroupId);
+    AppStore.setSelectedGroup(action.selectedGroup);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);

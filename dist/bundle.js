@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "53b051346f799a836b79"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "223f3d5ee0e9a220e872"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2603,7 +2603,7 @@ if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
         });
       },
       addMessage: function addMessage(message) {
-        //console.log(message);
+        // console.log(message);
         _AppDispatcher2.default.handleViewAction({
           actionType: _AppConstants2.default.ADD_MESSAGE,
           message: message
@@ -2652,10 +2652,10 @@ if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
         });
       },
-      selectGroup: function selectGroup(selectedGroupId) {
+      selectGroup: function selectGroup(selectedGroup) {
         _AppDispatcher2.default.handleViewAction({
           actionType: _AppConstants2.default.SELECT_GROUP,
-          selectedGroupId: selectedGroupId
+          selectedGroup: selectedGroup
 
         });
       }
@@ -19928,9 +19928,9 @@ module.exports = exports['default'];
 
     var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-    var _AppAPI = __webpack_require__(109);
+    var _appAPI = __webpack_require__(109);
 
-    var _AppAPI2 = _interopRequireDefault(_AppAPI);
+    var _appAPI2 = _interopRequireDefault(_appAPI);
 
     var _AppDispatcher = __webpack_require__(173);
 
@@ -19954,7 +19954,7 @@ module.exports = exports['default'];
     var _success = '';
     var _loggedInUser = [];
     var _registeredUser = [];
-    var _selectedGroupId = '';
+    var _selectedGroup = [];
     var _isAuthenticated = false;
 
     var AppStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
@@ -19979,7 +19979,7 @@ module.exports = exports['default'];
       setIsAuthenticated: function setIsAuthenticated(value) {
         _isAuthenticated = value;
       },
-      recieveError: function recieveError(error) {
+      receiveErrors: function receiveErrors(error) {
         console.log(error);
         _errors = error;
       },
@@ -19989,8 +19989,8 @@ module.exports = exports['default'];
       getErrors: function getErrors() {
         return _errors;
       },
-      getSelectedGroupId: function getSelectedGroupId() {
-        return _selectedGroupId;
+      getSelectedGroup: function getSelectedGroup() {
+        return _selectedGroup;
       },
       getLoggedInUser: function getLoggedInUser() {
         // this.signinUser();
@@ -20018,15 +20018,18 @@ module.exports = exports['default'];
         return _success;
       },
       setUserGroups: function setUserGroups(groups) {
-        console.log(groups);
+        //console.log(groups);
         _userGroups = groups;
       },
       setGroupMessages: function setGroupMessages(messages) {
         //  console.log(messages);
         _groupMessages = messages;
       },
-      setSelectedGroupId: function setSelectedGroupId(groupId) {
-        _selectedGroupId = groupId;
+      setSelectedGroup: function setSelectedGroup(group) {
+        //console.log(_selectedGroup);
+        _selectedGroup.pop();
+        _selectedGroup.push(group);
+        //console.log(_selectedGroup);
       },
       setUsersInGroup: function setUsersInGroup(users) {
         _usersInGroup = users;
@@ -20052,7 +20055,7 @@ module.exports = exports['default'];
         case _AppConstants2.default.REGISTER_USER:
           // console.log('Registering user...');
           // save to API
-          _AppAPI2.default.registerNewUser(action.user);
+          _appAPI2.default.registerNewUser(action.user);
           // store save
           AppStore.registerNewUser(action.user);
 
@@ -20065,7 +20068,7 @@ module.exports = exports['default'];
           // console.log(action.user);
 
           // save to API
-          _AppAPI2.default.signinUser(action.user);
+          _appAPI2.default.signinUser(action.user);
           // if (_errors === '') {
           // store save
           // console.log('errors');
@@ -20078,7 +20081,7 @@ module.exports = exports['default'];
         case _AppConstants2.default.CREATE_GROUP:
           // console.log('create user group');
           // API store
-          _AppAPI2.default.createNewGroup(action.group);
+          _appAPI2.default.createNewGroup(action.group);
 
           // store save
           AppStore.createNewGroup(action.group);
@@ -20090,7 +20093,7 @@ module.exports = exports['default'];
         case _AppConstants2.default.ADDUSER_GROUP:
           // console.log('add user group');
           // API store
-          _AppAPI2.default.addUserToGroup(action.userGroup);
+          _appAPI2.default.addUserToGroup(action.userGroup);
 
           // store save
           AppStore.addUserToGroup(action.userGroup);
@@ -20102,7 +20105,7 @@ module.exports = exports['default'];
         case _AppConstants2.default.ADD_MESSAGE:
 
           // API store
-          _AppAPI2.default.postMessage(action.message);
+          _appAPI2.default.postMessage(action.message);
 
           // store save
           AppStore.postMessage(action.message);
@@ -20114,7 +20117,7 @@ module.exports = exports['default'];
         case _AppConstants2.default.SIGNOUT_USER:
 
           // API store
-          _AppAPI2.default.signOutUser();
+          _appAPI2.default.signOutUser();
 
           // store save
           AppStore.signOutUser();
@@ -20165,9 +20168,10 @@ module.exports = exports['default'];
           AppStore.emit(CHANGE_EVENT);
           break;
 
-        case _AppConstants2.default.RECEIVE_ERROR:
+        case _AppConstants2.default.RECEIVE_ERRORS:
           // store save
-          AppStore.receiveError(action.message);
+          //console.log(action.errors);
+          AppStore.receiveErrors(action.errors);
 
           // emit change
           AppStore.emit(CHANGE_EVENT);
@@ -20184,7 +20188,7 @@ module.exports = exports['default'];
         case _AppConstants2.default.SELECT_GROUP:
           // console.log(`sets selected group from appstore ${action.selectedGroupId}`);
           // store save
-          AppStore.setSelectedGroupId(action.selectedGroupId);
+          AppStore.setSelectedGroup(action.selectedGroup);
 
           // emit change
           AppStore.emit(CHANGE_EVENT);
@@ -22889,9 +22893,10 @@ module.exports = defaults;
           };
           _AppActions2.default.receiveSuccess(response.message);
           _AppActions2.default.receiveAuthenticatedUser(authuser);
-          console.log(authuser);
+          _AppActions2.default.receiveErrors('');
+          //console.log(authuser);
         }).catch(function (error) {
-          _AppActions2.default.receiveErrors(error);
+          _AppActions2.default.receiveErrors('Invalid username or password');
           console.log(error);
           // console.log(user);
         });
@@ -22997,7 +23002,7 @@ module.exports = defaults;
         }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
           module.hot.accept(function (err) {
             if (err) {
-              console.error("Cannot apply hot update to " + "AppAPI.js" + ": " + err.message);
+              console.error("Cannot apply hot update to " + "appAPI.js" + ": " + err.message);
             }
           });
         }
@@ -78420,13 +78425,19 @@ var App = function (_Component) {
         var componentToMount = _react2.default.createElement(_MessageBoard2.default, null);
       }
 
+      var rightButtons = _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(FlatButton, { label: 'Sign Out', style: buttonStyle })
+      );
+
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           _MuiThemeProvider2.default,
           { muiTheme: muiTheme },
-          _react2.default.createElement(_AppBar2.default, { title: 'Post It App' })
+          _react2.default.createElement(_AppBar2.default, { title: 'Post It App', iconRightElement: rightButtons })
         ),
         componentToMount
       );
@@ -78492,9 +78503,9 @@ var _AppStore = __webpack_require__(89);
 
 var _AppStore2 = _interopRequireDefault(_AppStore);
 
-var _AppAPI = __webpack_require__(109);
+var _appAPI = __webpack_require__(109);
 
-var _AppAPI2 = _interopRequireDefault(_AppAPI);
+var _appAPI2 = _interopRequireDefault(_appAPI);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78524,9 +78535,9 @@ var Group = function (_Component) {
     key: 'groupClicked',
     value: function groupClicked() {
       //console.log(this.props.group.groupId)
-      _AppAPI2.default.getGroupMessages(this.props.group);
-      _AppActions2.default.selectGroup(this.props.group.groupId);
-      //console.log('Selected group Id ' + this.props.group.groupId);
+      _appAPI2.default.getGroupMessages(this.props.group);
+      _AppActions2.default.selectGroup(this.props.group);
+      // console.log(this.props.group);
     }
   }]);
 
@@ -78613,7 +78624,7 @@ var GroupForm = function (_Component) {
     value: function submit(event) {
       event.preventDefault();
 
-      console.log(dateCreated);
+      // console.log(dateCreated);
 
       var today = new Date();
       var dd = today.getDate();
@@ -78885,21 +78896,29 @@ var Login = function (_Component) {
         isAuthenticated: false,
         profilePic: ''
       };
-      //console.log(user)
-      _AppActions2.default.login(user);
-      //this.setState({error : AppStore.getErrors()});
-      //console.log(AppStore.getErrors());
+
+      if (this.refs.loginEmail.value === '') {
+        _AppActions2.default.receiveErrors('Please insert email');
+      } else if (this.refs.loginPassword.value === '') {
+        _AppActions2.default.receiveErrors('Please insert password');
+      } else {
+        _AppActions2.default.login(user);
+      }
     }
   }, {
     key: 'handleToggle',
     value: function handleToggle() {
       (0, _jquery2.default)('form').slideToggle();
-      //this.props.errors = '';
+      _AppActions2.default.receiveErrors('');
+      this.refs.email.value = '';
+      this.refs.username.value = '';
+      this.refs.password.value = '';
+      this.refs.loginEmail.value = '';
+      this.refs.loginPassword.value = '';
     }
   }, {
     key: 'signup',
     value: function signup(event) {
-      // 
       event.preventDefault();
       var user = {
         email: this.refs.email.value.trim(),
@@ -78907,19 +78926,28 @@ var Login = function (_Component) {
         username: this.refs.username.value.trim()
       };
 
-      _AppActions2.default.registerUser(user);
+      if (this.refs.email.value === '') {
+        _AppActions2.default.receiveErrors('Please insert email');
+      } else if (this.refs.password.value === '') {
+        _AppActions2.default.receiveErrors('Please insert password');
+      } else if (this.refs.username.value === '') {
+        _AppActions2.default.receiveErrors('Please insert username');
+      } else {
+        _AppActions2.default.registerUser(user);
+        this.refs.email.value === '';
+        this.refs.username.value === '';
+        this.refs.password.value === '';
+      }
     }
   }, {
     key: 'signupGoogle',
     value: function signupGoogle(event) {
-      // 
       event.preventDefault();
       var user = {
         email: this.refs.email.value.trim(),
         password: this.refs.password.value.trim(),
         username: this.refs.username.value.trim()
       };
-      //AppActions.registerUser(user); 
     }
   }]);
 
@@ -78996,7 +79024,7 @@ var Login = function (_Component) {
             _react2.default.createElement(
               'p',
               { className: 'error' },
-              this.props.error
+              this.props.errors
             ),
             _react2.default.createElement(
               'button',
@@ -79115,7 +79143,7 @@ var Message = function (_Component) {
   _createClass(Message, [{
     key: 'render',
     value: function render() {
-      console.log(this.props.message);
+      //console.log(this.props.message);
       return _react2.default.createElement(
         _MuiThemeProvider2.default,
         { muiTheme: muiTheme },
@@ -79206,9 +79234,9 @@ var _GroupForm = __webpack_require__(597);
 
 var _GroupForm2 = _interopRequireDefault(_GroupForm);
 
-var _AppAPI = __webpack_require__(109);
+var _appAPI = __webpack_require__(109);
 
-var _AppAPI2 = _interopRequireDefault(_AppAPI);
+var _appAPI2 = _interopRequireDefault(_appAPI);
 
 var _AppStore = __webpack_require__(89);
 
@@ -79231,7 +79259,7 @@ function getAppState() {
     users: _AppStore2.default.getUsersInGroup(),
     groups: _AppStore2.default.getUserGroups(),
     messages: _AppStore2.default.getGroupMessages(),
-    selectedGroupId: _AppStore2.default.getSelectedGroupId()
+    selectedGroup: _AppStore2.default.getSelectedGroup()
   };
 }
 
@@ -79247,7 +79275,7 @@ var MessageBoard = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       //console.log(this.state.loggedInUser);
-      _AppAPI2.default.getUserGroups();
+      _appAPI2.default.getUserGroups();
       _AppStore2.default.addChangeListener(this._onChange.bind(this));
     }
   }, {
@@ -79285,7 +79313,7 @@ var MessageBoard = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'rightColumn' },
-          _react2.default.createElement(_MessageList2.default, { messages: this.state.messages }),
+          _react2.default.createElement(_MessageList2.default, this.state),
           _react2.default.createElement(_MessageForm2.default, this.state)
         )
       );
@@ -79370,23 +79398,33 @@ var MessageForm = function (_Component) {
       var priority = this.refs.priority.value.trim();
       var postedon = today;
 
-      var messageObject = {
-        messageBody: messagebody,
-        postedon: postedon,
-        priority: priority,
-        postedBy: this.props.loggedInUser[0].email,
-        postedByDisplayName: "",
-        profilePic: "",
-        groupId: this.props.selectedGroupId
-      };
+      //console.log(this.props.selectedGroupId);
 
-      console.log(this.props.selectedGroupId);
-      _AppActions2.default.addMessage(messageObject);
-      //console.log(this.props.selectedGroupId) 
-      this.refs.message.value = "";
-      this.refs.priority.value = "Select Message Priority ...";
-      //this.setState({error : AppStore.getErrors()});
-      //console.log(AppStore.getErrors());
+      if (this.props.selectedGroup.length === 0) {
+        _AppActions2.default.receiveErrors('Please select a group to post a message');
+        //console.log(this.props.errors);
+      } else if (this.refs.message.value === '') {
+        _AppActions2.default.receiveErrors('Please type in a message');
+      } else if (this.refs.priority.value === 'Select Message Priority ....') {
+        _AppActions2.default.receiveErrors('Please select a message priority');
+      } else {
+        var messageObject = {
+          messageBody: messagebody,
+          postedon: postedon,
+          priority: priority,
+          postedBy: this.props.loggedInUser[0].email,
+          postedByDisplayName: "",
+          profilePic: "",
+          groupId: this.props.selectedGroup[0].groupId
+        };
+        _AppActions2.default.addMessage(messageObject);
+        //console.log(this.props.selectedGroupId) 
+        this.refs.message.value = '';
+        this.refs.priority.value = 'Select Message Priority ....';
+        _AppActions2.default.receiveErrors('');
+        //this.setState({error : AppStore.getErrors()});
+        //console.log(AppStore.getErrors());
+      }
     }
   }]);
 
@@ -79433,6 +79471,11 @@ var MessageForm = function (_Component) {
               { value: 'critical' },
               'Critical'
             )
+          ),
+          _react2.default.createElement(
+            'p',
+            { className: 'error' },
+            this.props.errors
           ),
           _react2.default.createElement(
             'button',
@@ -79533,6 +79576,10 @@ var MessageList = function (_Component) {
   _createClass(MessageList, [{
     key: 'render',
     value: function render() {
+      var groupsname = '';
+      if (this.props.selectedGroup.length !== 0) {
+        groupsname = this.props.selectedGroup[0].groupname;
+      }
       return _react2.default.createElement(
         'div',
         { className: 'bottomMargin' },
@@ -79548,7 +79595,8 @@ var MessageList = function (_Component) {
               _react2.default.createElement(
                 'strong',
                 null,
-                'Message List'
+                groupsname,
+                ' Message List'
               )
             ),
             _react2.default.createElement(
@@ -79618,7 +79666,7 @@ var Signup = function (_Component) {
         username: this.refs.username.value.trim()
       };
 
-      console.log(user);
+      ///console.log(user);
 
       _AppActions2.default.registerUser(user);
     }

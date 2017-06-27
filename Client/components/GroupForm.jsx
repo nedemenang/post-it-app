@@ -15,7 +15,7 @@ class GroupForm extends Component {
 submit(event){
   event.preventDefault();
   
-  console.log(dateCreated);
+ // console.log(dateCreated);
 
   let today = new Date();
   let dd = today.getDate();

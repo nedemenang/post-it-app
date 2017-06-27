@@ -24,7 +24,7 @@ function getAppState() {
       users: AppStore.getUsersInGroup(),
       groups: AppStore.getUserGroups(),
       messages: AppStore.getGroupMessages(),
-      selectedGroupId: AppStore.getSelectedGroupId()
+      selectedGroup: AppStore.getSelectedGroup()
     };
 }
 
@@ -61,7 +61,7 @@ componentUnmount() {
           <UserList users = {this.state.users} />
         </div>
         <div className="rightColumn">
-          <MessageList messages = {this.state.messages}/>
+          <MessageList {...this.state}/>
           <MessageForm {...this.state} />
           </div>
         

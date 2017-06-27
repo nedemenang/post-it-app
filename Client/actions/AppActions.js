@@ -51,7 +51,7 @@ const AppActions = {
   },
 
   addMessage(message) {
-    //console.log(message);
+    // console.log(message);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADD_MESSAGE,
       message
@@ -107,10 +107,10 @@ const AppActions = {
     });
   },
 
-  selectGroup(selectedGroupId) {
+  selectGroup(selectedGroup) {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.SELECT_GROUP,
-      selectedGroupId
+      selectedGroup
 
     });
   }

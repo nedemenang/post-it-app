@@ -13,7 +13,7 @@ signup(event){
     username: this.refs.username.value.trim()
   }
 
-  console.log(user);
+  ///console.log(user);
 
   AppActions.registerUser(user); 
 }
