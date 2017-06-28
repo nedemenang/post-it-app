@@ -38,8 +38,8 @@ module.exports = {
       // console.log(authuser);
     })
   .catch((error) => {
-    AppActions.receiveErrors('Invalid username or password');
-    console.log(error);
+    AppActions.receiveErrors(error.message);
+    //console.log(error);
     // console.log(user);
   });
   },
@@ -134,14 +134,11 @@ module.exports = {
   },
 
   getUsersNotInGroups(group) {
-    axios.get('group/notusers', {
-      params: {
-        groupId: group.groupId
-      }
-    })
+    console.log(group);
+    axios.get(`group/${group.groupId}/notusers`)
    .then((response) => {
      AppActions.receiveSuccess(response.message);
-     AppActions.receiveUserNotInGroupResults(response.users);
+     AppActions.receiveUserNotInGroupResults(response.data.userNotInGroup);
    })
    .catch((error) => {
      AppActions.receiveErrors(error.message);

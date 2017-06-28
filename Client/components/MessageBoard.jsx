@@ -21,7 +21,7 @@ function getAppState() {
       success: AppStore.getSuccess(),
       loggedInUser: AppStore.getLoggedInUser(),
       registeredUser: AppStore.getRegisteredUser(),
-      users: AppStore.getUsersInGroup(),
+      users: AppStore.getUsersNotInGroup(),
       groups: AppStore.getUserGroups(),
       messages: AppStore.getGroupMessages(),
       selectedGroup: AppStore.getSelectedGroup()
@@ -58,7 +58,7 @@ componentUnmount() {
         <div className="leftColumn">
           <GroupList groups = {this.state.groups} />
           <GroupForm />
-          <UserList users = {this.state.users} />
+          <UserList {...this.state} />
         </div>
         <div className="rightColumn">
           <MessageList {...this.state}/>

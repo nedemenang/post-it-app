@@ -57,12 +57,9 @@ submit(event){
       groupId: this.props.selectedGroup[0].groupId,
     }
     AppActions.addMessage(messageObject);
-    //console.log(this.props.selectedGroupId) 
     this.refs.message.value = '';
     this.refs.priority.value = 'Select Message Priority ....';
     AppActions.receiveErrors('');
-    //this.setState({error : AppStore.getErrors()});
-    //console.log(AppStore.getErrors());
   }
   
 }

@@ -1,10 +1,10 @@
 module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
-      const messageRef = firebase.database()
+      const userRef = firebase.database()
       .ref(`groups/${request.params.groupId}/users/`);
       const users = [];
-      messageRef.orderByKey().on('child_added', (snapshot) => {
+      userRef.orderByKey().once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const user = {
             id: childSnapShot.key(),

@@ -1,5 +1,5 @@
 module.exports = (request, result, firebase) => {
-  //console.log('registering user...');
+  // console.log('registering user...');
   const email = request.body.email;
   const password = request.body.password;
   const userName = request.body.userName;
@@ -8,6 +8,12 @@ module.exports = (request, result, firebase) => {
     user.updateProfile({
       displayName: userName,
     }).then(() => {
+      const userRef = firebase.database()
+       .ref(`users/`);
+      userRef.child(user.uid).set({
+        userName,
+        email
+      });
       result.send({
         message: `Welcome ${user.email}. Please proceed to log in`
       });

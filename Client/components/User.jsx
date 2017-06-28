@@ -45,7 +45,7 @@ class User extends Component {
           style={style}
         />
       }>
-         <strong>User</strong>
+         <strong>{this.props.user.email}</strong>
      </ListItem>
       </MuiThemeProvider>
     );
