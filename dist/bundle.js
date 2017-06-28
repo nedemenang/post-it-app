@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e1bd4788053dbd3460d6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9a12930a750c6fbf29e0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -79828,7 +79828,9 @@ var User = function (_Component) {
           _react2.default.createElement(
             'strong',
             null,
-            this.props.user.email
+            this.props.user.email,
+            ' - ',
+            this.props.username
           )
         )
       );

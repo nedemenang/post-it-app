@@ -15,6 +15,7 @@ module.exports = (request, result, firebase) => {
           const user = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
+            username: childSnapShot.val().userName
           };
           usersInGroup.push(user);
         });
@@ -25,6 +26,7 @@ module.exports = (request, result, firebase) => {
           const users = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
+            username: childSnapShot.val().userName
           };
           allUsers.push(users);
         });
