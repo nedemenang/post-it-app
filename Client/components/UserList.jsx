@@ -34,6 +34,11 @@ class UserList extends Component {
     this.state= {};
   }
   render(){
+    let groupsname = '';
+    if (this.props.selectedGroup.length !== 0)
+    {
+      groupsname = this.props.selectedGroup[0].groupname;
+    }
     return(
       <div>
       <MuiThemeProvider muiTheme={muiTheme}>

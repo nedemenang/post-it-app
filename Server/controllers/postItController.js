@@ -8,7 +8,7 @@ import postMessage from '../Routes/postMessage';
 import getUserGroups from '../Routes/getUserGroups';
 import getGroupMessages from '../Routes/getGroupMessages';
 import getUsersInGroups from '../Routes/getUsersInGroups';
-// import getUsersNotInGroups from '../Routes/getUsersNotInGroups';
+import getUsersNotInGroups from '../Routes/getUsersNotInGroups';
 // import signInUserGoogle from '../Routes/SignInUserGoogle';
 
 const config = {
@@ -58,7 +58,7 @@ module.exports = (app) => {
     getUsersInGroups(req, res, firebase);
   });
 
- // app.get('/group/notusers', (req, res) => {
-  //  getUsersNotInGroups(req, res, firebase);
- // });
+  app.get('/group/:groupId/notusers', (req, res) => {
+    getUsersNotInGroups(req, res, firebase);
+  });
 };

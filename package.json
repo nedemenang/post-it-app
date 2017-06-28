@@ -9,7 +9,6 @@
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
     "build": "babel server/ -d dist",
     "test": "mocha --timeout 10000 dist/tests/test.js"
-   
   },
   "author": "Nnamso Edemenang",
   "license": "ISC",
@@ -29,6 +28,7 @@
     "firebase": "^4.0.0",
     "firebase-admin": "^5.0.0",
     "flux": "*",
+    "lodash": "^4.17.4",
     "material-ui": "^0.18.3",
     "mocha": "^3.4.2",
     "object-assign": "^4.1.1",

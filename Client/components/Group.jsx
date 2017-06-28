@@ -35,6 +35,7 @@ class Group extends Component {
 groupClicked() {
    //console.log(this.props.group.groupId)
     AppAPI.getGroupMessages(this.props.group);
+    AppAPI.getUsersNotInGroups(this.props.group);
     AppActions.selectGroup(this.props.group);
    // console.log(this.props.group);
   }
