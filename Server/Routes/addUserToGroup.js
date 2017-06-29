@@ -1,11 +1,13 @@
 module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
+      console.log(request);
       const groupRef = firebase.database()
       .ref(`groups/${request.params.groupId}/users/`);
       groupRef.child(request.body.userId).set({
+        email: request.body.email,
         userId: request.body.userId,
-        email: request.body.email
+        userName: request.body.username
       })
      .then(() => {
        const userRef = firebase.database()

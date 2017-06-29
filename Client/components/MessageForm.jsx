@@ -47,12 +47,13 @@ submit(event){
   {
     AppActions.receiveErrors('Please select a message priority');
   }else{
+    console.log(this.props.loggedInUser[0]);
     let messageObject = {
       messageBody : messagebody,
       postedon: postedon,
       priority: priority,
       postedBy: this.props.loggedInUser[0].email,
-      postedByDisplayName: "",
+      postedByDisplayName: this.props.loggedInUser[0].displayName,
       profilePic: "",
       groupId: this.props.selectedGroup[0].groupId,
     }

@@ -42,10 +42,11 @@ const AppActions = {
     });
   },
 
-  addUserToGroup(usergroup) {
+  addUserToGroup(user) {
+    //console.log(usergroup);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADDUSER_GROUP,
-      usergroup
+      user
 
     });
   },

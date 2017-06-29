@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9a12930a750c6fbf29e0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a8035c8f401a246c76af"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2595,10 +2595,11 @@ if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
         });
       },
-      addUserToGroup: function addUserToGroup(usergroup) {
+      addUserToGroup: function addUserToGroup(user) {
+        //console.log(usergroup);
         _AppDispatcher2.default.handleViewAction({
           actionType: _AppConstants2.default.ADDUSER_GROUP,
-          usergroup: usergroup
+          user: user
 
         });
       },
@@ -20097,10 +20098,10 @@ module.exports = exports['default'];
         case _AppConstants2.default.ADDUSER_GROUP:
           // console.log('add user group');
           // API store
-          _appAPI2.default.addUserToGroup(action.userGroup);
+          _appAPI2.default.addUserToGroup(action.user);
 
           // store save
-          AppStore.addUserToGroup(action.userGroup);
+          AppStore.addUserToGroup(action.user);
 
           // emit change
           AppStore.emit(CHANGE_EVENT);
@@ -23232,6 +23233,7 @@ module.exports = defaults;
             id: response.data.user.uid,
             email: user.email,
             profilePic: response.data.user.photoURL,
+            displayName: response.data.user.displayName,
             isAuthenticated: true
           };
           _AppActions2.default.receiveSuccess(response.message);
@@ -23240,7 +23242,7 @@ module.exports = defaults;
           // console.log(authuser);
         }).catch(function (error) {
           _AppActions2.default.receiveErrors(error.message);
-          //console.log(error);
+          // console.log(error);
           // console.log(user);
         });
       },
@@ -23264,9 +23266,12 @@ module.exports = defaults;
           _AppActions2.default.receiveErrors(error.message);
         });
       },
-      addUserToGroup: function addUserToGroup(userGroup) {
-        _axios2.default.post('/group/' + userGroup.groupId + '/user', {
-          userId: userGroup.userId
+      addUserToGroup: function addUserToGroup(user) {
+        _axios2.default.post('/group/' + user.groupId + '/user', {
+          email: user.email,
+          userId: user.userId,
+          username: user.username,
+          groupName: user.groupName
         }).then(function (response) {
           _AppActions2.default.receiveSuccess(response.message);
           console.log(response);
@@ -23282,7 +23287,9 @@ module.exports = defaults;
           groupId: message.groupId,
           messageBody: message.messageBody,
           priority: message.priority,
-          postedon: message.postedon
+          postedon: message.postedon,
+          postedBy: message.postedBy,
+          postedByDisplayName: message.postedByDisplayName
         }).then(function (response) {
           _AppActions2.default.receiveSuccess(response.message);
         }).catch(function (error) {
@@ -79418,12 +79425,13 @@ var MessageForm = function (_Component) {
       } else if (this.refs.priority.value === 'Select Message Priority ....') {
         _AppActions2.default.receiveErrors('Please select a message priority');
       } else {
+        console.log(this.props.loggedInUser[0]);
         var messageObject = {
           messageBody: messagebody,
           postedon: postedon,
           priority: priority,
           postedBy: this.props.loggedInUser[0].email,
-          postedByDisplayName: "",
+          postedByDisplayName: this.props.loggedInUser[0].displayName,
           profilePic: "",
           groupId: this.props.selectedGroup[0].groupId
         };
@@ -79803,12 +79811,30 @@ var muiTheme = (0, _getMuiTheme2.default)({
 var User = function (_Component) {
   _inherits(User, _Component);
 
+  _createClass(User, [{
+    key: 'userClicked',
+    value: function userClicked() {
+
+      if (confirm("Are you sure you want to add this user to group?") == true) {
+        var userObject = {
+          email: this.props.user.email,
+          userId: this.props.user.id,
+          username: this.props.user.username,
+          groupId: this.props.selectedGroup[0].groupId,
+          groupName: this.props.selectedGroup[0].groupname
+        };
+        _AppActions2.default.addUserToGroup(userObject);
+      }
+    }
+  }]);
+
   function User(props) {
     _classCallCheck(this, User);
 
     var _this = _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).call(this, props));
 
     _this.state = {};
+    _this.userClicked = _this.userClicked.bind(_this);
     return _this;
   }
 
@@ -79824,13 +79850,13 @@ var User = function (_Component) {
               src: 'images/uxceo-128.jpg',
               size: 30,
               style: style
-            }) },
+            }), onClick: this.userClicked },
           _react2.default.createElement(
             'strong',
             null,
             this.props.user.email,
             ' - ',
-            this.props.username
+            this.props.user.username
           )
         )
       );
@@ -79926,6 +79952,8 @@ var UserList = function (_Component) {
   _createClass(UserList, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var groupsname = '';
       if (this.props.selectedGroup.length !== 0) {
         groupsname = this.props.selectedGroup[0].groupname;
@@ -79952,7 +79980,7 @@ var UserList = function (_Component) {
                 )
               ),
               this.props.users.map(function (user, i) {
-                return _react2.default.createElement(_User2.default, { user: user, key: i });
+                return _react2.default.createElement(_User2.default, { selectedGroup: _this2.props.selectedGroup, user: user, key: i });
               })
             )
           )

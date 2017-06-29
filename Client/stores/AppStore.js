@@ -186,10 +186,10 @@ AppDispatcher.register((payload) => {
   case AppConstants.ADDUSER_GROUP:
    // console.log('add user group');
     // API store
-    AppAPI.addUserToGroup(action.userGroup);
+    AppAPI.addUserToGroup(action.user);
 
     // store save
-    AppStore.addUserToGroup(action.userGroup);
+    AppStore.addUserToGroup(action.user);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);
