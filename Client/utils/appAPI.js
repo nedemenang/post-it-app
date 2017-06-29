@@ -30,6 +30,7 @@ module.exports = {
         id: response.data.user.uid,
         email: user.email,
         profilePic: response.data.user.photoURL,
+        displayName: response.data.user.displayName,
         isAuthenticated: true
       };
       AppActions.receiveSuccess(response.message);
@@ -39,7 +40,7 @@ module.exports = {
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
-    //console.log(error);
+    // console.log(error);
     // console.log(user);
   });
   },
@@ -68,9 +69,12 @@ module.exports = {
     });
   },
 
-  addUserToGroup(userGroup) {
-    axios.post(`/group/${userGroup.groupId}/user`, {
-      userId: userGroup.userId
+  addUserToGroup(user) {
+    axios.post(`/group/${user.groupId}/user`, {
+      email: user.email,
+      userId: user.userId,
+      username: user.username,
+      groupName: user.groupName
     }).then((response) => {
       AppActions.receiveSuccess(response.message);
       console.log(response);
@@ -88,7 +92,9 @@ module.exports = {
       groupId: message.groupId,
       messageBody: message.messageBody,
       priority: message.priority,
-      postedon: message.postedon
+      postedon: message.postedon,
+      postedBy: message.postedBy,
+      postedByDisplayName: message.postedByDisplayName
     }).then((response) => {
       AppActions.receiveSuccess(response.message);
     })

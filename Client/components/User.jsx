@@ -30,10 +30,25 @@ const muiTheme = getMuiTheme({
 
 
 class User extends Component {
+  
+  userClicked() {
+
+   if (confirm("Are you sure you want to add this user to group?") == true) {
+     let userObject = {
+      email : this.props.user.email,
+      userId: this.props.user.id,
+      username: this.props.user.username,
+      groupId: this.props.selectedGroup[0].groupId,
+      groupName: this.props.selectedGroup[0].groupname
+    }
+    AppActions.addUserToGroup(userObject);
+  }
+}
 
   constructor(props){
     super(props);
     this.state= {};
+    this.userClicked = this.userClicked.bind(this);
   }
   render(){
     return(
@@ -43,9 +58,9 @@ class User extends Component {
           src="images/uxceo-128.jpg"
           size={30}
           style={style}
-        />
-      }>
-         <strong>{this.props.user.email}</strong>
+           />
+      }   onClick={this.userClicked}>
+         <strong>{this.props.user.email} - {this.props.user.username}</strong>
      </ListItem>
       </MuiThemeProvider>
     );

@@ -2,7 +2,7 @@ module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
       const messageRef = firebase.database()
-      .ref(`groups/${request.params.groupId}/messages/`);
+      .ref(`users/${userlogin.uid}/groups/${request.params.groupId}/messages/`);
       const groupMessages = [];
       messageRef.orderByKey().once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
@@ -13,7 +13,8 @@ module.exports = (request, result, firebase) => {
             postedByDisplayName: childSnapShot.val().postedByDisplayName,
             // profilePic: childSnapShot.val().profilePic,
             postedon: childSnapShot.val().postedon,
-            priority: childSnapShot.val().priority
+            priority: childSnapShot.val().priority,
+            isRead: childSnapShot.val().isRead
           };
           groupMessages.push(message);
         });

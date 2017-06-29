@@ -47,7 +47,7 @@ class UserList extends Component {
         <Subheader><strong>User List</strong></Subheader>
           {
             this.props.users.map((user, i) => {
-                  return <User user={user} key={i} />
+                  return <User selectedGroup={this.props.selectedGroup} user={user} key={i} />
               })
           }
           </List>

@@ -9,7 +9,8 @@ module.exports = (request, result, firebase) => {
       const groupRef = firebase.database().ref(`groups/${newKey}/users/`);
       groupRef.child(userlogin.uid).set({
         userId: userlogin.uid,
-        email: userlogin.email
+        email: userlogin.email,
+        userName: userlogin.displayName
       })
      .then(() => {
        const userRef = firebase.database()
