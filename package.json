@@ -28,6 +28,7 @@
     "firebase": "^4.0.0",
     "firebase-admin": "^5.0.0",
     "flux": "*",
+    "local-storage": "^1.4.2",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.3",
     "mocha": "^3.4.2",
