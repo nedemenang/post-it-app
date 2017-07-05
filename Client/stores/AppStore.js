@@ -216,7 +216,7 @@ AppDispatcher.register((payload) => {
 
     // store save
     AppStore.signOutUser();
-    //AppStore.setIsAuthenticated(false);
+    AppStore.setIsAuthenticated(false);
     // console.log(_isAuthenticated);
     // emit change
     AppStore.emit(CHANGE_EVENT);

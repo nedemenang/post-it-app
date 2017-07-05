@@ -11,6 +11,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {green100, green500, green700} from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import logo from '../public/images/logo.png';
+import ls from 'local-storage';
 
 injectTapEventPlugin();
 //import UserList from './UserList';
@@ -57,6 +59,7 @@ componentUnmount() {
 signOut(event){
   event.preventDefault();
   AppActions.signOutUser();
+  ls.clear();
 }
 
   constructor(props){
@@ -69,10 +72,17 @@ signOut(event){
      //console.log(this.state.errors)
      //<Login errors = {this.state.errors} />
      //console.log(this.state.isAuthenticated);
-     if(this.state.isAuthenticated == false) {
+     if (this.state.isAuthenticated == true)
+     {
+       ls.set('user', this.state.loggedInUser);
+     }
+     
+     if(ls.get('user') == null) {
        var componentToMount = <Login {...this.state} />
+       var image = <img src = {logo} />
      } else {
        var componentToMount = <MessageBoard />
+       var image = ''
      }
 
      const rightButtons = (
@@ -86,6 +96,9 @@ signOut(event){
          <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar title="Post It App" iconElementRight={<button className="googleButton" onClick={this.signOut}>Sign Out</button>}/>
             </MuiThemeProvider>
+            <div className="login-image">
+               {image}
+              </div>
              {componentToMount}
          </div>
       );
