@@ -2,6 +2,7 @@
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
+  
 }
 .form {
   position: relative;
@@ -53,6 +54,10 @@
 
 .error {
   color: #F44336;
+}
+.login-image {
+  width: 38%;
+  float: left;
 }
 
 .success {
