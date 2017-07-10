@@ -42,8 +42,34 @@ module.exports = {
     AppActions.receiveErrors(error.message);
     // console.log(error);
     // console.log(user);
+    });
+  },
+
+signinGoogleUser(idToken) {
+   // console.log(user);
+    axios.post('/users/googleSignin', {
+      idToken: idToken
+    }).then((response) => {
+      // console.log(response);
+      const authuser = {
+        id: response.data.user.uid,
+        email: response.data.user.email,
+        profilePic: response.data.user.photoURL,
+        displayName: response.data.user.displayName,
+        isAuthenticated: true
+      };
+      AppActions.receiveSuccess(response.message);
+      AppActions.receiveAuthenticatedUser(authuser);
+      AppActions.receiveErrors('');
+     // console.log(authuser);
+    })
+  .catch((error) => {
+    AppActions.receiveErrors(error.message);
+    // console.log(error);
+    // console.log(user);
   });
   },
+
 
   signoutUser() {
     axios.post('/users/signout').then((response) => {

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "90087dd26e524d447f29"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "318a372a8aaae79c65d1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2615,6 +2615,13 @@ if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
         _AppDispatcher2.default.handleViewAction({
           actionType: _AppConstants2.default.SIGNOUT_USER,
           user: user
+
+        });
+      },
+      registerGoogleUser: function registerGoogleUser(idToken) {
+        _AppDispatcher2.default.handleViewAction({
+          actionType: _AppConstants2.default.REGISTER_GOOGLE_USER,
+          idToken: idToken
 
         });
       },
@@ -20068,18 +20075,17 @@ module.exports = exports['default'];
           AppStore.emit(CHANGE_EVENT);
           break;
 
-        case _AppConstants2.default.LOGIN_USER:
-          // console.log('logging in user...');
-          // console.log(action.user);
+        case _AppConstants2.default.REGISTER_GOOGLE_USER:
 
-          // save to API
+          _appAPI2.default.signinGoogleUser(action.idToken);
+
+          AppStore.emit(CHANGE_EVENT);
+          break;
+
+        case _AppConstants2.default.LOGIN_USER:
+
           _appAPI2.default.signinUser(action.user);
-          // if (_errors === '') {
-          // store save
-          // console.log('errors');
-          //  AppStore.signinUser(action.user);
-          // }
-          // emit change
+
           AppStore.emit(CHANGE_EVENT);
           break;
 
@@ -23259,6 +23265,29 @@ module.exports = defaults;
           var authuser = {
             id: response.data.user.uid,
             email: user.email,
+            profilePic: response.data.user.photoURL,
+            displayName: response.data.user.displayName,
+            isAuthenticated: true
+          };
+          _AppActions2.default.receiveSuccess(response.message);
+          _AppActions2.default.receiveAuthenticatedUser(authuser);
+          _AppActions2.default.receiveErrors('');
+          // console.log(authuser);
+        }).catch(function (error) {
+          _AppActions2.default.receiveErrors(error.message);
+          // console.log(error);
+          // console.log(user);
+        });
+      },
+      signinGoogleUser: function signinGoogleUser(idToken) {
+        // console.log(user);
+        _axios2.default.post('/users/googleSignin', {
+          idToken: idToken
+        }).then(function (response) {
+          // console.log(response);
+          var authuser = {
+            id: response.data.user.uid,
+            email: response.data.user.email,
             profilePic: response.data.user.photoURL,
             displayName: response.data.user.displayName,
             isAuthenticated: true
@@ -28820,6 +28849,7 @@ module.exports = function bind(fn, thisArg) {
 
     module.exports = {
       REGISTER_USER: 'REGISTER_USER',
+      REGISTER_GOOGLE_USER: 'REGISTER_GOOGLE_USER',
       LOGIN_USER: 'LOGIN_USER',
       CREATE_GROUP: 'CREATE_GROUP',
       ADDUSER_GROUP: 'ADDUSER_GROUP',
@@ -78570,6 +78600,7 @@ var App = function (_Component) {
     value: function signOut(event) {
       event.preventDefault();
       _AppActions2.default.signOutUser();
+      _localStorage2.default.clear();
     }
   }]);
 
@@ -78593,7 +78624,7 @@ var App = function (_Component) {
         _localStorage2.default.set('user', this.state.loggedInUser);
       }
 
-      if (_localStorage2.default.get(user) == null) {
+      if (_localStorage2.default.get('user') == null) {
         var componentToMount = _react2.default.createElement(_Login2.default, this.state);
         var image = _react2.default.createElement('img', { src: _logo2.default });
       } else {
@@ -79126,14 +79157,29 @@ var Login = function (_Component) {
       }
     }
   }, {
-    key: 'signupGoogle',
-    value: function signupGoogle(event) {
-      event.preventDefault();
-      var user = {
-        email: this.refs.email.value.trim(),
-        password: this.refs.password.value.trim(),
-        username: this.refs.username.value.trim()
-      };
+    key: 'onSignIn',
+    value: function onSignIn(googleUser) {
+      console.log('im in on sign in method');
+      var id_token = googleUser.getAuthResponse().id_token;
+      _AppActions2.default.registerGoogleUser(id_token);
+    }
+  }, {
+    key: 'renderGoogleLoginButton',
+    value: function renderGoogleLoginButton() {
+      console.log('rendering google signin button');
+      gapi.signin2.render('my-signin2', {
+        'scope': 'https://www.googleapis.com/auth/plus.login',
+        'width': 293,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': this.onSignIn
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      window.addEventListener('google-loaded', this.renderGoogleLoginButton);
     }
   }]);
 
@@ -79147,6 +79193,8 @@ var Login = function (_Component) {
     _this.login = _this.login.bind(_this);
     _this.signup = _this.signup.bind(_this);
     _this.handleToggle = _this.handleToggle.bind(_this);
+    _this.onSignIn = _this.onSignIn.bind(_this);
+    _this.renderGoogleLoginButton = _this.renderGoogleLoginButton.bind(_this);
     return _this;
   }
 
@@ -79180,6 +79228,9 @@ var Login = function (_Component) {
               { className: 'button', onClick: this.login },
               'Log In'
             ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('div', { id: 'my-signin2' }),
             _react2.default.createElement(
               'p',
               { className: 'message' },
@@ -79216,12 +79267,6 @@ var Login = function (_Component) {
               'button',
               { className: 'button', onClick: this.signup },
               'Register'
-            ),
-            _react2.default.createElement('br', null),
-            _react2.default.createElement(
-              'button',
-              { className: 'googleButton', onClick: this.signupGoogle },
-              'Register with Google'
             ),
             _react2.default.createElement(
               'p',

@@ -156,18 +156,17 @@ AppDispatcher.register((payload) => {
     AppStore.emit(CHANGE_EVENT);
     break;
 
-  case AppConstants.LOGIN_USER:
-    // console.log('logging in user...');
-    // console.log(action.user);
+  case AppConstants.REGISTER_GOOGLE_USER:
+  
+    AppAPI.signinGoogleUser(action.idToken);
 
-    // save to API
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.LOGIN_USER:
+
     AppAPI.signinUser(action.user);
-    // if (_errors === '') {
-    // store save
-      // console.log('errors');
-    //  AppStore.signinUser(action.user);
-    // }
-    // emit change
+
     AppStore.emit(CHANGE_EVENT);
     break;
 

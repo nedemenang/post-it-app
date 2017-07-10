@@ -68,6 +68,14 @@ const AppActions = {
     });
   },
 
+  registerGoogleUser(idToken) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.REGISTER_GOOGLE_USER,
+      idToken
+
+    });
+  },
+
   receiveUserInGroupResults(users) {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_USER_IN_GROUP_RESULTS,

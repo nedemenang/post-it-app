@@ -8,7 +8,7 @@
     "start": "webpack && babel-node ./Server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
     "build": "babel server/ -d dist",
-    "test": "mocha --timeout 10000 dist/tests/test.js"
+    "test": "jest"
   },
   "author": "Nnamso Edemenang",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "babel-watch": "^2.0.6",
     "body-parser": "^1.17.2",
     "css-loader": "^0.28.4",
+    "enzyme": "^2.9.1",
     "events": "^1.1.1",
     "express": "*",
     "file-loader": "^0.11.2",
@@ -41,6 +42,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
+    "react-test-renderer": "^15.6.1",
     "rimraf": "^2.6.1",
     "should": "^11.2.1",
     "style-loader": "^0.18.2",
