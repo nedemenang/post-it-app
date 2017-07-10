@@ -9,7 +9,7 @@ import getUserGroups from '../Routes/getUserGroups';
 import getGroupMessages from '../Routes/getGroupMessages';
 import getUsersInGroups from '../Routes/getUsersInGroups';
 import getUsersNotInGroups from '../Routes/getUsersNotInGroups';
-// import signInUserGoogle from '../Routes/SignInUserGoogle';
+import signInGoogleUser from '../Routes/googleSignin';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',
@@ -28,6 +28,10 @@ module.exports = (app) => {
 
   app.post('/users/signin', (req, res) => {
     signInUser(req, res, firebase);
+  });
+
+  app.post('/users/googleSignin', (req, res) => {
+    signInGoogleUser(req, res, firebase);
   });
 
   app.post('/users/signout', (req, res) => {

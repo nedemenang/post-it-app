@@ -17,7 +17,8 @@ module.exports = (request, result, firebase) => {
        .ref(`users/${userlogin.uid}/groups/`);
        userRef.child(newKey).set({
          groupId: newKey,
-         groupName: request.body.groupName
+         groupName: request.body.groupName,
+         newMessage: false
        });
        result.send({
          message: 'New group successfully created',

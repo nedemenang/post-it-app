@@ -51,6 +51,7 @@ signup(event){
     password: this.refs.password.value.trim(),
     username: this.refs.username.value.trim()
   }
+  
 
   if(this.refs.email.value === ''){
     AppActions.receiveErrors('Please insert email');
@@ -68,17 +69,29 @@ signup(event){
   }
 }
 
-
-signupGoogle(event){
-  event.preventDefault();
-  let user = {
-    email : this.refs.email.value.trim(),
-    password: this.refs.password.value.trim(),
-    username: this.refs.username.value.trim()
-  }
+onSignIn(googleUser){
+  console.log('im in on sign in method');
+  const id_token = googleUser.getAuthResponse().id_token
+  AppActions.registerGoogleUser(id_token);
    
 }
 
+
+renderGoogleLoginButton() {
+    console.log('rendering google signin button')
+    gapi.signin2.render('my-signin2', {
+      'scope': 'https://www.googleapis.com/auth/plus.login',
+      'width': 293,
+      'height': 50,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': this.onSignIn
+    })
+  }
+
+  componentDidMount() {
+    window.addEventListener('google-loaded',this.renderGoogleLoginButton);
+  }
 
   constructor(props){
     super(props);
@@ -87,6 +100,8 @@ signupGoogle(event){
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.onSignIn = this.onSignIn.bind(this);
+    this.renderGoogleLoginButton = this.renderGoogleLoginButton.bind(this);
   }
   render(){
     //console.log(this.props.errors)
@@ -99,6 +114,9 @@ signupGoogle(event){
       <input type="password" ref="loginPassword" placeholder="password"/>
       <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.login}>Log In</button>
+            <br/>
+       <br/>
+      <div id="my-signin2"></div>
       <p className="message">Not registered? <a onClick={this.handleToggle} href="#">Create an account</a></p>
     </form>
     <form className="register-form">
@@ -109,8 +127,6 @@ signupGoogle(event){
       <p className="success">{this.props.success}</p>
       <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.signup}>Register</button>
-      <br/>
-      <button className="googleButton" onClick={this.signupGoogle}>Register with Google</button>
       <p className="message">Already registered? <a onClick={this.handleToggle} href="#">Sign In</a></p>
     </form>
   </div>
