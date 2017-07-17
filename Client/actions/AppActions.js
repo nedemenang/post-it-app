@@ -43,7 +43,7 @@ const AppActions = {
   },
 
   addUserToGroup(user) {
-    //console.log(usergroup);
+    // console.log(usergroup);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADDUSER_GROUP,
       user
@@ -112,6 +112,22 @@ const AppActions = {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_AUTHENTICATED_USER,
       user
+
+    });
+  },
+
+  resetPassword(emailAddress) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RESET_PASSWORD,
+      emailAddress
+
+    });
+  },
+
+  confirmPasswordReset(resetObject) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.CONFIRM_RESET_PASSWORD,
+      resetObject
 
     });
   },

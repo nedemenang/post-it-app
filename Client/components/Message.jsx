@@ -37,12 +37,12 @@ class Message extends Component {
     };
   }
   render(){
-    //console.log(this.props.message);
+    //console.log(this.props.message.profilePic);
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
         <ListItem leftAvatar={
         <Avatar
-          src={this.props.message.userProfilePic}
+          src={this.props.message.profilePic}
           size={30}
           style={style}
         />

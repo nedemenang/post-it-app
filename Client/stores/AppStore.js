@@ -15,7 +15,7 @@ let _errors = '';
 let _success = '';
 const _loggedInUser = [];
 const _registeredUser = [];
-let _selectedGroup = [];
+const _selectedGroup = [];
 let _isAuthenticated = false;
 
 
@@ -104,7 +104,7 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   setUserGroups(groups) {
-    //console.log(groups);
+    // console.log(groups);
     _userGroups = groups;
   },
 
@@ -114,10 +114,10 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   setSelectedGroup(group) {
-    //console.log(_selectedGroup);
+    // console.log(_selectedGroup);
     _selectedGroup.pop();
     _selectedGroup.push(group);
-    //console.log(_selectedGroup);
+    // console.log(_selectedGroup);
   },
 
   setUsersInGroup(users) {
@@ -157,8 +157,22 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.REGISTER_GOOGLE_USER:
-  
+
     AppAPI.signinGoogleUser(action.idToken);
+
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RESET_PASSWORD:
+
+    AppAPI.resetPassword(action.emailAddress);
+
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.CONFIRM_RESET_PASSWORD:
+
+    AppAPI.confirmResetPassword(action.resetObject);
 
     AppStore.emit(CHANGE_EVENT);
     break;
@@ -241,9 +255,9 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_MESSAGE_RESULTS:
     // store save
-    //console.log(action.messages);
+    // console.log(action.messages);
     AppStore.setGroupMessages(action.messages);
-  
+
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
@@ -265,7 +279,7 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_ERRORS:
     // store save
-    //console.log(action.errors);
+    // console.log(action.errors);
     AppStore.receiveErrors(action.errors);
 
     // emit change

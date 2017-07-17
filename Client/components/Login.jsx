@@ -8,6 +8,8 @@ import '../public/style.css';
 import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
+import logo from '../public/images/logo.png';
+import profile from '../public/images/blank-profile-pic.png';
 
 class Login extends Component {
   
@@ -49,7 +51,8 @@ signup(event){
   let user = {
     email : this.refs.email.value.trim(),
     password: this.refs.password.value.trim(),
-    username: this.refs.username.value.trim()
+    username: this.refs.username.value.trim(),
+    profilePic: profile
   }
   
 
@@ -106,7 +109,12 @@ renderGoogleLoginButton() {
   render(){
     //console.log(this.props.errors)
     return(
+      <div>
+      <div className="login-image">
+               <img src = {logo} />
+              </div>
       <div className="login-page">
+        
       <div className="form">
     <form className="login-form">
     <h3>LOG IN</h3>
@@ -118,6 +126,7 @@ renderGoogleLoginButton() {
        <br/>
       <div id="my-signin2"></div>
       <p className="message">Not registered? <a onClick={this.handleToggle} href="#">Create an account</a></p>
+      <p className="message">Forgot Password? <a href="/PasswordReset">Reset Password</a></p>
     </form>
     <form className="register-form">
     <h3>REGISTER</h3>
@@ -130,6 +139,7 @@ renderGoogleLoginButton() {
       <p className="message">Already registered? <a onClick={this.handleToggle} href="#">Sign In</a></p>
     </form>
   </div>
+</div>
 </div>
     );
   }

@@ -10,6 +10,8 @@ import getGroupMessages from '../Routes/getGroupMessages';
 import getUsersInGroups from '../Routes/getUsersInGroups';
 import getUsersNotInGroups from '../Routes/getUsersNotInGroups';
 import signInGoogleUser from '../Routes/googleSignin';
+import passwordReset from '../Routes/passwordReset';
+import confirmPasswordReset from '../Routes/passwordResetConfirm';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',
@@ -28,6 +30,14 @@ module.exports = (app) => {
 
   app.post('/users/signin', (req, res) => {
     signInUser(req, res, firebase);
+  });
+
+  app.post('/users/passwordReset', (req, res) => {
+    passwordReset(req, res, firebase);
+  });
+
+  app.post('/users/confirmPasswordReset', (req, res) => {
+    confirmPasswordReset(req, res, firebase);
   });
 
   app.post('/users/googleSignin', (req, res) => {

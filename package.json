@@ -36,6 +36,7 @@
     "material-ui": "^0.18.3",
     "mocha": "^3.4.2",
     "object-assign": "^4.1.1",
+    "query-string": "^4.3.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-hot-loader": "^1.3.1",

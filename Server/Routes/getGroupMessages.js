@@ -11,7 +11,7 @@ module.exports = (request, result, firebase) => {
             messageBody: childSnapShot.val().messageBody,
             postedBy: childSnapShot.val().postedBy,
             postedByDisplayName: childSnapShot.val().postedByDisplayName,
-            // profilePic: childSnapShot.val().profilePic,
+            profilePic: childSnapShot.val().profilePic,
             postedon: childSnapShot.val().postedon,
             priority: childSnapShot.val().priority,
             isRead: childSnapShot.val().isRead

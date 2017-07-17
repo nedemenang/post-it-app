@@ -3,13 +3,15 @@ module.exports = (request, result, firebase) => {
   const email = request.body.email;
   const password = request.body.password;
   const userName = request.body.userName;
+  const photo = request.body.photoURL;
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then((user) => {
     user.updateProfile({
       displayName: userName,
+      photoURL: photo
     }).then(() => {
       const userRef = firebase.database()
-       .ref(`users/`);
+       .ref('users/');
       userRef.child(user.uid).set({
         userName,
         email
