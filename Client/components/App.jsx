@@ -7,6 +7,7 @@ import MessageBoard from './MessageBoard';
 import PasswordReset from './passwordReset';
 import LoginMessageBoard from './LoginMessageBoard';
 import PasswordResetConfirm from './PasswordResetConfirm';
+import ProfileEdit from './ProfileEdit';
 import '../public/style.css';
 import {AppBar, FlatButton} from 'material-ui'
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
@@ -60,7 +61,7 @@ componentUnmount() {
 signOut(event){
   event.preventDefault();
   AppActions.signOutUser();
-  ls.clear();
+  //sessionStorage.clear();
 }
 
   constructor(props){
@@ -86,6 +87,9 @@ signOut(event){
           )} />
           <Route path = '/PasswordResetConfirm' render = {() => (
             <PasswordResetConfirm {...this.state} />
+          )} />
+          <Route path = '/ProfileEdit' render = {() => (
+            <ProfileEdit  {...this.state} />
           )} />
           <Route render = { () => (
             <p> Sorry, something went wrong... </p>

@@ -1,7 +1,7 @@
-module.exports = (request, result, firebase) => {
+module.exports = (request, result, firebase, io) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
-      console.log(request);
+      // console.log(request);
       const groupRef = firebase.database()
       .ref(`groups/${request.params.groupId}/users/`);
       groupRef.child(request.body.userId).set({
@@ -15,6 +15,14 @@ module.exports = (request, result, firebase) => {
        userRef.child(request.params.groupId).set({
          groupId: request.params.groupId,
          groupName: request.body.groupName
+       });
+       const group = {
+         groupId: request.params.groupId,
+         groupname: request.body.groupName,
+         newMessage: false
+       };
+       io.emit('userAddedToGroup', {
+         group
        });
        result.send({
          message: 'User successfully added',

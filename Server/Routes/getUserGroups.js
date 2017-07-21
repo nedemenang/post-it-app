@@ -8,13 +8,13 @@ module.exports = (request, result, firebase) => {
         snapshot.forEach((childSnapShot) => {
           const group = {
             groupId: childSnapShot.key,
-            groupname: childSnapShot.val().groupName
+            groupname: childSnapShot.val().groupName,
+            newMessage: childSnapShot.val().newMessage
             // createdby: childSnapShot.val().createdby
           };
+         // console.log(group.groupId);
           groups.push(group);
         });
-        // console.log(snapshot.key);
-        // const group = snapshot.val();
       }).then(() => {
         result.send({
           groups,

@@ -10,10 +10,35 @@ module.exports = {
       email: user.email,
       password: user.password,
       userName: user.username,
-      photoURL: user.profilePic
+      photoURL: user.profilePic,
+      phoneNo: user.phoneNo
     }).then((response) => {
-      // console.log(response.data.message);
+      const authuser = {
+        id: response.data.user.uid,
+        email: user.email,
+        profilePic: response.data.user.photoURL,
+        displayName: response.data.user.displayName,
+        phoneNo: response.data.user.phoneNumber,
+        isAuthenticated: true
+      };
       AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveAuthenticatedUser(authuser);
+      AppActions.receiveErrors('');
+    })
+  .catch((error) => {
+    AppActions.receiveErrors(error.message);
+  });
+  },
+
+  updateUserProfile(user) {
+    // console.log(user);
+    axios.post('/users/updateUserProfile', {
+      userName: user.username,
+      photoURL: user.profilePic,
+      phoneNo: user.phoneNo
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveErrors('');
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
@@ -32,6 +57,7 @@ module.exports = {
         email: user.email,
         profilePic: response.data.user.photoURL,
         displayName: response.data.user.displayName,
+        phoneNo: response.data.user.phoneNumber,
         isAuthenticated: true
       };
       AppActions.receiveSuccess(response.data.message);
@@ -93,12 +119,9 @@ module.exports = {
       AppActions.receiveSuccess(response.data.message);
       AppActions.receiveAuthenticatedUser(authuser);
       AppActions.receiveErrors('');
-     // console.log(authuser);
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
-    // console.log(error);
-    // console.log(user);
   });
   },
 
@@ -153,7 +176,8 @@ module.exports = {
       postedon: message.postedon,
       postedBy: message.postedBy,
       postedByDisplayName: message.postedByDisplayName,
-      profilePic: message.profilePic
+      profilePic: message.profilePic,
+      groupName: message.groupName
     }).then((response) => {
       AppActions.receiveSuccess(response.data.message);
     })
@@ -163,10 +187,10 @@ module.exports = {
   },
 
   getUserGroups() {
-    // console.log('getting group info...');
-    axios.get('user/groups')
+     // console.log('app api get user group function');
+    axios.get('/user/groups')
    .then((response) => {
-     // console.log(response);
+    // console.log(response);
      AppActions.receiveSuccess(response.data.message);
      AppActions.receiveUserGroups(response.data.groups);
    })
@@ -188,7 +212,7 @@ module.exports = {
   },
 
   getUsersInGroups(group) {
-    axios.get(`group/${group.groupId}/users`)
+    axios.get(`/group/${group.groupId}/users`)
    .then((response) => {
      AppActions.receiveSuccess(response.data.message);
      AppActions.receiveUserInGroupResults(response.data.users);
@@ -200,7 +224,7 @@ module.exports = {
 
   getUsersNotInGroups(group) {
     //console.log(group);
-    axios.get(`group/${group.groupId}/notusers`)
+    axios.get(`/group/${group.groupId}/notusers`)
    .then((response) => {
      AppActions.receiveSuccess(response.data.message);
      AppActions.receiveUserNotInGroupResults(response.data.userNotInGroup);

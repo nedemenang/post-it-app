@@ -156,6 +156,17 @@ AppDispatcher.register((payload) => {
     AppStore.emit(CHANGE_EVENT);
     break;
 
+  case AppConstants.UPDATE_USER_PROFILE:
+    // console.log('Registering user...');
+    // save to API
+    AppAPI.updateUserProfile(action.user);
+      // store save
+    // AppStore.registerNewUser(action.user);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
   case AppConstants.REGISTER_GOOGLE_USER:
 
     AppAPI.signinGoogleUser(action.idToken);
@@ -264,6 +275,7 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_GROUP_RESULTS:
     // store save
+    // console.log(` receiving group results ${action.groups}`);
     AppStore.setUserGroups(action.groups);
     // emit change
     AppStore.emit(CHANGE_EVENT);

@@ -1,4 +1,4 @@
-module.exports = (request, result, firebase) => {
+module.exports = (request, result, firebase, io) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
       const newKey = firebase.database().ref('groups/').push({
@@ -19,6 +19,14 @@ module.exports = (request, result, firebase) => {
          groupId: newKey,
          groupName: request.body.groupName,
          newMessage: false
+       });
+       const group = {
+         groupId: newKey,
+         groupName: request.body.groupName,
+         newMessage: false
+       };
+       io.emit('groupCreated', {
+         group
        });
        result.send({
          message: 'New group successfully created',

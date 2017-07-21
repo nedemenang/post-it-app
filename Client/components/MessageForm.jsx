@@ -49,7 +49,7 @@ submit(event){
     AppActions.receiveErrors('Please select a message priority');
   }else{
     //console.log(ls.get('user'));
-    const user = ls.get('user');
+    const user = this.props.loggedInUser//ls.get('user');
     //console.log(user[0].email);
     let messageObject = {
       messageBody : messagebody,
@@ -59,6 +59,7 @@ submit(event){
       postedByDisplayName: user[0].displayName,//this.props.loggedInUser[0].displayName,
       profilePic: user[0].profilePic,
       groupId: this.props.selectedGroup[0].groupId,
+      groupName: this.props.selectedGroup[0].groupname
     }
     console.log(messageObject);
 

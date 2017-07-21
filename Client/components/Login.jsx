@@ -52,7 +52,8 @@ signup(event){
     email : this.refs.email.value.trim(),
     password: this.refs.password.value.trim(),
     username: this.refs.username.value.trim(),
-    profilePic: profile
+    phoneNo: this.refs.phoneNo.value.trim(),
+    profilePic: 'http://localhost:3000/static/files/blank-profile-pic.png'
   }
   
 
@@ -69,6 +70,7 @@ signup(event){
     this.refs.email.value === '';
     this.refs.username.value === '';
     this.refs.password.value === '';
+    this.refs.phoneNo.value === '';
   }
 }
 
@@ -133,6 +135,7 @@ renderGoogleLoginButton() {
       <input type="text" ref="email" placeholder="email address"/>
       <input type="password" ref="password" placeholder="password"/>
       <input type="text" ref="username" placeholder="username"/>
+      <input type="text" ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
       <p className="success">{this.props.success}</p>
       <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.signup}>Register</button>

@@ -1,4 +1,7 @@
-module.exports = (request, result, firebase) => {
+import sendSMS from './sendSms';
+import sendEmail from './sendMail';
+
+module.exports = (request, result, firebase, io) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
       const messageRef = firebase.database()
@@ -12,13 +15,13 @@ module.exports = (request, result, firebase) => {
         profilePic: request.body.profilePic
       }).key;
 
-      // console.log(`new key is ${newkey}`);
       const userRef = firebase.database()
        .ref(`groups/${request.body.groupId}/users/`);
       userRef.orderByKey().once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const userRef2 = firebase.database()
-            .ref(`users/${childSnapShot.key}/groups/${request.body.groupId}/messages`);
+            .ref(`users/${childSnapShot.key}
+            /groups/${request.body.groupId}/messages`);
           userRef2.child(newkey).set({
             messageBody: request.body.messageBody,
             postedBy: request.body.postedBy,
@@ -28,10 +31,50 @@ module.exports = (request, result, firebase) => {
             isRead: false,
             profilePic: request.body.profilePic
           });
+         // console.log(childSnapShot.key)
+          const groupRef = firebase.database().ref(`users/${childSnapShot.key}
+          /groups/${request.body.groupId}`);
+          groupRef.update({
+            newMessage: true
+          });
+          if (request.body.priority === 'critical') {
+            const phoneRef = firebase.database()
+            .ref(`users/${childSnapShot.key}`);
+            phoneRef.once('value', (record) => {
+              if (record.val().phoneNo !== '') {
+                const smsObject = {
+                  phoneNo: record.val().phoneNo,
+                  groupName: request.body.groupName
+                };
+               // console.log(smsObject);
+                sendSMS(smsObject);
+              }
+            });
+          }
+          if (request.body.priority === 'critical' ||
+            request.body.priority === 'urgent') {
+            const emailRef = firebase.database()
+            .ref(`users/${childSnapShot.key}`);
+            emailRef.once('value', (record) => {
+              const emailObject = {
+                To: record.val().email,
+                groupName: request.body.groupName
+              };
+              // console.log(emailObject);
+              sendEmail(emailObject);
+            });
+          }
         });
       })
      .then(() => {
-       // update all user profiles with appropriate message. Add isRead flag
+       const group = {
+         groupId: request.body.groupId,
+         groupname: request.body.groupName,
+         newMessage: true
+       };
+       io.emit('messageAdded', {
+         group
+       });
        result.send({
          message: 'Message successfully added',
        });

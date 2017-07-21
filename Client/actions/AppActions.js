@@ -26,6 +26,14 @@ const AppActions = {
       errors
     });
   },
+
+  updateUserProfile(user) {
+    // console.log(errors);
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.UPDATE_USER_PROFILE,
+      user
+    });
+  },
   receiveSuccess(message) {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_SUCCESS,
@@ -101,6 +109,7 @@ const AppActions = {
   },
 
   receiveUserGroups(groups) {
+    console.log(groups);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_GROUP_RESULTS,
       groups

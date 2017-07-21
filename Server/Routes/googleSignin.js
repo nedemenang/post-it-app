@@ -1,23 +1,24 @@
-//import ls from 'local-storage';
+// import ls from 'local-storage';
 
 module.exports = (request, result, firebase) => {
   const idToken = request.body.idToken;
-  var credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-//console.log('im in google sigin in');
-firebase.auth().signInWithCredential(credential)
+  const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+// console.log('im in google sigin in');
+  firebase.auth().signInWithCredential(credential)
 .then((user) => {
-  //console.log(user);
+  // console.log(user);
   const ref = firebase.database()
         .ref(`users/${user.uid}`);
-  ref.once("value")
-  .then(function(snapshot) {
-    if(!snapshot.exists()){
-      const userRef = firebase.database()
-       .ref(`users/`).child(user.uid).set({
-        userName: user.displayName,
-        email: user.email
-      });
-    } 
+  ref.once('value')
+  .then((snapshot) => {
+    if (!snapshot.exists()) {
+      firebase.database()
+       .ref('users/').child(user.uid).set({
+         userName: user.displayName,
+         email: user.email,
+         phoneNo: ''
+       });
+    }
   });
   result.send({
     message: `Welcome ${user.email}`,

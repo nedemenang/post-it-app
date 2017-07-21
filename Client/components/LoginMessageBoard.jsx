@@ -22,14 +22,17 @@ class LoginMessageBoard extends Component {
       return getAppState();
   }
 
-componentDidMount(){
+  
+
+  componentDidMount(){
     AppStore.addChangeListener(this._onChange.bind(this));
   }
 
-componentUnmount() {
+  componentUnmount() {
     AppStore.removeChangeListener(this._onChange.bind(this));
   }
 
+  
   constructor(props){
     super(props);
     this.state = getAppState();
@@ -37,13 +40,13 @@ componentUnmount() {
 
    render() {
 
-     if (this.state.isAuthenticated == true)
-     {
-       ls.set('user', this.state.loggedInUser);
-     }
+    //  if (this.state.isAuthenticated == true)
+    //  {
+    //    ls.set('user', this.state.loggedInUser);
+    //  }
      
     let componentToMount; 
-    if(ls.get('user') == null) {
+    if(this.state.isAuthenticated == false) {
         componentToMount = <Login {...this.state} />
     } else {
       componentToMount = <MessageBoard />

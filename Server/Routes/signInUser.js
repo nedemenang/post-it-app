@@ -11,7 +11,7 @@ module.exports = (request, result, firebase) => {
     });
    // ls.set('user', user);
    // ls.set('authenticated', true);
-    //console.log(user);
+    // console.log(user);
   }).catch((error) => {
     result.status(500).send({
       message: `Error occured while login in:  ${error.message}`

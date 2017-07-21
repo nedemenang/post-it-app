@@ -4,6 +4,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import io from 'socket.io-client';
 import '../public/style.css';
 import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
@@ -35,8 +36,44 @@ getInitialState(){
       return getAppState();
   }
 
+// componentWillMount(){
+//     this.socket = io('http://localhost:3000');
+//     this.socket.on('connect', this.connect.bind(this));
+//   }
+
+  connect(){
+    //console.log(`Connected: ${this.socket.io}`);
+  }
+
 componentDidMount(){
-    //console.log(this.state.loggedInUser);
+
+  this.socket = io('http://localhost:3000');
+    this.socket.on('connect', this.connect.bind(this));
+
+    //console.log(this.state.groups);
+    this.socket.on('userAddedToGroup', (group) => {
+      if(group.groupId === this.state.selectedGroup.groupId)
+        {
+          AppAPI.getUsersNotInGroups(group);
+        }
+    });
+
+    this.socket.on('messageAdded', (group) => {
+      if(group.groupId === this.state.selectedGroup.groupId)
+        {
+          AppAPI.getGroupMessages(group);
+        }
+      AppAPI.getUserGroups();
+    });
+
+    this.socket.on('userAdded', () => {
+      if(this.state.selectedGroup.groupId !== '' )
+        {
+          AppAPI.getUsersNotInGroups(this.state.selectedGroup);
+        }
+    });
+
+    console.log('About to call appAPI')
     AppAPI.getUserGroups();
     AppStore.addChangeListener(this._onChange.bind(this));
   }
