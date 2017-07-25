@@ -64,7 +64,14 @@ const AppActions = {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADD_MESSAGE,
       message
+    });
+  },
 
+  updateMessageFlags(groupId) {
+    // console.log(message);
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.UPDATE_MESSAGE_FLAGS,
+      groupId
     });
   },
 

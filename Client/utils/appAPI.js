@@ -186,6 +186,18 @@ module.exports = {
     });
   },
 
+  updateMessageFlag(groupId) {
+    // console.log(message);
+    axios.post('/group/updateMessageFlag', {
+      groupId,
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+    });
+  },
+
   getUserGroups() {
      // console.log('app api get user group function');
     axios.get('/user/groups')

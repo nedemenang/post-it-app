@@ -15,7 +15,8 @@ module.exports = (request, result, firebase) => {
           const user = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
-            username: childSnapShot.val().userName
+            username: childSnapShot.val().userName,
+            profilePic: childSnapShot.val().profilePic
           };
           usersInGroup.push(user);
         });
@@ -26,16 +27,14 @@ module.exports = (request, result, firebase) => {
           const users = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
-            username: childSnapShot.val().userName
+            username: childSnapShot.val().userName,
+            profilePic: childSnapShot.val().profilePic
           };
           allUsers.push(users);
         });
       }).then(() => {
         const userNotInGroup = _.differenceWith(allUsers,
         usersInGroup, _.isEqual);
-        // console.log(allUsers);
-        // console.log(usersInGroup);
-        // console.log(userNotInGroup);
         result.send({
           userNotInGroup,
         });

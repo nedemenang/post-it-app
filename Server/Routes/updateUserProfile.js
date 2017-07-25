@@ -16,14 +16,11 @@ module.exports = (request, result, firebase) => {
       if (phone === '') {
         phone = user.phoneNumber;
       }
-      // console.log(photo);
-      // console.log(phone);
       user.updateProfile({
         displayName: userName,
         photoURL: photo,
         phoneNumber: phone
       }).then(() => {
-      // update user in database.
         const userRef = firebase.database()
        .ref(`users/${user.uid}`);
         userRef.update({

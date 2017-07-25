@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fe1d933b7afb201bb223"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3372cc85f154e8f17691"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -44122,7 +44122,9 @@ function getAppState() {
     users: _AppStore2.default.getUsersNotInGroup(),
     groups: _AppStore2.default.getUserGroups(),
     messages: _AppStore2.default.getGroupMessages(),
-    selectedGroup: _AppStore2.default.getSelectedGroup()
+    selectedGroup: _AppStore2.default.getSelectedGroup(),
+    notifiedGroup: '',
+    open: false
   };
 }
 
@@ -44134,12 +44136,6 @@ var MessageBoard = function (_Component) {
     value: function getInitialState() {
       return getAppState();
     }
-
-    // componentWillMount(){
-    //     this.socket = io('http://localhost:3000');
-    //     this.socket.on('connect', this.connect.bind(this));
-    //   }
-
   }, {
     key: 'connect',
     value: function connect() {
@@ -44148,32 +44144,51 @@ var MessageBoard = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
 
       this.socket = (0, _socket2.default)('http://localhost:3000');
       this.socket.on('connect', this.connect.bind(this));
-
       //console.log(this.state.groups);
       this.socket.on('userAddedToGroup', function (group) {
-        if (group.groupId === _this2.state.selectedGroup.groupId) {
-          _appAPI2.default.getUsersNotInGroups(group);
-        }
+        // if(group.groupId === this.state.selectedGroup.groupId)
+        //   {
+        //     AppAPI.getUsersNotInGroups(group);
+        //   }
+        getAppState();
       });
 
       this.socket.on('messageAdded', function (group) {
-        if (group.groupId === _this2.state.selectedGroup.groupId) {
-          _appAPI2.default.getGroupMessages(group);
-        }
-        _appAPI2.default.getUserGroups();
+        // if(group.groupId === this.state.selectedGroup.groupId)
+        //   {
+        //     var newArray = this.state.group.slice(); 
+        //     const message = {
+        //       messageBody: group.messageBody,
+        //       postedBy: group.postedBy,
+        //       postedByDisplayName: group.postedByDisplayName,
+        //       postedon: group.postedon,
+        //       priority: group.priority,
+        //       profilePic: group.profilePic
+        //     }   
+        //     newArray.push(message);   
+        //     this.setState({messages: newArray})
+        //   }
+        console.log('message added');
+        getAppState();
       });
 
       this.socket.on('userAdded', function () {
-        if (_this2.state.selectedGroup.groupId !== '') {
-          _appAPI2.default.getUsersNotInGroups(_this2.state.selectedGroup);
-        }
+        // if(this.state.selectedGroup.groupId !== '' )
+        //   {
+        //     console.log('user added...')
+        //     AppAPI.getUsersNotInGroups(this.state.selectedGroup);
+        //   }
+        getAppState();
       });
 
-      console.log('About to call appAPI');
+      this.socket.on('groupCreated', function (group) {
+        console.log('group created');
+        getAppState();
+      });
+
       _appAPI2.default.getUserGroups();
       _AppStore2.default.addChangeListener(this._onChange.bind(this));
     }

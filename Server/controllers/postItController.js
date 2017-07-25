@@ -13,6 +13,7 @@ import signInGoogleUser from '../Routes/googleSignin';
 import passwordReset from '../Routes/passwordReset';
 import confirmPasswordReset from '../Routes/passwordResetConfirm';
 import updateUserProfile from '../Routes/updateUserProfile';
+import updateMessageFlag from '../Routes/updateMessageFlags';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',
@@ -31,6 +32,10 @@ module.exports = (app, io) => {
 
   app.post('/users/updateUserProfile', (req, res) => {
     updateUserProfile(req, res, firebase);
+  });
+
+  app.post('/group/updateMessageFlag', (req, res) => {
+    updateMessageFlag(req, res, firebase);
   });
 
   app.post('/users/signin', (req, res) => {
@@ -54,7 +59,7 @@ module.exports = (app, io) => {
   });
 
   app.post('/group', (req, res) => {
-    //console.log('create new group...');
+    // console.log('create new group...');
     createNewGroup(req, res, firebase, io);
   });
 

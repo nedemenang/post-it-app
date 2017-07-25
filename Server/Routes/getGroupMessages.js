@@ -2,9 +2,11 @@ module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
       const messageRef = firebase.database()
-      .ref(`users/${userlogin.uid}/groups/${request.params.groupId}/messages/`);
+      .ref(`groups/${request.params.groupId}/messages/`);
       const groupMessages = [];
-      messageRef.orderByKey().once('value', (snapshot) => {
+      messageRef.orderByKey()
+      .limitToLast(10)
+      .once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const message = {
             id: childSnapShot.key,
@@ -14,8 +16,16 @@ module.exports = (request, result, firebase) => {
             profilePic: childSnapShot.val().profilePic,
             postedon: childSnapShot.val().postedon,
             priority: childSnapShot.val().priority,
-            isRead: childSnapShot.val().isRead
+            isRead: false
           };
+          const isReadCheck = firebase.database()
+          .ref(`groups/${request.params.groupId}/messages/${childSnapShot.key}/isRead/${userlogin.uid}`);
+          isReadCheck
+          .once('value', (snap) => {
+            if (snap.val() !== null) {
+              message.isRead = true;
+            }
+          });
           groupMessages.push(message);
         });
       })
@@ -29,8 +39,6 @@ module.exports = (request, result, firebase) => {
             message: `Error occurred ${error.message}`,
           });
         });
-        // console.log(snapshot.key);
-        // const group = snapshot.val();
     } else {
       result.status(403).send({
         message: 'Please log in to see a list of your groups'

@@ -36,6 +36,7 @@ groupClicked() {
     AppAPI.getGroupMessages(this.props.group);
     AppAPI.getUsersNotInGroups(this.props.group);
     AppActions.selectGroup(this.props.group);
+    AppActions.updateMessageFlags(this.props.groups.groupId);
   }
   
   constructor(props){
@@ -46,7 +47,7 @@ groupClicked() {
   render(){
     let newM = '';
     if(this.props.group.newMessage === true){
-       newM = <small className="error">***</small>
+       newM = <small className="error"> ***</small>
     }
     return(
       <MuiThemeProvider muiTheme={muiTheme}>

@@ -55,7 +55,7 @@ class User extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <ListItem leftAvatar={
         <Avatar
-          src="images/uxceo-128.jpg"
+          src={this.props.user.profilePic}
           size={30}
           style={style}
            />

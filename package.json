@@ -31,6 +31,7 @@
     "firebase": "^4.0.0",
     "firebase-admin": "^5.0.0",
     "flux": "*",
+    "http": "0.0.0",
     "images-upload-middleware": "^1.1.1",
     "img-loader": "^2.0.0",
     "jquery-file-upload-middleware": "^0.1.8",

@@ -4,39 +4,22 @@ import sendEmail from './sendMail';
 module.exports = (request, result, firebase, io) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
+      // console.log(`group Id ${request.body.groupId}`);
       const messageRef = firebase.database()
       .ref(`groups/${request.body.groupId}/messages/`);
-      const newkey = messageRef.push({
+      messageRef.push({
         messageBody: request.body.messageBody,
         postedBy: request.body.postedBy,
         postedByDisplayName: request.body.postedByDisplayName,
         postedon: request.body.postedon,
         priority: request.body.priority,
         profilePic: request.body.profilePic
-      }).key;
+      });
 
       const userRef = firebase.database()
        .ref(`groups/${request.body.groupId}/users/`);
       userRef.orderByKey().once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
-          const userRef2 = firebase.database()
-            .ref(`users/${childSnapShot.key}
-            /groups/${request.body.groupId}/messages`);
-          userRef2.child(newkey).set({
-            messageBody: request.body.messageBody,
-            postedBy: request.body.postedBy,
-            postedByDisplayName: request.body.postedByDisplayName,
-            postedon: request.body.postedon,
-            priority: request.body.priority,
-            isRead: false,
-            profilePic: request.body.profilePic
-          });
-         // console.log(childSnapShot.key)
-          const groupRef = firebase.database().ref(`users/${childSnapShot.key}
-          /groups/${request.body.groupId}`);
-          groupRef.update({
-            newMessage: true
-          });
           if (request.body.priority === 'critical') {
             const phoneRef = firebase.database()
             .ref(`users/${childSnapShot.key}`);
@@ -46,7 +29,6 @@ module.exports = (request, result, firebase, io) => {
                   phoneNo: record.val().phoneNo,
                   groupName: request.body.groupName
                 };
-               // console.log(smsObject);
                 sendSMS(smsObject);
               }
             });
@@ -70,7 +52,13 @@ module.exports = (request, result, firebase, io) => {
        const group = {
          groupId: request.body.groupId,
          groupname: request.body.groupName,
-         newMessage: true
+         newMessage: true,
+         messageBody: request.body.messageBody,
+         postedBy: request.body.postedBy,
+         postedByDisplayName: request.body.postedByDisplayName,
+         postedon: request.body.postedon,
+         priority: request.body.priority,
+         profilePic: request.body.profilePic
        };
        io.emit('messageAdded', {
          group

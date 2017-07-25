@@ -232,6 +232,15 @@ AppDispatcher.register((payload) => {
     AppStore.emit(CHANGE_EVENT);
     break;
 
+  case AppConstants.UPDATE_MESSAGE_FLAGS:
+
+    // API store
+    AppAPI.updateMessageFlag(action.groupId);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
   case AppConstants.SIGNOUT_USER:
 
     // API store
