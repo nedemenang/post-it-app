@@ -13,6 +13,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {green100, green500, green700} from 'material-ui/styles/colors';
 import AppStore from '../stores/AppStore';
 import AppAPI from '../utils/appAPI';
+import Icon from 'react-icons-kit';
+import { bubble } from 'react-icons-kit/icomoon/bubble';       
 
 const style = {margin: 5};
 const muiTheme = getMuiTheme({
@@ -33,11 +35,10 @@ const muiTheme = getMuiTheme({
 class Group extends Component {
 
 groupClicked() {
-   //console.log(this.props.group.groupId)
     AppAPI.getGroupMessages(this.props.group);
     AppAPI.getUsersNotInGroups(this.props.group);
     AppActions.selectGroup(this.props.group);
-   // console.log(this.props.group);
+    // AppActions.updateMessageFlags(this.props.group.groupId);
   }
   
   constructor(props){
@@ -46,10 +47,14 @@ groupClicked() {
     this.state= {};
   }
   render(){
+    let newM = '';
+    if(this.props.group.newMessage === true){
+       newM = <Icon icon={bubble} />
+    }
     return(
       <MuiThemeProvider muiTheme={muiTheme}>
-        <ListItem onClick={this.groupClicked}>
-          <strong>{this.props.group.groupname}</strong>
+        <ListItem onTouchTap={this.groupClicked}>
+          <strong>{this.props.group.groupname} {newM}</strong>
         </ListItem>
       </MuiThemeProvider>
     );

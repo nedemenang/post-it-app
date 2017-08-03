@@ -4,20 +4,22 @@ import Login from './Login';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 import MessageBoard from './MessageBoard';
+import PasswordReset from './passwordReset';
+import LoginMessageBoard from './LoginMessageBoard';
+import PasswordResetConfirm from './PasswordResetConfirm';
+import ProfileEdit from './ProfileEdit';
 import '../public/style.css';
 import {AppBar, FlatButton} from 'material-ui'
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {green100, green500, green700} from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import logo from '../public/images/logo.png';
+
 import ls from 'local-storage';
 
 injectTapEventPlugin();
-//import UserList from './UserList';
-//import GroupList from './GroupList';
-//import MessageList from './MessageList'; 
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -59,7 +61,7 @@ componentUnmount() {
 signOut(event){
   event.preventDefault();
   AppActions.signOutUser();
-  ls.clear();
+  //sessionStorage.clear();
 }
 
   constructor(props){
@@ -69,38 +71,32 @@ signOut(event){
   }
 
    render() {
-     //console.log(this.state.errors)
-     //<Login errors = {this.state.errors} />
-     //console.log(this.state.isAuthenticated);
-     if (this.state.isAuthenticated == true)
-     {
-       ls.set('user', this.state.loggedInUser);
-     }
-     
-     if(ls.get('user') == null) {
-       var componentToMount = <Login {...this.state} />
-       var image = <img src = {logo} />
-     } else {
-       var componentToMount = <MessageBoard />
-       var image = ''
-     }
-
-     const rightButtons = (
-      <div>
-        <FlatButton label="Sign Out" />
-      </div>
-    );
 
       return (
+        <BrowserRouter>
          <div>
          <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar title="Post It App" iconElementRight={<button className="googleButton" onClick={this.signOut}>Sign Out</button>}/>
             </MuiThemeProvider>
-            <div className="login-image">
-               {image}
-              </div>
-             {componentToMount}
-         </div>
+        <Switch>
+          <Route exact path = '/' render = {() => (
+            <LoginMessageBoard />
+          )} />
+          <Route exact path = '/PasswordReset' render = {() => (
+            <PasswordReset {...this.state} />
+          )} />
+          <Route path = '/PasswordResetConfirm' render = {() => (
+            <PasswordResetConfirm {...this.state} />
+          )} />
+          <Route path = '/ProfileEdit' render = {() => (
+            <ProfileEdit  {...this.state} />
+          )} />
+          <Route render = { () => (
+            <p> Sorry, something went wrong... </p>
+          )} />
+        </Switch>
+      </div>
+        </BrowserRouter>
       );
    }
 

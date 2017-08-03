@@ -1,4 +1,4 @@
-//import ls from 'local-storage';
+// import ls from 'local-storage';
 
 module.exports = (request, result, firebase) => {
   const email = request.body.email;
@@ -11,7 +11,7 @@ module.exports = (request, result, firebase) => {
     });
    // ls.set('user', user);
    // ls.set('authenticated', true);
-   // console.log(ls('user'));
+    // console.log(user);
   }).catch((error) => {
     result.status(500).send({
       message: `Error occured while login in:  ${error.message}`

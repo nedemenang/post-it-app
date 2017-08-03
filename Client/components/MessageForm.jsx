@@ -7,6 +7,7 @@ import {
 import '../public/style.css';
 import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
+import ls from 'local-storage';
 
 class MessageForm extends Component {
 
@@ -47,21 +48,27 @@ submit(event){
   {
     AppActions.receiveErrors('Please select a message priority');
   }else{
-    console.log(this.props.loggedInUser[0]);
+    //console.log(ls.get('user'));
+    const user = this.props.loggedInUser//ls.get('user');
+    //console.log(user[0].email);
     let messageObject = {
       messageBody : messagebody,
       postedon: postedon,
       priority: priority,
-      postedBy: this.props.loggedInUser[0].email,
-      postedByDisplayName: this.props.loggedInUser[0].displayName,
-      profilePic: "",
+      postedBy: user[0].email, //this.props.loggedInUser[0].email,
+      postedByDisplayName: user[0].displayName,//this.props.loggedInUser[0].displayName,
+      profilePic: user[0].profilePic,
       groupId: this.props.selectedGroup[0].groupId,
+      groupName: this.props.selectedGroup[0].groupname
     }
+    console.log(messageObject);
+
     AppActions.addMessage(messageObject);
     this.refs.message.value = '';
     this.refs.priority.value = 'Select Message Priority ....';
     AppActions.receiveErrors('');
   }
+  
   
 }
 

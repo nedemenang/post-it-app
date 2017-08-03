@@ -26,6 +26,14 @@ const AppActions = {
       errors
     });
   },
+
+  updateUserProfile(user) {
+    // console.log(errors);
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.UPDATE_USER_PROFILE,
+      user
+    });
+  },
   receiveSuccess(message) {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_SUCCESS,
@@ -43,7 +51,7 @@ const AppActions = {
   },
 
   addUserToGroup(user) {
-    //console.log(usergroup);
+    // console.log(usergroup);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADDUSER_GROUP,
       user
@@ -56,7 +64,14 @@ const AppActions = {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.ADD_MESSAGE,
       message
+    });
+  },
 
+  updateMessageFlags(groupId) {
+    // console.log(message);
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.UPDATE_MESSAGE_FLAGS,
+      groupId
     });
   },
 
@@ -100,6 +115,14 @@ const AppActions = {
     });
   },
 
+  receiveUserReadMessages(usersRead) {
+   // console.log(usersRead);
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RECEIVE_USER_READ_MESSAGES_RESULTS,
+      usersRead
+    });
+  },
+
   receiveUserGroups(groups) {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_GROUP_RESULTS,
@@ -112,6 +135,22 @@ const AppActions = {
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_AUTHENTICATED_USER,
       user
+
+    });
+  },
+
+  resetPassword(emailAddress) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RESET_PASSWORD,
+      emailAddress
+
+    });
+  },
+
+  confirmPasswordReset(resetObject) {
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.CONFIRM_RESET_PASSWORD,
+      resetObject
 
     });
   },

@@ -6,8 +6,8 @@ module.exports = (request, result, firebase) => {
     result.send({
       message: 'User successfully signed out.'
     });
-    ls.clear();
-    //ls.remove('authenticated');
+    //sessionStorage.clear();
+    // ls.remove('authenticated');
   }).catch((error) => {
     result.status(500).send({
       message: `Error occured while signing out :  ${error.message}`

@@ -1,15 +1,23 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import controllers from './controllers/postItController';
+import corsPrefetch from 'cors-prefetch-middleware';
+import imagesUpload from 'images-upload-middleware';
+import http from 'http';
+import sockio from 'socket.io';
 import path from 'path';
-
 import webpack from 'webpack';
 import webpackMiddleWare from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
 
+import controllers from './controllers/postItController';
+
 const app = express();
+const server = http.Server(app);
+const io = new sockio(server);
 const port = process.env.PORT || 3000;
+
+
 const compiler = webpack(webpackConfig);
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,13 +29,29 @@ app.use(webpackMiddleWare(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-controllers(app);
+app.use('/static', express.static('./server/static'));
+app.use(corsPrefetch);
+
+app.post('/notmultiple', imagesUpload(
+    './server/static/files',
+    'http://localhost:3000/static/files'
+));
+
+io.on('connection', (socket) => {
+  // connections.push(socket);
+  console.log('Connected');
+  socket.on('disconnect', () => {
+    console.log('Disconnected');
+  });
+});
+
+controllers(app, io);
+
+server.listen(port, () => {
+  console.log(`We are live on ${port}`);
+});
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/public/index.html'));
 });
 
-
-app.listen(port, () => {
-  console.log(`We are live on ${port}`);
-});

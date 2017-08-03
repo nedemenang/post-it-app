@@ -4,17 +4,19 @@ module.exports = (request, result, firebase) => {
       const messageRef = firebase.database()
       .ref(`users/${userlogin.uid}/groups/${request.params.groupId}/messages/`);
       const groupMessages = [];
-      messageRef.orderByKey().once('value', (snapshot) => {
+      messageRef.orderByKey()
+      .limitToLast(10)
+      .once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const message = {
             id: childSnapShot.key,
             messageBody: childSnapShot.val().messageBody,
             postedBy: childSnapShot.val().postedBy,
             postedByDisplayName: childSnapShot.val().postedByDisplayName,
-            // profilePic: childSnapShot.val().profilePic,
+            profilePic: childSnapShot.val().profilePic,
             postedon: childSnapShot.val().postedon,
             priority: childSnapShot.val().priority,
-            isRead: childSnapShot.val().isRead
+            isRead: childSnapShot.val().isRead,
           };
           groupMessages.push(message);
         });
@@ -29,8 +31,6 @@ module.exports = (request, result, firebase) => {
             message: `Error occurred ${error.message}`,
           });
         });
-        // console.log(snapshot.key);
-        // const group = snapshot.val();
     } else {
       result.status(403).send({
         message: 'Please log in to see a list of your groups'

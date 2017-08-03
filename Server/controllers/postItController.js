@@ -10,6 +10,11 @@ import getGroupMessages from '../Routes/getGroupMessages';
 import getUsersInGroups from '../Routes/getUsersInGroups';
 import getUsersNotInGroups from '../Routes/getUsersNotInGroups';
 import signInGoogleUser from '../Routes/googleSignin';
+import passwordReset from '../Routes/passwordReset';
+import confirmPasswordReset from '../Routes/passwordResetConfirm';
+import updateUserProfile from '../Routes/updateUserProfile';
+import updateMessageFlag from '../Routes/updateMessageFlags';
+import getUsersReadMessages from '../Routes/getUsersReadMessages';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',
@@ -21,17 +26,33 @@ const config = {
 };
 firebase.initializeApp(config);
 
-module.exports = (app) => {
+module.exports = (app, io) => {
   app.post('/users/signup', (req, res) => {
-    registerNewUser(req, res, firebase);
+    registerNewUser(req, res, firebase, io);
+  });
+
+  app.post('/users/updateUserProfile', (req, res) => {
+    updateUserProfile(req, res, firebase);
+  });
+
+  app.post('/group/updateMessageFlag', (req, res) => {
+    updateMessageFlag(req, res, firebase);
   });
 
   app.post('/users/signin', (req, res) => {
     signInUser(req, res, firebase);
   });
 
+  app.post('/users/passwordReset', (req, res) => {
+    passwordReset(req, res, firebase);
+  });
+
+  app.post('/users/confirmPasswordReset', (req, res) => {
+    confirmPasswordReset(req, res, firebase);
+  });
+
   app.post('/users/googleSignin', (req, res) => {
-    signInGoogleUser(req, res, firebase);
+    signInGoogleUser(req, res, firebase, io);
   });
 
   app.post('/users/signout', (req, res) => {
@@ -39,23 +60,29 @@ module.exports = (app) => {
   });
 
   app.post('/group', (req, res) => {
-    createNewGroup(req, res, firebase);
+    // console.log('create new group...');
+    createNewGroup(req, res, firebase, io);
   });
 
   app.post('/group/:groupId/user', (req, res) => {
-    addUserToGroup(req, res, firebase);
+    addUserToGroup(req, res, firebase, io);
   });
 
   app.post('/group/:groupId/message', (req, res) => {
-    postMessage(req, res, firebase);
+    postMessage(req, res, firebase, io);
   });
 
   app.get('/user/groups', (req, res) => {
+    // console.log('getting user group from database');
     getUserGroups(req, res, firebase);
   });
 
   app.get('/group/:groupId/messages', (req, res) => {
     getGroupMessages(req, res, firebase);
+  });
+
+  app.get('/group/:groupId/messages/:messageId/usersRead', (req, res) => {
+    getUsersReadMessages(req, res, firebase);
   });
 
   app.get('/group/users', (req, res) => {

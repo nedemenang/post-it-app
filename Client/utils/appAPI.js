@@ -5,14 +5,40 @@ import AppActions from '../actions/AppActions';
 
 module.exports = {
   registerNewUser(user) {
-    console.log(user);
+    // console.log(user);
     axios.post('/users/signup', {
       email: user.email,
       password: user.password,
-      userName: user.username
+      userName: user.username,
+      photoURL: user.profilePic,
+      phoneNo: user.phoneNo
     }).then((response) => {
-      // console.log(response.data.message);
+      const authuser = {
+        id: response.data.user.uid,
+        email: user.email,
+        profilePic: response.data.user.photoURL,
+        displayName: response.data.user.displayName,
+        phoneNo: response.data.user.phoneNumber,
+        isAuthenticated: true
+      };
       AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveAuthenticatedUser(authuser);
+      AppActions.receiveErrors('');
+    })
+  .catch((error) => {
+    AppActions.receiveErrors(error.message);
+  });
+  },
+
+  updateUserProfile(user) {
+    // console.log(user);
+    axios.post('/users/updateUserProfile', {
+      userName: user.username,
+      photoURL: user.profilePic,
+      phoneNo: user.phoneNo
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveErrors('');
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
@@ -31,9 +57,10 @@ module.exports = {
         email: user.email,
         profilePic: response.data.user.photoURL,
         displayName: response.data.user.displayName,
+        phoneNo: response.data.user.phoneNumber,
         isAuthenticated: true
       };
-      AppActions.receiveSuccess(response.message);
+      AppActions.receiveSuccess(response.data.message);
       AppActions.receiveAuthenticatedUser(authuser);
       AppActions.receiveErrors('');
       // console.log(authuser);
@@ -42,13 +69,44 @@ module.exports = {
     AppActions.receiveErrors(error.message);
     // console.log(error);
     // console.log(user);
+  });
+  },
+
+  resetPassword(emailAddress) {
+   // console.log(user);
+    axios.post('/users/passwordReset', {
+      emailAddress
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveErrors('');
+     // console.log(authuser);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+      // console.log(error);
     });
   },
 
-signinGoogleUser(idToken) {
+  confirmResetPassword(resetObject) {
+   // console.log(user);
+    axios.post('/users/confirmPasswordReset', {
+      code: resetObject.code,
+      newPassword: resetObject.newPassword
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveErrors('');
+     // console.log(authuser);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+      // console.log(error);
+    });
+  },
+
+  signinGoogleUser(idToken) {
    // console.log(user);
     axios.post('/users/googleSignin', {
-      idToken: idToken
+      idToken
     }).then((response) => {
       // console.log(response);
       const authuser = {
@@ -58,22 +116,19 @@ signinGoogleUser(idToken) {
         displayName: response.data.user.displayName,
         isAuthenticated: true
       };
-      AppActions.receiveSuccess(response.message);
+      AppActions.receiveSuccess(response.data.message);
       AppActions.receiveAuthenticatedUser(authuser);
       AppActions.receiveErrors('');
-     // console.log(authuser);
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
-    // console.log(error);
-    // console.log(user);
   });
   },
 
 
   signoutUser() {
     axios.post('/users/signout').then((response) => {
-      AppActions.receiveSuccess(response.message);
+      AppActions.receiveSuccess(response.data.message);
     })
     .catch((error) => {
       AppActions.receiveErrors(error.message);
@@ -86,11 +141,11 @@ signinGoogleUser(idToken) {
       groupName: group.groupname,
       dateCreated: group.datecreated
     }).then((response) => {
-      console.log('create group success');
-      AppActions.receiveSuccess(response.message);
+      //console.log('create group success');
+      AppActions.receiveSuccess(response.data.message);
     })
     .catch((error) => {
-      console.log('create group error');
+     // console.log('create group error');
       AppActions.receiveErrors(error.message);
     });
   },
@@ -102,12 +157,12 @@ signinGoogleUser(idToken) {
       username: user.username,
       groupName: user.groupName
     }).then((response) => {
-      AppActions.receiveSuccess(response.message);
-      console.log(response);
+      AppActions.receiveSuccess(response.data.message);
+      // console.log(response);
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
-    console.log(error);
+    // console.log(error);
   });
     // console.log('Adding user to group....');
   },
@@ -120,9 +175,23 @@ signinGoogleUser(idToken) {
       priority: message.priority,
       postedon: message.postedon,
       postedBy: message.postedBy,
-      postedByDisplayName: message.postedByDisplayName
+      postedByDisplayName: message.postedByDisplayName,
+      profilePic: message.profilePic,
+      groupName: message.groupName
     }).then((response) => {
-      AppActions.receiveSuccess(response.message);
+      AppActions.receiveSuccess(response.data.message);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+    });
+  },
+
+  updateMessageFlag(groupId) {
+    // console.log(message);
+    axios.post('/group/updateMessageFlag', {
+      groupId,
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
     })
     .catch((error) => {
       AppActions.receiveErrors(error.message);
@@ -130,11 +199,11 @@ signinGoogleUser(idToken) {
   },
 
   getUserGroups() {
-    console.log('getting group info...');
-    axios.get('user/groups')
+     // console.log('app api get user group function');
+    axios.get('/user/groups')
    .then((response) => {
-     console.log(response);
-     AppActions.receiveSuccess(response.message);
+    // console.log(response);
+     AppActions.receiveSuccess(response.data.message);
      AppActions.receiveUserGroups(response.data.groups);
    })
    .catch((error) => {
@@ -146,7 +215,7 @@ signinGoogleUser(idToken) {
     axios.get(`/group/${group.groupId}/messages`)
     .then((response) => {
       // console.log(response);
-      AppActions.receiveSuccess(response.message);
+      AppActions.receiveSuccess(response.data.message);
       AppActions.receiveGroupMessages(response.data.groupMessages);
     })
    .catch((error) => {
@@ -154,11 +223,23 @@ signinGoogleUser(idToken) {
    });
   },
 
+  getUsersReadMessage(item) {
+    // console.log(item);
+    axios.get(`/group/${item.groupId}/messages/${item.messageId}/usersRead`)
+    .then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveUserReadMessages(response.data.usersRead);
+    })
+   .catch((error) => {
+     AppActions.receiveErrors(error.message);
+   });
+  },
+
   getUsersInGroups(group) {
-    axios.get(`group/${group.groupId}/users`)
+    axios.get(`/group/${group.groupId}/users`)
    .then((response) => {
-     AppActions.receiveSuccess(response.message);
-     AppActions.receiveUserInGroupResults(response.users);
+     AppActions.receiveSuccess(response.data.message);
+     AppActions.receiveUserInGroupResults(response.data.users);
    })
    .catch((error) => {
      AppActions.receiveErrors(error.message);
@@ -166,10 +247,10 @@ signinGoogleUser(idToken) {
   },
 
   getUsersNotInGroups(group) {
-    console.log(group);
-    axios.get(`group/${group.groupId}/notusers`)
+    //console.log(group);
+    axios.get(`/group/${group.groupId}/notusers`)
    .then((response) => {
-     AppActions.receiveSuccess(response.message);
+     AppActions.receiveSuccess(response.data.message);
      AppActions.receiveUserNotInGroupResults(response.data.userNotInGroup);
    })
    .catch((error) => {

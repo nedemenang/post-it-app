@@ -44,7 +44,7 @@ class UserList extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
        <Card>
         <List>
-        <Subheader><strong>User List</strong></Subheader>
+        <Subheader><strong>Click to add user to group</strong></Subheader>
           {
             this.props.users.map((user, i) => {
                   return <User selectedGroup={this.props.selectedGroup} user={user} key={i} />
