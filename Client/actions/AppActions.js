@@ -115,8 +115,15 @@ const AppActions = {
     });
   },
 
+  receiveUserReadMessages(usersRead) {
+   // console.log(usersRead);
+    AppDispatcher.handleViewAction({
+      actionType: AppConstants.RECEIVE_USER_READ_MESSAGES_RESULTS,
+      usersRead
+    });
+  },
+
   receiveUserGroups(groups) {
-    console.log(groups);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.RECEIVE_GROUP_RESULTS,
       groups

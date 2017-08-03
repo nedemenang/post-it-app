@@ -16,7 +16,8 @@ module.exports = (request, result, firebase) => {
        .ref('users/').child(user.uid).set({
          userName: user.displayName,
          email: user.email,
-         phoneNo: ''
+         phoneNo: '',
+         profilePic: user.photoURL
        });
     }
   });

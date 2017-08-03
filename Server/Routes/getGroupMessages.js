@@ -2,7 +2,7 @@ module.exports = (request, result, firebase) => {
   firebase.auth().onAuthStateChanged((userlogin) => {
     if (userlogin) {
       const messageRef = firebase.database()
-      .ref(`groups/${request.params.groupId}/messages/`);
+      .ref(`users/${userlogin.uid}/groups/${request.params.groupId}/messages/`);
       const groupMessages = [];
       messageRef.orderByKey()
       .limitToLast(10)
@@ -16,16 +16,8 @@ module.exports = (request, result, firebase) => {
             profilePic: childSnapShot.val().profilePic,
             postedon: childSnapShot.val().postedon,
             priority: childSnapShot.val().priority,
-            isRead: false
+            isRead: childSnapShot.val().isRead,
           };
-          const isReadCheck = firebase.database()
-          .ref(`groups/${request.params.groupId}/messages/${childSnapShot.key}/isRead/${userlogin.uid}`);
-          isReadCheck
-          .once('value', (snap) => {
-            if (snap.val() !== null) {
-              message.isRead = true;
-            }
-          });
           groupMessages.push(message);
         });
       })

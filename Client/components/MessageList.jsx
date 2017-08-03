@@ -35,19 +35,21 @@ class MessageList extends Component {
   }
   render(){
     let groupsname = '';
+    let groupId = '';
     if (this.props.selectedGroup.length !== 0)
     {
       groupsname = this.props.selectedGroup[0].groupname;
+      groupId = this.props.selectedGroup[0].groupId;
     }
     return(
       <div className="bottomMargin">
       <MuiThemeProvider muiTheme={muiTheme}>
        <Card>
-       <Subheader><strong>{groupsname} Message List</strong></Subheader>
+       <Subheader><strong>{groupsname} Message List </strong></Subheader>
         <List>
           {
             this.props.messages.map((message, i) => {
-                  return <Message message={message} key={i} />
+                  return <Message userRead = {this.props.userReadMessages} groupId={groupId} message={message} key={i} />
               })
           }
         </List>

@@ -34,14 +34,17 @@ class User extends Component {
   userClicked() {
 
    if (confirm("Are you sure you want to add this user to group?") == true) {
-     let userObject = {
-      email : this.props.user.email,
-      userId: this.props.user.id,
-      username: this.props.user.username,
-      groupId: this.props.selectedGroup[0].groupId,
-      groupName: this.props.selectedGroup[0].groupname
-    }
+     console.log(this.props.selectedGroup[0].groupId)
+    if(this.props.selectedGroup[0].groupId !== undefined) {
+        let userObject = {
+        email : this.props.user.email,
+        userId: this.props.user.id,
+        username: this.props.user.username,
+        groupId: this.props.selectedGroup[0].groupId,
+        groupName: this.props.selectedGroup[0].groupname
+      }
     AppActions.addUserToGroup(userObject);
+    } 
   }
 }
 
@@ -59,7 +62,7 @@ class User extends Component {
           size={30}
           style={style}
            />
-      }   onClick={this.userClicked}>
+      }   onTouchTap={this.userClicked}>
          <strong>{this.props.user.email} - {this.props.user.username}</strong>
      </ListItem>
       </MuiThemeProvider>

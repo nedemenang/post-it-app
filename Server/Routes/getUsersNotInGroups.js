@@ -10,6 +10,7 @@ module.exports = (request, result, firebase) => {
       .ref('users');
       const usersInGroup = [];
       const allUsers = [];
+      let userNotInGroup = [];
       userRef.orderByKey().once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const user = {
@@ -32,9 +33,12 @@ module.exports = (request, result, firebase) => {
           };
           allUsers.push(users);
         });
+        // console.log(usersInGroup);
+        // console.log(allUsers);
       }).then(() => {
-        const userNotInGroup = _.differenceWith(allUsers,
-        usersInGroup, _.isEqual);
+        userNotInGroup = _.difference(allUsers,
+        usersInGroup);
+        // console.log(userNotInGroup);
         result.send({
           userNotInGroup,
         });

@@ -11,6 +11,7 @@ let _usersInGroup = [];
 let _usersNotInGroup = [];
 let _userGroups = [];
 let _groupMessages = [];
+let _usersReadMessage = [];
 let _errors = '';
 let _success = '';
 const _loggedInUser = [];
@@ -91,6 +92,10 @@ const AppStore = assign({}, EventEmitter.prototype, {
     return _groupMessages;
   },
 
+  getUsersReadMessage() {
+    return _usersReadMessage;
+  },
+
   getUsersInGroup() {
     return _usersInGroup;
   },
@@ -111,6 +116,11 @@ const AppStore = assign({}, EventEmitter.prototype, {
   setGroupMessages(messages) {
   //  console.log(messages);
     _groupMessages = messages;
+  },
+
+  setUserReadMessages(usersRead) {
+  //  console.log(messages);
+    _usersReadMessage = usersRead;
   },
 
   setSelectedGroup(group) {
@@ -277,6 +287,15 @@ AppDispatcher.register((payload) => {
     // store save
     // console.log(action.messages);
     AppStore.setGroupMessages(action.messages);
+
+    // emit change
+    AppStore.emit(CHANGE_EVENT);
+    break;
+
+  case AppConstants.RECEIVE_USER_READ_MESSAGES_RESULTS:
+    // store save
+    // console.log(action.usersRead);
+    AppStore.setUserReadMessages(action.usersRead);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);

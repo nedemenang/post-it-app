@@ -18,7 +18,8 @@ module.exports = (request, result, firebase, io) => {
       userRef.child(user.uid).set({
         userName,
         email,
-        phoneNo
+        phoneNo,
+        profilePic: photo
       });
       io.emit('userAdded', {});
       firebase.auth().signInWithEmailAndPassword(email, password)

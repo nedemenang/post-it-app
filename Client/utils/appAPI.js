@@ -223,6 +223,18 @@ module.exports = {
    });
   },
 
+  getUsersReadMessage(item) {
+    // console.log(item);
+    axios.get(`/group/${item.groupId}/messages/${item.messageId}/usersRead`)
+    .then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveUserReadMessages(response.data.usersRead);
+    })
+   .catch((error) => {
+     AppActions.receiveErrors(error.message);
+   });
+  },
+
   getUsersInGroups(group) {
     axios.get(`/group/${group.groupId}/users`)
    .then((response) => {

@@ -4,7 +4,7 @@ module.exports = (request, result, firebase) => {
       const messageRef = firebase.database()
             .ref(`/groups/${request.body.groupId}/messages`)
             .orderByKey().limitToLast(5);
-      messageRef.orderByKey().once('value', (snapshot) => {
+      messageRef.once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const isReadCheck = firebase.database()
           .ref(`groups/${request.body.groupId}/messages/${childSnapShot.key}/isRead/${userlogin.uid}`);
@@ -17,6 +17,16 @@ module.exports = (request, result, firebase) => {
               });
             }
           });
+          const userRef2 = firebase.database()
+            .ref(`users/${userlogin.uid}/groups/${request.body.groupId}/messages/${childSnapShot.key}`);
+          userRef2.update({
+            isRead: true
+          });
+        });
+        const groupRef = firebase.database()
+       .ref(`users/${userlogin.uid}/groups/${request.body.groupId}/`);
+        groupRef.update({
+          newMessage: false
         });
       });
     } else {

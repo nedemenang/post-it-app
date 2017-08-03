@@ -15,7 +15,7 @@ import MessageForm from './MessageForm';
 import GroupForm from './GroupForm';
 import AppAPI from '../utils/appAPI';
 import AppStore from '../stores/AppStore';
-import {Snackbar} from 'material-ui';
+import Snackbar from 'material-ui/Snackbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {green100, green500, green700} from 'material-ui/styles/colors';
@@ -44,6 +44,7 @@ function getAppState() {
       messages: AppStore.getGroupMessages(),
       selectedGroup: AppStore.getSelectedGroup(),
       notifiedGroup: '',
+      userReadMessages: AppStore.getUsersReadMessage(),
       open: false
     };
 }
@@ -61,9 +62,7 @@ getInitialState(){
   }
 
   handleRequestClose() {
-    this.setState({
-      open: false,
-    });
+    this.state.open = false;
   };
 
 componentDidMount(){
@@ -80,9 +79,10 @@ componentDidMount(){
     });
 
     this.socket.on('messageAdded', (group) => {
+      console.log('message added');
        if(group.groupId === this.state.selectedGroup.groupId)
          {
-           var newArray = this.state.group.slice(); 
+           var newArray = this.state.messages.slice(); 
            const message = {
              messageBody: group.messageBody,
              postedBy: group.postedBy,
@@ -94,11 +94,10 @@ componentDidMount(){
            newArray.push(message);   
            this.setState({messages: newArray})
          }
-          this.setState({
-            open: true,
-            notifiedGroup: group.groupname
-          });
-      console.log('message added');
+          this.state.open = true;
+          this.state.notifiedGroup = group.groupname;
+          //console.log(group);
+          //console.log('message added');
     });
 
     this.socket.on('userAdded', () => {
@@ -125,6 +124,7 @@ componentUnmount() {
 
   constructor(props){
     super(props);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
     //AppActions.receiveUserGroups();
     
     this.state = getAppState();

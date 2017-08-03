@@ -9,22 +9,9 @@ module.exports = (request, result, firebase) => {
           const group = {
             groupId: childSnapShot.key,
             groupname: childSnapShot.val().groupName,
-            newMessage: false
+            newMessage: childSnapShot.val().newMessage
             // createdby: childSnapShot.val().createdby
           };
-          const newMessageCheck = firebase.database()
-          .ref(`groups/${childSnapShot.key}/messages`).limitToLast(1);
-          newMessageCheck.on('value', (snap) => {
-            if (snap.val() !== null) {
-              const isReadCheck = firebase.database()
-              .ref(`groups/${request.params.groupId}/messages/${snap.key}/isRead/${userlogin.uid}`);
-              isReadCheck.once('value', (check) => {
-                if (check.val() === null) {
-                  group.newMessage = true;
-                }
-              });
-            }
-          });
           groups.push(group);
         });
       }).then(() => {

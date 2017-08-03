@@ -25,7 +25,8 @@ module.exports = (request, result, firebase) => {
        .ref(`users/${user.uid}`);
         userRef.update({
           phoneNo: phone,
-          userName
+          userName,
+          profilePic: photo
         });
         result.send({
           message: 'Profile update successful!'
