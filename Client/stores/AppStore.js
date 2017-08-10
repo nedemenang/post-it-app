@@ -109,7 +109,8 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   setUserGroups(groups) {
-    // console.log(groups);
+    //_userGroups = [];
+     // console.log(groups);
     _userGroups = groups;
   },
 
@@ -245,7 +246,7 @@ AppDispatcher.register((payload) => {
   case AppConstants.UPDATE_MESSAGE_FLAGS:
 
     // API store
-    AppAPI.updateMessageFlag(action.groupId);
+    AppAPI.updateMessageFlag(action.updateObject);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);
@@ -285,7 +286,7 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_MESSAGE_RESULTS:
     // store save
-    // console.log(action.messages);
+    console.log(action.messages);
     AppStore.setGroupMessages(action.messages);
 
     // emit change

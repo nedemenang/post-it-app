@@ -1,12 +1,13 @@
-module.exports = (request, result, firebase) => {
-  firebase.auth().onAuthStateChanged((userlogin) => {
+import _ from 'lodash';
+
+module.exports = (request, result, firebase, io) => {
+  const userlogin = firebase.auth().currentUser;
     if (userlogin) {
       const messageRef = firebase.database()
-      .ref(`users/${userlogin.uid}/groups/${request.params.groupId}/messages/`);
-      const groupMessages = [];
-      messageRef.orderByKey()
-      .limitToLast(10)
-      .once('value', (snapshot) => {
+      .ref(`users/${request.params.userId}/groups/${request.params.groupId}/messages/`);
+      const ununiquegroupMessages = [];
+      let groupMessages = [];
+      messageRef.on('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const message = {
             id: childSnapShot.key,
@@ -18,24 +19,20 @@ module.exports = (request, result, firebase) => {
             priority: childSnapShot.val().priority,
             isRead: childSnapShot.val().isRead,
           };
-          groupMessages.push(message);
+          ununiquegroupMessages.push(message);
         });
-      })
-        .then(() => {
-          result.send({
+        // console.log(groupMessages);
+         groupMessages = _.uniqBy(ununiquegroupMessages, 'id');
+         io.emit('messageAdded', {
             groupMessages,
+            groupId: request.params.groupId,
+            userId: request.params.userId
           });
-        })
-        .catch((error) => {
-          result.status(500).send({
-            message: `Error occurred ${error.message}`,
-          });
-        });
+      });
     } else {
       result.status(403).send({
         message: 'Please log in to see a list of your groups'
       });
     }
-  });
 };
 

@@ -5,7 +5,6 @@ module.exports = (request, result, firebase) => {
     if (userlogin) {
       const userRef = firebase.database()
       .ref(`groups/${request.params.groupId}/users/`);
-
       const allUserRef = firebase.database()
       .ref('users');
       const usersInGroup = [];
@@ -22,7 +21,6 @@ module.exports = (request, result, firebase) => {
           usersInGroup.push(user);
         });
       });
-
       allUserRef.orderByKey().once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const users = {
@@ -33,12 +31,8 @@ module.exports = (request, result, firebase) => {
           };
           allUsers.push(users);
         });
-        // console.log(usersInGroup);
-        // console.log(allUsers);
       }).then(() => {
-        userNotInGroup = _.difference(allUsers,
-        usersInGroup);
-        // console.log(userNotInGroup);
+        userNotInGroup = _.differenceBy(allUsers, usersInGroup, 'id');
         result.send({
           userNotInGroup,
         });

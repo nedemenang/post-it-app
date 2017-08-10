@@ -63,7 +63,7 @@ module.exports = {
       AppActions.receiveSuccess(response.data.message);
       AppActions.receiveAuthenticatedUser(authuser);
       AppActions.receiveErrors('');
-      // console.log(authuser);
+      console.log(authuser);
     })
   .catch((error) => {
     AppActions.receiveErrors(error.message);
@@ -139,7 +139,11 @@ module.exports = {
     console.log(group);
     axios.post('/group', {
       groupName: group.groupname,
-      dateCreated: group.datecreated
+      dateCreated: group.datecreated,
+      createdBy: group.createdBy,
+      createdByDisplayName: group.createdByDisplayName,
+      createdByProfilePic: group.createdByProfilePic,
+      createdByUserId: group.createdByUserId
     }).then((response) => {
       //console.log('create group success');
       AppActions.receiveSuccess(response.data.message);
@@ -186,10 +190,12 @@ module.exports = {
     });
   },
 
-  updateMessageFlag(groupId) {
+  updateMessageFlag(updateObject) {
     // console.log(message);
     axios.post('/group/updateMessageFlag', {
-      groupId,
+      groupId: updateObject.groupId,
+      email: updateObject.email,
+      userId: updateObject.userId
     }).then((response) => {
       AppActions.receiveSuccess(response.data.message);
     })
@@ -198,11 +204,10 @@ module.exports = {
     });
   },
 
-  getUserGroups() {
-     // console.log('app api get user group function');
-    axios.get('/user/groups')
+  getUserGroups(userId) {
+    console.log(userId);
+    axios.get(`/user/${userId}/groups`)
    .then((response) => {
-    // console.log(response);
      AppActions.receiveSuccess(response.data.message);
      AppActions.receiveUserGroups(response.data.groups);
    })
@@ -211,8 +216,9 @@ module.exports = {
    });
   },
 
-  getGroupMessages(group) {
-    axios.get(`/group/${group.groupId}/messages`)
+  getGroupMessages(userGroup) {
+    // console.log(`user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+    axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/messages`)
     .then((response) => {
       // console.log(response);
       AppActions.receiveSuccess(response.data.message);

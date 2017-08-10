@@ -1,32 +1,24 @@
 module.exports = (request, result, firebase, io) => {
-  firebase.auth().onAuthStateChanged((userlogin) => {
+  const userlogin = firebase.auth().currentUser;
     if (userlogin) {
       const newKey = firebase.database().ref('groups/').push({
         groupName: request.body.groupName,
-        createdBy: userlogin.email,
+        createdBy: request.body.createdBy,
         dateCreated: request.body.dateCreated
       }).key;
       const groupRef = firebase.database().ref(`groups/${newKey}/users/`);
-      groupRef.child(userlogin.uid).set({
-        userId: userlogin.uid,
-        email: userlogin.email,
-        userName: userlogin.displayName
+      groupRef.child(request.body.createdByUserId).set({
+        userId: request.body.createdByUserId,
+        email: request.body.createdBy,
+        userName: request.body.createdByDisplayName
       })
      .then(() => {
        const userRef = firebase.database()
-       .ref(`users/${userlogin.uid}/groups/`);
+       .ref(`users/${request.body.createdByUserId}/groups/`);
        userRef.child(newKey).set({
          groupId: newKey,
          groupName: request.body.groupName,
          newMessage: false
-       });
-       const group = {
-         groupId: newKey,
-         groupName: request.body.groupName,
-         newMessage: false
-       };
-       io.emit('groupCreated', {
-         group
        });
        result.send({
          message: 'New group successfully created',
@@ -37,10 +29,9 @@ module.exports = (request, result, firebase, io) => {
          message: `Error occurred ${error.message}`,
        });
      });
-    } else {
+  } else {
       result.status(403).send({
         message: 'Only logged users can create groups'
       });
     }
-  });
 };

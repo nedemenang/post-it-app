@@ -2,8 +2,8 @@ import sendSMS from './sendSms';
 import sendEmail from './sendMail';
 
 module.exports = (request, result, firebase, io) => {
-  firebase.auth().onAuthStateChanged((userlogin) => {
-    if (userlogin) {
+  const userlogin = firebase.auth().currentUser;
+  if (userlogin) {
        // console.log(`group Id ${request.body.groupId}`);
       const messageRef = firebase.database()
        .ref(`groups/${request.body.groupId}/messages`);
@@ -20,7 +20,7 @@ module.exports = (request, result, firebase, io) => {
       userRef.orderByKey().once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const groupRef = firebase.database()
-          .ref(`users/${childSnapShot.key}/groups`);
+          .ref(`users/${childSnapShot.key}/groups/${request.body.groupId}`);
           groupRef.update({
             newMessage: true
           });
@@ -65,14 +65,14 @@ module.exports = (request, result, firebase, io) => {
         });
       })
      .then(() => {
-       const group = {
-         groupId: request.body.groupId,
-         groupname: request.body.groupName,
-         newMessage: true
-       };
-       io.emit('messageAdded', {
-         group
-       });
+      //  const group = {
+      //    groupId: request.body.groupId,
+      //    groupname: request.body.groupName,
+      //    newMessage: true
+      //  };
+      //  io.emit('messageAdded', {
+      //    group
+      //  });
        result.send({
          message: 'Message successfully added',
        });
@@ -82,11 +82,10 @@ module.exports = (request, result, firebase, io) => {
          message: `Error occurred ${error.message}`,
        });
      });
-    } else {
+  } else {
       result.status(403).send({
         message: 'Only logged users can add messages to groups'
       });
     }
-  });
 };
 

@@ -67,11 +67,11 @@ const AppActions = {
     });
   },
 
-  updateMessageFlags(groupId) {
+  updateMessageFlags(updateObject) {
     // console.log(message);
     AppDispatcher.handleViewAction({
       actionType: AppConstants.UPDATE_MESSAGE_FLAGS,
-      groupId
+      updateObject
     });
   },
 
