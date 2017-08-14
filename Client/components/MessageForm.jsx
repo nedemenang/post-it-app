@@ -57,7 +57,7 @@ submit(event){
       AppActions.addMessage(messageObject);
     }
     this.refs.message.value = '';
-    this.refs.priority.value = 'Select Message Priority ....';
+    this.refs.priority.value = 'normal';
     AppActions.receiveErrors('');
   }
 }
@@ -73,7 +73,6 @@ submit(event){
          <form>
            <input type="text" className="form-control" ref="message" placeholder="Please type a message. Press enter to submit." />
             <select ref="priority" className="form-select">
-              <option>Select Message Priority ....</option>
               <option value="normal">Normal</option>
               <option value="urgent">Urgent</option>
               <option value="critical">Critical</option>

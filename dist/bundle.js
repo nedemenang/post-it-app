@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "99b5004bfdb76e76f78b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5395a387e661aa3d160c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -44865,8 +44865,9 @@ var MessageBoard = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-
-      _appAPI2.default.getUserGroups(this.state.loggedInUser[0].id);
+      var user = localStorage.getItem('user');
+      // console.log(JSON.parse(user).id);
+      _appAPI2.default.getUserGroups(JSON.parse(user).id);
       _AppStore2.default.addChangeListener(this._onChange.bind(this));
     }
   }, {
@@ -98403,11 +98404,13 @@ var Group = function (_Component) {
     key: 'groupClicked',
     value: function groupClicked() {
 
-      var user = this.props.loggedInUser;
+      var user = localStorage.getItem('user');
+      // console.log(JSON.parse(user).id);
+      // const user = this.props.loggedInUser
 
       var userGroup = {
         groupId: this.props.group.groupId,
-        userId: user[0].id
+        userId: JSON.parse(user).id
       };
 
       _AppActions2.default.selectGroup(this.props.group);
@@ -98536,16 +98539,17 @@ var GroupForm = function (_Component) {
       var groupname = this.refs.group.value.trim();
       var dateCreated = today;
 
-      var user = this.props.loggedInUser;
+      var user = localStorage.getItem('user');
+      //  JSON.parse(user).id
       // console.log(this.props.loggedInUser);
 
       var group = {
         groupname: groupname,
         datecreated: dateCreated,
-        createdBy: user[0].email,
-        createdByDisplayName: user[0].displayName,
-        createdByProfilePic: user[0].profilePic,
-        createdByUserId: user[0].id
+        createdBy: JSON.parse(user).email,
+        createdByDisplayName: JSON.parse(user).displayName,
+        createdByProfilePic: JSON.parse(user).profilePic,
+        createdByUserId: JSON.parse(user).id
       };
       console.log('Creating Group');
       _AppActions2.default.createGroup(group);
@@ -98701,8 +98705,9 @@ var GroupList = function (_Component) {
       this.socket.on('connect', this.connect.bind(this));
 
       this.socket.on('messageAdded', function (groupsMessages) {
+        var user = localStorage.getItem('user');
         if (_this2.props.selectedGroup[0] !== undefined) {
-          if (_this2.props.selectedGroup[0].groupId === groupsMessages.groupId && _this2.props.loggedInUser[0].id == groupsMessages.userId) {
+          if (_this2.props.selectedGroup[0].groupId === groupsMessages.groupId && JSON.parse(user).id == groupsMessages.userId) {
             console.log(groupsMessages.groupMessages);
             console.log('message added event');
             _AppActions2.default.receiveGroupMessages(groupsMessages.groupMessages);
@@ -98880,7 +98885,9 @@ var LoginMessageBoard = function (_Component) {
     value: function render() {
 
       if (this.state.isAuthenticated == true) {
-        localStorage.setItem('user', JSON.stringify(this.state.loggedInUser));
+        // console.log(this.state.loggedInUser[0]);
+        localStorage.setItem('user', JSON.stringify(this.state.loggedInUser[0]));
+
         // localStorage.setItem('isAuthenticated', JSON.stringify(this.state.isAuthenticated));
       }
 
@@ -99188,14 +99195,14 @@ var MessageForm = function (_Component) {
       } else {
         //console.log(ls.get('user'));
         if (this.props.selectedGroup[0].groupId !== undefined) {
-          var user = this.props.loggedInUser; //ls.get('user');
+          var user = localStorage.getItem('user'); //ls.get('user');
           var messageObject = {
             messageBody: messagebody,
             postedon: postedon,
             priority: priority,
-            postedBy: user[0].email,
-            postedByDisplayName: user[0].displayName,
-            profilePic: user[0].profilePic,
+            postedBy: JSON.parse(user).email,
+            postedByDisplayName: JSON.parse(user).displayName,
+            profilePic: JSON.parse(user).profilePic,
             groupId: this.props.selectedGroup[0].groupId,
             groupName: this.props.selectedGroup[0].groupname
           };
