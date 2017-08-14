@@ -9,11 +9,9 @@ import LoginMessageBoard from './LoginMessageBoard';
 import PasswordResetConfirm from './PasswordResetConfirm';
 import ProfileEdit from './ProfileEdit';
 import '../public/style.css';
-import {AppBar, FlatButton} from 'material-ui'
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {green100, green500, green700} from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -58,16 +56,11 @@ componentUnmount() {
   AppStore.removeChangeListener(this._onChange.bind(this));
 }
 
-signOut(event){
-  event.preventDefault();
-  AppActions.signOutUser();
-  localStorage.removeItem('user');
-}
 
   constructor(props){
     super(props);
     this.state = getAppState();
-    this.signOut = this.signOut.bind(this);
+
   }
 
    render() {
@@ -75,9 +68,7 @@ signOut(event){
       return (
         <BrowserRouter>
          <div>
-         <MuiThemeProvider muiTheme={muiTheme}>
-          <AppBar title="Post It App" iconElementRight={<button className="googleButton" onClick={this.signOut}>Sign Out</button>}/>
-            </MuiThemeProvider>
+         
         <Switch>
           <Route exact path = '/' render = {() => (
             <LoginMessageBoard />

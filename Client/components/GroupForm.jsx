@@ -38,22 +38,21 @@ submit(event){
   const user = localStorage.getItem('user');
   //  JSON.parse(user).id
   // console.log(this.props.loggedInUser);
-
-  let group = {
-    groupname : groupname,
-    datecreated: dateCreated,
-    createdBy: JSON.parse(user).email, 
-    createdByDisplayName: JSON.parse(user).displayName,
-    createdByProfilePic: JSON.parse(user).profilePic,
-    createdByUserId: JSON.parse(user).id
+ if(this.refs.group.value !== '')
+  {
+    let group = {
+      groupname : groupname,
+      datecreated: dateCreated,
+      createdBy: JSON.parse(user).email, 
+      createdByDisplayName: JSON.parse(user).displayName,
+      createdByProfilePic: JSON.parse(user).profilePic,
+      createdByUserId: JSON.parse(user).id
+    }
+    // console.log('Creating Group');
+    AppActions.createGroup(group); 
+    this.refs.group.value = '';
+    $('.group-form').slideToggle();
   }
-  console.log('Creating Group');
-  AppActions.createGroup(group); 
-  //this.setState({error : AppStore.getErrors()});
-  //console.log(AppStore.getErrors());
-  this.refs.group.value = '';
-  $('.group-form').slideToggle();
-  
 }
 
   constructor(props){

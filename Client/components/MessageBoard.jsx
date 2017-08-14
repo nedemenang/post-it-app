@@ -11,13 +11,19 @@ import AppActions from '../actions/AppActions';
 import GroupList from './GroupList';
 import UserList from './UserList';
 import MessageList from './MessageList';
+import TitleBar from './TitleBar';
 import MessageForm from './MessageForm';
 import GroupForm from './GroupForm';
 import AppAPI from '../utils/appAPI';
 import AppStore from '../stores/AppStore';
+import {AppBar, FlatButton} from 'material-ui'
 import Snackbar from 'material-ui/Snackbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
 import {green100, green500, green700} from 'material-ui/styles/colors';
 
 const style = {margin: 5};
@@ -49,7 +55,6 @@ function getAppState() {
     };
 }
 
-
 class MessageBoard extends Component {
 
 getInitialState(){
@@ -79,13 +84,14 @@ componentUnmount() {
   constructor(props){
     super(props);
     this.handleRequestClose = this.handleRequestClose.bind(this);
-    //AppActions.receiveUserGroups();
     
     this.state = getAppState();
-    //console.log(this.state.loggedInUser);
   }
+
   render(){
     return(
+      <div>
+        <TitleBar />
       <div className="row">
         <div className="leftColumn">
           <GroupList selectedGroup= {this.state.selectedGroup} groups = {this.state.groups} loggedInUser = {this.state.loggedInUser} />
@@ -99,16 +105,7 @@ componentUnmount() {
           <MessageList {...this.state}/>
           
           </div>
-          <div>
-             <MuiThemeProvider muiTheme={muiTheme}>
-               <Snackbar
-                  open={this.state.open}
-                  message={"New message added in " + this.state.notifiedGroup}
-                  autoHideDuration={4000}
-                  onRequestClose={this.handleRequestClose}
-              />
-               </MuiThemeProvider>
-            </div>
+      </div>
       </div>
     );
   }
