@@ -11,6 +11,7 @@ import AppStore from '../stores/AppStore';
 import ImagesUploader from 'react-images-uploader';
 import 'react-images-uploader/styles.css';
 import 'react-images-uploader/font.css';
+import TitleBar from './TitleBar';
 
 class ProfileEdit extends Component {
   
@@ -39,6 +40,7 @@ save(event){
   render(){
     return(
    <div>
+     <TitleBar />
      <div className="form">
     <form className="login-form">
     <h3>Profile Edit</h3>
