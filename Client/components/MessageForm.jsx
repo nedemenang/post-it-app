@@ -14,24 +14,16 @@ class MessageForm extends Component {
 submit(event){
   event.preventDefault();
 
-  let today = new Date();
-  let dd = today.getDate();
-  let mm = today.getMonth()+1; //January is 0!
-  let yyyy = today.getFullYear();
-
-  if(dd<10) {
-      dd = '0'+dd
-  } 
-
-  if(mm<10) {
-      mm = '0'+mm
-  } 
-
-  today = mm + '/' + dd + '/' + yyyy;
+  var currentdate = new Date(); 
+  var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes();
 
   const messagebody = this.refs.message.value.trim();
   const priority = this.refs.priority.value.trim();
-  const postedon = today;
+  const postedon = datetime;
   
   //console.log(this.props.selectedGroupId);
   
@@ -49,27 +41,25 @@ submit(event){
     AppActions.receiveErrors('Please select a message priority');
   }else{
     //console.log(ls.get('user'));
-    const user = this.props.loggedInUser//ls.get('user');
-    //console.log(user[0].email);
-    let messageObject = {
-      messageBody : messagebody,
-      postedon: postedon,
-      priority: priority,
-      postedBy: user[0].email, //this.props.loggedInUser[0].email,
-      postedByDisplayName: user[0].displayName,//this.props.loggedInUser[0].displayName,
-      profilePic: user[0].profilePic,
-      groupId: this.props.selectedGroup[0].groupId,
-      groupName: this.props.selectedGroup[0].groupname
+    if(this.props.selectedGroup[0].groupId !== undefined)
+    {
+      const user = localStorage.getItem('user');//ls.get('user');
+      let messageObject = {
+        messageBody : messagebody,
+        postedon: postedon,
+        priority: priority,
+        postedBy: JSON.parse(user).email, 
+        postedByDisplayName: JSON.parse(user).displayName,
+        profilePic: JSON.parse(user).profilePic,
+        groupId: this.props.selectedGroup[0].groupId,
+        groupName: this.props.selectedGroup[0].groupname
+      }
+      AppActions.addMessage(messageObject);
     }
-    console.log(messageObject);
-
-    AppActions.addMessage(messageObject);
     this.refs.message.value = '';
     this.refs.priority.value = 'Select Message Priority ....';
     AppActions.receiveErrors('');
   }
-  
-  
 }
 
   constructor(props){

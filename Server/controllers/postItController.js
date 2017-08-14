@@ -15,6 +15,7 @@ import confirmPasswordReset from '../Routes/passwordResetConfirm';
 import updateUserProfile from '../Routes/updateUserProfile';
 import updateMessageFlag from '../Routes/updateMessageFlags';
 import getUsersReadMessages from '../Routes/getUsersReadMessages';
+import getGroupQuickMessages from '../Routes/getGroupMessagesQuick';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',
@@ -72,17 +73,23 @@ module.exports = (app, io) => {
     postMessage(req, res, firebase, io);
   });
 
-  app.get('/user/groups', (req, res) => {
+  app.get('/user/:userId/groups', (req, res) => {
     // console.log('getting user group from database');
-    getUserGroups(req, res, firebase);
+    getUserGroups(req, res, firebase, io);
   });
 
-  app.get('/group/:groupId/messages', (req, res) => {
-    getGroupMessages(req, res, firebase);
+  app.get('/user/:userId/group/:groupId/messages', (req, res) => {
+    // console.log('getting group messages from database')
+    getGroupMessages(req, res, firebase, io);
+  });
+
+  app.get('/user/:userId/group/:groupId/quickMessages', (req, res) => {
+    // console.log('getting quick group messages from database')
+    getGroupQuickMessages(req, res, firebase, io);
   });
 
   app.get('/group/:groupId/messages/:messageId/usersRead', (req, res) => {
-    getUsersReadMessages(req, res, firebase);
+    getUsersReadMessages(req, res, firebase, io);
   });
 
   app.get('/group/users', (req, res) => {
@@ -90,6 +97,6 @@ module.exports = (app, io) => {
   });
 
   app.get('/group/:groupId/notusers', (req, res) => {
-    getUsersNotInGroups(req, res, firebase);
+    getUsersNotInGroups(req, res, firebase, io);
   });
 };

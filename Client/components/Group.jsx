@@ -35,10 +35,30 @@ const muiTheme = getMuiTheme({
 class Group extends Component {
 
 groupClicked() {
-    AppAPI.getGroupMessages(this.props.group);
-    AppAPI.getUsersNotInGroups(this.props.group);
+ 
+    const user = localStorage.getItem('user');
+    // console.log(JSON.parse(user).id);
+    // const user = this.props.loggedInUser
+
+    const userGroup = {
+      groupId: this.props.group.groupId,
+      userId: JSON.parse(user).id
+    }
+
     AppActions.selectGroup(this.props.group);
-    // AppActions.updateMessageFlags(this.props.group.groupId);
+    console.log('group clicked');
+    AppAPI.getGroupMessages(userGroup);
+    AppAPI.getQuickGroupMessages(userGroup);
+    AppAPI.getUsersNotInGroups(this.props.group);
+
+    const updateObject = {
+      groupId : this.props.group.groupId,
+      email: user[0].email,
+      userId: user[0].id
+    }
+
+    // AppActions.updateMessageFlags(updateObject);
+    //console.log(this.props.selectedGroup);
   }
   
   constructor(props){

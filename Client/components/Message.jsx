@@ -83,7 +83,7 @@ class Message extends Component {
           style={style}
         />
       }>
-          <strong>{this.props.message.messageBody} {isRead}</strong><br/>
+          <strong>{isRead} {this.props.message.messageBody}</strong><br/>
           <p><small>{this.props.message.postedBy} - {this.props.message.postedon}</small></p>
         </ListItem>
         </MuiThemeProvider>

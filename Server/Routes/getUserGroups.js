@@ -1,10 +1,11 @@
-module.exports = (request, result, firebase) => {
-  firebase.auth().onAuthStateChanged((userlogin) => {
+module.exports = (request, result, firebase, io) => {
+  const userlogin = firebase.auth().currentUser;
     if (userlogin) {
+
       const groupRef = firebase.database()
-      .ref(`users/${userlogin.uid}/groups/`);
+      .ref(`users/${request.params.userId}/groups/`);
       const groups = [];
-      groupRef.orderByKey().once('value', (snapshot) => {
+      groupRef.once('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
           const group = {
             groupId: childSnapShot.key,
@@ -14,21 +15,14 @@ module.exports = (request, result, firebase) => {
           };
           groups.push(group);
         });
-      }).then(() => {
         result.send({
           groups,
         });
-      })
-        .catch((error) => {
-          result.status(500).send({
-            message: `Error occurred ${error.message}`,
-          });
-        });
+      });
     } else {
       result.status(403).send({
         message: 'Please log in to see a list of your groups'
       });
     }
-  });
 };
 

@@ -66,55 +66,9 @@ getInitialState(){
   };
 
 componentDidMount(){
-
-    this.socket = io('http://localhost:3000');
-    this.socket.on('connect', this.connect.bind(this));
-    //console.log(this.state.groups);
-    this.socket.on('userAddedToGroup', (group) => {
-      // if(group.groupId === this.state.selectedGroup.groupId)
-      //   {
-      //     AppAPI.getUsersNotInGroups(group);
-      //   }
-      getAppState();
-    });
-
-    this.socket.on('messageAdded', (group) => {
-      console.log('message added');
-       if(group.groupId === this.state.selectedGroup.groupId)
-         {
-           var newArray = this.state.messages.slice(); 
-           const message = {
-             messageBody: group.messageBody,
-             postedBy: group.postedBy,
-             postedByDisplayName: group.postedByDisplayName,
-             postedon: group.postedon,
-             priority: group.priority,
-             profilePic: group.profilePic
-           }   
-           newArray.push(message);   
-           this.setState({messages: newArray})
-         }
-          this.state.open = true;
-          this.state.notifiedGroup = group.groupname;
-          //console.log(group);
-          //console.log('message added');
-    });
-
-    this.socket.on('userAdded', () => {
-      // if(this.state.selectedGroup.groupId !== '' )
-      //   {
-      //     console.log('user added...')
-      //     AppAPI.getUsersNotInGroups(this.state.selectedGroup);
-      //   }
-      getAppState();
-    });
-
-    this.socket.on('groupCreated', (group) => {
-      console.log('group created');
-      getAppState();
-    });
-
-    AppAPI.getUserGroups();
+    const user = localStorage.getItem('user');
+    // console.log(JSON.parse(user).id);
+    AppAPI.getUserGroups(JSON.parse(user).id);
     AppStore.addChangeListener(this._onChange.bind(this));
   }
 
@@ -134,13 +88,16 @@ componentUnmount() {
     return(
       <div className="row">
         <div className="leftColumn">
-          <GroupList groups = {this.state.groups} />
-          <GroupForm />
+          <GroupList selectedGroup= {this.state.selectedGroup} groups = {this.state.groups} loggedInUser = {this.state.loggedInUser} />
+          <GroupForm loggedInUser = {this.state.loggedInUser}/>
           <UserList {...this.state} />
         </div>
         <div className="rightColumn">
-          <MessageList {...this.state}/>
           <MessageForm {...this.state} />
+          <br/>
+          <br/>
+          <MessageList {...this.state}/>
+          
           </div>
           <div>
              <MuiThemeProvider muiTheme={muiTheme}>

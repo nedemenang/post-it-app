@@ -1,32 +1,26 @@
 module.exports = (request, result, firebase, io) => {
-  firebase.auth().onAuthStateChanged((userlogin) => {
+  const userlogin = firebase.auth().currentUser;
     if (userlogin) {
-      const newKey = firebase.database().ref('groups/').push({
-        groupName: request.body.groupName,
-        createdBy: userlogin.email,
-        dateCreated: request.body.dateCreated
+      const requestBody = request.body;
+      const firebaseDatabase = firebase.database();
+      const newKey = firebaseDatabase.ref('groups/').push({
+        groupName: requestBody.groupName,
+        createdBy: requestBody.createdBy,
+        dateCreated: requestBody.dateCreated
       }).key;
-      const groupRef = firebase.database().ref(`groups/${newKey}/users/`);
-      groupRef.child(userlogin.uid).set({
-        userId: userlogin.uid,
-        email: userlogin.email,
-        userName: userlogin.displayName
+      const groupRef = firebaseDatabase.ref(`groups/${newKey}/users/`);
+      groupRef.child(requestBody.createdByUserId).set({
+        userId: requestBody.createdByUserId,
+        email: requestBody.createdBy,
+        userName: requestBody.createdByDisplayName
       })
      .then(() => {
-       const userRef = firebase.database()
-       .ref(`users/${userlogin.uid}/groups/`);
+       const userRef = firebaseDatabase
+       .ref(`users/${requestBody.createdByUserId}/groups/`);
        userRef.child(newKey).set({
          groupId: newKey,
-         groupName: request.body.groupName,
+         groupName: requestBody.groupName,
          newMessage: false
-       });
-       const group = {
-         groupId: newKey,
-         groupName: request.body.groupName,
-         newMessage: false
-       };
-       io.emit('groupCreated', {
-         group
        });
        result.send({
          message: 'New group successfully created',
@@ -37,10 +31,9 @@ module.exports = (request, result, firebase, io) => {
          message: `Error occurred ${error.message}`,
        });
      });
-    } else {
+  } else {
       result.status(403).send({
         message: 'Only logged users can create groups'
       });
     }
-  });
 };

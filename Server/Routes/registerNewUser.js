@@ -1,11 +1,9 @@
 module.exports = (request, result, firebase, io) => {
-  // console.log('registering user...');
   const email = request.body.email;
   const password = request.body.password;
   const userName = request.body.userName;
   const photo = request.body.photoURL;
   const phoneNo = request.body.phoneNo;
-  // console.log(phoneNo);
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then((user) => {
     user.updateProfile({
@@ -21,7 +19,6 @@ module.exports = (request, result, firebase, io) => {
         phoneNo,
         profilePic: photo
       });
-      io.emit('userAdded', {});
       firebase.auth().signInWithEmailAndPassword(email, password)
       .catch((error) => {
         result.status(500).send({

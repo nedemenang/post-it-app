@@ -1,41 +1,44 @@
-module.exports = (request, result, firebase) => {
-  firebase.auth().onAuthStateChanged((userlogin) => {
+import _ from 'lodash';
+import updateFlags from './updateMessageFlags';
+
+module.exports = (request, result, firebase, io) => {
+  const userlogin = firebase.auth().currentUser;
     if (userlogin) {
-      const messageRef = firebase.database()
-      .ref(`users/${userlogin.uid}/groups/${request.params.groupId}/messages/`);
-      const groupMessages = [];
-      messageRef.orderByKey()
-      .limitToLast(10)
-      .once('value', (snapshot) => {
+      const firebaseDatabase = firebase.database();
+      const requestParams = request.params;
+      const messageRef = firebaseDatabase
+      .ref(`users/${requestParams.userId}/groups/${requestParams.groupId}/messages/`);
+      const ununiquegroupMessages = [];
+      let groupMessages = [];
+      messageRef.orderByKey().limitToLast(8).on('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
+          const values = childSnapShot.val();
           const message = {
             id: childSnapShot.key,
-            messageBody: childSnapShot.val().messageBody,
-            postedBy: childSnapShot.val().postedBy,
-            postedByDisplayName: childSnapShot.val().postedByDisplayName,
-            profilePic: childSnapShot.val().profilePic,
-            postedon: childSnapShot.val().postedon,
-            priority: childSnapShot.val().priority,
-            isRead: childSnapShot.val().isRead,
+            messageBody: values.messageBody,
+            postedBy: values.postedBy,
+            postedByDisplayName: values.postedByDisplayName,
+            profilePic: values.profilePic,
+            postedon: values.postedon,
+            priority: values.priority,
+            isRead: values.isRead,
           };
-          groupMessages.push(message);
+          ununiquegroupMessages.push(message);
+          updateFlags(firebase, requestParams.userId, requestParams.groupId, childSnapShot.key);
         });
-      })
-        .then(() => {
-          result.send({
+         groupMessages = _.uniqBy(ununiquegroupMessages, 'id');
+         // console.log('groupMessages');
+         
+         io.emit('messageAdded', {
             groupMessages,
+            groupId: requestParams.groupId,
+            userId: requestParams.userId
           });
-        })
-        .catch((error) => {
-          result.status(500).send({
-            message: `Error occurred ${error.message}`,
-          });
-        });
+      });
     } else {
       result.status(403).send({
         message: 'Please log in to see a list of your groups'
       });
     }
-  });
 };
 
