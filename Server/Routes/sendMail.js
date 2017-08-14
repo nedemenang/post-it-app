@@ -16,26 +16,15 @@ module.exports = (mailObject) => {
     service: 'gmail',
     auth: {
       user: 'nnamso.edemenang@gmail.com', // my mail
-      pass: 'Sup3rP@ssword'
+      pass: ''
     }
   }));
-  // const transporter = nodemailer.createTransport({
-  //   host: 'smtp.live.com',
-  //   port: 587,
-  //   secure: false, // secure:true for port 465, secure:false for port 587
-  //   auth: {
-  //     user: 'postitapplication@hotmail.com',
-  //     pass: 'Sup3rP@ssword'
-  //   }
-  // });
-// setup email data with unicode symbols
-  // console.log(mailObject.To);
   const mailOptions = {
     from: '"Post It App" <notification@postit.com>',
     to: mailObject.To,
     subject: 'Message Posted',
     text: `You have a new message in ${mailObject.groupName}`,
-    html: `<b>You have a new message in ${mailObject.groupName} ?</b>`
+    html: `<b>You have a new message in ${mailObject.groupName} group. Kindly log into the application to view.</b>`
   };
 
   transporter.sendMail(mailOptions, (error) => {
