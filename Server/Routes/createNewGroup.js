@@ -1,23 +1,25 @@
 module.exports = (request, result, firebase, io) => {
   const userlogin = firebase.auth().currentUser;
     if (userlogin) {
-      const newKey = firebase.database().ref('groups/').push({
-        groupName: request.body.groupName,
-        createdBy: request.body.createdBy,
-        dateCreated: request.body.dateCreated
+      const requestBody = request.body;
+      const firebaseDatabase = firebase.database();
+      const newKey = firebaseDatabase.ref('groups/').push({
+        groupName: requestBody.groupName,
+        createdBy: requestBody.createdBy,
+        dateCreated: requestBody.dateCreated
       }).key;
-      const groupRef = firebase.database().ref(`groups/${newKey}/users/`);
-      groupRef.child(request.body.createdByUserId).set({
-        userId: request.body.createdByUserId,
-        email: request.body.createdBy,
-        userName: request.body.createdByDisplayName
+      const groupRef = firebaseDatabase.ref(`groups/${newKey}/users/`);
+      groupRef.child(requestBody.createdByUserId).set({
+        userId: requestBody.createdByUserId,
+        email: requestBody.createdBy,
+        userName: requestBody.createdByDisplayName
       })
      .then(() => {
-       const userRef = firebase.database()
-       .ref(`users/${request.body.createdByUserId}/groups/`);
+       const userRef = firebaseDatabase
+       .ref(`users/${requestBody.createdByUserId}/groups/`);
        userRef.child(newKey).set({
          groupId: newKey,
-         groupName: request.body.groupName,
+         groupName: requestBody.groupName,
          newMessage: false
        });
        result.send({

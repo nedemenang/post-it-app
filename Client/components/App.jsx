@@ -61,7 +61,7 @@ componentUnmount() {
 signOut(event){
   event.preventDefault();
   AppActions.signOutUser();
-  //sessionStorage.clear();
+  localStorage.removeItem('user');
 }
 
   constructor(props){

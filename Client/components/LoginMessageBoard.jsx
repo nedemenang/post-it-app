@@ -39,14 +39,17 @@ class LoginMessageBoard extends Component {
   }
 
    render() {
-
-    //  if (this.state.isAuthenticated == true)
-    //  {
-    //    ls.set('user', this.state.loggedInUser);
-    //  }
+    
+    if (this.state.isAuthenticated == true)
+    {
+      // console.log(this.state.loggedInUser[0]);
+      localStorage.setItem('user',JSON.stringify(this.state.loggedInUser[0]));
+      
+      // localStorage.setItem('isAuthenticated', JSON.stringify(this.state.isAuthenticated));
+    }
      
     let componentToMount; 
-    if(this.state.isAuthenticated == false) {
+    if(localStorage.getItem('user') == null) {
         componentToMount = <Login {...this.state} />
     } else {
       componentToMount = <MessageBoard />

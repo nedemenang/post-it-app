@@ -66,8 +66,9 @@ getInitialState(){
   };
 
 componentDidMount(){
-
-    AppAPI.getUserGroups(this.state.loggedInUser[0].id);
+    const user = localStorage.getItem('user');
+    // console.log(JSON.parse(user).id);
+    AppAPI.getUserGroups(JSON.parse(user).id);
     AppStore.addChangeListener(this._onChange.bind(this));
   }
 
@@ -92,8 +93,11 @@ componentUnmount() {
           <UserList {...this.state} />
         </div>
         <div className="rightColumn">
-          <MessageList {...this.state}/>
           <MessageForm {...this.state} />
+          <br/>
+          <br/>
+          <MessageList {...this.state}/>
+          
           </div>
           <div>
              <MuiThemeProvider muiTheme={muiTheme}>

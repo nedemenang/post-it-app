@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2ad033933288a0828ce6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "99b5004bfdb76e76f78b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22136,7 +22136,12 @@ module.exports = reactProdInvariant;
       },
       getGroupMessages: function getGroupMessages(userGroup) {
         // console.log(`user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
-        _axios2.default.get('/user/' + userGroup.userId + '/group/' + userGroup.groupId + '/messages').then(function (response) {
+        console.log('get group messages');
+        _axios2.default.get('/user/' + userGroup.userId + '/group/' + userGroup.groupId + '/messages');
+      },
+      getQuickGroupMessages: function getQuickGroupMessages(userGroup) {
+        // console.log(`user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+        _axios2.default.get('/user/' + userGroup.userId + '/group/' + userGroup.groupId + '/quickMessages').then(function (response) {
           // console.log(response);
           _AppActions2.default.receiveSuccess(response.data.message);
           _AppActions2.default.receiveGroupMessages(response.data.groupMessages);
@@ -44573,7 +44578,7 @@ var Login = function (_Component) {
   }, {
     key: 'onSignIn',
     value: function onSignIn(googleUser) {
-      console.log('im in on sign in method');
+      // console.log('im in on sign in method');
       var id_token = googleUser.getAuthResponse().id_token;
       _AppActions2.default.registerGoogleUser(id_token);
     }
@@ -44900,8 +44905,10 @@ var MessageBoard = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'rightColumn' },
-          _react2.default.createElement(_MessageList2.default, this.state),
-          _react2.default.createElement(_MessageForm2.default, this.state)
+          _react2.default.createElement(_MessageForm2.default, this.state),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(_MessageList2.default, this.state)
         ),
         _react2.default.createElement(
           'div',
@@ -98236,7 +98243,7 @@ var App = function (_Component) {
     value: function signOut(event) {
       event.preventDefault();
       _AppActions2.default.signOutUser();
-      //sessionStorage.clear();
+      localStorage.removeItem('user');
     }
   }]);
 
@@ -98404,17 +98411,19 @@ var Group = function (_Component) {
       };
 
       _AppActions2.default.selectGroup(this.props.group);
+      console.log('group clicked');
       _appAPI2.default.getGroupMessages(userGroup);
+      _appAPI2.default.getQuickGroupMessages(userGroup);
       _appAPI2.default.getUsersNotInGroups(this.props.group);
 
       var updateObject = {
         groupId: this.props.group.groupId,
         email: user[0].email,
         userId: user[0].id
-      };
 
-      _AppActions2.default.updateMessageFlags(updateObject);
-      //console.log(this.props.selectedGroup);
+        // AppActions.updateMessageFlags(updateObject);
+        //console.log(this.props.selectedGroup);
+      };
     }
   }]);
 
@@ -98661,6 +98670,20 @@ var muiTheme = (0, _getMuiTheme2.default)({
   }
 });
 
+function getAppState() {
+  return {
+    errors: _AppStore2.default.getErrors(),
+    success: _AppStore2.default.getSuccess(),
+    loggedInUser: _AppStore2.default.getLoggedInUser(),
+    registeredUser: _AppStore2.default.getRegisteredUser(),
+    users: _AppStore2.default.getUsersNotInGroup(),
+    groups: _AppStore2.default.getUserGroups(),
+    messages: _AppStore2.default.getGroupMessages(),
+    selectedGroup: _AppStore2.default.getSelectedGroup(),
+    userReadMessages: _AppStore2.default.getUsersReadMessage()
+  };
+}
+
 var GroupList = function (_Component) {
   _inherits(GroupList, _Component);
 
@@ -98680,11 +98703,18 @@ var GroupList = function (_Component) {
       this.socket.on('messageAdded', function (groupsMessages) {
         if (_this2.props.selectedGroup[0] !== undefined) {
           if (_this2.props.selectedGroup[0].groupId === groupsMessages.groupId && _this2.props.loggedInUser[0].id == groupsMessages.userId) {
-            // console.log(groupsMessages.groupMessages);
+            console.log(groupsMessages.groupMessages);
+            console.log('message added event');
             _AppActions2.default.receiveGroupMessages(groupsMessages.groupMessages);
           }
         }
       });
+      _AppStore2.default.addChangeListener(this._onChange.bind(this));
+    }
+  }, {
+    key: 'componentUnmount',
+    value: function componentUnmount() {
+      _AppStore2.default.removeChangeListener(this._onChange.bind(this));
     }
   }, {
     key: 'handleToggle',
@@ -98744,6 +98774,11 @@ var GroupList = function (_Component) {
           )
         )
       );
+    }
+  }, {
+    key: '_onChange',
+    value: function _onChange() {
+      this.setState(getAppState());
     }
   }]);
 
@@ -98844,13 +98879,13 @@ var LoginMessageBoard = function (_Component) {
     key: 'render',
     value: function render() {
 
-      //  if (this.state.isAuthenticated == true)
-      //  {
-      //    ls.set('user', this.state.loggedInUser);
-      //  }
+      if (this.state.isAuthenticated == true) {
+        localStorage.setItem('user', JSON.stringify(this.state.loggedInUser));
+        // localStorage.setItem('isAuthenticated', JSON.stringify(this.state.isAuthenticated));
+      }
 
       var componentToMount = void 0;
-      if (this.state.isAuthenticated == false) {
+      if (localStorage.getItem('user') == null) {
         componentToMount = _react2.default.createElement(_Login2.default, this.state);
       } else {
         componentToMount = _react2.default.createElement(_MessageBoard2.default, null);
@@ -99033,9 +99068,9 @@ var Message = function (_Component) {
             _react2.default.createElement(
               'strong',
               null,
-              this.props.message.messageBody,
+              isRead,
               ' ',
-              isRead
+              this.props.message.messageBody
             ),
             _react2.default.createElement('br', null),
             _react2.default.createElement(
@@ -99152,20 +99187,20 @@ var MessageForm = function (_Component) {
         _AppActions2.default.receiveErrors('Please select a message priority');
       } else {
         //console.log(ls.get('user'));
-        var user = this.props.loggedInUser; //ls.get('user');
-        //console.log(user[0].email);
-        var messageObject = {
-          messageBody: messagebody,
-          postedon: postedon,
-          priority: priority,
-          postedBy: user[0].email, //this.props.loggedInUser[0].email,
-          postedByDisplayName: user[0].displayName, //this.props.loggedInUser[0].displayName,
-          profilePic: user[0].profilePic,
-          groupId: this.props.selectedGroup[0].groupId,
-          groupName: this.props.selectedGroup[0].groupname
-          // console.log(this.props.loggedInUser);
-
-        };_AppActions2.default.addMessage(messageObject);
+        if (this.props.selectedGroup[0].groupId !== undefined) {
+          var user = this.props.loggedInUser; //ls.get('user');
+          var messageObject = {
+            messageBody: messagebody,
+            postedon: postedon,
+            priority: priority,
+            postedBy: user[0].email,
+            postedByDisplayName: user[0].displayName,
+            profilePic: user[0].profilePic,
+            groupId: this.props.selectedGroup[0].groupId,
+            groupName: this.props.selectedGroup[0].groupname
+          };
+          _AppActions2.default.addMessage(messageObject);
+        }
         this.refs.message.value = '';
         this.refs.priority.value = 'Select Message Priority ....';
         _AppActions2.default.receiveErrors('');

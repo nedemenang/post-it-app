@@ -218,7 +218,13 @@ module.exports = {
 
   getGroupMessages(userGroup) {
     // console.log(`user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
-    axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/messages`)
+    console.log('get group messages');
+    axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+  },
+
+  getQuickGroupMessages(userGroup) {
+    // console.log(`user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+    axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/quickMessages`)
     .then((response) => {
       // console.log(response);
       AppActions.receiveSuccess(response.data.message);

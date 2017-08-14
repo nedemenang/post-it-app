@@ -22,8 +22,6 @@ module.exports = (request, result, firebase) => {
             message: `Error occurred ${error.message}`,
           });
         });
-        // console.log(snapshot.key);
-        // const group = snapshot.val();
       });
     } else {
       result.status(403).send({

@@ -1,32 +1,38 @@
 import _ from 'lodash';
+import updateFlags from './updateMessageFlags';
 
 module.exports = (request, result, firebase, io) => {
   const userlogin = firebase.auth().currentUser;
     if (userlogin) {
-      const messageRef = firebase.database()
-      .ref(`users/${request.params.userId}/groups/${request.params.groupId}/messages/`);
+      const firebaseDatabase = firebase.database();
+      const requestParams = request.params;
+      const messageRef = firebaseDatabase
+      .ref(`users/${requestParams.userId}/groups/${requestParams.groupId}/messages/`);
       const ununiquegroupMessages = [];
       let groupMessages = [];
-      messageRef.on('value', (snapshot) => {
+      messageRef.orderByKey().limitToLast(8).on('value', (snapshot) => {
         snapshot.forEach((childSnapShot) => {
+          const values = childSnapShot.val();
           const message = {
             id: childSnapShot.key,
-            messageBody: childSnapShot.val().messageBody,
-            postedBy: childSnapShot.val().postedBy,
-            postedByDisplayName: childSnapShot.val().postedByDisplayName,
-            profilePic: childSnapShot.val().profilePic,
-            postedon: childSnapShot.val().postedon,
-            priority: childSnapShot.val().priority,
-            isRead: childSnapShot.val().isRead,
+            messageBody: values.messageBody,
+            postedBy: values.postedBy,
+            postedByDisplayName: values.postedByDisplayName,
+            profilePic: values.profilePic,
+            postedon: values.postedon,
+            priority: values.priority,
+            isRead: values.isRead,
           };
           ununiquegroupMessages.push(message);
+          updateFlags(firebase, requestParams.userId, requestParams.groupId, childSnapShot.key);
         });
-        // console.log(groupMessages);
          groupMessages = _.uniqBy(ununiquegroupMessages, 'id');
+         // console.log('groupMessages');
+         
          io.emit('messageAdded', {
             groupMessages,
-            groupId: request.params.groupId,
-            userId: request.params.userId
+            groupId: requestParams.groupId,
+            userId: requestParams.userId
           });
       });
     } else {

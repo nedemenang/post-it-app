@@ -15,6 +15,7 @@ import confirmPasswordReset from '../Routes/passwordResetConfirm';
 import updateUserProfile from '../Routes/updateUserProfile';
 import updateMessageFlag from '../Routes/updateMessageFlags';
 import getUsersReadMessages from '../Routes/getUsersReadMessages';
+import getGroupQuickMessages from '../Routes/getGroupMessagesQuick';
 
 const config = {
   apiKey: 'AIzaSyAUCocC9e7f3cohd-SiwJM8ZcCvL9tWO-A',
@@ -78,8 +79,13 @@ module.exports = (app, io) => {
   });
 
   app.get('/user/:userId/group/:groupId/messages', (req, res) => {
-    console.log('getting group messages from database')
+    // console.log('getting group messages from database')
     getGroupMessages(req, res, firebase, io);
+  });
+
+  app.get('/user/:userId/group/:groupId/quickMessages', (req, res) => {
+    // console.log('getting quick group messages from database')
+    getGroupQuickMessages(req, res, firebase, io);
   });
 
   app.get('/group/:groupId/messages/:messageId/usersRead', (req, res) => {

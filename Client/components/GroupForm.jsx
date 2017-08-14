@@ -35,16 +35,17 @@ submit(event){
   const groupname = this.refs.group.value.trim();
   const dateCreated = today;
 
-  const user = this.props.loggedInUser
+  const user = localStorage.getItem('user');
+  //  JSON.parse(user).id
   // console.log(this.props.loggedInUser);
 
   let group = {
     groupname : groupname,
     datecreated: dateCreated,
-    createdBy: user[0].email, 
-    createdByDisplayName: user[0].displayName,
-    createdByProfilePic: user[0].profilePic,
-    createdByUserId: user[0].id
+    createdBy: JSON.parse(user).email, 
+    createdByDisplayName: JSON.parse(user).displayName,
+    createdByProfilePic: JSON.parse(user).profilePic,
+    createdByUserId: JSON.parse(user).id
   }
   console.log('Creating Group');
   AppActions.createGroup(group); 

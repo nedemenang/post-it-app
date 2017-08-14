@@ -28,6 +28,20 @@ const muiTheme = getMuiTheme({
   },
 });
 
+function getAppState() {
+    return {
+      errors: AppStore.getErrors(),
+      success: AppStore.getSuccess(),
+      loggedInUser: AppStore.getLoggedInUser(),
+      registeredUser: AppStore.getRegisteredUser(),
+      users: AppStore.getUsersNotInGroup(),
+      groups: AppStore.getUserGroups(),
+      messages: AppStore.getGroupMessages(),
+      selectedGroup: AppStore.getSelectedGroup(),
+      userReadMessages: AppStore.getUsersReadMessage()
+    };
+}
+
 
 class GroupList extends Component {
 
@@ -41,13 +55,20 @@ class GroupList extends Component {
       this.socket.on('connect', this.connect.bind(this));
  
       this.socket.on('messageAdded', (groupsMessages) => {
+      const user = localStorage.getItem('user');
       if(this.props.selectedGroup[0] !== undefined){
-        if(this.props.selectedGroup[0].groupId === groupsMessages.groupId && this.props.loggedInUser[0].id == groupsMessages.userId){
-            // console.log(groupsMessages.groupMessages);
+        if(this.props.selectedGroup[0].groupId === groupsMessages.groupId && JSON.parse(user).id == groupsMessages.userId){
+            console.log(groupsMessages.groupMessages);
+            console.log('message added event');
             AppActions.receiveGroupMessages(groupsMessages.groupMessages);
           }
         }
       });
+      AppStore.addChangeListener(this._onChange.bind(this));
+  }
+
+  componentUnmount() {
+    AppStore.removeChangeListener(this._onChange.bind(this));
   }
 
   handleToggle(){
@@ -81,6 +102,10 @@ class GroupList extends Component {
 
     );
   }
+  _onChange() {
+     this.setState(getAppState());
+   };
+
 }
 
 export default GroupList;

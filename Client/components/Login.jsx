@@ -75,7 +75,7 @@ signup(event){
 }
 
 onSignIn(googleUser){
-  console.log('im in on sign in method');
+  // console.log('im in on sign in method');
   const id_token = googleUser.getAuthResponse().id_token
   AppActions.registerGoogleUser(id_token);
    
