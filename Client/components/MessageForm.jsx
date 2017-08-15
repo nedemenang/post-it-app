@@ -71,7 +71,7 @@ submit(event){
     return(
       <div>
          <form>
-           <input type="text" className="form-control" ref="message" placeholder="Please type a message. Press enter to submit." />
+           <input type="text" className="form-control" ref="message" placeholder="Please type a message." />
             <select ref="priority" className="form-select">
               <option value="normal">Normal</option>
               <option value="urgent">Urgent</option>
