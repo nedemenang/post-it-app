@@ -63,7 +63,7 @@ class User extends Component {
           style={style}
            />
       }   onTouchTap={this.userClicked}>
-         <strong>{this.props.user.email} - {this.props.user.username}</strong>
+         <strong>{this.props.user.username}</strong>
      </ListItem>
       </MuiThemeProvider>
     );

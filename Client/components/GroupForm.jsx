@@ -64,7 +64,7 @@ submit(event){
     return(
       <div className="bottomMargin">
          <form onSubmit={this.submit} className= "group-form">
-              <input type="text" className="form-control" ref="group" placeholder="Please type group name. Press enter to submit" />
+              <input type="text" className="form-control" ref="group" placeholder="Press enter to submit" />
               <p>{this.props.errors}</p>
          </form>
       </div>
