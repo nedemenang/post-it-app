@@ -1,16 +1,6 @@
 import nodemailer from 'nodemailer';
 import smtpTransport from 'nodemailer-smtp-transport';
 
-// var transporter = nodemailer.createTransport({
-//   host: 'smtp.gmail.com',
-//   port: 587,
-//   secure: false, // secure:true for port 465, secure:false for port 587
-//   auth: {
-//     user: 'xxxx@gmail.com',
-//     pass: 'xxxx'
-//   }
-// });
-
 module.exports = (mailObject) => {
   const transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',

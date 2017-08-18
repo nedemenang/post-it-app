@@ -27,7 +27,6 @@ const muiTheme = getMuiTheme({
   avatar: {
     borderColor: null,
   },
-  //userAgent: req.headers['user-agent'],
 });
 
 
@@ -69,14 +68,16 @@ groupClicked() {
   render(){
     let newM = '';
     if(this.props.group.newMessage === true){
-       newM = <Icon icon={bubble} />
+       newM = <Icon style={{ color: 'red' }} icon={bubble} />
     }
     return(
+      <div >
       <MuiThemeProvider muiTheme={muiTheme}>
         <ListItem onTouchTap={this.groupClicked}>
           <strong>{this.props.group.groupname} {newM}</strong>
         </ListItem>
       </MuiThemeProvider>
+      </div>
     );
   }
 }

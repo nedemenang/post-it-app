@@ -17,7 +17,7 @@ import GroupForm from './GroupForm';
 import AppAPI from '../utils/appAPI';
 import AppStore from '../stores/AppStore';
 import {AppBar, FlatButton} from 'material-ui'
-import Snackbar from 'material-ui/Snackbar';
+import Notification from './notification';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
@@ -103,7 +103,7 @@ componentUnmount() {
           <br/>
           <br/>
           <MessageList {...this.state}/>
-          
+          <Notification />
           </div>
       </div>
       </div>

@@ -11,7 +11,7 @@ module.exports = (request, result, firebase) => {
   result.status(500).send({
       message: `Error occured while sending:  ${error.message}`
     });
-    // An error happened.
+    // An error happened. 
 });
 
 
