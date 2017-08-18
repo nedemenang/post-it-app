@@ -9,7 +9,6 @@ import '../public/style.css';
 import $ from '../public/jquery.js';
 import {AppBar, FlatButton} from 'material-ui'
 import AppActions from '../actions/AppActions';
-import Snackbar from 'material-ui/Snackbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';

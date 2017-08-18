@@ -6,6 +6,7 @@ module.exports = (request, result, firebase, io) => {
   if (userlogin) {
       const requestBody = request.body;
       const firebaseDatabase = firebase.database();
+      const subscribers = [];
       const messageRef = firebaseDatabase
        .ref(`groups/${requestBody.groupId}/messages`);
       const newkey = messageRef.push({
@@ -62,7 +63,13 @@ module.exports = (request, result, firebase, io) => {
               sendEmail(emailObject);
             });
           }
+          subscribers.push(childSnapShot.key);
         });
+        io.emit('messageBroadcast', {
+            subscribers,
+            groupName : requestBody.groupName,
+            postedBy : requestBody.postedBy
+          });
       })
      .then(() => {
        result.send({

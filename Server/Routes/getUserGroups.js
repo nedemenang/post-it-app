@@ -16,7 +16,7 @@ module.exports = (request, result, firebase, io) => {
           groups.push(group);
         });
         result.send({
-          groups,
+          groups, 
         });
       });
     } else {
