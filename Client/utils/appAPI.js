@@ -5,7 +5,7 @@ import AppActions from '../actions/AppActions';
 
 module.exports = {
   registerNewUser(user) {
-    // console.log(user);
+    console.log(user);
     axios.post('/users/signup', {
       email: user.email,
       password: user.password,
@@ -26,6 +26,7 @@ module.exports = {
       AppActions.receiveErrors('');
     })
   .catch((error) => {
+    console.log(error);
     AppActions.receiveErrors(error.message);
   });
   },

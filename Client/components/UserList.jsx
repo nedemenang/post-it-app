@@ -42,7 +42,6 @@ class UserList extends Component {
     return(
       <div>
       <MuiThemeProvider muiTheme={muiTheme}>
-       <Card>
         <List>
         <Subheader><strong>Click to add user to group</strong></Subheader>
           {
@@ -51,7 +50,6 @@ class UserList extends Component {
               })
           }
           </List>
-       </Card>
           </MuiThemeProvider>
       </div>
       //button to add to group....
