@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1503925989428" clover="3.2.0">
-  <project timestamp="1503925989428" name="All files">
-    <metrics statements="4252" coveredstatements="752" conditionals="3951" coveredconditionals="252" methods="799" coveredmethods="104" elements="9002" coveredelements="1108" complexity="0" loc="4252" ncloc="4252" packages="12" files="31" classes="31">
-      <package name="post-it-app">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <file name="webpack.config.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/webpack.config.js">
-          <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="1" type="stmt"/>
-          <line num="6" count="1" type="stmt"/>
-          <line num="61" count="1" type="stmt"/>
-        </file>
-      </package>
-      <package name="post-it-app.Client.actions">
+<coverage generated="1504399296718" clover="3.2.0">
+  <project timestamp="1504399296719" name="All files">
+    <metrics statements="3959" coveredstatements="662" conditionals="3851" coveredconditionals="209" methods="689" coveredmethods="86" elements="8499" coveredelements="957" complexity="0" loc="3959" ncloc="3959" packages="7" files="8" classes="8">
+      <package name="actions">
         <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="21" coveredmethods="1"/>
         <file name="AppActions.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Client/actions/AppActions.js">
           <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="21" coveredmethods="1"/>
@@ -21,7 +11,7 @@
           <line num="4" count="1" type="stmt"/>
         </file>
       </package>
-      <package name="post-it-app.Client.components">
+      <package name="components">
         <metrics statements="4" coveredstatements="4" conditionals="27" coveredconditionals="15" methods="6" coveredmethods="6"/>
         <file name="Group.jsx" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Client/components/Group.jsx">
           <metrics statements="4" coveredstatements="4" conditionals="27" coveredconditionals="15" methods="6" coveredmethods="6"/>
@@ -31,14 +21,14 @@
           <line num="20" count="1" type="stmt"/>
         </file>
       </package>
-      <package name="post-it-app.Client.constants">
+      <package name="constants">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <file name="AppConstants.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Client/constants/AppConstants.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="1" count="1" type="stmt"/>
         </file>
       </package>
-      <package name="post-it-app.Client.dispatcher">
+      <package name="dispatcher">
         <metrics statements="5" coveredstatements="3" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
         <file name="AppDispatcher.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Client/dispatcher/AppDispatcher.js">
           <metrics statements="5" coveredstatements="3" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
@@ -49,7 +39,7 @@
           <line num="10" count="0" type="stmt"/>
         </file>
       </package>
-      <package name="post-it-app.Client.public">
+      <package name="public">
         <metrics statements="3893" coveredstatements="634" conditionals="3808" coveredconditionals="179" methods="612" coveredmethods="76"/>
         <file name="jquery.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Client/public/jquery.js">
           <metrics statements="3893" coveredstatements="634" conditionals="3808" coveredconditionals="179" methods="612" coveredmethods="76"/>
@@ -3951,7 +3941,7 @@
           <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         </file>
       </package>
-      <package name="post-it-app.Client.stores">
+      <package name="stores">
         <metrics statements="47" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="30" coveredmethods="1"/>
         <file name="AppStore.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Client/stores/AppStore.js">
           <metrics statements="47" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="30" coveredmethods="1"/>
@@ -4004,383 +3994,16 @@
           <line num="151" count="0" type="stmt"/>
         </file>
       </package>
-      <package name="post-it-app.Client.utils">
-        <metrics statements="5" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="18" coveredmethods="1"/>
+      <package name="utils">
+        <metrics statements="6" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="18" coveredmethods="1"/>
         <file name="appAPI.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Client/utils/appAPI.js">
-          <metrics statements="5" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="18" coveredmethods="1"/>
+          <metrics statements="6" coveredstatements="2" conditionals="4" coveredconditionals="4" methods="18" coveredmethods="1"/>
           <line num="4" count="2" type="cond" truecount="4" falsecount="0"/>
           <line num="6" count="1" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
           <line num="140" count="0" type="stmt"/>
           <line num="209" count="0" type="stmt"/>
           <line num="222" count="0" type="stmt"/>
-        </file>
-      </package>
-      <package name="post-it-app.Server">
-        <metrics statements="21" coveredstatements="19" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="3"/>
-        <file name="server.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/server.js">
-          <metrics statements="21" coveredstatements="19" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="3"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="13" count="12" type="cond" truecount="4" falsecount="0"/>
-          <line num="15" count="1" type="stmt"/>
-          <line num="16" count="1" type="stmt"/>
-          <line num="17" count="1" type="stmt"/>
-          <line num="18" count="1" type="cond" truecount="2" falsecount="0"/>
-          <line num="21" count="1" type="stmt"/>
-          <line num="23" count="1" type="stmt"/>
-          <line num="24" count="1" type="stmt"/>
-          <line num="25" count="1" type="stmt"/>
-          <line num="32" count="1" type="stmt"/>
-          <line num="33" count="1" type="stmt"/>
-          <line num="35" count="1" type="stmt"/>
-          <line num="40" count="1" type="stmt"/>
-          <line num="42" count="2" type="stmt"/>
-          <line num="43" count="2" type="stmt"/>
-          <line num="44" count="0" type="stmt"/>
-          <line num="52" count="1" type="stmt"/>
-          <line num="53" count="1" type="stmt"/>
-          <line num="56" count="1" type="stmt"/>
-          <line num="57" count="0" type="stmt"/>
-        </file>
-      </package>
-      <package name="post-it-app.Server.Routes">
-        <metrics statements="242" coveredstatements="40" conditionals="80" coveredconditionals="26" methods="84" coveredmethods="10"/>
-        <file name="addUserToGroup.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/addUserToGroup.js">
-          <metrics statements="15" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="17" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
-          <line num="27" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="40" count="0" type="stmt"/>
-        </file>
-        <file name="createNewGroup.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/createNewGroup.js">
-          <metrics statements="13" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="18" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="25" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-        </file>
-        <file name="getGroupMessages.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/getGroupMessages.js">
-          <metrics statements="17" coveredstatements="2" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="1"/>
-          <line num="2" count="2" type="cond" truecount="3" falsecount="1"/>
-          <line num="4" count="1" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="13" count="0" type="stmt"/>
-          <line num="14" count="0" type="stmt"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="16" count="0" type="stmt"/>
-          <line num="26" count="0" type="stmt"/>
-          <line num="29" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="38" count="0" type="stmt"/>
-        </file>
-        <file name="getGroupMessagesQuick.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/getGroupMessagesQuick.js">
-          <metrics statements="12" coveredstatements="2" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="1"/>
-          <line num="1" count="1" type="cond" truecount="3" falsecount="1"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="21" count="0" type="stmt"/>
-          <line num="23" count="0" type="stmt"/>
-          <line num="28" count="0" type="stmt"/>
-        </file>
-        <file name="getUserGroups.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/getUserGroups.js">
-          <metrics statements="11" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="17" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
-        </file>
-        <file name="getUsersInGroups.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/getUsersInGroups.js">
-          <metrics statements="12" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="13" count="0" type="stmt"/>
-          <line num="16" count="0" type="stmt"/>
-          <line num="21" count="0" type="stmt"/>
-          <line num="27" count="0" type="stmt"/>
-        </file>
-        <file name="getUsersNotInGroups.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/getUsersNotInGroups.js">
-          <metrics statements="21" coveredstatements="2" conditionals="6" coveredconditionals="3" methods="9" coveredmethods="1"/>
-          <line num="1" count="1" type="cond" truecount="3" falsecount="1"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="13" count="0" type="stmt"/>
-          <line num="14" count="0" type="stmt"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="21" count="0" type="stmt"/>
-          <line num="24" count="0" type="stmt"/>
-          <line num="25" count="0" type="stmt"/>
-          <line num="26" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="36" count="0" type="stmt"/>
-          <line num="41" count="0" type="stmt"/>
-          <line num="46" count="0" type="stmt"/>
-        </file>
-        <file name="getUsersReadMessages.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/getUsersReadMessages.js">
-          <metrics statements="12" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="16" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="25" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-        </file>
-        <file name="googleSignin.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/googleSignin.js">
-          <metrics statements="10" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="24" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-        </file>
-        <file name="passwordReset.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/passwordReset.js">
-          <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-        </file>
-        <file name="passwordResetConfirm.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/passwordResetConfirm.js">
-          <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-        </file>
-        <file name="postMessage.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/postMessage.js">
-          <metrics statements="30" coveredstatements="2" conditionals="14" coveredconditionals="3" methods="8" coveredmethods="1"/>
-          <line num="2" count="2" type="cond" truecount="3" falsecount="1"/>
-          <line num="4" count="1" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
-          <line num="23" count="0" type="stmt"/>
-          <line num="24" count="0" type="stmt"/>
-          <line num="26" count="0" type="stmt"/>
-          <line num="29" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="42" count="0" type="stmt"/>
-          <line num="44" count="0" type="stmt"/>
-          <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="46" count="0" type="stmt"/>
-          <line num="54" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="56" count="0" type="stmt"/>
-          <line num="58" count="0" type="stmt"/>
-          <line num="59" count="0" type="stmt"/>
-          <line num="66" count="0" type="stmt"/>
-          <line num="68" count="0" type="stmt"/>
-          <line num="75" count="0" type="stmt"/>
-          <line num="80" count="0" type="stmt"/>
-          <line num="85" count="0" type="stmt"/>
-        </file>
-        <file name="registerNewUser.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/registerNewUser.js">
-          <metrics statements="19" coveredstatements="12" conditionals="6" coveredconditionals="5" methods="6" coveredmethods="3"/>
-          <line num="1" count="1" type="cond" truecount="3" falsecount="1"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="3" type="stmt"/>
-          <line num="5" count="3" type="stmt"/>
-          <line num="6" count="3" type="stmt"/>
-          <line num="7" count="3" type="stmt"/>
-          <line num="8" count="3" type="stmt"/>
-          <line num="10" count="3" type="cond" truecount="2" falsecount="0"/>
-          <line num="11" count="2" type="stmt"/>
-          <line num="15" count="1" type="stmt"/>
-          <line num="17" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
-          <line num="24" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="43" count="1" type="stmt"/>
-          <line num="44" count="1" type="stmt"/>
-        </file>
-        <file name="sendMail.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/sendMail.js">
-          <metrics statements="7" coveredstatements="2" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="1"/>
-          <line num="2" count="2" type="cond" truecount="3" falsecount="1"/>
-          <line num="4" count="1" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="22" count="0" type="stmt"/>
-        </file>
-        <file name="sendSms.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/sendSms.js">
-          <metrics statements="9" coveredstatements="5" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="1"/>
-          <line num="1" count="1" type="cond" truecount="3" falsecount="1"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="1" type="stmt"/>
-          <line num="5" count="1" type="stmt"/>
-          <line num="9" count="1" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="17" count="0" type="stmt"/>
-        </file>
-        <file name="signInUser.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/signInUser.js">
-          <metrics statements="6" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="16" count="0" type="stmt"/>
-        </file>
-        <file name="signOutUser.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/signOutUser.js">
-          <metrics statements="5" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="1"/>
-          <line num="1" count="1" type="cond" truecount="3" falsecount="1"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-        </file>
-        <file name="updateMessageFlags.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/updateMessageFlags.js">
-          <metrics statements="16" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
-          <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="24" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="36" count="0" type="stmt"/>
-        </file>
-        <file name="updateUserProfile.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/Routes/updateUserProfile.js">
-          <metrics statements="19" coveredstatements="1" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="13" count="0" type="stmt"/>
-          <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="17" count="0" type="stmt"/>
-          <line num="19" count="0" type="stmt"/>
-          <line num="24" count="0" type="stmt"/>
-          <line num="26" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="40" count="0" type="stmt"/>
-        </file>
-      </package>
-      <package name="post-it-app.Server.controllers">
-        <metrics statements="22" coveredstatements="22" conditionals="12" coveredconditionals="9" methods="20" coveredmethods="4"/>
-        <file name="postItController.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/controllers/postItController.js">
-          <metrics statements="22" coveredstatements="22" conditionals="12" coveredconditionals="9" methods="20" coveredmethods="4"/>
-          <line num="19" count="17" type="cond" truecount="9" falsecount="3"/>
-          <line num="21" count="1" type="stmt"/>
-          <line num="22" count="1" type="stmt"/>
-          <line num="30" count="1" type="stmt"/>
-          <line num="32" count="1" type="stmt"/>
-          <line num="33" count="1" type="stmt"/>
-          <line num="37" count="1" type="stmt"/>
-          <line num="41" count="1" type="stmt"/>
-          <line num="45" count="1" type="stmt"/>
-          <line num="49" count="1" type="stmt"/>
-          <line num="53" count="1" type="stmt"/>
-          <line num="57" count="1" type="stmt"/>
-          <line num="61" count="1" type="stmt"/>
-          <line num="65" count="1" type="stmt"/>
-          <line num="70" count="1" type="stmt"/>
-          <line num="74" count="1" type="stmt"/>
-          <line num="78" count="1" type="stmt"/>
-          <line num="83" count="1" type="stmt"/>
-          <line num="88" count="1" type="stmt"/>
-          <line num="93" count="1" type="stmt"/>
-          <line num="97" count="1" type="stmt"/>
-          <line num="101" count="1" type="stmt"/>
-        </file>
-      </package>
-      <package name="post-it-app.Server.validators">
-        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <file name="emailValidator.js" path="/Users/andeladeveloper/Documents/post-it-app/post-it-app/Server/validators/emailValidator.js">
-          <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-          <line num="1" count="1" type="stmt"/>
-          <line num="2" count="3" type="stmt"/>
-          <line num="3" count="3" type="cond" truecount="2" falsecount="0"/>
-          <line num="4" count="1" type="stmt"/>
-          <line num="6" count="2" type="stmt"/>
         </file>
       </package>
     </metrics>

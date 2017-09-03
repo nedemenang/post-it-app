@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.91% </span>
+        <span class="strong">70.83% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>20/22</span>
+        <span class='fraction'>17/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">87.5% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>7/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">60% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/5</span>
+        <span class='fraction'>2/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.48% </span>
+        <span class="strong">69.57% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>19/21</span>
+        <span class='fraction'>16/23</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -104,7 +104,11 @@
 59
 60
 61
-62</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+62
+63
+64
+65
+66</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,37 +120,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,6 +178,7 @@ import bodyParser from 'body-parser';
 import corsPrefetch from 'cors-prefetch-middleware';
 import imagesUpload from 'images-upload-middleware';
 import http from 'http';
+import dotenv from 'dotenv';
 import sockio from 'socket.io';
 import path from 'path';
 import webpack from 'webpack';
@@ -177,24 +186,27 @@ import webpackMiddleWare from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
 &nbsp;
-import controllers from './controllers/postItController';
 &nbsp;
+import indexRoute from './Routes/index';
+&nbsp;
+dotenv.load();
 const app = express();
 const server = http.Server(app);
 const io = new sockio(server);
 const port = process.env.PORT || 3000;
 &nbsp;
-&nbsp;
-const compiler = webpack(webpackConfig);
-&nbsp;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(webpackMiddleWare(compiler, {
-  hot: true,
-  publicPath: webpackConfig.output.publicPath,
-  noInfo: true
-}));
-// app.use(webpackHotMiddleware(compiler));
+&nbsp;
+<span class="missing-if-branch" title="if path not taken" >I</span>if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(webpackConfig);<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  app.use(webpackMiddleWare(compiler, {</span>
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+  }));
+<span class="cstat-no" title="statement not covered" >  app.use(webpackHotMiddleware(compiler));</span>
+}
 &nbsp;
 app.use('/static', express.static('./server/static'));
 app.use(corsPrefetch);
@@ -204,15 +216,15 @@ app.post('/notmultiple', imagesUpload(
     'http://localhost:3000/static/files'
 ));
 &nbsp;
-io.on('connection', (socket) =&gt; {
+io.on('connection', <span class="fstat-no" title="function not covered" >(s</span>ocket) =&gt; {
   // connections.push(socket);
-  console.log('Connected');
-  socket.on('disconnect', <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >  console.log('Connected');</span>
+<span class="cstat-no" title="statement not covered" >  socket.on('disconnect', <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    console.log('Disconnected');</span>
   });
 });
 &nbsp;
-controllers(app, io);
+indexRoute(app, io);
 &nbsp;
 export { app };
 &nbsp;
@@ -232,7 +244,7 @@ export default app;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Aug 28 2017 14:13:09 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Sep 03 2017 01:12:04 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

@@ -14,8 +14,6 @@ export default {
 
   signUp(req, res, firebase) {
     const { email, password, userName, photoURL, phoneNo } = req.body;
-    console.log(email);
-
     if (!emailValidator(email)) {
       res.status(401).send({
         message: 'Please insert a valid email address'
@@ -28,6 +26,13 @@ export default {
             photoURL,
             phoneNumber: phoneNo
           }).then(() => {
+            firebase.auth().signInWithEmailAndPassword(email, password)
+            .catch((error) => {
+             //  console.log(error.message);
+              res.status(500).send({
+                message: `Error occured ${error.message}`
+              });
+            });
             const userRef = firebase.database()
              .ref('users/');
             userRef.child(user.uid).set({
@@ -35,12 +40,6 @@ export default {
               email,
               phoneNo,
               profilePic: photoURL
-            });
-            firebase.auth().signInWithEmailAndPassword(email, password)
-            .catch((error) => {
-              res.status(500).send({
-                message: `Error occured ${error.message}`
-              });
             });
             res.send({
               message: `Welcome ${user.email}. Please proceed to log in`,
