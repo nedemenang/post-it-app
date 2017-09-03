@@ -7,8 +7,7 @@
     "dev": "babel-watch server.js",
     "start": "NODE_ENV=development webpack && babel-node ./Server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
-    "build": "babel server/ -d dist",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha Server/**/__tests__/**/*.test.js --compilers js:babel-core/register --timeout 50000 --full-trace"
+    "build": "babel server/ -d dist"
   },
   "author": "Nnamso Edemenang",
   "license": "ISC",
