@@ -44,17 +44,16 @@ class MessageList extends Component {
     return(
       <div className="bottomMargin">
       <MuiThemeProvider muiTheme={muiTheme}>
-       <Card>
-       <Subheader><strong>{groupsname} Message List </strong></Subheader>
         <List>
+        <Subheader><strong>{groupsname} Message List </strong></Subheader>
           {
             this.props.messages.map((message, i) => {
                   return <Message userRead = {this.props.userReadMessages} groupId={groupId} message={message} key={i} />
               })
           }
         </List>
-       </Card>
           </MuiThemeProvider>
+          <p className="error">{this.props.errors}</p>
       </div>
     );
   }

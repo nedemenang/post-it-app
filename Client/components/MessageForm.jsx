@@ -69,16 +69,15 @@ submit(event){
   }
   render(){
     return(
-      <div>
-         <form>
-           <input type="text" className="form-control" ref="message" placeholder="Please type a message." />
-            <select ref="priority" className="form-select">
+      <div className="footer">
+         <form id="chatform">
+         <select ref="priority" className="form-select">
               <option value="normal">Normal</option>
               <option value="urgent">Urgent</option>
               <option value="critical">Critical</option>
              </select>
-             <p className="error">{this.props.errors}</p>
-              <button className="messageButton" onClick={this.submit}>Submit</button>
+           <textarea type="text" id="message" ref="message" placeholder="Please type a message." />
+              <button id="submit" onClick={this.submit}>Submit</button>
          </form>
       </div>
     );

@@ -9,6 +9,9 @@ import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 
+/**
+ * @return {JSX} password reset page
+ */
 class passwordReset extends Component {
   
 reset(event){

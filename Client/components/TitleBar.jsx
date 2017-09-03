@@ -67,7 +67,7 @@ class TitleBar extends Component {
 
   render(){
     return(
-      <div>
+      <div className="topnav">
         <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar title="Post It App" iconElementRight={< Menu />} />
             </MuiThemeProvider>

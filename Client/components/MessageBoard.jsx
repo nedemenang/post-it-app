@@ -18,6 +18,7 @@ import AppAPI from '../utils/appAPI';
 import AppStore from '../stores/AppStore';
 import {AppBar, FlatButton} from 'material-ui'
 import Notification from './notification';
+import Drawer from 'material-ui/Drawer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
@@ -92,20 +93,22 @@ componentUnmount() {
     return(
       <div>
         <TitleBar />
+        <MuiThemeProvider muiTheme={muiTheme}>
       <div className="row">
         <div className="leftColumn">
+          <Drawer containerStyle={{height: 'calc(100% - 64px)', top: 64 }}>
           <GroupList selectedGroup= {this.state.selectedGroup} groups = {this.state.groups} loggedInUser = {this.state.loggedInUser} />
           <GroupForm loggedInUser = {this.state.loggedInUser}/>
           <UserList {...this.state} />
+          </Drawer>
         </div>
         <div className="rightColumn">
           <MessageForm {...this.state} />
-          <br/>
-          <br/>
           <MessageList {...this.state}/>
           <Notification />
           </div>
       </div>
+      </MuiThemeProvider>
       </div>
     );
   }

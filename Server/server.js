@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
 import corsPrefetch from 'cors-prefetch-middleware';
@@ -9,25 +10,29 @@ import webpack from 'webpack';
 import webpackMiddleWare from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
+import indexRoute from './Routes/index';
 
-import controllers from './controllers/postItController';
+// dotenv.config();
+dotenv.load();
 
 const app = express();
 const server = http.Server(app);
 const io = new sockio(server);
 const port = process.env.PORT || 3000;
 
-
-const compiler = webpack(webpackConfig);
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(webpackMiddleWare(compiler, {
-  hot: true,
-  publicPath: webpackConfig.output.publicPath,
-  noInfo: true
-}));
-app.use(webpackHotMiddleware(compiler));
+
+
+if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(webpackConfig);
+  app.use(webpackMiddleWare(compiler, {
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+  }));
+  app.use(webpackHotMiddleware(compiler));
+}
 
 app.use('/static', express.static('./server/static'));
 app.use(corsPrefetch);
@@ -45,7 +50,9 @@ io.on('connection', (socket) => {
   });
 });
 
-controllers(app, io);
+indexRoute(app, io);
+
+export { app };
 
 server.listen(port, () => {
   console.log(`We are live on ${port}`);
@@ -55,3 +62,5 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/public/index.html'));
 });
 
+// module.exports = app;
+export default app;

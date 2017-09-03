@@ -86,7 +86,7 @@ class GroupList extends Component {
     return(
       <div className="bottomMargin">
       <MuiThemeProvider muiTheme={muiTheme}>
-       <Card>
+        <div>
         <List>
         <Subheader><strong>Group List</strong></Subheader>
           {
@@ -96,7 +96,7 @@ class GroupList extends Component {
           }
           </List>
           <button className="button" onClick={this.handleToggle}>Create New Group</button>
-       </Card>
+          </div>
           </MuiThemeProvider>
       </div>
 
