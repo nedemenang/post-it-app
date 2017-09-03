@@ -42,7 +42,7 @@ describe('SignUp Route', () => {
             .post('/users/signup')
             .type('form')
             .send({
-              email: `${Math.floor(Math.random() * 20)}@Email.com`,
+              email: `${Math.floor(Math.random() * 200)}@Email.com`,
               password: 'validPassword',
               userName: 'validUser',
               photoURL: 'http://localhost:3000/static/files/blank-profile-pic.png',
