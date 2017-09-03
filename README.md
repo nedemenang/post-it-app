@@ -1,3 +1,5 @@
+![Build](https://travis-ci.org/nedemenang/post-it-app.svg?branch=develop)
+
 # PostIt Application
 
 
