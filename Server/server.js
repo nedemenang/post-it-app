@@ -12,8 +12,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
 import indexRoute from './Routes/index';
 
-require('es6-promise').polyfill();
-
 // dotenv.config();
 dotenv.load();
 

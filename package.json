@@ -43,7 +43,6 @@
     "express": "*",
     "file-loader": "^0.11.2",
     "firebase": "^4.0.0",
-    "firebase-admin": "^5.2.1",
     "firebase-mock": "https://github.com/OsayamenOsaretin/firebase-mock/tarball/1545b207f1bffb488ad159aeb238498ad17abc25",
     "firebase-server": "^0.11.0",
     "flux": "*",
