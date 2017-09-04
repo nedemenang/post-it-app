@@ -1,4 +1,6 @@
-![Build](https://travis-ci.org/nedemenang/post-it-app.svg?branch=develop)
+[![Build Status](https://travis-ci.org/nedemenang/post-it-app.svg?branch=develop)](https://travis-ci.org/nedemenang/post-it-app)
+
+[![Coverage Status](https://coveralls.io/repos/github/nedemenang/post-it-app/badge.svg?branch=develop)](https://coveralls.io/github/nedemenang/post-it-app?branch=develop)
 
 # PostIt Application
 
