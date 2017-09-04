@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+require('es6-promise').polyfill();
 // import path from 'path';
 // import webpack from 'webpack';
 
