@@ -2,7 +2,6 @@
 // Require the dev-dependencies
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import * as admin from 'firebase-admin';
 import server from '../server';
 
 const account = require('../../postittest-45ed5-firebase-adminsdk-7fjno-42a736db9f');
