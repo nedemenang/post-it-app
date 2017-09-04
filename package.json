@@ -38,6 +38,7 @@
     "css-loader": "^0.28.4",
     "dotenv": "^4.0.0",
     "enzyme": "^2.9.1",
+    "es6-promise": "^4.1.1",
     "events": "^1.1.1",
     "express": "*",
     "file-loader": "^0.11.2",
