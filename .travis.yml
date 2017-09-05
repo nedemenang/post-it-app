@@ -1,10 +1,5 @@
 language: node_js
-	node_js: 
-	  - '6.11.2'
-	before_install: 
-	  - travis_wait npm install
-	cache: 
-	  - node_modules
-	sript:
-	  - npm run build
-	  - npm test
+node_js: 
+- '6.11.2'
+before_install: 
+- travis_wait npm install
