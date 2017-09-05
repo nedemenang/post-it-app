@@ -22,7 +22,6 @@ module.exports = (app, firebase, io) => {
   });
 
   app.post('/users/signup', (res, req) => {
-    // console.log(req.body);
     userController.signUp(res, req, firebase);
   });
 

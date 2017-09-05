@@ -18,6 +18,10 @@ export default {
       res.status(401).send({
         message: 'Please insert a valid email address'
       });
+    } else if (email === '' || password === '' || userName === '') {
+      res.status(401).send({
+        message: 'Please insert email or password'
+      });
     } else {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => {
