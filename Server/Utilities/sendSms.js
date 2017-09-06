@@ -1,7 +1,10 @@
 import Nexmo from 'nexmo';
+import * as dotenv from 'dotenv';
 
-const API_KEY = 'fa43188a';
-const API_SECRET = '6eec78df11a6d609';
+dotenv.load();
+
+const API_KEY = process.env.SMSAPIKEY;
+const API_SECRET = process.env.SMSAPISECRET;
 const nexmo = new Nexmo({
   apiKey: API_KEY,
   apiSecret: API_SECRET

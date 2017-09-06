@@ -33,6 +33,14 @@ app.use(webpackMiddleWare(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
+const compiler = webpack(webpackConfig);
+app.use(webpackMiddleWare(compiler, {
+  hot: true,
+  publicPath: webpackConfig.output.publicPath,
+  noInfo: true
+}));
+app.use(webpackHotMiddleware(compiler));
+
 
 app.use('/static', express.static('./server/static'));
 app.use(corsPrefetch);
