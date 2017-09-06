@@ -61,11 +61,9 @@ reset(event){
     
   } else if (confirmPassword !== password ){
     const parsed = QueryString.parse(location.search);
-    console.log(parsed);
     AppActions.receiveErrors('Password and confirmation passwords do not match');
   } else {
     const parsed = QueryString.parse(location.search);
-    console.log(parsed);
     let resetObject = {
       code: parsed.oobCode ,
       newPassword: password

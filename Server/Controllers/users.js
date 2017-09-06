@@ -15,11 +15,11 @@ export default {
   signUp(req, res, firebase) {
     const { email, password, userName, photoURL, phoneNo } = req.body;
     if (!emailValidator(email)) {
-      res.status(401).send({
+      res.status(400).send({
         message: 'Please insert a valid email address'
       });
     } else if (email === '' || password === '' || userName === '') {
-      res.status(401).send({
+      res.status(400).send({
         message: 'Please insert email or password'
       });
     } else {
@@ -32,7 +32,6 @@ export default {
           }).then(() => {
             firebase.auth().signInWithEmailAndPassword(email, password)
             .catch((error) => {
-             //  console.log(error.message);
               res.status(500).send({
                 message: `Error occured ${error.message}`
               });
@@ -205,7 +204,6 @@ export default {
   updateUserProfile(req, res, firebase) {
     const user = firebase.auth().currentUser;
     if (user) {
-        // console.log('registering user...');
       let { userName, photo, phone } = req.body;
       if (userName === '') {
         userName = user.displayName;
@@ -238,7 +236,7 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Only logged users update profile'
       });
     }
@@ -254,8 +252,8 @@ export default {
    * @returns {Response} response object
    */
   groupMessages(req, res, firebase, io) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const { userId, groupId } = req.params;
       const messageRef = firebase.database()
         .ref(`users/${userId}/groups/${groupId}/messages/`);
@@ -285,7 +283,7 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Please log in to see a list of your groups'
       });
     }
@@ -300,8 +298,8 @@ export default {
    * @returns {Response} response object
    */
   groupMessagesQuick(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const { userId, groupId } = req.params;
       const messageRef = firebase.database()
       .ref(`users/${userId}/groups/${groupId}/messages/`);
@@ -325,7 +323,7 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Please log in to see a list of your groups'
       });
     }
@@ -340,8 +338,8 @@ export default {
    * @returns {Response} response object
    */
   groups(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const groupRef = firebase.database()
         .ref(`users/${req.params.userId}/groups/`);
       const groups = [];
@@ -360,7 +358,7 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Please log in to see a list of your groups'
       });
     }

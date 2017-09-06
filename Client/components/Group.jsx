@@ -46,7 +46,6 @@ groupClicked() {
     }
 
     AppActions.selectGroup(this.props.group);
-    console.log('group clicked');
     AppAPI.getGroupMessages(userGroup);
     AppAPI.getQuickGroupMessages(userGroup);
     AppAPI.getUsersNotInGroups(this.props.group);

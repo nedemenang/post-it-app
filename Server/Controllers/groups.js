@@ -14,8 +14,8 @@ export default {
    * @returns {void} no returns
    */
   updateMessageFlag(firebase, userId, groupId, messageId) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const firebaseDatabase = firebase.database();
       const isReadRef = firebaseDatabase
               .ref(`groups/${groupId}/messages/${messageId}/isRead/${userId}`);
@@ -58,8 +58,8 @@ export default {
    * @returns {Response} response object
    */
   create(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const { groupName, createdBy, dateCreated, createdByUserId, createdByDisplayName } = req.body;
       const firebaseDatabase = firebase.database();
       const newKey = firebaseDatabase.ref('groups/').push({
@@ -91,7 +91,7 @@ export default {
          });
        });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Only logged users can create groups'
       });
     }
@@ -106,8 +106,8 @@ export default {
    * @returns {Response} response object
    */
   addUser(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const { userId, groupName, username, email } = req.body;
       const firebaseDatabase = firebase.database();
       const { groupId } = req.params;
@@ -136,7 +136,7 @@ export default {
          });
        });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Only logged users can add users to groups'
       });
     }
@@ -152,8 +152,8 @@ export default {
    * @returns {Response} response object
    */
   postMessage(req, res, firebase, io) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const { messageBody, groupId, postedBy, postedByDisplayName,
         postedon, priority, groupName, profilePic } = req.body;
       const firebaseDatabase = firebase.database();
@@ -216,7 +216,6 @@ export default {
           }
           subscribers.push(childSnapShot.key);
         });
-        console.log('message broadcast');
         io.emit('messageBroadcast', {
           subscribers,
           groupName,
@@ -234,7 +233,7 @@ export default {
          });
        });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Only logged users can add messages to groups'
       });
     }
@@ -249,9 +248,9 @@ export default {
    * @returns {Response} response object
    */
   userReadMessages(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
+    const userLogIn = firebase.auth().currentUser;
     const { groupId, messageId } = req.params;
-    if (userlogin) {
+    if (userLogIn) {
       const isReadRef = firebase.database()
             .ref(`groups/${groupId}/messages/${messageId}/isRead`);
       const usersRead = [];
@@ -275,7 +274,7 @@ export default {
             });
           });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Please log in to see a list of your groups'
       });
     }
@@ -290,9 +289,9 @@ export default {
    * @returns {Response} response object
    */
   usersNotInGroups(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
+    const userLogIn = firebase.auth().currentUser;
     const { groupId } = req.params;
-    if (userlogin) {
+    if (userLogIn) {
       const userRef = firebase.database()
         .ref(`groups/${groupId}/users/`);
       const allUserRef = firebase.database()
@@ -333,7 +332,7 @@ export default {
             });
           });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Please log in to see a list of your groups'
       });
     }

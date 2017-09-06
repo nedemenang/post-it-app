@@ -409,9 +409,7 @@
 364
 365
 366
-367
-368
-369</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+367</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -445,7 +443,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -618,7 +615,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -796,11 +792,11 @@ export default <span class="fstat-no" title="function not covered" ><span class=
   signUp(req, res, firebase) {
     const { email, password, userName, photoURL, phoneNo } = req.body;
     <span class="missing-if-branch" title="else path not taken" >E</span>if (!emailValidator(email)) {
-      res.status(401).send({
+      res.status(400).send({
         message: 'Please insert a valid email address'
       });
     } else <span class="cstat-no" title="statement not covered" >if (email === '' || password === '' || userName === '') {</span>
-<span class="cstat-no" title="statement not covered" >      res.status(401).send({</span>
+<span class="cstat-no" title="statement not covered" >      res.status(400).send({</span>
         message: 'Please insert email or password'
       });
     } else {
@@ -813,7 +809,6 @@ export default <span class="fstat-no" title="function not covered" ><span class=
           }).then(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >            firebase.auth().signInWithEmailAndPassword(email, password)</span>
             .catch(<span class="fstat-no" title="function not covered" >(</span>error) =&gt; {
-             //  console.log(error.message);
 <span class="cstat-no" title="statement not covered" >              res.status(500).send({</span>
                 message: `Error occured ${error.message}`
               });
@@ -986,7 +981,6 @@ export default <span class="fstat-no" title="function not covered" ><span class=
   updateUserProfile(req, res, firebase) {
     const user = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
 <span class="cstat-no" title="statement not covered" >    if (user) <span class="cstat-no" title="statement not covered" >{</span></span>
-        // console.log('registering user...');
       let { userName, photo, phone } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 <span class="cstat-no" title="statement not covered" >      if (userName === '') {</span>
 <span class="cstat-no" title="statement not covered" >        userName = user.displayName;</span>
@@ -1035,8 +1029,8 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   groupMessages(req, res, firebase, io) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) <span class="cstat-no" title="statement not covered" >{</span></span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) <span class="cstat-no" title="statement not covered" >{</span></span>
       const { userId, groupId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
       const messageRef = <span class="cstat-no" title="statement not covered" >firebase.database()</span>
         .ref(`users/${userId}/groups/${groupId}/messages/`);
@@ -1081,8 +1075,8 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   groupMessagesQuick(req, res, firebase) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) <span class="cstat-no" title="statement not covered" >{</span></span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) <span class="cstat-no" title="statement not covered" >{</span></span>
       const { userId, groupId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
       const messageRef = <span class="cstat-no" title="statement not covered" >firebase.database()</span>
       .ref(`users/${userId}/groups/${groupId}/messages/`);
@@ -1121,8 +1115,8 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   groups(req, res, firebase) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) {</span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) {</span>
       const groupRef = <span class="cstat-no" title="statement not covered" >firebase.database()</span>
         .ref(`users/${req.params.userId}/groups/`);
       const groups = <span class="cstat-no" title="statement not covered" >[];</span>
@@ -1153,7 +1147,7 @@ export default <span class="fstat-no" title="function not covered" ><span class=
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 06 2017 07:05:09 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 06 2017 12:52:27 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

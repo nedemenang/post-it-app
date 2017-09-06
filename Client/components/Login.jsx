@@ -98,7 +98,6 @@ signup(event){
  * @memberof Login
  */
 onSignIn(googleUser){
-  // console.log('im in on sign in method');
   const id_token = googleUser.getAuthResponse().id_token
   AppActions.registerGoogleUser(id_token);
    
@@ -111,7 +110,6 @@ onSignIn(googleUser){
  * @memberof Login
  */
 renderGoogleLoginButton() {
-    console.log('rendering google signin button')
     gapi.signin2.render('my-signin2', {
       'scope': 'https://www.googleapis.com/auth/plus.login',
       'width': 293,

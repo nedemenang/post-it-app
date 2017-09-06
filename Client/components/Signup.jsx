@@ -12,15 +12,12 @@ class Signup extends Component {
  * @memberof Signup
  */
 signup(event){
-  // 
   event.preventDefault();
   let user = {
     email : this.refs.email.value.trim(),
     password: this.refs.password.value.trim(),
     username: this.refs.username.value.trim()
   }
-
-  ///console.log(user);
 
   AppActions.registerUser(user); 
 }

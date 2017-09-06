@@ -74,10 +74,8 @@ class LoginMessageBoard extends Component {
     
     if (this.state.isAuthenticated == true)
     {
-      // console.log(this.state.loggedInUser[0]);
       localStorage.setItem('user',JSON.stringify(this.state.loggedInUser[0]));
       
-      // localStorage.setItem('isAuthenticated', JSON.stringify(this.state.isAuthenticated));
     }
      
     let componentToMount; 

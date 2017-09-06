@@ -25,7 +25,6 @@ const muiTheme = getMuiTheme({
   avatar: {
     borderColor: null,
   },
-  //userAgent: req.headers['user-agent'],
 });
 
 
@@ -39,7 +38,6 @@ class User extends Component {
   userClicked() {
 
    if (confirm("Are you sure you want to add this user to group?") == true) {
-     console.log(this.props.selectedGroup[0].groupId)
     if(this.props.selectedGroup[0].groupId !== undefined) {
         let userObject = {
         email : this.props.user.email,

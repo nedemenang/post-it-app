@@ -70,9 +70,7 @@ save(event){
                 multiple={false}
                 onLoadEnd={(error, response) => {
                     if (error) {
-                        console.error(error);
                     }
-                    console.log(response);
                    this.setState({
                       file: response,
                     });

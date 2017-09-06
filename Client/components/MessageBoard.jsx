@@ -74,7 +74,6 @@ getInitialState(){
 
 
   connect(){
-    //console.log(`Connected: ${this.socket.io}`);
   }
 
   /**

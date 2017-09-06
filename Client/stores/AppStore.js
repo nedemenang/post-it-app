@@ -1,142 +1,130 @@
 
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
-import AppAPI from '../utils/appAPI.js';
+import AppAPI from '../utils/appAPI';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
 
 const CHANGE_EVENT = 'change';
 
-let _usersInGroup = [];
-let _usersNotInGroup = [];
-let _userGroups = [];
-let _groupMessages = [];
-let _usersReadMessage = [];
-let _errors = '';
-let _success = '';
-const _loggedInUser = [];
-const _registeredUser = [];
-const _selectedGroup = [];
-let _isAuthenticated = false;
+let usersInGroup = [];
+let usersNotInGroup = [];
+let userGroups = [];
+let groupMessages = [];
+let usersReadMessage = [];
+let errors = '';
+let success = '';
+const loggedInUser = [];
+const registeredUser = [];
+const selectedGroup = [];
+let isAuthenticated = false;
 
 
 const AppStore = assign({}, EventEmitter.prototype, {
 
   registerNewUser(user) {
-    _registeredUser.push(user);
+    registeredUser.push(user);
   },
 
   addUserToGroup(user) {
-    _usersInGroup.push(user);
+    usersInGroup.push(user);
   },
 
   postMessage(message) {
-     // console.log(message);
-    _groupMessages.push(message);
+    groupMessages.push(message);
   },
 
   createNewGroup(group) {
-    _userGroups.push(group);
+    userGroups.push(group);
   },
 
   signinUser(user) {
-    _loggedInUser.push(user);
-    // console.log(_loggedInUser)
-    // _isAuthenticated = true;
+    loggedInUser.push(user);
   },
 
   signOutUser() {
-    console.log('signing out...');
-    _loggedInUser.pop();
+    loggedInUser.pop();
   },
 
   setIsAuthenticated(value) {
-    _isAuthenticated = value;
+    isAuthenticated = value;
   },
 
   receiveErrors(error) {
-    console.log(error);
-    _errors = error;
+    errors = error;
   },
 
   receiveSuccess(message) {
-    _success = message;
+    success = message;
   },
 
   getErrors() {
-    return _errors;
+    return errors;
   },
 
   getSelectedGroup() {
-    return _selectedGroup;
+    return selectedGroup;
   },
 
   getLoggedInUser() {
-    // this.signinUser();
-    return _loggedInUser;
+    return loggedInUser;
   },
 
   getRegisteredUser() {
-    return _registeredUser;
+    return registeredUser;
   },
 
   getIsAuthenticated() {
-    return _isAuthenticated;
+    return isAuthenticated;
   },
 
   getUserGroups() {
-    return _userGroups;
+    return userGroups;
   },
 
   getGroupMessages() {
-    return _groupMessages;
+    return groupMessages;
   },
 
   getUsersReadMessage() {
-    return _usersReadMessage;
+    return usersReadMessage;
   },
 
   getUsersInGroup() {
-    return _usersInGroup;
+    return usersInGroup;
   },
 
   getUsersNotInGroup() {
-    return _usersNotInGroup;
+    return usersNotInGroup;
   },
 
   getSuccess() {
-    return _success;
+    return success;
   },
 
   setUserGroups(groups) {
-    //_userGroups = [];
-     // console.log(groups);
-    _userGroups = groups;
+    userGroups = groups;
   },
 
   setGroupMessages(messages) {
-  //  console.log(messages);
-    _groupMessages = messages;
+    groupMessages = messages;
   },
 
   setUserReadMessages(usersRead) {
-  //  console.log(messages);
-    _usersReadMessage = usersRead;
+    usersReadMessage = usersRead;
   },
 
   setSelectedGroup(group) {
-    // console.log(_selectedGroup);
-    _selectedGroup.pop();
-    _selectedGroup.push(group);
-    // console.log(_selectedGroup);
+    selectedGroup.pop();
+    selectedGroup.push(group);
   },
 
   setUsersInGroup(users) {
-    _usersInGroup = users;
+    usersInGroup = users;
   },
 
   setUsersNotInGroup(users) {
-    _usersNotInGroup = users;
+    usersNotInGroup = users;
   },
 
   emitChange() {
@@ -157,7 +145,6 @@ AppDispatcher.register((payload) => {
 
   switch (action.actionType) {
   case AppConstants.REGISTER_USER:
-    // console.log('Registering user...');
     // save to API
     AppAPI.registerNewUser(action.user);
       // store save
@@ -168,11 +155,9 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.UPDATE_USER_PROFILE:
-    // console.log('Registering user...');
     // save to API
     AppAPI.updateUserProfile(action.user);
       // store save
-    // AppStore.registerNewUser(action.user);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);
@@ -207,7 +192,6 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.CREATE_GROUP:
-    // console.log('create user group');
     // API store
     AppAPI.createNewGroup(action.group);
 
@@ -219,7 +203,6 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.ADDUSER_GROUP:
-   // console.log('add user group');
     // API store
     AppAPI.addUserToGroup(action.user);
 
@@ -261,13 +244,11 @@ AppDispatcher.register((payload) => {
     // store save
     AppStore.signOutUser();
     AppStore.setIsAuthenticated(false);
-    // console.log(_isAuthenticated);
     // emit change
     AppStore.emit(CHANGE_EVENT);
     break;
 
   case AppConstants.RECEIVE_USER_IN_GROUP_RESULTS:
-   // console.log('logging in user...');
 
     // store save
     AppStore.setUsersInGroup(action.users);
@@ -286,7 +267,6 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_MESSAGE_RESULTS:
     // store save
-    console.log(action.messages);
     AppStore.setGroupMessages(action.messages);
 
     // emit change
@@ -295,7 +275,6 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_USER_READ_MESSAGES_RESULTS:
     // store save
-    // console.log(action.usersRead);
     AppStore.setUserReadMessages(action.usersRead);
 
     // emit change
@@ -304,7 +283,6 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_GROUP_RESULTS:
     // store save
-    // console.log(` receiving group results ${action.groups}`);
     AppStore.setUserGroups(action.groups);
     // emit change
     AppStore.emit(CHANGE_EVENT);
@@ -320,7 +298,6 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.RECEIVE_ERRORS:
     // store save
-    // console.log(action.errors);
     AppStore.receiveErrors(action.errors);
 
     // emit change
@@ -336,7 +313,6 @@ AppDispatcher.register((payload) => {
     break;
 
   case AppConstants.SELECT_GROUP:
-  // console.log(`sets selected group from appstore ${action.selectedGroupId}`);
     // store save
     AppStore.setSelectedGroup(action.selectedGroup);
 

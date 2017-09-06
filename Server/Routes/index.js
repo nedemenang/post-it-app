@@ -6,7 +6,6 @@ import groupRoutes from './groups';
 dotenv.load();
 
 let config = {};
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'test') {
   config = {
     apiKey: process.env.APIKEYTEST,

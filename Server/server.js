@@ -45,7 +45,6 @@ app.post('/notmultiple', imagesUpload(
 ));
 
 io.on('connection', (socket) => {
-  // connections.push(socket);
   console.log('Connected');
   socket.on('disconnect', () => {
     console.log('Disconnected');

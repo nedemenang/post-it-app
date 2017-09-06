@@ -32,7 +32,7 @@ describe('Sign up Route', () => {
               phoneNo: ''
             })
             .end((err, res) => {
-              res.status.should.equal(401);
+              res.status.should.equal(400);
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               done();
@@ -50,7 +50,7 @@ describe('Sign up Route', () => {
               phoneNo: ''
             })
             .end((err, res) => {
-              res.status.should.equal(401);
+              res.status.should.equal(400);
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               done();
@@ -68,7 +68,7 @@ describe('Sign up Route', () => {
               phoneNo: ''
             })
             .end((err, res) => {
-              res.status.should.equal(401);
+              res.status.should.equal(400);
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               done();

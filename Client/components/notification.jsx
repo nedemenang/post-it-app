@@ -28,7 +28,6 @@ const muiTheme = getMuiTheme({
 class notification extends Component {
 
   connect(){
-    //console.log(`Connected: ${this.socket.io}`);
   }
 
   /**
@@ -45,7 +44,6 @@ class notification extends Component {
       const user = localStorage.getItem('user');
       if(JSON.parse(user).email !== subscribers.postedBy) {
        if(_.indexOf(subscribers.subscribers , String(JSON.parse(user).id ), true) !== -1){
-         console.log('We make the party turn up!!')
             this.setState({
                 notifiedGroup: subscribers.groupName,
                 open: true,

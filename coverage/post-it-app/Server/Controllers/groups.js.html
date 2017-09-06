@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">2.78% </span>
+        <span class="strong">2.8% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/108</span>
+        <span class='fraction'>3/107</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/29</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">2.86% </span>
+        <span class="strong">2.88% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/105</span>
+        <span class='fraction'>3/104</span>
       </div>
     </div>
   </div>
@@ -383,8 +383,7 @@
 338
 339
 340
-341
-342</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+341</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -602,7 +601,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -741,8 +739,8 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {void} no returns
    */
   updateMessageFlag(firebase, userId, groupId, messageId) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) {</span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) {</span>
       const firebaseDatabase = <span class="cstat-no" title="statement not covered" >firebase.database();</span>
       const isReadRef = <span class="cstat-no" title="statement not covered" >firebaseDatabase</span>
               .ref(`groups/${groupId}/messages/${messageId}/isRead/${userId}`);
@@ -785,8 +783,8 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   create(req, res, firebase) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) <span class="cstat-no" title="statement not covered" >{</span></span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) <span class="cstat-no" title="statement not covered" >{</span></span>
       const { groupName, createdBy, dateCreated, createdByUserId, createdByDisplayName } = <span class="cstat-no" title="statement not covered" >req.body;</span>
       const firebaseDatabase = <span class="cstat-no" title="statement not covered" >firebase.database();</span>
       const newKey = <span class="cstat-no" title="statement not covered" >firebaseDatabase.ref('groups/').push({</span>
@@ -833,8 +831,8 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   addUser(req, res, firebase) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) <span class="cstat-no" title="statement not covered" >{</span></span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) <span class="cstat-no" title="statement not covered" >{</span></span>
       const { userId, groupName, username, email } = <span class="cstat-no" title="statement not covered" >req.body;</span>
       const firebaseDatabase = <span class="cstat-no" title="statement not covered" >firebase.database();</span>
       const { groupId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
@@ -879,8 +877,8 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   postMessage(req, res, firebase, io) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) <span class="cstat-no" title="statement not covered" >{</span></span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) <span class="cstat-no" title="statement not covered" >{</span></span>
       const { messageBody, groupId, postedBy, postedByDisplayName,
         postedon, priority, groupName, profilePic } = <span class="cstat-no" title="statement not covered" >req.body;</span>
       const firebaseDatabase = <span class="cstat-no" title="statement not covered" >firebase.database();</span>
@@ -943,7 +941,6 @@ export default <span class="fstat-no" title="function not covered" ><span class=
           }
 <span class="cstat-no" title="statement not covered" >          subscribers.push(childSnapShot.key);</span>
         });
-<span class="cstat-no" title="statement not covered" >        console.log('message broadcast');</span>
 <span class="cstat-no" title="statement not covered" >        io.emit('messageBroadcast', {</span>
           subscribers,
           groupName,
@@ -976,9 +973,9 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   userReadMessages(req, res, firebase) <span class="cstat-no" title="statement not covered" >{</span>
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
     const { groupId, messageId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) {</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) {</span>
       const isReadRef = <span class="cstat-no" title="statement not covered" >firebase.database()</span>
             .ref(`groups/${groupId}/messages/${messageId}/isRead`);
       const usersRead = <span class="cstat-no" title="statement not covered" >[];</span>
@@ -1017,9 +1014,9 @@ export default <span class="fstat-no" title="function not covered" ><span class=
    * @returns {Response} response object
    */
   usersNotInGroups(req, res, firebase) {
-    const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+    const userLogIn = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
     const { groupId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
-<span class="cstat-no" title="statement not covered" >    if (userlogin) {</span>
+<span class="cstat-no" title="statement not covered" >    if (userLogIn) {</span>
       const userRef = <span class="cstat-no" title="statement not covered" >firebase.database()</span>
         .ref(`groups/${groupId}/users/`);
       const allUserRef = <span class="cstat-no" title="statement not covered" >firebase.database()</span>
@@ -1072,7 +1069,7 @@ export default <span class="fstat-no" title="function not covered" ><span class=
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 06 2017 07:05:09 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 06 2017 12:52:27 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

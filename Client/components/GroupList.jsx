@@ -50,7 +50,6 @@ function getAppState() {
 class GroupList extends Component {
 
   connect(){
-    //console.log(`Connected: ${this.socket.io}`);
   }
 
   /**
@@ -67,8 +66,6 @@ class GroupList extends Component {
       const user = localStorage.getItem('user');
       if(this.props.selectedGroup[0] !== undefined){
         if(this.props.selectedGroup[0].groupId === groupsMessages.groupId && JSON.parse(user).id == groupsMessages.userId){
-            console.log(groupsMessages.groupMessages);
-            console.log('message added event');
             AppActions.receiveGroupMessages(groupsMessages.groupMessages);
           }
         }

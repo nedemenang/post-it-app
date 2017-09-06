@@ -51,7 +51,6 @@ submit(event){
       createdByProfilePic: JSON.parse(user).profilePic,
       createdByUserId: JSON.parse(user).id
     }
-    // console.log('Creating Group');
     AppActions.createGroup(group); 
     this.refs.group.value = '';
     $('.group-form').slideToggle();

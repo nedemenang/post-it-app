@@ -25,12 +25,9 @@ submit(event){
   const priority = this.refs.priority.value.trim();
   const postedon = datetime;
   
-  //console.log(this.props.selectedGroupId);
-  
   if(this.props.selectedGroup.length === 0)
   {
     AppActions.receiveErrors('Please select a group to post a message');
-    //console.log(this.props.errors);
 
   }else if(this.refs.message.value === '')
   {
@@ -40,10 +37,9 @@ submit(event){
   {
     AppActions.receiveErrors('Please select a message priority');
   }else{
-    //console.log(ls.get('user'));
     if(this.props.selectedGroup[0].groupId !== undefined)
     {
-      const user = localStorage.getItem('user');//ls.get('user');
+      const user = localStorage.getItem('user');
       let messageObject = {
         messageBody : messagebody,
         postedon: postedon,
