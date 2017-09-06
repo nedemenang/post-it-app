@@ -74,47 +74,5 @@ describe('Sign up Route', () => {
               done();
             });
   });
-
-  it('should return 200 for a valid email address', (done) => {
-    chai.request(server)
-            .post('/users/signup')
-            .type('form')
-            .send({
-              email: faker.internet.email(),
-              password: 'validPassword',
-              userName: faker.name.findName(),
-              photoURL: 'http://localhost:3000/static/files/blank-profile-pic.png',
-              phoneNo: ''
-            })
-            .end((err, res) => {
-              res.status.should.equal(200);
-              res.body.should.be.a('object');
-              res.body.should.have.property('message');
-              done();
-            });
-  });
 });
 
-describe('Sign up Route', () => {
-  const db = admin.database();
-  const email = faker.internet.email();
-  const password = 'Pass2enter';
-  db.auth().signInWithEmailAndPassword(email, password);
-
-  it('should return 200 for a just created password', (done) => {
-    chai.request(server)
-    .post('/users/signin')
-    .type('form')
-    .send({
-      email,
-      password
-    })
-    .end((err, res) => {
-      res.status.should.equal(200);
-      done();
-    });
-  });
-
-  // beforeEach(() => {
-  // });
-});
