@@ -25,16 +25,14 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const compiler = webpack(webpackConfig);
+app.use(webpackMiddleWare(compiler, {
+  hot: true,
+  publicPath: webpackConfig.output.publicPath,
+  noInfo: true
+}));
+app.use(webpackHotMiddleware(compiler));
 
-if (process.env.NODE_ENV === 'development') {
-  const compiler = webpack(webpackConfig);
-  app.use(webpackMiddleWare(compiler, {
-    hot: true,
-    publicPath: webpackConfig.output.publicPath,
-    noInfo: true
-  }));
-  app.use(webpackHotMiddleware(compiler));
-}
 
 app.use('/static', express.static('./server/static'));
 app.use(corsPrefetch);
