@@ -18,7 +18,7 @@ describe("the group item component", () => {
             id: "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
             isAuthenticated: true,
             phoneNo: null,
-            profilePic: "//localhost:3000/static/files/blank-profile-pic.png" 
+            profilePic: "//postitappnnam.herokuapp.com/static/files/blank-profile-pic.png" 
         };
 
         const groupItem = () => {

@@ -25,6 +25,13 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const compiler = webpack(webpackConfig);
+app.use(webpackMiddleWare(compiler, {
+  hot: true,
+  publicPath: webpackConfig.output.publicPath,
+  noInfo: true
+}));
+app.use(webpackHotMiddleware(compiler));
 
 const compiler = webpack(webpackConfig);
 app.use(webpackMiddleWare(compiler, {
@@ -40,7 +47,7 @@ app.use(corsPrefetch);
 
 app.post('/notmultiple', imagesUpload(
     './server/static/files',
-    'http://localhost:3000/static/files'
+    'http://postitappnnam.herokuapp.com/static/files'
 ));
 
 io.on('connection', (socket) => {

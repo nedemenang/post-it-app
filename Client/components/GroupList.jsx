@@ -59,7 +59,7 @@ class GroupList extends Component {
    */
   componentDidMount(){
 
-      this.socket = io('http://localhost:3000');
+      this.socket = io('http://postitappnnam.herokuapp.com');
       this.socket.on('connect', this.connect.bind(this));
  
       this.socket.on('messageAdded', (groupsMessages) => {

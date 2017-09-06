@@ -28,7 +28,7 @@ describe('Sign up Route', () => {
               userName: 'invalidUser',
               email: 'invalidUserEmail',
               password: 'invalidPassword',
-              photoURL: 'http://localhost:3000/static/files/blank-profile-pic.png',
+              photoURL: 'http://postitappnnam.herokuapp.com/static/files/blank-profile-pic.png',
               phoneNo: ''
             })
             .end((err, res) => {
@@ -46,7 +46,7 @@ describe('Sign up Route', () => {
               userName: '',
               email: 'invalidUserEmail',
               password: 'invalidPassword',
-              photoURL: 'http://localhost:3000/static/files/blank-profile-pic.png',
+              photoURL: 'http://postitappnnam.herokuapp.com/static/files/blank-profile-pic.png',
               phoneNo: ''
             })
             .end((err, res) => {
@@ -64,7 +64,7 @@ describe('Sign up Route', () => {
               userName: '',
               email: 'invalidUserEmail',
               password: '',
-              photoURL: 'http://localhost:3000/static/files/blank-profile-pic.png',
+              photoURL: 'http://postitappnnam.herokuapp.com/static/files/blank-profile-pic.png',
               phoneNo: ''
             })
             .end((err, res) => {

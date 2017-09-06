@@ -70,7 +70,7 @@ signup(event){
     password: this.refs.password.value.trim(),
     username: this.refs.username.value.trim(),
     phoneNo: this.refs.phoneNo.value.trim(),
-    profilePic: 'http://localhost:3000/static/files/blank-profile-pic.png'
+    profilePic: 'http://postitappnnam.herokuapp.com/static/files/blank-profile-pic.png'
   }
   
 
