@@ -1,12 +1,15 @@
 import nodemailer from 'nodemailer';
 import smtpTransport from 'nodemailer-smtp-transport';
+import * as dotenv from 'dotenv';
+
+dotenv.load();
 
 module.exports = (mailObject) => {
   const transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {
-      user: 'nnamso.edemenang@gmail.com', // my mail
-      pass: ''
+      user: process.env.EMAILUSERNAME, // my mail
+      pass: process.env.SMSAPISECRET
     }
   }));
   const mailOptions = {
