@@ -28,6 +28,10 @@ const muiTheme = getMuiTheme({
   },
 });
 
+/**
+ * 
+ * @returns {void} return void
+ */
 function getAppState() {
     return {
       errors: AppStore.getErrors(),
@@ -49,6 +53,11 @@ class GroupList extends Component {
     //console.log(`Connected: ${this.socket.io}`);
   }
 
+  /**
+   * 
+   * @return {void} return void
+   * @memberof GroupList
+   */
   componentDidMount(){
 
       this.socket = io('http://localhost:3000');
@@ -67,10 +76,20 @@ class GroupList extends Component {
       AppStore.addChangeListener(this._onChange.bind(this));
   }
 
+  /**
+   * 
+   * @return {void} return void
+   * @memberof GroupList
+   */
   componentUnmount() {
     AppStore.removeChangeListener(this._onChange.bind(this));
   }
 
+  /**
+   * 
+   * @return {void} return void
+   * @memberof GroupList
+   */
   handleToggle(){
     $('.group-form').slideToggle();
     //this.props.errors = '';
@@ -81,8 +100,13 @@ class GroupList extends Component {
    // this.groupClicked = this.groupClicked.bind(this);
     this.state= {};
   }
+  /**
+   * 
+   * Renders jsx components
+   * @returns {JSX} return group list page
+   * @memberof GroupList
+   */
   render(){
-    //console.log(this.props.groups)
     return(
       <div className="bottomMargin">
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -102,6 +126,12 @@ class GroupList extends Component {
 
     );
   }
+
+  /**
+   * 
+   * @return {return} return void
+   * @memberof GroupList
+   */
   _onChange() {
      this.setState(getAppState());
    };

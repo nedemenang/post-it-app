@@ -33,6 +33,13 @@ class MessageList extends Component {
     super(props);
     this.state= {};
   }
+
+  /**
+   * 
+   * Renders message list page
+   * @returns {JSX} returns message list page
+   * @memberof MessageList
+   */
   render(){
     let groupsname = '';
     let groupId = '';

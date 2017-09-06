@@ -31,6 +31,11 @@ const muiTheme = getMuiTheme({
 
 class User extends Component {
   
+  /**
+   * Calls the add user to group action
+   * @return {void} return void
+   * @memberof User
+   */
   userClicked() {
 
    if (confirm("Are you sure you want to add this user to group?") == true) {
@@ -48,11 +53,23 @@ class User extends Component {
   }
 }
 
+  /**
+   * Creates an instance of User.
+   * @param {object} props props object 
+   * @memberof User
+   */
   constructor(props){
     super(props);
     this.state= {};
     this.userClicked = this.userClicked.bind(this);
   }
+
+  /**
+   * 
+   * Renders the user page
+   * @returns {JSX} returns user page
+   * @memberof User
+   */
   render(){
     return(
       <MuiThemeProvider muiTheme={muiTheme}>

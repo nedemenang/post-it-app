@@ -33,11 +33,12 @@ const muiTheme = getMuiTheme({
 
 class Group extends Component {
 
+  /**
+  * @return {void} return void
+  */
 groupClicked() {
  
     const user = localStorage.getItem('user');
-    // console.log(JSON.parse(user).id);
-    // const user = this.props.loggedInUser
 
     const userGroup = {
       groupId: this.props.group.groupId,
@@ -56,15 +57,20 @@ groupClicked() {
       userId: user[0].id
     }
 
-    // AppActions.updateMessageFlags(updateObject);
-    //console.log(this.props.selectedGroup);
   }
-  
+ /**
+  * @param {object} props props object
+  * @return {void} return void
+  */
   constructor(props){
     super(props);
     this.groupClicked = this.groupClicked.bind(this);
     this.state= {};
   }
+  /**
+   * renders components
+  * @return {JSX} return group page
+  */
   render(){
     let newM = '';
     if(this.props.group.newMessage === true){

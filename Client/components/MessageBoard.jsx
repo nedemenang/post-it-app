@@ -40,6 +40,10 @@ const muiTheme = getMuiTheme({
   },
 });
 
+/**
+ * Gets initial state of the app
+ * @returns {void} returns void
+ */
 function getAppState() {
     return {
       errors: AppStore.getErrors(),
@@ -58,6 +62,12 @@ function getAppState() {
 
 class MessageBoard extends Component {
 
+/**
+ * 
+ * returns initial state of the application
+ * @returns {void} returns void
+ * @memberof MessageBoard
+ */
 getInitialState(){
       return getAppState();
   }
@@ -67,21 +77,41 @@ getInitialState(){
     //console.log(`Connected: ${this.socket.io}`);
   }
 
+  /**
+   * Sets open state to false
+   * @return {void} return void
+   * @memberof MessageBoard
+   */
   handleRequestClose() {
     this.state.open = false;
   };
 
+/**
+ * Set groups user belongs to when component mounts
+ * Adds change event listener to app store
+ * @return {void} return void
+ * @memberof MessageBoard
+ */
 componentDidMount(){
     const user = localStorage.getItem('user');
-    // console.log(JSON.parse(user).id);
     AppAPI.getUserGroups(JSON.parse(user).id);
     AppStore.addChangeListener(this._onChange.bind(this));
   }
 
+/**
+ * Removes change event listener
+ * @return {void} return void
+ * @memberof MessageBoard
+ */
 componentUnmount() {
     AppStore.removeChangeListener(this._onChange.bind(this));
   }
 
+  /**
+   * Creates an instance of MessageBoard.
+   * @param {object} props props object 
+   * @memberof MessageBoard
+   */
   constructor(props){
     super(props);
     this.handleRequestClose = this.handleRequestClose.bind(this);
@@ -89,6 +119,12 @@ componentUnmount() {
     this.state = getAppState();
   }
 
+  /**
+   * 
+   * Returns page components
+   * @returns {JSX} return message board page
+   * @memberof MessageBoard
+   */
   render(){
     return(
       <div>

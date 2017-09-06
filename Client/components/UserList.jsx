@@ -29,10 +29,23 @@ const muiTheme = getMuiTheme({
 
 class UserList extends Component {
 
+  /**
+   * Creates an instance of UserList.
+   * @param {object} props prop object
+   * @return {void} return void
+   * @memberof UserList
+   */
   constructor(props){
     super(props);
     this.state= {};
   }
+
+  /**
+   * 
+   * Renders user list page
+   * @returns {JSX} returns userlist page 
+   * @memberof UserList
+   */
   render(){
     let groupsname = '';
     if (this.props.selectedGroup.length !== 0)

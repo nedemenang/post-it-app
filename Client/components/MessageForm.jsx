@@ -62,11 +62,23 @@ submit(event){
   }
 }
 
+  /**
+   * Creates an instance of MessageForm.
+   * @param {object} props 
+   * @memberof MessageForm
+   */
   constructor(props){
     super(props);
     this.state= {};
     this.submit = this.submit.bind(this);
   }
+
+  /**
+   * 
+   * Renders message form page
+   * @returns {JSX} Returns message form page 
+   * @memberof MessageForm
+   */
   render(){
     return(
       <div className="footer">

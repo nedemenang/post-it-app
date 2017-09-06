@@ -216,6 +216,7 @@ export default {
           }
           subscribers.push(childSnapShot.key);
         });
+        console.log('message broadcast');
         io.emit('messageBroadcast', {
           subscribers,
           groupName,

@@ -8,7 +8,7 @@
     "start": "NODE_ENV=development webpack && babel-node ./Server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
     "build": "babel server/ -d dist",
-    "test": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 50000 ./Server/test/*.test.js"
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./Server/test/*.test.js"
   },
   "author": "Nnamso Edemenang",
   "license": "ISC",
@@ -41,9 +41,10 @@
     "es6-promise": "^4.1.1",
     "events": "^1.1.1",
     "express": "*",
+    "faker": "^4.1.0",
     "file-loader": "^0.11.2",
     "firebase": "^4.0.0",
-    "firebase-mock": "https://github.com/OsayamenOsaretin/firebase-mock/tarball/1545b207f1bffb488ad159aeb238498ad17abc25",
+    "firebase-admin": "^5.2.1",
     "firebase-server": "^0.11.0",
     "flux": "*",
     "http": "0.0.0",
@@ -97,7 +98,6 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.2.1",
-    "firebase-admin": "^5.2.1",
     "firebase-server": "^0.11.0",
     "jest": "^20.0.4",
     "jest-css-modules": "^1.1.0",
