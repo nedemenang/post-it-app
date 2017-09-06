@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for Server/Routes/updateMessageFlags.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">Server/Routes</a> updateMessageFlags.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.25% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.25% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/16</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">module.exports = (firebase, userId, groupId, messageId) <span class="fstat-no" title="function not covered" >=&gt;</span> {
+const userlogin = <span class="cstat-no" title="statement not covered" >firebase.auth().currentUser;</span>
+if<span class="cstat-no" title="statement not covered" > (userlogin) {</span>
+      const firebaseDatabas<span class="cstat-no" title="statement not covered" >e = firebase.databas</span>e();
+      const isReadRe<span class="cstat-no" title="statement not covered" >f = firebaseDatabase</span>
+          .ref(`groups/${groupId}/messages/${messageId}/isRead/${userId}`);
+<span class="cstat-no" title="statement not covered" >          isReadRef.once('va<span class="fstat-no" title="function not covered" >lu</span>e', (snap) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            if (snap.val() === null) {</span>
+              const user<span class="cstat-no" title="statement not covered" >Email = firebaseDatabase</span>
+              .ref(`users/${userId}`)
+              .once('v<span class="fstat-no" title="function not covered" >al</span>ue', (emailSnap) =&gt; {
+<span class="cstat-no" title="statement not covered" >                firebaseDatabase</span>
+                .ref(`groups/${groupId}/messages/${messageId}/isRead`)
+                .child(userId).set({
+                  email: emailSnap.val().email
+                });
+              });
+            }
+          });
+          const us<span class="cstat-no" title="statement not covered" >erRef = firebaseDatabase</span>
+            .ref(`users/${userId}/groups/${groupId}/messages/${messageId}`);
+<span class="cstat-no" title="statement not covered" >            userRef.once('<span class="fstat-no" title="function not covered" >va</span>lue', (checkSnap) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >              if (checkSnap.val() !== null){</span>
+<span class="cstat-no" title="statement not covered" >                userRef.update({</span>
+                    isRead: true
+                });
+              }
+            });
+&nbsp;
+        const group<span class="cstat-no" title="statement not covered" >Ref = firebaseDatabase</span>
+       .ref(`users/${userId}/groups/${groupId}/`);
+<span class="cstat-no" title="statement not covered" >        groupRef.update({</span>
+          newMessage: false
+        });
+  } else {
+<span class="cstat-no" title="statement not covered" >      result.status(403).send({</span>
+        message: 'Error occured, please log in'
+      });
+    }
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Aug 26 2017 22:58:23 GMT+0100 (WAT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

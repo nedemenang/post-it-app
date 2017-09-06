@@ -1,0 +1,273 @@
+import axios from 'axios';
+
+// const AppActions = require('../actions/AppActions');
+import AppActions from '../actions/AppActions';
+
+module.exports = {
+  registerNewUser(user) {
+    console.log(user);
+    axios.post('/users/signup', {
+      email: user.email,
+      password: user.password,
+      userName: user.username,
+      photoURL: user.profilePic,
+      phoneNo: user.phoneNo
+    }).then((response) => {
+      const authuser = {
+        id: response.data.user.uid,
+        email: user.email,
+        profilePic: response.data.user.photoURL,
+        displayName: response.data.user.displayName,
+        phoneNo: response.data.user.phoneNumber,
+        isAuthenticated: true
+      };
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveAuthenticatedUser(authuser);
+      AppActions.receiveErrors('');
+    })
+  .catch((error) => {
+    console.log(error);
+    AppActions.receiveErrors(error.message);
+  });
+  },
+
+  updateUserProfile(user) {
+    // console.log(user);
+    axios.post('/users/updateUserProfile', {
+      userName: user.username,
+      photoURL: user.profilePic,
+      phoneNo: user.phoneNo
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveErrors('');
+    })
+  .catch((error) => {
+    AppActions.receiveErrors(error.message);
+  });
+  },
+
+  signinUser(user) {
+   // console.log(user);
+    axios.post('/users/signin', {
+      email: user.email,
+      password: user.password
+    }).then((response) => {
+      // console.log(response);
+      const authuser = {
+        id: response.data.user.uid,
+        email: user.email,
+        profilePic: response.data.user.photoURL,
+        displayName: response.data.user.displayName,
+        phoneNo: response.data.user.phoneNumber,
+        isAuthenticated: true
+      };
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveAuthenticatedUser(authuser);
+      AppActions.receiveErrors('');
+      console.log(authuser);
+    })
+  .catch((error) => {
+    AppActions.receiveErrors(error.message);
+    // console.log(error);
+    // console.log(user);
+  });
+  },
+
+  resetPassword(emailAddress) {
+   // console.log(user);
+    axios.post('/users/passwordReset', {
+      emailAddress
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveErrors('');
+     // console.log(authuser);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+      // console.log(error);
+    });
+  },
+
+  confirmResetPassword(resetObject) {
+   // console.log(user);
+    axios.post('/users/confirmPasswordReset', {
+      code: resetObject.code,
+      newPassword: resetObject.newPassword
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveErrors('');
+     // console.log(authuser);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+      // console.log(error);
+    });
+  },
+
+  signinGoogleUser(idToken) {
+   // console.log(user);
+    axios.post('/users/googleSignin', {
+      idToken
+    }).then((response) => {
+      // console.log(response);
+      const authuser = {
+        id: response.data.user.uid,
+        email: response.data.user.email,
+        profilePic: response.data.user.photoURL,
+        displayName: response.data.user.displayName,
+        isAuthenticated: true
+      };
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveAuthenticatedUser(authuser);
+      AppActions.receiveErrors('');
+    })
+  .catch((error) => {
+    AppActions.receiveErrors(error.message);
+  });
+  },
+
+
+  signoutUser() {
+    axios.post('/users/signout').then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+    });
+  },
+
+  createNewGroup(group) {
+    console.log(group);
+    axios.post('/group', {
+      groupName: group.groupname,
+      dateCreated: group.datecreated,
+      createdBy: group.createdBy,
+      createdByDisplayName: group.createdByDisplayName,
+      createdByProfilePic: group.createdByProfilePic,
+      createdByUserId: group.createdByUserId
+    }).then((response) => {
+      //console.log('create group success');
+      AppActions.receiveSuccess(response.data.message);
+    })
+    .catch((error) => {
+     // console.log('create group error');
+      AppActions.receiveErrors(error.message);
+    });
+  },
+
+  addUserToGroup(user) {
+    axios.post(`/group/${user.groupId}/user`, {
+      email: user.email,
+      userId: user.userId,
+      username: user.username,
+      groupName: user.groupName
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      // console.log(response);
+    })
+  .catch((error) => {
+    AppActions.receiveErrors(error.message);
+    // console.log(error);
+  });
+    // console.log('Adding user to group....');
+  },
+
+  postMessage(message) {
+    // console.log(message);
+    axios.post(`/group/${message.groupId}/message`, {
+      groupId: message.groupId,
+      messageBody: message.messageBody,
+      priority: message.priority,
+      postedon: message.postedon,
+      postedBy: message.postedBy,
+      postedByDisplayName: message.postedByDisplayName,
+      profilePic: message.profilePic,
+      groupName: message.groupName
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+    });
+  },
+
+  updateMessageFlag(updateObject) {
+    // console.log(message);
+    axios.post('/group/updateMessageFlag', {
+      groupId: updateObject.groupId,
+      email: updateObject.email,
+      userId: updateObject.userId
+    }).then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+    })
+    .catch((error) => {
+      AppActions.receiveErrors(error.message);
+    });
+  },
+
+  getUserGroups(userId) {
+    console.log(userId);
+    axios.get(`/user/${userId}/groups`)
+   .then((response) => {
+     AppActions.receiveSuccess(response.data.message);
+     AppActions.receiveUserGroups(response.data.groups);
+   })
+   .catch((error) => {
+     AppActions.receiveErrors(error.message);
+   });
+  },
+
+  getGroupMessages(userGroup) {
+    // console.log(`user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+    console.log('get group messages');
+    axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+  },
+
+  getQuickGroupMessages(userGroup) {
+    // console.log(`user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+    axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/quickMessages`)
+    .then((response) => {
+      // console.log(response);
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveGroupMessages(response.data.groupMessages);
+    })
+   .catch((error) => {
+     AppActions.receiveErrors(error.message);
+   });
+  },
+
+  getUsersReadMessage(item) {
+    // console.log(item);
+    axios.get(`/group/${item.groupId}/messages/${item.messageId}/usersRead`)
+    .then((response) => {
+      AppActions.receiveSuccess(response.data.message);
+      AppActions.receiveUserReadMessages(response.data.usersRead);
+    })
+   .catch((error) => {
+     AppActions.receiveErrors(error.message);
+   });
+  },
+
+  getUsersInGroups(group) {
+    axios.get(`/group/${group.groupId}/users`)
+   .then((response) => {
+     AppActions.receiveSuccess(response.data.message);
+     AppActions.receiveUserInGroupResults(response.data.users);
+   })
+   .catch((error) => {
+     AppActions.receiveErrors(error.message);
+   });
+  },
+
+  getUsersNotInGroups(group) {
+    //console.log(group);
+    axios.get(`/group/${group.groupId}/notusers`)
+   .then((response) => {
+     AppActions.receiveSuccess(response.data.message);
+     AppActions.receiveUserNotInGroupResults(response.data.userNotInGroup);
+   })
+   .catch((error) => {
+     AppActions.receiveErrors(error.message);
+   });
+  }
+};
