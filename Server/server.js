@@ -41,7 +41,7 @@ app.use(corsPrefetch);
 
 app.post('/notmultiple', imagesUpload(
     './server/static/files',
-    'http://localhost:3000/static/files'
+    'http://postitappnnam.herokuapp.com/static/files'
 ));
 
 io.on('connection', (socket) => {

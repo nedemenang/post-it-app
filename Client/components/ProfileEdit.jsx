@@ -65,7 +65,7 @@ save(event){
       <input type="text" ref="username" placeholder="username"/>
       <input type="text" ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
       <ImagesUploader
-                url="http://localhost:3000/notmultiple"
+                url="http://postitappnnam.herokuapp.com/notmultiple"
                 optimisticPreviews
                 multiple={false}
                 onLoadEnd={(error, response) => {
