@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 import userRoutes from './users';
 import groupRoutes from './groups';
 
-dotenv.config();
+dotenv.load();
 
 let config = {};
 console.log(process.env.NODE_ENV);

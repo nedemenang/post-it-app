@@ -15,6 +15,12 @@ import TitleBar from './TitleBar';
 
 class ProfileEdit extends Component {
   
+/**
+ * 
+ * Call update user profile action
+ * @param {object} event event object
+ * @memberof ProfileEdit
+ */
 save(event){
   event.preventDefault();
   let user = {
@@ -29,6 +35,11 @@ save(event){
 
 
 
+  /**
+   * Creates an instance of ProfileEdit.
+   * @param {object} props props object
+   * @memberof ProfileEdit
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -37,13 +48,20 @@ save(event){
     this.save = this.save.bind(this);
     
   }
+
+  /**
+   * 
+   * Renders profile edit page
+   * @returns {JSX} profile edit page
+   * @memberof ProfileEdit
+   */
   render(){
     return(
    <div>
      <TitleBar />
      <div className="form">
     <form className="login-form">
-    <h3>Profile Edit</h3>
+    <h3 style={{ marginTop: 40}}>Profile Edit</h3>
       <input type="text" ref="username" placeholder="username"/>
       <input type="text" ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
       <ImagesUploader

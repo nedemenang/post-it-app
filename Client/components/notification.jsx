@@ -31,6 +31,11 @@ class notification extends Component {
     //console.log(`Connected: ${this.socket.io}`);
   }
 
+  /**
+   * Adds a sockect listener when component is mounted
+   * @return {void} return void
+   * @memberof notification
+   */
   componentDidMount(){
 
       this.socket = io('http://localhost:3000');
@@ -51,6 +56,11 @@ class notification extends Component {
   }
 
 
+  /**
+   * Creates an instance of notification.
+   * @param {object} props props object
+   * @memberof notification
+   */
   constructor(props){
     super(props);
 
@@ -61,6 +71,11 @@ class notification extends Component {
     this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
+  /**
+   * 
+   * Sets open and notified group state
+   * @memberof notification
+   */
   handleRequestClose(){
     this.setState({
       open: false,
@@ -68,6 +83,12 @@ class notification extends Component {
     });
   };
 
+  /**
+   * 
+   * Renders notification page
+   * @returns {JSX} Returns notification page
+   * @memberof notification
+   */
   render(){
     return(
       <div>

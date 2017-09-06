@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+// import * as dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
 import corsPrefetch from 'cors-prefetch-middleware';
@@ -12,10 +12,10 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config';
 import indexRoute from './Routes/index';
 
-require('es6-promise').polyfill();
+require('dotenv').config();
+// dotenv.load();
 
-// dotenv.config();
-dotenv.load();
+require('es6-promise').polyfill();
 
 const app = express();
 const server = http.Server(app);

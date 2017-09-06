@@ -18,6 +18,10 @@ export default {
       res.status(401).send({
         message: 'Please insert a valid email address'
       });
+    } else if (email === '' || password === '' || userName === '') {
+      res.status(401).send({
+        message: 'Please insert email or password'
+      });
     } else {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => {
@@ -63,9 +67,14 @@ export default {
    * @returns {Response} response object
    */
   passwordReset(req, res, firebase) {
-    firebase.auth().sendPasswordResetEmail(req.body.emailAddress)
+    if (req.body.emailAddress !== '') {
+      res.status(400).send({
+        message: 'Please insert password'
+      });
+    } else {
+      firebase.auth().sendPasswordResetEmail(req.body.emailAddress)
     .then(() => {
-      res.send({
+      res.status(200).send({
         message: 'Email successfully. Kindly check your inbox for reset link.'
       });
     // Email sent.
@@ -75,6 +84,7 @@ export default {
       });
       // An error happened.
     });
+    }
   },
 
   /**

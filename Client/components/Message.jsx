@@ -30,12 +30,17 @@ const muiTheme = getMuiTheme({
   avatar: {
     borderColor: null,
   },
-  //userAgent: req.headers['user-agent'],
 });
 
 
 class Message extends Component {
 
+  /**
+   * 
+   * Gets user that read a message on click
+   * @param {object} event event object
+   * @memberof Message
+   */
   messageClicked(event) {
 
     this.setState({
@@ -47,17 +52,26 @@ class Message extends Component {
       groupId: this.props.groupId,
       messageId: this.props.message.id
     }
-    //console.log(item);
     AppAPI.getUsersReadMessage(item);
-    //console.log(this.props.userRead);
   }
 
+  /**
+   * Sets the open pop up state to false
+   * @return {void} return void
+   * @memberof Message
+   */
   handleRequestClose() {
     this.setState({
       openPopUp: false,
     });
   };
 
+  /**
+   * Creates an instance of Message.
+   * @param {object} props event object
+   * @return {void} return void 
+   * @memberof Message
+   */
   constructor(props){
     super(props);
     this.messageClicked = this.messageClicked.bind(this);
@@ -66,8 +80,11 @@ class Message extends Component {
       openPopUp: false,
     };
   }
+  /**
+   * renders components
+  * @return {JSX} returns message page
+  */
   render(){
-    //console.log(this.props.message.profilePic);
     let isRead = '';
     if(this.props.message.isRead === true){
        isRead = <Icon icon={checkmark} />

@@ -13,6 +13,12 @@ import profile from '../public/images/blank-profile-pic.png';
 
 class Login extends Component {
   
+/**
+ * 
+ * Login event
+ * @param {object} event event object
+ * @memberof Login
+ */
 login(event){
   // 
   event.preventDefault();
@@ -36,6 +42,11 @@ login(event){
   }
 }
 
+/**
+ * Toggles between login and register forms
+ * @return {void} return void
+ * @memberof Login
+ */
 handleToggle(){
     $('form').slideToggle();
     AppActions.receiveErrors('');
@@ -46,6 +57,12 @@ handleToggle(){
     this.refs.loginPassword.value = '';
   };
 
+/**
+ * Sign function
+ * @return {void} return void
+ * @param {object} event event object
+ * @memberof Login
+ */
 signup(event){
   event.preventDefault();
   let user = {
@@ -74,6 +91,12 @@ signup(event){
   }
 }
 
+/**
+ * Google sigin
+ * @return {void} return void
+ * @param {object} googleUser google user object
+ * @memberof Login
+ */
 onSignIn(googleUser){
   // console.log('im in on sign in method');
   const id_token = googleUser.getAuthResponse().id_token
@@ -82,6 +105,11 @@ onSignIn(googleUser){
 }
 
 
+/**
+ * Renders google login button
+ * @return {void} return void
+ * @memberof Login
+ */
 renderGoogleLoginButton() {
     console.log('rendering google signin button')
     gapi.signin2.render('my-signin2', {
@@ -94,10 +122,20 @@ renderGoogleLoginButton() {
     })
   }
 
+  /**
+   * Adds an event listener after component mounts
+   * @return {void} return void
+   * @memberof Login
+   */
   componentDidMount() {
     window.addEventListener('google-loaded',this.renderGoogleLoginButton);
   }
 
+  /**
+   * Creates an instance of Login.
+   * @param {object} props property object
+   * @memberof Login
+   */
   constructor(props){
     super(props);
     //this.state =;
@@ -108,8 +146,14 @@ renderGoogleLoginButton() {
     this.onSignIn = this.onSignIn.bind(this);
     this.renderGoogleLoginButton = this.renderGoogleLoginButton.bind(this);
   }
+
+  /**
+   * 
+   * renders component
+   * @returns {JSX} return login page
+   * @memberof Login
+   */
   render(){
-    //console.log(this.props.errors)
     return(
       <div>
       <div className="login-image">

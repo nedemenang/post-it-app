@@ -29,9 +29,11 @@ const muiTheme = getMuiTheme({
   avatar: {
     borderColor: null,
   },
-  //userAgent: req.headers['user-agent'],
 });
 
+/**
+  * @return {objects} state objects
+  */
 function getAppState() {
     return {
       errors: AppStore.getErrors(),
@@ -43,26 +45,40 @@ function getAppState() {
 }
 
 class App extends Component {
-
+/**
+  * @return {function} getappstate function
+  */
   getInitialState(){
       return getAppState();
   }
 
+  /**
+  * @return {void} return void
+  */
   componentDidMount(){
     AppStore.addChangeListener(this._onChange.bind(this));
   }
 
+  /**
+  * @return {void} return void
+  */
 componentUnmount() {
   AppStore.removeChangeListener(this._onChange.bind(this));
 }
 
-
+/**
+ * @param {object} props props objects
+  * @return {void} return void
+  */
   constructor(props){
     super(props);
     this.state = getAppState();
 
   }
 
+  /**
+  * @return {JSX} App page
+  */
    render() {
 
       return (
@@ -91,6 +107,9 @@ componentUnmount() {
       );
    }
 
+   /**
+  * @return {void} return void
+  */
  _onChange() {
      this.setState(getAppState());
    };

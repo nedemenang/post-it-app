@@ -9,11 +9,13 @@ import $ from '../public/jquery.js';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 
-/**
- * @return {JSX} password reset page
- */
 class passwordReset extends Component {
-  
+
+/**
+ * Calls reset password action
+ * @param {object} event event object
+ * @return {void} password reset page
+ */
 reset(event){
   // 
   event.preventDefault();
@@ -30,6 +32,10 @@ reset(event){
 
     this.reset = this.reset.bind(this);
   }
+  /**
+   * Renders password reset page
+  * @return {JSX} password reset page
+  */
   render(){
     return(
   <div className="login-page">

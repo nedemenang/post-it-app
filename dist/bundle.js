@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "138b1ed03f0bae0e295a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "688d4c715850d8f8fab2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -117418,15 +117418,15 @@ var notification = function (_Component) {
 
       this.socket.on('messageBroadcast', function (subscribers) {
         var user = localStorage.getItem('user');
-        if (JSON.parse(user).email !== subscribers.postedBy) {
-          if (_lodash2.default.indexOf(subscribers.subscribers, String(JSON.parse(user).id), true) !== -1) {
-            console.log('We make the party turn up!!');
-            _this2.setState({
-              notifiedGroup: subscribers.groupName,
-              open: true
-            });
-          }
+        // if(JSON.parse(user).email !== subscribers.postedBy) {
+        if (_lodash2.default.indexOf(subscribers.subscribers, String(JSON.parse(user).id), true) !== -1) {
+          console.log('We make the party turn up!!');
+          _this2.setState({
+            notifiedGroup: subscribers.groupName,
+            open: true
+          });
         }
+        // }
       });
     }
   }]);
@@ -117462,6 +117462,7 @@ var notification = function (_Component) {
           _MuiThemeProvider2.default,
           { muiTheme: muiTheme },
           _react2.default.createElement(_Snackbar2.default, {
+            anchorOrigin: { vertical: 'top', horizontal: 'right' },
             open: this.state.open,
             message: 'Message added in group ' + this.state.notifiedGroup,
             autoHideDuration: 4000,

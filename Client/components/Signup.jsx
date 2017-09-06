@@ -4,6 +4,13 @@ import '../public/style.css';
 
 class Signup extends Component {
 
+/**
+ * 
+ * Calls register user action
+ * @param {object} event event object
+ * @return {void} return void
+ * @memberof Signup
+ */
 signup(event){
   // 
   event.preventDefault();
@@ -18,11 +25,23 @@ signup(event){
   AppActions.registerUser(user); 
 }
 
+  /**
+   * Creates an instance of Signup.
+   * @param {props} props props object
+   * @memberof Signup
+   */
   constructor(props){
     super(props);
     this.state= {};
     this.signup = this.signup.bind(this);
   }
+
+  /**
+   * 
+   * Renders signup page
+   * @returns {JSX} return signup page
+   * @memberof Signup
+   */
   render(){
     return(
 <div className="login-page">

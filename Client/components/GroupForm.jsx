@@ -12,10 +12,14 @@ import AppActions from '../actions/AppActions';
 
 class GroupForm extends Component {
 
+  /**
+   * Creates group
+   * @param {object} event event object
+  * @return {void} return void
+  */
 submit(event){
   event.preventDefault();
-  
- // console.log(dateCreated);
+
 
   let today = new Date();
   let dd = today.getDate();
@@ -36,8 +40,7 @@ submit(event){
   const dateCreated = today;
 
   const user = localStorage.getItem('user');
-  //  JSON.parse(user).id
-  // console.log(this.props.loggedInUser);
+
  if(this.refs.group.value !== '')
   {
     let group = {

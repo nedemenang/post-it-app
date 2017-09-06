@@ -45,14 +45,26 @@ const Menu = () => (
   </IconMenu>
 );
 
+/**
+ * 
+ * @return {void} return void
+ */
 function redirectToEdit() {
   location.href = '/ProfileEdit';
 }
 
+/**
+ * 
+ * @return {void} return void
+ */
 function redirectToMessages() {
   location.href = '/#';
 }
 
+/**
+ * 
+ * @return {void} return void
+ */
 function signOut()  {
   AppActions.signOutUser();
   localStorage.removeItem('user');
@@ -65,6 +77,12 @@ class TitleBar extends Component {
   }
 
 
+  /**
+   * 
+   * Renders title bar page
+   * @returns {JSX} returns title bar page
+   * @memberof TitleBar
+   */
   render(){
     return(
       <div className="topnav">
