@@ -8,7 +8,7 @@
     "start": "NODE_ENV=development webpack && babel-node ./Server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
     "build": "babel server/ -d dist",
-    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./Server/test/*.test.js && npm run coverage"
   },
   "author": "Nnamso Edemenang",
