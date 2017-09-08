@@ -6,6 +6,19 @@ module.exports = {
     "es6": true,
     "jasmine": true
   },
+  "plugins": [
+        "react",
+        "jsx-a11y",
+        "import",
+        "jsx"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+      },
   "rules": {
     "max-len":["error", 80, 2],
     "indent": ["error", 2],

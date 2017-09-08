@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -6,56 +6,62 @@ import {
 } from 'react-router-dom';
 import '../public/style.css';
 import $ from '../public/jquery.js';
-import AppActions from '../actions/AppActions';
+import { registerUser,
+  receiveErrors, login,
+  registerGoogleUser } from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 import logo from '../public/images/logo.png';
 import profile from '../public/images/blank-profile-pic.png';
 
-class Login extends Component {
-  
+
 /**
- * 
+ * @class Login
+ * @extends {Component}
+ */
+class Login extends Component {
+
+/**
  * Login event
  * @param {object} event event object
  * @memberof Login
+ * @returns {void} returns void
  */
-login(event){
-  // 
-  event.preventDefault();
-  const email = this.refs.loginEmail.value.trim();
-  const password = this.refs.loginPassword.value.trim();
-  
-  let user = {
-    email : email,
-    password: password,
-    isAuthenticated: false,
-    profilePic: ''
-  }
+  login(event) {
+  //
+    event.preventDefault();
+    const email = this.refs.loginEmail.value.trim();
+    const password = this.refs.loginPassword.value.trim();
 
-  if(this.refs.loginEmail.value === ''){
-    AppActions.receiveErrors('Please insert email');
-  }else if (this.refs.loginPassword.value === '')
-  {
-    AppActions.receiveErrors('Please insert password');
-  } else{
-    AppActions.login(user); 
+    const user = {
+      email,
+      password,
+      isAuthenticated: false,
+      profilePic: ''
+    };
+
+    if (this.refs.loginEmail.value === '') {
+      receiveErrors('Please insert email');
+    } else if (this.refs.loginPassword.value === '') {
+      receiveErrors('Please insert password');
+    } else {
+      login(user);
+    }
   }
-}
 
 /**
  * Toggles between login and register forms
  * @return {void} return void
  * @memberof Login
  */
-handleToggle(){
+  handleToggle() {
     $('form').slideToggle();
-    AppActions.receiveErrors('');
+    receiveErrors('');
     this.refs.email.value = '';
     this.refs.username.value = '';
     this.refs.password.value = '';
     this.refs.loginEmail.value = '';
     this.refs.loginPassword.value = '';
-  };
+  }
 
 /**
  * Sign function
@@ -63,33 +69,31 @@ handleToggle(){
  * @param {object} event event object
  * @memberof Login
  */
-signup(event){
-  event.preventDefault();
-  let user = {
-    email : this.refs.email.value.trim(),
-    password: this.refs.password.value.trim(),
-    username: this.refs.username.value.trim(),
-    phoneNo: this.refs.phoneNo.value.trim(),
-    profilePic: 'http://postitappnnam.herokuapp.com/static/files/blank-profile-pic.png'
-  }
-  
+  signup(event) {
+    event.preventDefault();
+    const user = {
+      email: this.refs.email.value.trim(),
+      password: this.refs.password.value.trim(),
+      username: this.refs.username.value.trim(),
+      phoneNo: this.refs.phoneNo.value.trim(),
+      profilePic: 'http://postitappnnam.herokuapp.com/static/files/blank-profile-pic.png'
+    };
 
-  if(this.refs.email.value === ''){
-    AppActions.receiveErrors('Please insert email');
-  }else if (this.refs.password.value === '')
-  {
-    AppActions.receiveErrors('Please insert password');
-  }else if (this.refs.username.value === ''){
-    AppActions.receiveErrors('Please insert username');
-  } 
-  else{
-    AppActions.registerUser(user);
-    this.refs.email.value === '';
-    this.refs.username.value === '';
-    this.refs.password.value === '';
-    this.refs.phoneNo.value === '';
+
+    if (this.refs.email.value === '') {
+      receiveErrors('Please insert email');
+    } else if (this.refs.password.value === '') {
+      receiveErrors('Please insert password');
+    } else if (this.refs.username.value === '') {
+      receiveErrors('Please insert username');
+    } else {
+      registerUser(user);
+      this.refs.email.value === '';
+      this.refs.username.value === '';
+      this.refs.password.value === '';
+      this.refs.phoneNo.value === '';
+    }
   }
-}
 
 /**
  * Google sigin
@@ -97,11 +101,10 @@ signup(event){
  * @param {object} googleUser google user object
  * @memberof Login
  */
-onSignIn(googleUser){
-  const id_token = googleUser.getAuthResponse().id_token
-  AppActions.registerGoogleUser(id_token);
-   
-}
+  onSignIn(googleUser) {
+    const idtoken = googleUser.getAuthResponse().id_token;
+    registerGoogleUser(idtoken);
+  }
 
 
 /**
@@ -109,15 +112,15 @@ onSignIn(googleUser){
  * @return {void} return void
  * @memberof Login
  */
-renderGoogleLoginButton() {
+  renderGoogleLoginButton() {
     gapi.signin2.render('my-signin2', {
-      'scope': 'https://www.googleapis.com/auth/plus.login',
-      'width': 293,
-      'height': 50,
-      'longtitle': true,
-      'theme': 'dark',
-      'onsuccess': this.onSignIn
-    })
+      scope: 'https://www.googleapis.com/auth/plus.login',
+      width: 293,
+      height: 50,
+      longtitle: true,
+      theme: 'dark',
+      onsuccess: this.onSignIn
+    });
   }
 
   /**
@@ -126,7 +129,7 @@ renderGoogleLoginButton() {
    * @memberof Login
    */
   componentDidMount() {
-    window.addEventListener('google-loaded',this.renderGoogleLoginButton);
+    window.addEventListener('google-loaded', this.renderGoogleLoginButton);
   }
 
   /**
@@ -134,9 +137,9 @@ renderGoogleLoginButton() {
    * @param {object} props property object
    * @memberof Login
    */
-  constructor(props){
+  constructor(props) {
     super(props);
-    //this.state =;
+    // this.state =;
 
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -146,19 +149,19 @@ renderGoogleLoginButton() {
   }
 
   /**
-   * 
+   *
    * renders component
    * @returns {JSX} return login page
    * @memberof Login
    */
-  render(){
-    return(
+  render() {
+    return (
       <div>
       <div className="login-image">
                <img src = {logo} />
               </div>
       <div className="login-page">
-        
+
       <div className="form">
     <form className="login-form">
     <h3>LOG IN</h3>

@@ -8,7 +8,8 @@
     "start": "NODE_ENV=development webpack && babel-node ./Server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
     "build": "babel server/ -d dist",
-    "test": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./Server/test/*.test.js"
+    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./Server/test/*.test.js && npm run coverage"
   },
   "author": "Nnamso Edemenang",
   "license": "ISC",
@@ -96,6 +97,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx": "0.0.2",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.2.1",
     "firebase-server": "^0.11.0",

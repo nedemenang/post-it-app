@@ -1,7 +1,11 @@
 
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
-import AppAPI from '../utils/appAPI';
+import { registerNewUser, updateUserProfile,
+signinGoogleUser, resetPassword, confirmResetPassword,
+signinUser, createNewGroup, addUserToGroup,
+postMessage, updateMessageFlag,
+signoutUser } from '../utils/appAPI';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
 
@@ -146,7 +150,7 @@ AppDispatcher.register((payload) => {
   switch (action.actionType) {
   case AppConstants.REGISTER_USER:
     // save to API
-    AppAPI.registerNewUser(action.user);
+    registerNewUser(action.user);
       // store save
     AppStore.registerNewUser(action.user);
 
@@ -156,7 +160,7 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.UPDATE_USER_PROFILE:
     // save to API
-    AppAPI.updateUserProfile(action.user);
+    updateUserProfile(action.user);
       // store save
 
     // emit change
@@ -165,35 +169,35 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.REGISTER_GOOGLE_USER:
 
-    AppAPI.signinGoogleUser(action.idToken);
+    signinGoogleUser(action.idToken);
 
     AppStore.emit(CHANGE_EVENT);
     break;
 
   case AppConstants.RESET_PASSWORD:
 
-    AppAPI.resetPassword(action.emailAddress);
+    resetPassword(action.emailAddress);
 
     AppStore.emit(CHANGE_EVENT);
     break;
 
   case AppConstants.CONFIRM_RESET_PASSWORD:
 
-    AppAPI.confirmResetPassword(action.resetObject);
+    confirmResetPassword(action.resetObject);
 
     AppStore.emit(CHANGE_EVENT);
     break;
 
   case AppConstants.LOGIN_USER:
 
-    AppAPI.signinUser(action.user);
+    signinUser(action.user);
 
     AppStore.emit(CHANGE_EVENT);
     break;
 
   case AppConstants.CREATE_GROUP:
     // API store
-    AppAPI.createNewGroup(action.group);
+    createNewGroup(action.group);
 
     // store save
     AppStore.createNewGroup(action.group);
@@ -204,7 +208,7 @@ AppDispatcher.register((payload) => {
 
   case AppConstants.ADDUSER_GROUP:
     // API store
-    AppAPI.addUserToGroup(action.user);
+    addUserToGroup(action.user);
 
     // store save
     AppStore.addUserToGroup(action.user);
@@ -216,7 +220,7 @@ AppDispatcher.register((payload) => {
   case AppConstants.ADD_MESSAGE:
 
     // API store
-    AppAPI.postMessage(action.message);
+    postMessage(action.message);
 
 
     // store save
@@ -229,7 +233,7 @@ AppDispatcher.register((payload) => {
   case AppConstants.UPDATE_MESSAGE_FLAGS:
 
     // API store
-    AppAPI.updateMessageFlag(action.updateObject);
+    updateMessageFlag(action.updateObject);
 
     // emit change
     AppStore.emit(CHANGE_EVENT);
@@ -238,7 +242,7 @@ AppDispatcher.register((payload) => {
   case AppConstants.SIGNOUT_USER:
 
     // API store
-    AppAPI.signoutUser();
+    signoutUser();
 
 
     // store save

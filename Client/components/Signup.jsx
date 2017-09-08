@@ -1,46 +1,50 @@
-import React, {Component} from 'react';
-import AppActions from '../actions/AppActions';
+import React, { Component } from 'react';
+import { registerUser } from '../actions/AppActions';
 import '../public/style.css';
 
+
+/**
+ * @class Signup
+ * @extends {Component}
+ */
 class Signup extends Component {
 
 /**
- * 
  * Calls register user action
  * @param {object} event event object
  * @return {void} return void
  * @memberof Signup
  */
-signup(event){
-  event.preventDefault();
-  let user = {
-    email : this.refs.email.value.trim(),
-    password: this.refs.password.value.trim(),
-    username: this.refs.username.value.trim()
-  }
+  signup(event) {
+    event.preventDefault();
+    const user = {
+      email: this.refs.email.value.trim(),
+      password: this.refs.password.value.trim(),
+      username: this.refs.username.value.trim()
+    };
 
-  AppActions.registerUser(user); 
-}
+    registerUser(user);
+  }
 
   /**
    * Creates an instance of Signup.
    * @param {props} props props object
    * @memberof Signup
    */
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state= {};
+    this.state = {};
     this.signup = this.signup.bind(this);
   }
 
   /**
-   * 
+   *
    * Renders signup page
    * @returns {JSX} return signup page
    * @memberof Signup
    */
-  render(){
-    return(
+  render() {
+    return (
 <div className="login-page">
   <div className="form">
     <form className="register-form">
