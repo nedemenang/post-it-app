@@ -17,24 +17,14 @@ class MessageForm extends Component {
    */
   submit(event) {
     event.preventDefault();
-
-    const currentdate = new Date();
-    const datetime = `${currentdate.getDate()}/${
-                 currentdate.getMonth() + 1}/${
-                 currentdate.getFullYear()} @ ${
-                 currentdate.getHours()}:${
-                 currentdate.getMinutes()}`;
-
-    const messagebody = this.refs.message.value.trim();
-    const priority = this.refs.priority.value.trim();
-    const postedon = datetime;
+    const messagebody = this.state.message;
+    const priority = this.state.priority;
+    const postedon = (new Date()).toLocaleString('en-GB');
 
     if (this.props.selectedGroup.length === 0) {
       receiveErrors('Please select a group to post a message');
-    } else if (this.refs.message.value === '') {
+    } else if (this.state.message === '') {
       receiveErrors('Please type in a message');
-    } else if (this.refs.priority.value === 'Select Message Priority ....') {
-      receiveErrors('Please select a message priority');
     } else {
       if (this.props.selectedGroup[0].groupId !== undefined) {
         const user = localStorage.getItem('user');
@@ -50,10 +40,33 @@ class MessageForm extends Component {
         };
         addMessage(messageObject);
       }
-      this.refs.message.value = '';
-      this.refs.priority.value = 'normal';
+
+      this.setState({
+        message: '',
+        priority: 'normal'
+      });
       receiveErrors('');
     }
+  }
+
+  /**
+   * Set message state when user types
+   * @param {object} event event object
+   * @memberof MessageForm
+   * @returns {void} returns void
+   */
+  handleMessageChange(event) {
+    this.setState({ message: event.target.value });
+  }
+
+
+  /**
+   * Set priority state when user selection changes
+   * @param {object} event event object
+   * @memberof MessageForm
+   */
+  handlePriorityChange(event) {
+    this.setState({ priority: event.target.value });
   }
 
   /**
@@ -63,7 +76,10 @@ class MessageForm extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      message: '',
+      priority: 'normal'
+    };
     this.submit = this.submit.bind(this);
   }
 
@@ -76,12 +92,16 @@ class MessageForm extends Component {
     return (
       <div className="footer">
          <form id="chatform">
-         <select ref="priority" className="form-select">
+         <select ref="priority" value={this.state.priority}
+         className="form-select"
+         onChange={ this.handlePriorityChange.bind(this) }>
               <option value="normal">Normal</option>
               <option value="urgent">Urgent</option>
               <option value="critical">Critical</option>
              </select>
-           <textarea type="text" id="message" ref="message"
+           <textarea type="text"
+           onChange={ this.handleMessageChange.bind(this) }
+           id="message" value={this.state.message}
            placeholder="Please type a message." />
               <button id="submit" onClick={this.submit}>Submit</button>
          </form>

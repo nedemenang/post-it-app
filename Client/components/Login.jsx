@@ -132,6 +132,15 @@ class Login extends Component {
     window.addEventListener('google-loaded', this.renderGoogleLoginButton);
   }
 
+
+  /**
+   * 
+   * @memberof Login
+   */
+  componentWillMount() {
+    window.removeEventListener('google-loaded', this.renderGoogleLoginButton);
+  }
+
   /**
    * Creates an instance of Login.
    * @param {object} props property object

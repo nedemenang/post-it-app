@@ -9,7 +9,7 @@ module.exports = (mailObject) => {
     service: 'gmail',
     auth: {
       user: process.env.EMAILUSERNAME, // my mail
-      pass: process.env.SMSAPISECRET
+      pass: process.env.EMAILPASSWORD
     }
   }));
   const mailOptions = {
@@ -17,7 +17,8 @@ module.exports = (mailObject) => {
     to: mailObject.To,
     subject: 'Message Posted',
     text: `You have a new message in ${mailObject.groupName}`,
-    html: `<b>You have a new message in ${mailObject.groupName} group. Kindly log into the application to view.</b>`
+    html: `<b>You have a new message in ${mailObject.groupName} group.
+     Kindly log into the application to view.</b>`
   };
 
   transporter.sendMail(mailOptions, (error) => {

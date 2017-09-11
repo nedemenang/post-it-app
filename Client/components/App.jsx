@@ -11,7 +11,6 @@ import PasswordResetConfirm from './PasswordResetConfirm';
 import ProfileEdit from './ProfileEdit';
 import '../public/style.css';
 
-const style = { margin: 5 };
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: green500,

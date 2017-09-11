@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
 import '../public/style.css';
-import $ from '../public/jquery.js';
+import $ from '../public/jquery';
 import { createGroup } from '../actions/AppActions';
 
 
@@ -23,24 +18,8 @@ class GroupForm extends Component {
   submit(event) {
     event.preventDefault();
 
-
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth() + 1; // January is 0!
-    const yyyy = today.getFullYear();
-
-    if (dd < 10) {
-      dd = `0${dd}`;
-    }
-
-    if (mm < 10) {
-      mm = `0${mm}`;
-    }
-
-    today = `${mm}/${dd}/${yyyy}`;
-
     const groupname = this.refs.group.value.trim();
-    const dateCreated = today;
+    const dateCreated = (new Date()).toLocaleString('en-GB');
 
     const user = localStorage.getItem('user');
 

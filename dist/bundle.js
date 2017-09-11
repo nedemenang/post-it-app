@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "935472155c6a606ebe2f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "69f8260bf28360534aaf"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2730,7 +2730,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(273)(content, options);
+var update = __webpack_require__(274)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
@@ -2760,6 +2760,23 @@ module.exports = function (it) {
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var store = __webpack_require__(197)('wks');
+var uid = __webpack_require__(148);
+var Symbol = __webpack_require__(43).Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(module) {
 
@@ -2782,11 +2799,11 @@ module.exports = function (it) {
     });
     exports.selectGroup = exports.confirmPasswordReset = exports.resetPassword = exports.receiveAuthenticatedUser = exports.receiveUserGroups = exports.receiveUserReadMessages = exports.receiveGroupMessages = exports.receiveUserNotInGroupResults = exports.receiveUserInGroupResults = exports.registerGoogleUser = exports.signOutUser = exports.updateMessageFlags = exports.addMessage = exports.addUserToGroup = exports.createGroup = exports.receiveSuccess = exports.updateUserProfile = exports.receiveErrors = exports.registerUser = exports.login = undefined;
 
-    var _AppDispatcher = __webpack_require__(280);
+    var _AppDispatcher = __webpack_require__(281);
 
     var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
 
-    var _AppConstants = __webpack_require__(279);
+    var _AppConstants = __webpack_require__(280);
 
     var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
@@ -2978,23 +2995,6 @@ module.exports = function (it) {
   }
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)(module)))
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var store = __webpack_require__(197)('wks');
-var uid = __webpack_require__(148);
-var Symbol = __webpack_require__(43).Symbol;
-var USE_SYMBOL = typeof Symbol == 'function';
-
-var $exports = module.exports = function (name) {
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-
-$exports.store = store;
-
 
 /***/ }),
 /* 43 */
@@ -3559,7 +3559,7 @@ module.exports = ReactComponentTreeHook;
 "use strict";
 
 
-var bind = __webpack_require__(278);
+var bind = __webpack_require__(279);
 var isBuffer = __webpack_require__(781);
 
 /*global toString:true*/
@@ -4142,13 +4142,13 @@ module.exports = { debugTool: debugTool };
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_2__Redirect__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(413);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_3__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(270);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_4__Router__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__StaticRouter__ = __webpack_require__(1040);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_5__StaticRouter__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Switch__ = __webpack_require__(1041);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_6__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__matchPath__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__matchPath__ = __webpack_require__(271);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_7__matchPath__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__withRouter__ = __webpack_require__(1042);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_8__withRouter__["a"]; });
@@ -17940,7 +17940,7 @@ var _assign = __webpack_require__(23);
 var ReactCurrentOwner = __webpack_require__(72);
 
 var warning = __webpack_require__(13);
-var canDefineProperty = __webpack_require__(183);
+var canDefineProperty = __webpack_require__(182);
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 var REACT_ELEMENT_TYPE = __webpack_require__(415);
@@ -20577,8 +20577,8 @@ var createFactory = ReactElement.createFactory;
 var cloneElement = ReactElement.cloneElement;
 
 if (process.env.NODE_ENV !== 'production') {
-  var lowPriorityWarning = __webpack_require__(271);
-  var canDefineProperty = __webpack_require__(183);
+  var lowPriorityWarning = __webpack_require__(272);
+  var canDefineProperty = __webpack_require__(182);
   var ReactElementValidator = __webpack_require__(416);
   var didWarnPropTypesDeprecated = false;
   createElement = ReactElementValidator.createElement;
@@ -20756,13 +20756,13 @@ module.exports = reactProdInvariant;
 
     var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-    var _appAPI = __webpack_require__(281);
+    var _appAPI = __webpack_require__(184);
 
-    var _AppDispatcher = __webpack_require__(280);
+    var _AppDispatcher = __webpack_require__(281);
 
     var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
 
-    var _AppConstants = __webpack_require__(279);
+    var _AppConstants = __webpack_require__(280);
 
     var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
@@ -22419,7 +22419,7 @@ exports.f = {}.propertyIsEnumerable;
 
 var def = __webpack_require__(74).f;
 var has = __webpack_require__(86);
-var TAG = __webpack_require__(42)('toStringTag');
+var TAG = __webpack_require__(41)('toStringTag');
 
 module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -22445,7 +22445,7 @@ __webpack_require__(509);
 var global = __webpack_require__(43);
 var hide = __webpack_require__(87);
 var Iterators = __webpack_require__(109);
-var TO_STRING_TAG = __webpack_require__(42)('toStringTag');
+var TO_STRING_TAG = __webpack_require__(41)('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
   'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -25648,65 +25648,6 @@ module.exports = setInnerHTML;
 
 /***/ }),
 /* 182 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(1025);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(1026);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(412);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(1027);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(1028);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(1029);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(1030);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(1031);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(1032);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(1033);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(1034);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(1035);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(1036);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25738,7 +25679,7 @@ module.exports = canDefineProperty;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 184 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25761,10 +25702,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(274);
+    adapter = __webpack_require__(275);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(274);
+    adapter = __webpack_require__(275);
   }
   return adapter;
 }
@@ -25836,6 +25777,280 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module) {
+
+/* REACT HOT LOADER */if (true) {
+  (function () {
+    var ReactHotAPI = __webpack_require__(24),
+        RootInstanceProvider = __webpack_require__(25),
+        ReactMount = __webpack_require__(21),
+        React = __webpack_require__(0);module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () {
+      return RootInstanceProvider.getRootInstances(ReactMount);
+    }, React);
+  })();
+}try {
+  (function () {
+
+    'use strict';
+
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.getUsersNotInGroups = exports.getUsersInGroups = exports.getUsersReadMessage = exports.getQuickGroupMessages = exports.getGroupMessages = exports.getUserGroups = exports.updateMessageFlag = exports.postMessage = exports.addUserToGroup = exports.createNewGroup = exports.signoutUser = exports.signinGoogleUser = exports.confirmResetPassword = exports.resetPassword = exports.signinUser = exports.updateUserProfile = exports.registerNewUser = undefined;
+
+    var _axios = __webpack_require__(435);
+
+    var _axios2 = _interopRequireDefault(_axios);
+
+    var _AppActions = __webpack_require__(42);
+
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : { default: obj };
+    }
+
+    var registerNewUser = exports.registerNewUser = function registerNewUser(user) {
+      _axios2.default.post('/users/signup', {
+        email: user.email,
+        password: user.password,
+        userName: user.username,
+        photoURL: user.profilePic,
+        phoneNo: user.phoneNo
+      }).then(function (response) {
+        var authuser = {
+          id: response.data.user.uid,
+          email: user.email,
+          profilePic: response.data.user.photoURL,
+          displayName: response.data.user.displayName,
+          phoneNo: response.data.user.phoneNumber,
+          isAuthenticated: true
+        };
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveAuthenticatedUser)(authuser);
+        (0, _AppActions.receiveErrors)('');
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    // const AppActions = require('../actions/AppActions');
+    var updateUserProfile = exports.updateUserProfile = function updateUserProfile(user) {
+      _axios2.default.post('/users/updateUserProfile', {
+        userName: user.username,
+        photoURL: user.profilePic,
+        phoneNo: user.phoneNo
+      }).then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveErrors)('');
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var signinUser = exports.signinUser = function signinUser(user) {
+      _axios2.default.post('/users/signin', {
+        email: user.email,
+        password: user.password
+      }).then(function (response) {
+        var authuser = {
+          id: response.data.user.uid,
+          email: user.email,
+          profilePic: response.data.user.photoURL,
+          displayName: response.data.user.displayName,
+          phoneNo: response.data.user.phoneNumber,
+          isAuthenticated: true
+        };
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveAuthenticatedUser)(authuser);
+        (0, _AppActions.receiveErrors)('');
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var resetPassword = exports.resetPassword = function resetPassword(emailAddress) {
+      _axios2.default.post('/users/passwordReset', {
+        emailAddress: emailAddress
+      }).then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveErrors)('');
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var confirmResetPassword = exports.confirmResetPassword = function confirmResetPassword(resetObject) {
+      _axios2.default.post('/users/confirmPasswordReset', {
+        code: resetObject.code,
+        newPassword: resetObject.newPassword
+      }).then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveErrors)('');
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var signinGoogleUser = exports.signinGoogleUser = function signinGoogleUser(idToken) {
+      _axios2.default.post('/users/googleSignin', {
+        idToken: idToken
+      }).then(function (response) {
+        var authuser = {
+          id: response.data.user.uid,
+          email: response.data.user.email,
+          profilePic: response.data.user.photoURL,
+          displayName: response.data.user.displayName,
+          isAuthenticated: true
+        };
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveAuthenticatedUser)(authuser);
+        (0, _AppActions.receiveErrors)('');
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var signoutUser = exports.signoutUser = function signoutUser() {
+      _axios2.default.post('/users/signout').then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var createNewGroup = exports.createNewGroup = function createNewGroup(group) {
+      _axios2.default.post('/group', {
+        groupName: group.groupname,
+        dateCreated: group.datecreated,
+        createdBy: group.createdBy,
+        createdByDisplayName: group.createdByDisplayName,
+        createdByProfilePic: group.createdByProfilePic,
+        createdByUserId: group.createdByUserId
+      }).then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var addUserToGroup = exports.addUserToGroup = function addUserToGroup(user) {
+      _axios2.default.post('/group/' + user.groupId + '/user', {
+        email: user.email,
+        userId: user.userId,
+        username: user.username,
+        groupName: user.groupName
+      }).then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var postMessage = exports.postMessage = function postMessage(message) {
+      _axios2.default.post('/group/' + message.groupId + '/message', {
+        groupId: message.groupId,
+        messageBody: message.messageBody,
+        priority: message.priority,
+        postedon: message.postedon,
+        postedBy: message.postedBy,
+        postedByDisplayName: message.postedByDisplayName,
+        profilePic: message.profilePic,
+        groupName: message.groupName
+      }).then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var updateMessageFlag = exports.updateMessageFlag = function updateMessageFlag(updateObject) {
+      _axios2.default.post('/group/updateMessageFlag', {
+        groupId: updateObject.groupId,
+        email: updateObject.email,
+        userId: updateObject.userId
+      }).then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var getUserGroups = exports.getUserGroups = function getUserGroups(userId) {
+      _axios2.default.get('/user/' + userId + '/groups').then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveUserGroups)(response.data.groups);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var getGroupMessages = exports.getGroupMessages = function getGroupMessages(userGroup) {
+      _axios2.default.get('/user/' + userGroup.userId + '/group/' + userGroup.groupId + '/messages');
+    };
+
+    var getQuickGroupMessages = exports.getQuickGroupMessages = function getQuickGroupMessages(userGroup) {
+      _axios2.default.get('/user/' + userGroup.userId + '/group/' + userGroup.groupId + '/quickMessages').then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveGroupMessages)(response.data.groupMessages);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var getUsersReadMessage = exports.getUsersReadMessage = function getUsersReadMessage(item) {
+      _axios2.default.get('/group/' + item.groupId + '/messages/' + item.messageId + '/usersRead').then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveUserReadMessages)(response.data.usersRead);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var getUsersInGroups = exports.getUsersInGroups = function getUsersInGroups(group) {
+      _axios2.default.get('/group/' + group.groupId + '/users').then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveUserInGroupResults)(response.data.users);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    var getUsersNotInGroups = exports.getUsersNotInGroups = function getUsersNotInGroups(group) {
+      _axios2.default.get('/group/' + group.groupId + '/notusers').then(function (response) {
+        (0, _AppActions.receiveSuccess)(response.data.message);
+        (0, _AppActions.receiveUserNotInGroupResults)(response.data.userNotInGroup);
+      }).catch(function (error) {
+        (0, _AppActions.receiveErrors)(error.message);
+      });
+    };
+
+    /* REACT HOT LOADER */
+  }).call(undefined);
+} finally {
+  if (true) {
+    (function () {
+      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
+        var makeExportsHot = __webpack_require__(26);if (makeExportsHot(module, __webpack_require__(0))) {
+          foundReactClasses = true;
+        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
+          module.hot.accept(function (err) {
+            if (err) {
+              console.error("Cannot apply hot update to " + "appAPI.js" + ": " + err.message);
+            }
+          });
+        }
+      }module.hot.dispose(function (data) {
+        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
+      });
+    })();
+  }
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)(module)))
 
 /***/ }),
 /* 185 */
@@ -25942,7 +26157,7 @@ exports.default = function () {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = __webpack_require__(127);
-var TAG = __webpack_require__(42)('toStringTag');
+var TAG = __webpack_require__(41)('toStringTag');
 // ES3 wrong here
 var ARG = cof(function () { return arguments; }()) == 'Arguments';
 
@@ -26162,7 +26377,7 @@ module.exports = function (name) {
 /* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.f = __webpack_require__(42);
+exports.f = __webpack_require__(41);
 
 
 /***/ }),
@@ -26170,7 +26385,7 @@ exports.f = __webpack_require__(42);
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof = __webpack_require__(189);
-var ITERATOR = __webpack_require__(42)('iterator');
+var ITERATOR = __webpack_require__(41)('iterator');
 var Iterators = __webpack_require__(109);
 module.exports = __webpack_require__(34).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR]
@@ -31869,6 +32084,65 @@ module.exports = validateDOMNesting;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(1025);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(1026);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(412);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(1027);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(1028);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(1029);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(1030);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(1031);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(1032);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(1033);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(1034);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(1035);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(1036);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 270 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(166);
@@ -31984,7 +32258,7 @@ Router.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Router);
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32059,7 +32333,7 @@ var matchPath = function matchPath(pathname) {
 /* harmony default export */ __webpack_exports__["a"] = (matchPath);
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32130,7 +32404,7 @@ module.exports = lowPriorityWarning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -32536,7 +32810,7 @@ function error() {
 
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -32895,7 +33169,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32906,7 +33180,7 @@ var settle = __webpack_require__(442);
 var buildURL = __webpack_require__(445);
 var parseHeaders = __webpack_require__(451);
 var isURLSameOrigin = __webpack_require__(449);
-var createError = __webpack_require__(277);
+var createError = __webpack_require__(278);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(444);
 
 module.exports = function xhrAdapter(config) {
@@ -33083,7 +33357,7 @@ module.exports = function xhrAdapter(config) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33109,7 +33383,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33121,7 +33395,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33146,7 +33420,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33164,7 +33438,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33231,7 +33505,7 @@ module.exports = function bind(fn, thisArg) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)(module)))
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33289,280 +33563,6 @@ module.exports = function bind(fn, thisArg) {
           module.hot.accept(function (err) {
             if (err) {
               console.error("Cannot apply hot update to " + "AppDispatcher.js" + ": " + err.message);
-            }
-          });
-        }
-      }module.hot.dispose(function (data) {
-        data.makeHot = module.makeHot;data.foundReactClasses = foundReactClasses;
-      });
-    })();
-  }
-}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)(module)))
-
-/***/ }),
-/* 281 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(module) {
-
-/* REACT HOT LOADER */if (true) {
-  (function () {
-    var ReactHotAPI = __webpack_require__(24),
-        RootInstanceProvider = __webpack_require__(25),
-        ReactMount = __webpack_require__(21),
-        React = __webpack_require__(0);module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () {
-      return RootInstanceProvider.getRootInstances(ReactMount);
-    }, React);
-  })();
-}try {
-  (function () {
-
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-    exports.getUsersNotInGroups = exports.getUsersInGroups = exports.getUsersReadMessage = exports.getQuickGroupMessages = exports.getGroupMessages = exports.getUserGroups = exports.updateMessageFlag = exports.postMessage = exports.addUserToGroup = exports.createNewGroup = exports.signoutUser = exports.signinGoogleUser = exports.confirmResetPassword = exports.resetPassword = exports.signinUser = exports.updateUserProfile = exports.registerNewUser = undefined;
-
-    var _axios = __webpack_require__(435);
-
-    var _axios2 = _interopRequireDefault(_axios);
-
-    var _AppActions = __webpack_require__(41);
-
-    function _interopRequireDefault(obj) {
-      return obj && obj.__esModule ? obj : { default: obj };
-    }
-
-    var registerNewUser = exports.registerNewUser = function registerNewUser(user) {
-      _axios2.default.post('/users/signup', {
-        email: user.email,
-        password: user.password,
-        userName: user.username,
-        photoURL: user.profilePic,
-        phoneNo: user.phoneNo
-      }).then(function (response) {
-        var authuser = {
-          id: response.data.user.uid,
-          email: user.email,
-          profilePic: response.data.user.photoURL,
-          displayName: response.data.user.displayName,
-          phoneNo: response.data.user.phoneNumber,
-          isAuthenticated: true
-        };
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveAuthenticatedUser)(authuser);
-        (0, _AppActions.receiveErrors)('');
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    // const AppActions = require('../actions/AppActions');
-    var updateUserProfile = exports.updateUserProfile = function updateUserProfile(user) {
-      _axios2.default.post('/users/updateUserProfile', {
-        userName: user.username,
-        photoURL: user.profilePic,
-        phoneNo: user.phoneNo
-      }).then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveErrors)('');
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var signinUser = exports.signinUser = function signinUser(user) {
-      _axios2.default.post('/users/signin', {
-        email: user.email,
-        password: user.password
-      }).then(function (response) {
-        var authuser = {
-          id: response.data.user.uid,
-          email: user.email,
-          profilePic: response.data.user.photoURL,
-          displayName: response.data.user.displayName,
-          phoneNo: response.data.user.phoneNumber,
-          isAuthenticated: true
-        };
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveAuthenticatedUser)(authuser);
-        (0, _AppActions.receiveErrors)('');
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var resetPassword = exports.resetPassword = function resetPassword(emailAddress) {
-      _axios2.default.post('/users/passwordReset', {
-        emailAddress: emailAddress
-      }).then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveErrors)('');
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var confirmResetPassword = exports.confirmResetPassword = function confirmResetPassword(resetObject) {
-      _axios2.default.post('/users/confirmPasswordReset', {
-        code: resetObject.code,
-        newPassword: resetObject.newPassword
-      }).then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveErrors)('');
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var signinGoogleUser = exports.signinGoogleUser = function signinGoogleUser(idToken) {
-      _axios2.default.post('/users/googleSignin', {
-        idToken: idToken
-      }).then(function (response) {
-        var authuser = {
-          id: response.data.user.uid,
-          email: response.data.user.email,
-          profilePic: response.data.user.photoURL,
-          displayName: response.data.user.displayName,
-          isAuthenticated: true
-        };
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveAuthenticatedUser)(authuser);
-        (0, _AppActions.receiveErrors)('');
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var signoutUser = exports.signoutUser = function signoutUser() {
-      _axios2.default.post('/users/signout').then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var createNewGroup = exports.createNewGroup = function createNewGroup(group) {
-      _axios2.default.post('/group', {
-        groupName: group.groupname,
-        dateCreated: group.datecreated,
-        createdBy: group.createdBy,
-        createdByDisplayName: group.createdByDisplayName,
-        createdByProfilePic: group.createdByProfilePic,
-        createdByUserId: group.createdByUserId
-      }).then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var addUserToGroup = exports.addUserToGroup = function addUserToGroup(user) {
-      _axios2.default.post('/group/' + user.groupId + '/user', {
-        email: user.email,
-        userId: user.userId,
-        username: user.username,
-        groupName: user.groupName
-      }).then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var postMessage = exports.postMessage = function postMessage(message) {
-      _axios2.default.post('/group/' + message.groupId + '/message', {
-        groupId: message.groupId,
-        messageBody: message.messageBody,
-        priority: message.priority,
-        postedon: message.postedon,
-        postedBy: message.postedBy,
-        postedByDisplayName: message.postedByDisplayName,
-        profilePic: message.profilePic,
-        groupName: message.groupName
-      }).then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var updateMessageFlag = exports.updateMessageFlag = function updateMessageFlag(updateObject) {
-      _axios2.default.post('/group/updateMessageFlag', {
-        groupId: updateObject.groupId,
-        email: updateObject.email,
-        userId: updateObject.userId
-      }).then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var getUserGroups = exports.getUserGroups = function getUserGroups(userId) {
-      _axios2.default.get('/user/' + userId + '/groups').then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveUserGroups)(response.data.groups);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var getGroupMessages = exports.getGroupMessages = function getGroupMessages(userGroup) {
-      _axios2.default.get('/user/' + userGroup.userId + '/group/' + userGroup.groupId + '/messages');
-    };
-
-    var getQuickGroupMessages = exports.getQuickGroupMessages = function getQuickGroupMessages(userGroup) {
-      _axios2.default.get('/user/' + userGroup.userId + '/group/' + userGroup.groupId + '/quickMessages').then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveGroupMessages)(response.data.groupMessages);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var getUsersReadMessage = exports.getUsersReadMessage = function getUsersReadMessage(item) {
-      _axios2.default.get('/group/' + item.groupId + '/messages/' + item.messageId + '/usersRead').then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveUserReadMessages)(response.data.usersRead);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var getUsersInGroups = exports.getUsersInGroups = function getUsersInGroups(group) {
-      _axios2.default.get('/group/' + group.groupId + '/users').then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveUserInGroupResults)(response.data.users);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    var getUsersNotInGroups = exports.getUsersNotInGroups = function getUsersNotInGroups(group) {
-      _axios2.default.get('/group/' + group.groupId + '/notusers').then(function (response) {
-        (0, _AppActions.receiveSuccess)(response.data.message);
-        (0, _AppActions.receiveUserNotInGroupResults)(response.data.userNotInGroup);
-      }).catch(function (error) {
-        (0, _AppActions.receiveErrors)(error.message);
-      });
-    };
-
-    /* REACT HOT LOADER */
-  }).call(undefined);
-} finally {
-  if (true) {
-    (function () {
-      var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false;if (module.exports && module.makeHot) {
-        var makeExportsHot = __webpack_require__(26);if (makeExportsHot(module, __webpack_require__(0))) {
-          foundReactClasses = true;
-        }var shouldAcceptModule = true && foundReactClasses;if (shouldAcceptModule) {
-          module.hot.accept(function (err) {
-            if (err) {
-              console.error("Cannot apply hot update to " + "appAPI.js" + ": " + err.message);
             }
           });
         }
@@ -33669,7 +33669,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 // check on default Array iterator
 var Iterators = __webpack_require__(109);
-var ITERATOR = __webpack_require__(42)('iterator');
+var ITERATOR = __webpack_require__(41)('iterator');
 var ArrayProto = Array.prototype;
 
 module.exports = function (it) {
@@ -33710,7 +33710,7 @@ var Iterators = __webpack_require__(109);
 var $iterCreate = __webpack_require__(493);
 var setToStringTag = __webpack_require__(147);
 var getPrototypeOf = __webpack_require__(295);
-var ITERATOR = __webpack_require__(42)('iterator');
+var ITERATOR = __webpack_require__(41)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
 var KEYS = 'keys';
@@ -33776,7 +33776,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 /* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ITERATOR = __webpack_require__(42)('iterator');
+var ITERATOR = __webpack_require__(41)('iterator');
 var SAFE_CLOSING = false;
 
 try {
@@ -33934,7 +33934,7 @@ module.exports = __webpack_require__(87);
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject = __webpack_require__(73);
 var aFunction = __webpack_require__(144);
-var SPECIES = __webpack_require__(42)('species');
+var SPECIES = __webpack_require__(41)('species');
 module.exports = function (O, D) {
   var C = anObject(O).constructor;
   var S;
@@ -44619,7 +44619,7 @@ Link.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__matchPath__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__matchPath__ = __webpack_require__(271);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44774,10 +44774,10 @@ var _prodInvariant = __webpack_require__(124),
 
 var ReactNoopUpdateQueue = __webpack_require__(417);
 
-var canDefineProperty = __webpack_require__(183);
+var canDefineProperty = __webpack_require__(182);
 var emptyObject = __webpack_require__(165);
 var invariant = __webpack_require__(12);
-var lowPriorityWarning = __webpack_require__(271);
+var lowPriorityWarning = __webpack_require__(272);
 
 /**
  * Base class helpers for the updating state of a component.
@@ -44956,10 +44956,10 @@ var ReactElement = __webpack_require__(102);
 
 var checkReactTypeSpec = __webpack_require__(1058);
 
-var canDefineProperty = __webpack_require__(183);
+var canDefineProperty = __webpack_require__(182);
 var getIteratorFn = __webpack_require__(418);
 var warning = __webpack_require__(13);
-var lowPriorityWarning = __webpack_require__(271);
+var lowPriorityWarning = __webpack_require__(272);
 
 function getDeclarationErrorAddendum() {
   if (ReactCurrentOwner.current) {
@@ -46129,7 +46129,7 @@ exports.default = wrapDisplayName;
  */
 
 var url = __webpack_require__(1073);
-var parser = __webpack_require__(272);
+var parser = __webpack_require__(273);
 var Manager = __webpack_require__(423);
 var debug = __webpack_require__(77)('socket.io-client');
 
@@ -46231,7 +46231,7 @@ exports.Socket = __webpack_require__(425);
 var eio = __webpack_require__(726);
 var Socket = __webpack_require__(425);
 var Emitter = __webpack_require__(105);
-var parser = __webpack_require__(272);
+var parser = __webpack_require__(273);
 var on = __webpack_require__(424);
 var bind = __webpack_require__(285);
 var debug = __webpack_require__(77)('socket.io-client:manager');
@@ -46837,7 +46837,7 @@ function on (obj, ev, fn) {
  * Module dependencies.
  */
 
-var parser = __webpack_require__(272);
+var parser = __webpack_require__(273);
 var Emitter = __webpack_require__(105);
 var toArray = __webpack_require__(1081);
 var on = __webpack_require__(424);
@@ -47363,7 +47363,7 @@ var _reactDom = __webpack_require__(31);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(182);
+var _reactRouterDom = __webpack_require__(269);
 
 var _App = __webpack_require__(999);
 
@@ -48028,9 +48028,9 @@ module.exports = __webpack_require__(436);
 
 
 var utils = __webpack_require__(52);
-var bind = __webpack_require__(278);
+var bind = __webpack_require__(279);
 var Axios = __webpack_require__(438);
-var defaults = __webpack_require__(184);
+var defaults = __webpack_require__(183);
 
 /**
  * Create an instance of Axios
@@ -48063,9 +48063,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(275);
+axios.Cancel = __webpack_require__(276);
 axios.CancelToken = __webpack_require__(437);
-axios.isCancel = __webpack_require__(276);
+axios.isCancel = __webpack_require__(277);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -48086,7 +48086,7 @@ module.exports.default = axios;
 "use strict";
 
 
-var Cancel = __webpack_require__(275);
+var Cancel = __webpack_require__(276);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -48150,7 +48150,7 @@ module.exports = CancelToken;
 "use strict";
 
 
-var defaults = __webpack_require__(184);
+var defaults = __webpack_require__(183);
 var utils = __webpack_require__(52);
 var InterceptorManager = __webpack_require__(439);
 var dispatchRequest = __webpack_require__(440);
@@ -48304,8 +48304,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(52);
 var transformData = __webpack_require__(443);
-var isCancel = __webpack_require__(276);
-var defaults = __webpack_require__(184);
+var isCancel = __webpack_require__(277);
+var defaults = __webpack_require__(183);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -48416,7 +48416,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var createError = __webpack_require__(277);
+var createError = __webpack_require__(278);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -50276,7 +50276,7 @@ var setToStringTag = __webpack_require__(147);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(87)(IteratorPrototype, __webpack_require__(42)('iterator'), function () { return this; });
+__webpack_require__(87)(IteratorPrototype, __webpack_require__(41)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -50581,7 +50581,7 @@ var global = __webpack_require__(43);
 var core = __webpack_require__(34);
 var dP = __webpack_require__(74);
 var DESCRIPTORS = __webpack_require__(80);
-var SPECIES = __webpack_require__(42)('species');
+var SPECIES = __webpack_require__(41)('species');
 
 module.exports = function (KEY) {
   var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
@@ -50646,7 +50646,7 @@ module.exports = __webpack_require__(34).getIterator = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof = __webpack_require__(189);
-var ITERATOR = __webpack_require__(42)('iterator');
+var ITERATOR = __webpack_require__(41)('iterator');
 var Iterators = __webpack_require__(109);
 module.exports = __webpack_require__(34).isIterable = function (it) {
   var O = Object(it);
@@ -50843,7 +50843,7 @@ var USE_NATIVE = !!function () {
   try {
     // correct subclassing with @@species support
     var promise = $Promise.resolve(1);
-    var FakePromise = (promise.constructor = {})[__webpack_require__(42)('species')] = function (exec) {
+    var FakePromise = (promise.constructor = {})[__webpack_require__(41)('species')] = function (exec) {
       exec(empty, empty);
     };
     // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
@@ -51121,7 +51121,7 @@ var $fails = __webpack_require__(107);
 var shared = __webpack_require__(197);
 var setToStringTag = __webpack_require__(147);
 var uid = __webpack_require__(148);
-var wks = __webpack_require__(42);
+var wks = __webpack_require__(41);
 var wksExt = __webpack_require__(202);
 var wksDefine = __webpack_require__(201);
 var keyOf = __webpack_require__(495);
@@ -114602,7 +114602,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(182);
+var _reactRouterDom = __webpack_require__(269);
 
 var _MuiThemeProvider = __webpack_require__(383);
 
@@ -114648,7 +114648,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var style = { margin: 5 };
 var muiTheme = (0, _getMuiTheme2.default)({
   palette: {
     primary1Color: _colors.green500,
@@ -114803,13 +114802,11 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(39);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 var _List = __webpack_require__(169);
 
-var _appAPI = __webpack_require__(281);
-
-var _appAPI2 = _interopRequireDefault(_appAPI);
+var _appAPI = __webpack_require__(184);
 
 var _reactIconsKit = __webpack_require__(411);
 
@@ -114848,9 +114845,9 @@ var Group = function (_Component) {
       };
 
       (0, _AppActions.selectGroup)(this.props.group);
-      _appAPI2.default.getGroupMessages(userGroup);
-      _appAPI2.default.getQuickGroupMessages(userGroup);
-      _appAPI2.default.getUsersNotInGroups(this.props.group);
+      (0, _appAPI.getGroupMessages)(userGroup);
+      (0, _appAPI.getQuickGroupMessages)(userGroup);
+      (0, _appAPI.getUsersNotInGroups)(this.props.group);
     }
     /**
      * @param {object} props props object
@@ -114925,15 +114922,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(182);
-
 __webpack_require__(39);
 
 var _jquery = __webpack_require__(59);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -114962,23 +114957,8 @@ var GroupForm = function (_Component) {
     value: function submit(event) {
       event.preventDefault();
 
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1; // January is 0!
-      var yyyy = today.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-
-      today = mm + '/' + dd + '/' + yyyy;
-
       var groupname = this.refs.group.value.trim();
-      var dateCreated = today;
+      var dateCreated = new Date().toLocaleString('en-GB');
 
       var user = localStorage.getItem('user');
 
@@ -115077,7 +115057,7 @@ var _socket = __webpack_require__(422);
 
 var _socket2 = _interopRequireDefault(_socket);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 var _Group = __webpack_require__(1000);
 
@@ -115279,7 +115259,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(182);
+var _reactRouterDom = __webpack_require__(269);
 
 __webpack_require__(39);
 
@@ -115287,7 +115267,7 @@ var _jquery = __webpack_require__(59);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 var _AppStore = __webpack_require__(125);
 
@@ -115761,7 +115741,7 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(39);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 var _List = __webpack_require__(169);
 
@@ -115958,7 +115938,7 @@ var _jquery = __webpack_require__(59);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _AppActions = __webpack_require__(41);
+var _appAPI = __webpack_require__(184);
 
 var _GroupList = __webpack_require__(1002);
 
@@ -116069,7 +116049,7 @@ var MessageBoard = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var user = localStorage.getItem('user');
-      (0, _AppActions.getUserGroups)(JSON.parse(user).id);
+      (0, _appAPI.getUserGroups)(JSON.parse(user).id);
       _AppStore2.default.addChangeListener(this.onChange.bind(this));
     }
 
@@ -116179,7 +116159,7 @@ var _jquery = __webpack_require__(59);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -116207,20 +116187,14 @@ var MessageForm = function (_Component) {
      */
     value: function submit(event) {
       event.preventDefault();
-
-      var currentdate = new Date();
-      var datetime = currentdate.getDate() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getFullYear() + ' @ ' + currentdate.getHours() + ':' + currentdate.getMinutes();
-
-      var messagebody = this.refs.message.value.trim();
-      var priority = this.refs.priority.value.trim();
-      var postedon = datetime;
+      var messagebody = this.state.message;
+      var priority = this.state.priority;
+      var postedon = new Date().toLocaleString('en-GB');
 
       if (this.props.selectedGroup.length === 0) {
         (0, _AppActions.receiveErrors)('Please select a group to post a message');
-      } else if (this.refs.message.value === '') {
+      } else if (this.state.message === '') {
         (0, _AppActions.receiveErrors)('Please type in a message');
-      } else if (this.refs.priority.value === 'Select Message Priority ....') {
-        (0, _AppActions.receiveErrors)('Please select a message priority');
       } else {
         if (this.props.selectedGroup[0].groupId !== undefined) {
           var user = localStorage.getItem('user');
@@ -116236,10 +116210,38 @@ var MessageForm = function (_Component) {
           };
           (0, _AppActions.addMessage)(messageObject);
         }
-        this.refs.message.value = '';
-        this.refs.priority.value = 'normal';
+
+        this.setState({
+          message: '',
+          priority: 'normal'
+        });
         (0, _AppActions.receiveErrors)('');
       }
+    }
+
+    /**
+     * Set message state when user types
+     * @param {object} event event object
+     * @memberof MessageForm
+     * @returns {void} returns void
+     */
+
+  }, {
+    key: 'handleMessageChange',
+    value: function handleMessageChange(event) {
+      this.setState({ message: event.target.value });
+    }
+
+    /**
+     * Set priority state when user selection changes
+     * @param {object} event event object
+     * @memberof MessageForm
+     */
+
+  }, {
+    key: 'handlePriorityChange',
+    value: function handlePriorityChange(event) {
+      this.setState({ priority: event.target.value });
     }
 
     /**
@@ -116255,7 +116257,10 @@ var MessageForm = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (MessageForm.__proto__ || Object.getPrototypeOf(MessageForm)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      message: '',
+      priority: 'normal'
+    };
     _this.submit = _this.submit.bind(_this);
     return _this;
   }
@@ -116278,7 +116283,9 @@ var MessageForm = function (_Component) {
           { id: 'chatform' },
           _react2.default.createElement(
             'select',
-            { ref: 'priority', className: 'form-select' },
+            { ref: 'priority', value: this.state.priority,
+              className: 'form-select',
+              onChange: this.handlePriorityChange.bind(this) },
             _react2.default.createElement(
               'option',
               { value: 'normal' },
@@ -116295,7 +116302,9 @@ var MessageForm = function (_Component) {
               'Critical'
             )
           ),
-          _react2.default.createElement('textarea', { type: 'text', id: 'message', ref: 'message',
+          _react2.default.createElement('textarea', { type: 'text',
+            onChange: this.handleMessageChange.bind(this),
+            id: 'message', value: this.state.message,
             placeholder: 'Please type a message.' }),
           _react2.default.createElement(
             'button',
@@ -116455,7 +116464,7 @@ var _jquery = __webpack_require__(59);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 var _queryString = __webpack_require__(916);
 
@@ -116631,7 +116640,7 @@ var _jquery = __webpack_require__(59);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -116777,7 +116786,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 __webpack_require__(39);
 
@@ -116913,7 +116922,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _materialUi = __webpack_require__(140);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 var _moreVert = __webpack_require__(897);
 
@@ -117040,7 +117049,7 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(39);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 var _List = __webpack_require__(169);
 
@@ -117313,7 +117322,7 @@ var notification = function (_Component) {
       var _this2 = this;
 
       this.socket = (0, _socket2.default)('http://postitappnnam.herokuapp.com');
-      this.socket.on('connect');
+      this.socket.on('connect', function () {});
 
       this.socket.on('messageBroadcast', function (subscribers) {
         var user = localStorage.getItem('user');
@@ -117420,7 +117429,7 @@ var _jquery = __webpack_require__(59);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _AppActions = __webpack_require__(41);
+var _AppActions = __webpack_require__(42);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -119139,7 +119148,7 @@ NavLink.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_history_createMemoryHistory__ = __webpack_require__(756);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_history_createMemoryHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_history_createMemoryHistory__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Router__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Router__ = __webpack_require__(270);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -119373,7 +119382,7 @@ Redirect.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_PathUtils__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_PathUtils___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_history_PathUtils__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(270);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -119547,7 +119556,7 @@ StaticRouter.childContextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__matchPath__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__matchPath__ = __webpack_require__(271);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -122137,7 +122146,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(273)(content, options);
+var update = __webpack_require__(274)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
@@ -122168,7 +122177,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(273)(content, options);
+var update = __webpack_require__(274)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(true) {
