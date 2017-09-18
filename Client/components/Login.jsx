@@ -137,7 +137,7 @@ class Login extends Component {
    * 
    * @memberof Login
    */
-  componentWillMount() {
+  componentWillUnmount() {
     window.removeEventListener('google-loaded', this.renderGoogleLoginButton);
   }
 

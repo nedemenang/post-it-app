@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "69f8260bf28360534aaf"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "cf8885e09100b6338ff8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -115423,6 +115423,17 @@ var Login = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       window.addEventListener('google-loaded', this.renderGoogleLoginButton);
+    }
+
+    /**
+     * 
+     * @memberof Login
+     */
+
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      window.removeEventListener('google-loaded', this.renderGoogleLoginButton);
     }
 
     /**
