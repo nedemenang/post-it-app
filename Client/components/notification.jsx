@@ -17,7 +17,7 @@ class notification extends Component {
    * @memberof notification
    */
   componentDidMount() {
-    this.socket = io('http://postitappnnam.herokuapp.com');
+    this.socket = io(`${__dirname}`);
     this.socket.on('connect', ()=>{});
 
     this.socket.on('messageBroadcast', (subscribers) => {

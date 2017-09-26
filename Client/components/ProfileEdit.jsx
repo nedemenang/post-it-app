@@ -4,6 +4,7 @@ import 'react-images-uploader/styles.css';
 import 'react-images-uploader/font.css';
 import '../public/style.css';
 import $ from '../public/jquery.js';
+import TitleBar from './TitleBar'
 import { updateUserProfile } from '../actions/AppActions';
 
 /**
@@ -21,7 +22,7 @@ class ProfileEdit extends Component {
   save(event) {
     event.preventDefault();
     const user = {
-      username: this.refs.username.value.trim(),
+      userName: this.refs.username.value.trim(),
       phoneNo: this.refs.phoneNo.value.trim(),
       profilePic: this.state.file
     };
@@ -38,8 +39,11 @@ class ProfileEdit extends Component {
    */
   constructor(props) {
     super(props);
+    const str = location.href;
+    const str2 = str.replace('#', ' ');
     this.state = {
-      file: ''
+      file: '',
+      path: str2
     };
     this.save = this.save.bind(this);
   }
@@ -59,7 +63,7 @@ class ProfileEdit extends Component {
       <input type="text" ref="username" placeholder="username"/>
       <input type="text" ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
       <ImagesUploader
-                url="http://postitappnnam.herokuapp.com/notmultiple"
+                url={`http://localhost:3000/profilePictures`}
                 optimisticPreviews
                 multiple={false}
                 onLoadEnd={(error, response) => {

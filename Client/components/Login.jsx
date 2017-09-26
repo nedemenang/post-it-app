@@ -5,32 +5,34 @@ import {
   Link
 } from 'react-router-dom';
 import '../public/style.css';
-import $ from '../public/jquery.js';
+import $ from '../public/jquery';
 import { registerUser,
   receiveErrors, login,
   registerGoogleUser } from '../actions/AppActions';
-import AppStore from '../stores/AppStore';
 import logo from '../public/images/logo.png';
-import profile from '../public/images/blank-profile-pic.png';
 
 
 /**
  * @class Login
+ *
  * @extends {Component}
  */
 class Login extends Component {
 
 /**
  * Login event
+ *
  * @param {object} event event object
+ *
  * @memberof Login
+ *
  * @returns {void} returns void
  */
   login(event) {
   //
     event.preventDefault();
-    const email = this.refs.loginEmail.value.trim();
-    const password = this.refs.loginPassword.value.trim();
+    const email = this.state.loginEmail.trim();
+    const password = this.state.loginPassword.trim();
 
     const user = {
       email,
@@ -50,55 +52,67 @@ class Login extends Component {
 
 /**
  * Toggles between login and register forms
+ *
  * @return {void} return void
+ *
  * @memberof Login
  */
   handleToggle() {
     $('form').slideToggle();
     receiveErrors('');
-    this.refs.email.value = '';
-    this.refs.username.value = '';
-    this.refs.password.value = '';
-    this.refs.loginEmail.value = '';
-    this.refs.loginPassword.value = '';
+    this.setState({
+      email: '',
+      username: '',
+      password: '',
+      loginEmail: '',
+      loginPassword: ''
+    });
   }
 
 /**
  * Sign function
  * @return {void} return void
+ *
  * @param {object} event event object
+ *
  * @memberof Login
  */
   signup(event) {
     event.preventDefault();
+    const str = location.href;
+    const str2 = str.replace('#', ' ');
     const user = {
-      email: this.refs.email.value.trim(),
-      password: this.refs.password.value.trim(),
-      username: this.refs.username.value.trim(),
-      phoneNo: this.refs.phoneNo.value.trim(),
-      profilePic: 'http://postitappnnam.herokuapp.com/static/files/blank-profile-pic.png'
+      email: this.state.email.trim(),
+      password: this.state.password.trim(),
+      username: this.state.username.trim(),
+      phoneNo: this.state.phoneNumber.trim(),
+      profilePic: `${str2}static/files/blank-profile-pic.png`
     };
 
-
-    if (this.refs.email.value === '') {
+    if (this.state.email.trim() === '') {
       receiveErrors('Please insert email');
-    } else if (this.refs.password.value === '') {
+    } else if (this.state.password.trim() === '') {
       receiveErrors('Please insert password');
-    } else if (this.refs.username.value === '') {
+    } else if (this.state.username.trim() === '') {
       receiveErrors('Please insert username');
     } else {
       registerUser(user);
-      this.refs.email.value === '';
-      this.refs.username.value === '';
-      this.refs.password.value === '';
-      this.refs.phoneNo.value === '';
+      this.setState({
+        email: '',
+        username: '',
+        password: '',
+        phoneNumber: ''
+      });
     }
   }
 
 /**
  * Google sigin
+ *
  * @return {void} return void
+ *
  * @param {object} googleUser google user object
+ *
  * @memberof Login
  */
   onSignIn(googleUser) {
@@ -109,7 +123,9 @@ class Login extends Component {
 
 /**
  * Renders google login button
+ *
  * @return {void} return void
+ *
  * @memberof Login
  */
   renderGoogleLoginButton() {
@@ -134,13 +150,79 @@ class Login extends Component {
 
 
   /**
-   * 
+   *
    * @memberof Login
    */
   componentWillUnmount() {
     window.removeEventListener('google-loaded', this.renderGoogleLoginButton);
   }
 
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleUserNameChange(event) {
+    this.setState({ username: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleLoginEmailChange(event) {
+    this.setState({ loginEmail: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handlePhoneNumberChange(event) {
+    this.setState({ phoneNumber: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleLoginPasswordChange(event) {
+    this.setState({ loginPassword: event.target.value });
+  }
   /**
    * Creates an instance of Login.
    * @param {object} props property object
@@ -148,7 +230,13 @@ class Login extends Component {
    */
   constructor(props) {
     super(props);
-    // this.state =;
+    this.state = {
+      email: '',
+      username: '',
+      password: '',
+      loginEmail: '',
+      loginPassword: ''
+    };
 
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -160,7 +248,9 @@ class Login extends Component {
   /**
    *
    * renders component
+   *
    * @returns {JSX} return login page
+   *
    * @memberof Login
    */
   render() {
@@ -174,8 +264,12 @@ class Login extends Component {
       <div className="form">
     <form className="login-form">
     <h3>LOG IN</h3>
-      <input type="text" ref="loginEmail" placeholder="email"/>
-      <input type="password" ref="loginPassword" placeholder="password"/>
+      <input type="text"
+      onChange={this.handleLoginEmailChange.bind(this)}
+      value={this.state.loginEmail} ref="loginEmail" placeholder="email"/>
+      <input type="password"
+      onChange={this.handleLoginPasswordChange.bind(this)}
+      value={this.state.loginpassword} ref="loginPassword" placeholder="password"/>
       <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.login}>Log In</button>
             <br/>
@@ -186,10 +280,18 @@ class Login extends Component {
     </form>
     <form className="register-form">
     <h3>REGISTER</h3>
-      <input type="text" ref="email" placeholder="email address"/>
-      <input type="password" ref="password" placeholder="password"/>
-      <input type="text" ref="username" placeholder="username"/>
-      <input type="text" ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
+      <input type="text"
+      onChange={this.handleEmailChange.bind(this)}
+      value={this.state.email} ref="email" placeholder="email address"/>
+      <input type="password"
+      onChange={this.handlePasswordChange.bind(this)}
+      value={this.state.password} ref="password" placeholder="password"/>
+      <input type="text"
+      onChange={this.handleUserNameChange.bind(this)}
+      value={this.state.username} ref="username" placeholder="username"/>
+      <input type="text"
+      onChange={this.handlePhoneNumberChange.bind(this)}
+      value={this.state.phoneNumber} ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
       <p className="success">{this.props.success}</p>
       <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.signup}>Register</button>

@@ -37,9 +37,9 @@ app.use(webpackHotMiddleware(compiler));
 app.use('/static', express.static('./server/static'));
 app.use(corsPrefetch);
 
-app.post('/notmultiple', imagesUpload(
+app.post('/profilePictures', imagesUpload(
     './server/static/files',
-    'http://postitappnnam.herokuapp.com/static/files'
+    `${__dirname}/static/files`
 ));
 
 io.on('connection', (socket) => {

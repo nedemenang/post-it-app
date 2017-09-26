@@ -6,9 +6,11 @@ export default {
 /**
    * Register New User
    * Route: POST: /users/signup
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {response} Response object
    */
 
@@ -60,9 +62,11 @@ export default {
   /**
    * Password Reset
    * Route: POST: /users/passwordReset
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   passwordReset(req, res, firebase) {
@@ -89,9 +93,11 @@ export default {
   /**
    * Confirm Password Reset
    * Route: POST: /users/confirmPasswordReset
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   confirmPasswordReset(req, res, firebase) {
@@ -112,9 +118,11 @@ export default {
   /**
    * Google Sign In
    * Route: POST: /users/googleSignin
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
 
@@ -152,9 +160,11 @@ export default {
   /**
    * Sign out
    * Route: POST: /users/signout
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   signOut(req, res, firebase) {
@@ -173,9 +183,11 @@ export default {
   /**
    * Sign In
    * Route: POST: /users/signin
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   signIn(req, res, firebase) {
@@ -196,9 +208,11 @@ export default {
   /**
    * Update User Profile
    * Route: POST: /users/updateUpdateUserProfle
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   updateUserProfile(req, res, firebase) {
@@ -245,10 +259,12 @@ export default {
   /**
    * Get all messages in a users group with event listener
    * Route: GET: /users/:userId/group/:groupId/messages
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
    * @param {io} io socket.io object
+   *
    * @returns {Response} response object
    */
   groupMessages(req, res, firebase, io) {
@@ -273,7 +289,8 @@ export default {
             isRead: values.isRead,
           };
           ununiquegroupMessages.push(message);
-          groupController.updateMessageFlag(firebase, userId, groupId, childSnapShot.key);
+          groupController
+          .updateMessageFlag(firebase, userId, groupId, childSnapShot.key);
         });
         groupMessages = lodash.uniqBy(ununiquegroupMessages, 'id');
         io.emit('messageAdded', {
@@ -292,9 +309,11 @@ export default {
   /**
    * Get all messages in a users group without event listener
    * Route: GET: /users/:userId/group/:groupId/quickMessages
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   groupMessagesQuick(req, res, firebase) {
@@ -332,9 +351,11 @@ export default {
   /**
    * Get user groups
    * Route: GET: /users/:userId/groups/
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   groups(req, res, firebase) {

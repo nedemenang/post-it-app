@@ -34,7 +34,7 @@ export const registerNewUser = (user) => {
 
 export const updateUserProfile = (user) => {
   axios.post('/users/updateUserProfile', {
-    userName: user.username,
+    userName: user.userName,
     photoURL: user.profilePic,
     phoneNo: user.phoneNo
   }).then((response) => {

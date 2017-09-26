@@ -35,12 +35,14 @@ function getAppState() {
 
 /**
  * @class MessageBoard
+ *
  * @extends {Component}
  */
 class MessageBoard extends Component {
 
   /**
    * @return {void} return void
+   *
    * @memberof MessageBoard
    */
   onChange() {
@@ -49,7 +51,9 @@ class MessageBoard extends Component {
 
   /**
    * Sets open state to false
+   *
    * @return {void} return void
+   *
    * @memberof MessageBoard
    */
   handleRequestClose() {
@@ -59,7 +63,9 @@ class MessageBoard extends Component {
 /**
  * Set groups user belongs to when component mounts
  * Adds change event listener to app store
+ *
  * @return {void} return void
+ *
  * @memberof MessageBoard
  */
   componentDidMount() {
@@ -70,7 +76,9 @@ class MessageBoard extends Component {
 
 /**
  * Removes change event listener
+ *
  * @return {void} return void
+ *
  * @memberof MessageBoard
  */
   componentWillUnmount() {
@@ -79,7 +87,9 @@ class MessageBoard extends Component {
 
   /**
    * Creates an instance of MessageBoard.
+   *
    * @param {object} props props object
+   *
    * @memberof MessageBoard
    */
   constructor(props) {
@@ -92,7 +102,9 @@ class MessageBoard extends Component {
   /**
    *
    * Returns page components
+   *
    * @returns {JSX} return message board page
+   *
    * @memberof MessageBoard
    */
   render() {

@@ -7,10 +7,12 @@ export default {
 /**
    * Update message flags
    * Route: GET: /group/updateMessageFlag
+   *
    * @param {Object} firebase firebase object
    * @param {string} userId user Id string
    * @param {string} groupId groupId string
    * @param {string} messageId messageId string
+   *
    * @returns {void} no returns
    */
   updateMessageFlag(firebase, userId, groupId, messageId) {
@@ -52,9 +54,11 @@ export default {
   /**
    * Create new group
    * Route: POST: /group
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   create(req, res, firebase) {
@@ -100,9 +104,11 @@ export default {
   /**
    * Add user to group
    * Route: POST: /group/:groupId/user
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   addUser(req, res, firebase) {
@@ -145,10 +151,12 @@ export default {
   /**
    * Post message to group
    * Route: POST: /group/:groupId/message
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
    * @param {io} io socket.io object
+   *
    * @returns {Response} response object
    */
   postMessage(req, res, firebase, io) {
@@ -242,9 +250,11 @@ export default {
   /**
    * Users who have read meassages
    * Route: GET: /group/:groupId/messages/:messageId/usersRead
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   userReadMessages(req, res, firebase) {
@@ -283,9 +293,11 @@ export default {
   /**
    * Users not in groups
    * Route: GET: /group/:groupId/notusers
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   usersNotInGroups(req, res, firebase) {

@@ -21,7 +21,7 @@ chai.use(chaiHttp);
 
 
 describe('Sign up Route', () => {
-  it('should return 401 for an invalid email address', (done) => {
+  it('should return 400 for an invalid email address', (done) => {
     chai.request(server)
             .post('/users/signup')
             .send({
@@ -39,7 +39,7 @@ describe('Sign up Route', () => {
             });
   });
 
-  it('should return 401 for an empty email address', (done) => {
+  it('should return 400 for an empty email address', (done) => {
     chai.request(server)
             .post('/users/signup')
             .send({

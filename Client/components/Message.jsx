@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../public/style.css';
-import { getUsersReadMessage } from '../actions/AppActions';
+import { getUsersReadMessage } from '../utils/appAPI';
 import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Icon from 'react-icons-kit';
@@ -13,12 +13,15 @@ const style = { margin: 5 };
 
 /**
  * @class Message
+ *
  * @extends {Component}
  */
 class Message extends Component {
   /**
    * Gets user that read a message on click
+   *
    * @param {object} event event object
+   *
    * @memberof Message
    */
   messageClicked(event) {
@@ -36,7 +39,9 @@ class Message extends Component {
 
   /**
    * Sets the open pop up state to false
+   *
    * @return {void} return void
+   *
    * @memberof Message
    */
   handleRequestClose() {
@@ -47,8 +52,11 @@ class Message extends Component {
 
   /**
    * Creates an instance of Message.
+   *
    * @param {object} props event object
+   *
    * @return {void} return void
+   *
    * @memberof Message
    */
   constructor(props) {
@@ -61,6 +69,7 @@ class Message extends Component {
   }
   /**
    * renders components
+   *
   * @return {JSX} returns message page
   */
   render() {
