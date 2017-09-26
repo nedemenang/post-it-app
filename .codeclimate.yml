@@ -11,8 +11,8 @@ engines:
     fixme:
       enabled: true
 ratings:
-  exclude_paths:
-    - Client/__tests__/
-    - node_modules/
-    - dist/
-    - Server/test
+exclude_paths:
+  - Client/__tests__/
+  - node_modules/
+  - dist/
+  - Server/test

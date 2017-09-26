@@ -10,7 +10,7 @@
     "build": "babel server/ -d dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "testServer": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./Server/test/*.test.js && npm run coverage",
-    "testClient": "jest"
+    "testClient": "jest --coverage && npm run coverage"
     
   },
   "author": "Nnamso Edemenang",
