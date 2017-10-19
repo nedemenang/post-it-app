@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the user item component should match snapshot test 1`] = `
+<ListItem
+  autoGenerateNestedIndicator={true}
+  containerElement="span"
+  disableKeyboardFocus={false}
+  disabled={false}
+  initiallyOpen={false}
+  insetChildren={false}
+  leftAvatar={
+    <Avatar
+      size={30}
+      src="postitappnnam.herokuapp.com/static/files/blank-profile-pic.png"
+      style={
+        Object {
+          "margin": 5,
+        }
+      }
+    />
+  }
+  nestedItems={Array []}
+  nestedLevel={0}
+  onKeyboardFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onNestedListToggle={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+  onTouchTap={[Function]}
+  open={null}
+  primaryTogglesNestedList={false}
+  secondaryTextLines={1}
+>
+  <strong>
+    nnamisco
+  </strong>
+</ListItem>
+`;
