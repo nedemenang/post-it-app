@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Login form component should match snapshot test 1`] = `
+<div>
+  <div
+    className="login-image"
+  />
+  <div
+    className="login-page"
+  >
+    <div
+      className="form"
+    >
+      <form
+        className="login-form"
+      >
+        <h3>
+          LOG IN
+        </h3>
+        <input
+          id="loginEmail"
+          onChange={[Function]}
+          placeholder="email"
+          type="text"
+          value=""
+        />
+        <input
+          id="loginPassword"
+          onChange={[Function]}
+          placeholder="password"
+          type="password"
+        />
+        <p
+          className="error"
+        />
+        <button
+          className="button"
+          id="loginButton"
+          onClick={[Function]}
+        >
+          Log In
+        </button>
+        <br />
+        <br />
+        <div
+          id="my-signin2"
+        />
+        <p
+          className="message"
+        >
+          Not registered? 
+          <a
+            href="#"
+            id="createAccount"
+            onClick={[Function]}
+          >
+            Create an account
+          </a>
+        </p>
+        <p
+          className="message"
+        >
+          Forgot Password? 
+          <a
+            href="/PasswordReset"
+          >
+            Reset Password
+          </a>
+        </p>
+      </form>
+      <form
+        className="register-form"
+      >
+        <h3>
+          REGISTER
+        </h3>
+        <input
+          id="email"
+          onChange={[Function]}
+          placeholder="email address"
+          type="text"
+          value=""
+        />
+        <input
+          id="password"
+          onChange={[Function]}
+          placeholder="password"
+          type="password"
+          value=""
+        />
+        <input
+          id="username"
+          onChange={[Function]}
+          placeholder="username"
+          type="text"
+          value=""
+        />
+        <input
+          id="phoneNo"
+          onChange={[Function]}
+          placeholder="Phone number (+2348012345678)"
+          type="text"
+          value=""
+        />
+        <p
+          className="success"
+        />
+        <p
+          className="error"
+        />
+        <button
+          className="button"
+          id="registerButton"
+          onClick={[Function]}
+        >
+          Register
+        </button>
+        <p
+          className="message"
+        >
+          Already registered? 
+          <a
+            href="#"
+            onClick={[Function]}
+          >
+            Sign In
+          </a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+`;

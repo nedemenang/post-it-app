@@ -1,125 +1,140 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom';
+import $ from 'jquery';
 import '../public/style.css';
-import $ from '../public/jquery.js';
-import AppActions from '../actions/AppActions';
-import AppStore from '../stores/AppStore';
-import logo from '../public/images/logo.png';
-import profile from '../public/images/blank-profile-pic.png';
+import { registerUser,
+  receiveErrors, login,
+  registerGoogleUser } from '../actions/AppActions';
 
-class Login extends Component {
-  
 /**
- * 
- * Login event
- * @param {object} event event object
- * @memberof Login
+ * @class Login
+ *
+ * @extends {Component}
  */
-login(event){
-  // 
-  event.preventDefault();
-  const email = this.refs.loginEmail.value.trim();
-  const password = this.refs.loginPassword.value.trim();
-  
-  let user = {
-    email : email,
-    password: password,
-    isAuthenticated: false,
-    profilePic: ''
-  }
+class Login extends Component {
 
-  if(this.refs.loginEmail.value === ''){
-    AppActions.receiveErrors('Please insert email');
-  }else if (this.refs.loginPassword.value === '')
-  {
-    AppActions.receiveErrors('Please insert password');
-  } else{
-    AppActions.login(user); 
+/**
+ * Login event
+ *
+ * @param {object} event event object
+ *
+ * @memberof Login
+ *
+ * @returns {void} returns void
+ */
+  login(event) {
+  //
+    event.preventDefault();
+    const email = this.state.loginEmail.trim();
+    const password = this.state.loginPassword.trim();
+
+    const user = {
+      email,
+      password,
+      isAuthenticated: false,
+      profilePic: ''
+    };
+
+    if (this.state.loginEmail.trim() === '') {
+      receiveErrors('Please insert email');
+    } else if (this.state.loginPassword.trim() === '') {
+      receiveErrors('Please insert password');
+    } else {
+      login(user);
+    }
   }
-}
 
 /**
  * Toggles between login and register forms
+ *
  * @return {void} return void
+ *
  * @memberof Login
  */
-handleToggle(){
+  handleToggle() {
     $('form').slideToggle();
-    AppActions.receiveErrors('');
-    this.refs.email.value = '';
-    this.refs.username.value = '';
-    this.refs.password.value = '';
-    this.refs.loginEmail.value = '';
-    this.refs.loginPassword.value = '';
-  };
+    receiveErrors('');
+    this.setState({
+      email: '',
+      username: '',
+      password: '',
+      loginEmail: '',
+      loginPassword: ''
+    });
+  }
 
 /**
  * Sign function
  * @return {void} return void
+ *
  * @param {object} event event object
+ *
  * @memberof Login
  */
-signup(event){
-  event.preventDefault();
-  let user = {
-    email : this.refs.email.value.trim(),
-    password: this.refs.password.value.trim(),
-    username: this.refs.username.value.trim(),
-    phoneNo: this.refs.phoneNo.value.trim(),
-    profilePic: 'http://localhost:3000/static/files/blank-profile-pic.png'
-  }
-  
+  signup(event) {
+    event.preventDefault();
+    const str = location.href;
+    const str2 = str.replace('#', ' ');
+    const user = {
+      email: this.state.email.trim(),
+      password: this.state.password.trim(),
+      username: this.state.username.trim(),
+      phoneNo: this.state.phoneNumber.trim(),
+      profilePic: `${str2}static/files/blank-profile-pic.png`
+    };
 
-  if(this.refs.email.value === ''){
-    AppActions.receiveErrors('Please insert email');
-  }else if (this.refs.password.value === '')
-  {
-    AppActions.receiveErrors('Please insert password');
-  }else if (this.refs.username.value === ''){
-    AppActions.receiveErrors('Please insert username');
-  } 
-  else{
-    AppActions.registerUser(user);
-    this.refs.email.value === '';
-    this.refs.username.value === '';
-    this.refs.password.value === '';
-    this.refs.phoneNo.value === '';
+    if (this.state.email.trim() === '') {
+      receiveErrors('Please insert email');
+    } else if (this.state.password.trim() === '') {
+      receiveErrors('Please insert password');
+    } else if (this.state.username.trim() === '') {
+      receiveErrors('Please insert username');
+    } else {
+      registerUser(user);
+      this.setState({
+        email: '',
+        username: '',
+        password: '',
+        phoneNumber: ''
+      });
+    }
   }
-}
 
 /**
  * Google sigin
+ *
  * @return {void} return void
+ *
  * @param {object} googleUser google user object
+ *
  * @memberof Login
  */
-onSignIn(googleUser){
-  // console.log('im in on sign in method');
-  const id_token = googleUser.getAuthResponse().id_token
-  AppActions.registerGoogleUser(id_token);
-   
-}
+  onSignIn(googleUser) {
+    const idtoken = googleUser.getAuthResponse().id_token;
+    registerGoogleUser(idtoken);
+  }
 
 
 /**
  * Renders google login button
+ *
  * @return {void} return void
+ *
  * @memberof Login
  */
-renderGoogleLoginButton() {
-    console.log('rendering google signin button')
+  renderGoogleLoginButton() {
     gapi.signin2.render('my-signin2', {
-      'scope': 'https://www.googleapis.com/auth/plus.login',
-      'width': 293,
-      'height': 50,
-      'longtitle': true,
-      'theme': 'dark',
-      'onsuccess': this.onSignIn
-    })
+      scope: 'https://www.googleapis.com/auth/plus.login',
+      width: 293,
+      height: 50,
+      longtitle: true,
+      theme: 'dark',
+      onsuccess: this.onSignIn
+    });
   }
 
   /**
@@ -128,17 +143,99 @@ renderGoogleLoginButton() {
    * @memberof Login
    */
   componentDidMount() {
-    window.addEventListener('google-loaded',this.renderGoogleLoginButton);
+    window.addEventListener('google-loaded', this.renderGoogleLoginButton);
   }
 
+
+  /**
+   *
+   * @memberof Login
+   */
+  componentWillUnmount() {
+    window.removeEventListener('google-loaded', this.renderGoogleLoginButton);
+  }
+
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleEmailChange(event) {
+    this.setState({ email: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleUserNameChange(event) {
+    this.setState({ username: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleLoginEmailChange(event) {
+    this.setState({ loginEmail: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handlePhoneNumberChange(event) {
+    this.setState({ phoneNumber: event.target.value });
+  }
+
+  /**
+   * @param {event} event event object
+   *
+   * @memberof Login
+   *
+   * @returns {void} returns void
+   */
+  handleLoginPasswordChange(event) {
+    this.setState({ loginPassword: event.target.value });
+  }
   /**
    * Creates an instance of Login.
    * @param {object} props property object
    * @memberof Login
    */
-  constructor(props){
+  constructor(props) {
     super(props);
-    //this.state =;
+    this.state = {
+      email: '',
+      username: '',
+      password: '',
+      phoneNumber: '',
+      loginEmail: '',
+      loginPassword: ''
+    };
 
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -148,41 +245,61 @@ renderGoogleLoginButton() {
   }
 
   /**
-   * 
+   *
    * renders component
+   *
    * @returns {JSX} return login page
+   *
    * @memberof Login
    */
-  render(){
-    return(
+  render() {
+    return (
       <div>
       <div className="login-image">
-               <img src = {logo} />
               </div>
       <div className="login-page">
-        
+
       <div className="form">
     <form className="login-form">
     <h3>LOG IN</h3>
-      <input type="text" ref="loginEmail" placeholder="email"/>
-      <input type="password" ref="loginPassword" placeholder="password"/>
+      <input type="text"
+      onChange={this.handleLoginEmailChange.bind(this)}
+      value={this.state.loginEmail} ref="loginEmail"
+      id="loginEmail"
+      placeholder="email"/>
+      <input type="password"
+      onChange={this.handleLoginPasswordChange.bind(this)}
+      id="loginPassword"
+      value={this.state.loginpassword} ref="loginPassword" placeholder="password"/>
       <p className="error">{this.props.errors}</p>
-      <button className="button" onClick={this.login}>Log In</button>
+      <button id="loginButton" className="button" onClick={this.login}>Log In</button>
             <br/>
        <br/>
       <div id="my-signin2"></div>
-      <p className="message">Not registered? <a onClick={this.handleToggle} href="#">Create an account</a></p>
+      <p className="message">Not registered? <a onClick={this.handleToggle} id="createAccount" href="#">Create an account</a></p>
       <p className="message">Forgot Password? <a href="/PasswordReset">Reset Password</a></p>
     </form>
     <form className="register-form">
     <h3>REGISTER</h3>
-      <input type="text" ref="email" placeholder="email address"/>
-      <input type="password" ref="password" placeholder="password"/>
-      <input type="text" ref="username" placeholder="username"/>
-      <input type="text" ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
+      <input type="text"
+      onChange={this.handleEmailChange.bind(this)}
+      id="email"
+      value={this.state.email} ref="email" placeholder="email address"/>
+      <input type="password"
+      onChange={this.handlePasswordChange.bind(this)}
+      id="password"
+      value={this.state.password} ref="password" placeholder="password"/>
+      <input type="text"
+      onChange={this.handleUserNameChange.bind(this)}
+      id="username"
+      value={this.state.username} ref="username" placeholder="username"/>
+      <input type="text"
+      onChange={this.handlePhoneNumberChange.bind(this)}
+      id="phoneNo"
+      value={this.state.phoneNumber} ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
       <p className="success">{this.props.success}</p>
       <p className="error">{this.props.errors}</p>
-      <button className="button" onClick={this.signup}>Register</button>
+      <button id="registerButton" className="button" onClick={this.signup}>Register</button>
       <p className="message">Already registered? <a onClick={this.handleToggle} href="#">Sign In</a></p>
     </form>
   </div>

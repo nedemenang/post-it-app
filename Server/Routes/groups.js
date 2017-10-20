@@ -1,23 +1,27 @@
 import groupController from '../Controllers/groups';
 
 module.exports = (app, firebase, io) => {
-  app.post('/group', (res, req) => {
-    groupController.create(res, req, firebase);
+  app.post('/group', (req, res) => {
+    groupController.create(req, res, firebase);
   });
 
-  app.post('/group/:groupId/user', (res, req) => {
-    groupController.addUser(res, req, firebase);
+  app.post('/group/remove', (req, res) => {
+    groupController.removeUser(req, res, firebase);
   });
 
-  app.post('/group/:groupId/message', (res, req) => {
-    groupController.postMessage(res, req, firebase, io);
+  app.post('/group/:groupId/user', (req, res) => {
+    groupController.addUser(req, res, firebase);
   });
 
-  app.get('/group/:groupId/messages/:messageId/usersRead', (res, req) => {
-    groupController.userReadMessages(res, req, firebase);
+  app.post('/group/:groupId/message', (req, res) => {
+    groupController.postMessage(req, res, firebase, io);
   });
 
-  app.get('/group/:groupId/notusers', (res, req) => {
-    groupController.usersNotInGroups(res, req, firebase);
+  app.get('/group/:groupId/messages/:messageId/usersRead', (req, res) => {
+    groupController.getUserReadMessages(req, res, firebase);
+  });
+
+  app.get('/group/:groupId/notusers', (req, res) => {
+    groupController.getUsersNotInGroups(req, res, firebase);
   });
 };

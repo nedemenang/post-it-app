@@ -1,94 +1,108 @@
-import React, {Component} from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+import React, { Component } from 'react';
 import '../public/style.css';
-import $ from '../public/jquery.js';
-import AppActions from '../actions/AppActions';
-import ls from 'local-storage';
+import { receiveErrors, addMessage } from '../actions/AppActions';
+import lodash from 'lodash';
 
+
+/**
+ * @class MessageForm
+ * @extends {Component}
+ */
 class MessageForm extends Component {
 
-submit(event){
-  event.preventDefault();
+  /**
+   * @param {object} event event object
+   * @return {void} return void
+   * @memberof MessageForm
+   */
+  submit(event) {
+    event.preventDefault();
+    const messagebody = this.state.message;
+    const priority = this.state.priority;
+    const postedon = (new Date()).toLocaleString('en-GB');
 
-  var currentdate = new Date(); 
-  var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes();
-
-  const messagebody = this.refs.message.value.trim();
-  const priority = this.refs.priority.value.trim();
-  const postedon = datetime;
-  
-  //console.log(this.props.selectedGroupId);
-  
-  if(this.props.selectedGroup.length === 0)
-  {
-    AppActions.receiveErrors('Please select a group to post a message');
-    //console.log(this.props.errors);
-
-  }else if(this.refs.message.value === '')
-  {
-    AppActions.receiveErrors('Please type in a message');
-  }
-  else if (this.refs.priority.value === 'Select Message Priority ....')
-  {
-    AppActions.receiveErrors('Please select a message priority');
-  }else{
-    //console.log(ls.get('user'));
-    if(this.props.selectedGroup[0].groupId !== undefined)
-    {
-      const user = localStorage.getItem('user');//ls.get('user');
-      let messageObject = {
-        messageBody : messagebody,
-        postedon: postedon,
-        priority: priority,
-        postedBy: JSON.parse(user).email, 
-        postedByDisplayName: JSON.parse(user).displayName,
-        profilePic: JSON.parse(user).profilePic,
-        groupId: this.props.selectedGroup[0].groupId,
-        groupName: this.props.selectedGroup[0].groupname
+    if (lodash.isEmpty(this.props.selectedGroup)) {
+      receiveErrors('Please select a group to post a message');
+    } else if (this.state.message === '') {
+      receiveErrors('Please type in a message');
+    } else {
+      if (this.props.selectedGroup.groupId !== undefined) {
+        const user = localStorage.getItem('user');
+        const messageObject = {
+          messageBody: messagebody,
+          postedon,
+          priority,
+          postedBy: JSON.parse(user).email,
+          postedByDisplayName: JSON.parse(user).displayName,
+          profilePic: JSON.parse(user).profilePic,
+          groupId: this.props.selectedGroup.groupId,
+          groupName: this.props.selectedGroup.groupname
+        };
+        addMessage(messageObject);
       }
-      AppActions.addMessage(messageObject);
+
+      this.setState({
+        message: '',
+        priority: 'normal'
+      });
+      receiveErrors('');
     }
-    this.refs.message.value = '';
-    this.refs.priority.value = 'normal';
-    AppActions.receiveErrors('');
   }
-}
+
+  /**
+   * Set message state when user types
+   * @param {object} event event object
+   * @memberof MessageForm
+   * @returns {void} returns void
+   */
+  handleMessageChange(event) {
+    this.setState({ message: event.target.value });
+  }
+
+
+  /**
+   * Set priority state when user selection changes
+   * @param {object} event event object
+   * @memberof MessageForm
+   */
+  handlePriorityChange(event) {
+    this.setState({ priority: event.target.value });
+  }
 
   /**
    * Creates an instance of MessageForm.
-   * @param {object} props 
+   * @param {object} props
    * @memberof MessageForm
    */
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state= {};
+    this.state = {
+      message: '',
+      priority: 'normal'
+    };
     this.submit = this.submit.bind(this);
   }
 
   /**
-   * 
    * Renders message form page
-   * @returns {JSX} Returns message form page 
+   * @returns {JSX} Returns message form page
    * @memberof MessageForm
    */
-  render(){
-    return(
+  render() {
+    return (
       <div className="footer">
          <form id="chatform">
-         <select ref="priority" className="form-select">
+         <select ref="priority" value={this.state.priority}
+         className="form-select"
+         onChange={ this.handlePriorityChange.bind(this) }>
               <option value="normal">Normal</option>
               <option value="urgent">Urgent</option>
               <option value="critical">Critical</option>
              </select>
-           <textarea type="text" id="message" ref="message" placeholder="Please type a message." />
+           <textarea type="text"
+           onChange={ this.handleMessageChange.bind(this) }
+           id="message" value={this.state.message}
+           placeholder="Please type a message." />
               <button id="submit" onClick={this.submit}>Submit</button>
          </form>
       </div>

@@ -1,53 +1,41 @@
-[![Build Status](https://travis-ci.org/nedemenang/post-it-app.svg?branch=develop)](https://travis-ci.org/nedemenang/post-it-app) [![Coverage Status](https://coveralls.io/repos/github/nedemenang/post-it-app/badge.svg?branch=develop)](https://coveralls.io/github/nedemenang/post-it-app?branch=develop)
+[![Build Status](https://travis-ci.org/nedemenang/post-it-app.svg?branch=develop)](https://travis-ci.org/nedemenang/post-it-app) [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 
 
 
-# PostIt Application
+#### PostIt Application
 
 
-# Background Information 
+#### Background Information 
 
 PostIt is a simple application that allows friends and colleagues create groups for notifications. This way one person can post notifications to everyone by sending a message once. The application allows people create accounts, create groups and add registered users to the groups, and then send messages out to these groups whenever they want.
 
-## Features
+#### Features
 
 Users can sign up / log in to the Application
 
-Users can Create broad cast groups
+Users can Create broadcast groups
 
 Users can add registered users to broadcast groups they have created
 
+Users can send messages to broadcast groups they are members of.
 
-### Why is this project useful
+Users are sent notifications based on the priority level of the message. 
+
+
+#### Why is this project useful
 
 It enables proper and easy dissemination of information by allowing users to broadcast messages to others users within a groups
 
 
-### Dependencies
+#### Dependencies
 
-Node.js 
+NodeJs 
+ExpressJS
+ReactJs
+Firebase
 
-babel-cli
 
-babel-core
-
-babel-eslint
-
-babel-loader
-
-babel-preset-es2015
-
-babel-watch
-
-body-parser
-
-express
-
-firebase
-
-eslint 
-
-### Installing and setup
+#### Installing and setup
 
 
 Navigate to directory of choice on terminal.
@@ -60,26 +48,31 @@ Install all app Dependencies
 
 Run the application using npm start 
 
-## Limitations of this project
 
-This project as at today is still in phase 1, therefore, you can only access the projects features using Postman.
-
-
-## Built With
+#### Built With
 
 
-node.js
+Node.js
+ReactJs
+ExpressJs
+Firebase
 
+#### Contributing
 
-## Authors
+Fork the repo on GitHub
+Clone the project to your own machine
+Commit changes to your own branch
+Push your work back up to your fork
+
+#### Authors
 
 * **Nnamso Edemenang** - *Post It App* - (https://github.com/nedemenang)
 
-## Heroku Link
+#### Heroku Link
 
 postitappnnam.herokuapp.com
 
-## License
+#### License
 
 This project is licensed under the ISC License 
 

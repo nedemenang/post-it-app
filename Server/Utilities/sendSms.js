@@ -1,10 +1,11 @@
 import Nexmo from 'nexmo';
+import * as dotenv from 'dotenv';
 
-const API_KEY = 'fa43188a';
-const API_SECRET = '6eec78df11a6d609';
+dotenv.load();
+
 const nexmo = new Nexmo({
-  apiKey: API_KEY,
-  apiSecret: API_SECRET
+  apiKey: process.env.SMSAPIKEY,
+  apiSecret: process.env.SMSAPISECRET
 });
 module.exports = (smsObject) => {
   nexmo.message.sendSms(

@@ -122,6 +122,7 @@
 .login-image {
   width: 38%;
   float: left;
+  background-image: url("./images/logo.png");
 }
 
 .success {

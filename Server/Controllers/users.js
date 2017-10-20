@@ -6,20 +6,22 @@ export default {
 /**
    * Register New User
    * Route: POST: /users/signup
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {response} Response object
    */
 
   signUp(req, res, firebase) {
     const { email, password, userName, photoURL, phoneNo } = req.body;
     if (!emailValidator(email)) {
-      res.status(401).send({
+      res.status(400).send({
         message: 'Please insert a valid email address'
       });
     } else if (email === '' || password === '' || userName === '') {
-      res.status(401).send({
+      res.status(400).send({
         message: 'Please insert email or password'
       });
     } else {
@@ -32,7 +34,6 @@ export default {
           }).then(() => {
             firebase.auth().signInWithEmailAndPassword(email, password)
             .catch((error) => {
-             //  console.log(error.message);
               res.status(500).send({
                 message: `Error occured ${error.message}`
               });
@@ -61,15 +62,17 @@ export default {
   /**
    * Password Reset
    * Route: POST: /users/passwordReset
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   passwordReset(req, res, firebase) {
     if (req.body.emailAddress !== '') {
       res.status(400).send({
-        message: 'Please insert password'
+        message: 'Please insert valid email'
       });
     } else {
       firebase.auth().sendPasswordResetEmail(req.body.emailAddress)
@@ -90,9 +93,11 @@ export default {
   /**
    * Confirm Password Reset
    * Route: POST: /users/confirmPasswordReset
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   confirmPasswordReset(req, res, firebase) {
@@ -113,9 +118,11 @@ export default {
   /**
    * Google Sign In
    * Route: POST: /users/googleSignin
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
 
@@ -153,9 +160,11 @@ export default {
   /**
    * Sign out
    * Route: POST: /users/signout
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   signOut(req, res, firebase) {
@@ -174,63 +183,85 @@ export default {
   /**
    * Sign In
    * Route: POST: /users/signin
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   signIn(req, res, firebase) {
     const { email, password } = req.body;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      res.send({
-        message: `Welcome ${user.displayName}`,
-        user
+    if (!emailValidator(email)) {
+      res.status(400).send({
+        message: 'Please insert a valid email address'
       });
-    }).catch((error) => {
-      res.status(500).send({
-        message: `Error occured while login in:  ${error.message}`
+    } else if (email === '' || password === '') {
+      res.status(400).send({
+        message: 'Please insert email or password'
       });
-    });
+    } else {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        res.send({
+          message: `Welcome ${user.displayName}`,
+          user
+        });
+      }).catch((error) => {
+        if (error.code === 'auth/wrong-password') {
+          res.status(401).send({
+            message: 'Invalid Password'
+          });
+        } else if (error.code === 'auth/user-not-found') {
+          res.status(401).send({
+            message: 'Invalid email address'
+          });
+        } else {
+          res.status(500).send({
+            message: `Error occured while login in:  ${error.message}`
+          });
+        }
+      });
+    }
   },
 
   /**
    * Update User Profile
    * Route: POST: /users/updateUpdateUserProfle
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
   updateUserProfile(req, res, firebase) {
     const user = firebase.auth().currentUser;
     if (user) {
-        // console.log('registering user...');
-      let { userName, photo, phone } = req.body;
+      let { userName, photoURL, phoneNo } = req.body;
       if (userName === '') {
         userName = user.displayName;
       }
-      if (photo === '') {
-        photo = user.photoURL;
+      if (photoURL === '') {
+        photoURL = user.photoURL;
       }
-
-      if (phone === '') {
-        phone = user.phoneNumber;
+      if (phoneNo === '') {
+        phoneNo = user.phoneNumber;
       }
       user.updateProfile({
         displayName: userName,
-        photoURL: photo,
-        phoneNumber: phone
+        photoURL
       }).then(() => {
         const userRef = firebase.database()
              .ref(`users/${user.uid}`);
         userRef.update({
-          phoneNo: phone,
+          phoneNo,
           userName,
-          profilePic: photo
+          profilePic: photoURL
         });
         res.send({
-          message: 'Profile update successful!'
+          message: 'Profile update successful!',
+          user
         });
       }).catch((error) => {
         res.status(500).send({
@@ -238,7 +269,7 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Only logged users update profile'
       });
     }
@@ -247,15 +278,17 @@ export default {
   /**
    * Get all messages in a users group with event listener
    * Route: GET: /users/:userId/group/:groupId/messages
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
    * @param {io} io socket.io object
+   *
    * @returns {Response} response object
    */
-  groupMessages(req, res, firebase, io) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+  getGroupMessages(req, res, firebase, io) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const { userId, groupId } = req.params;
       const messageRef = firebase.database()
         .ref(`users/${userId}/groups/${groupId}/messages/`);
@@ -275,7 +308,8 @@ export default {
             isRead: values.isRead,
           };
           ununiquegroupMessages.push(message);
-          groupController.updateMessageFlag(firebase, userId, groupId, childSnapShot.key);
+          groupController
+          .updateMessageFlag(firebase, userId, groupId, childSnapShot.key);
         });
         groupMessages = lodash.uniqBy(ununiquegroupMessages, 'id');
         io.emit('messageAdded', {
@@ -285,8 +319,8 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
-        message: 'Please log in to see a list of your groups'
+      res.status(401).send({
+        message: 'Please log in to see a list of your groups messages'
       });
     }
   },
@@ -294,14 +328,16 @@ export default {
   /**
    * Get all messages in a users group without event listener
    * Route: GET: /users/:userId/group/:groupId/quickMessages
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
-  groupMessagesQuick(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+  getGroupMessagesQuick(req, res, firebase) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const { userId, groupId } = req.params;
       const messageRef = firebase.database()
       .ref(`users/${userId}/groups/${groupId}/messages/`);
@@ -325,8 +361,8 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
-        message: 'Please log in to see a list of your groups'
+      res.status(401).send({
+        message: 'Please log in to see a list of your groups messages'
       });
     }
   },
@@ -334,14 +370,16 @@ export default {
   /**
    * Get user groups
    * Route: GET: /users/:userId/groups/
+   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {firebase} firebase firebase object
+   *
    * @returns {Response} response object
    */
-  groups(req, res, firebase) {
-    const userlogin = firebase.auth().currentUser;
-    if (userlogin) {
+  getGroups(req, res, firebase) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
       const groupRef = firebase.database()
         .ref(`users/${req.params.userId}/groups/`);
       const groups = [];
@@ -360,7 +398,7 @@ export default {
         });
       });
     } else {
-      res.status(403).send({
+      res.status(401).send({
         message: 'Please log in to see a list of your groups'
       });
     }

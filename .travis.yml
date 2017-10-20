@@ -3,3 +3,6 @@ node_js:
 - '6.11.2'
 before_install: 
 - travis_wait npm install
+script:
+  - npm test
+sudo: false

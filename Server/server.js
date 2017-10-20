@@ -25,27 +25,24 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const compiler = webpack(webpackConfig);
+app.use(webpackMiddleWare(compiler, {
+  hot: true,
+  publicPath: webpackConfig.output.publicPath,
+  noInfo: true
+}));
+app.use(webpackHotMiddleware(compiler));
 
-if (process.env.NODE_ENV === 'development') {
-  const compiler = webpack(webpackConfig);
-  app.use(webpackMiddleWare(compiler, {
-    hot: true,
-    publicPath: webpackConfig.output.publicPath,
-    noInfo: true
-  }));
-  app.use(webpackHotMiddleware(compiler));
-}
 
 app.use('/static', express.static('./server/static'));
 app.use(corsPrefetch);
 
-app.post('/notmultiple', imagesUpload(
+app.post('/profilePictures', imagesUpload(
     './server/static/files',
-    'http://localhost:3000/static/files'
+    `${__dirname}/static/files`
 ));
 
 io.on('connection', (socket) => {
-  // connections.push(socket);
   console.log('Connected');
   socket.on('disconnect', () => {
     console.log('Disconnected');

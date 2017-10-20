@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Message board component should match snapshot test 1`] = `
+<div>
+  <TitleBar />
+  <div
+    className="row"
+  >
+    <div
+      className="leftColumn"
+    >
+      <Drawer
+        containerStyle={
+          Object {
+            "height": "calc(100% - 64px)",
+            "top": 64,
+          }
+        }
+        disableSwipeToOpen={false}
+        docked={true}
+        open={null}
+        openSecondary={false}
+        swipeAreaWidth={30}
+        width={null}
+        zDepth={2}
+      >
+        <GroupList
+          groups={Array []}
+          loggedInUser={Array []}
+          selectedGroup={Object {}}
+        />
+        <GroupForm
+          loggedInUser={Array []}
+        />
+        <UserList
+          errors=""
+          groups={Array []}
+          loggedInUser={Array []}
+          messages={Array []}
+          notifiedGroup=""
+          open={false}
+          registeredUser={Array []}
+          selectedGroup={Object {}}
+          success=""
+          userReadMessages={Array []}
+          users={Array []}
+        />
+      </Drawer>
+    </div>
+    <div
+      className="rightColumn"
+    >
+      <MessageForm
+        errors=""
+        groups={Array []}
+        loggedInUser={Array []}
+        messages={Array []}
+        notifiedGroup=""
+        open={false}
+        registeredUser={Array []}
+        selectedGroup={Object {}}
+        success=""
+        userReadMessages={Array []}
+        users={Array []}
+      />
+      <MessageList
+        errors=""
+        groups={Array []}
+        loggedInUser={Array []}
+        messages={Array []}
+        notifiedGroup=""
+        open={false}
+        registeredUser={Array []}
+        selectedGroup={Object {}}
+        success=""
+        userReadMessages={Array []}
+        users={Array []}
+      />
+      <notification />
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,560 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the group list component should call function on click 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <div
+    className="bottomMargin"
+>
+    <div>
+        <List>
+            <Subheader
+                inset={false}
+            >
+                <strong>
+                    Group List
+                </strong>
+            </Subheader>
+            <Group
+                group={
+                    Object {
+                        "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+                        "groupName": "Test Group",
+                        "newMessage": false,
+                      }
+                }
+                loggedInUser={
+                    Object {
+                        "displayName": "nnamisco",
+                        "email": "nedemenang@gmail.com",
+                        "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                        "isAuthenticated": true,
+                        "phoneNo": null,
+                        "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                      }
+                }
+            />
+            <Group
+                group={
+                    Object {
+                        "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+                        "groupName": "Test Group2",
+                        "newMessage": false,
+                      }
+                }
+                loggedInUser={
+                    Object {
+                        "displayName": "nnamisco",
+                        "email": "nedemenang@gmail.com",
+                        "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                        "isAuthenticated": true,
+                        "phoneNo": null,
+                        "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                      }
+                }
+            />
+            <Group
+                group={
+                    Object {
+                        "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+                        "groupName": "Test Group3",
+                        "newMessage": true,
+                      }
+                }
+                loggedInUser={
+                    Object {
+                        "displayName": "nnamisco",
+                        "email": "nedemenang@gmail.com",
+                        "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                        "isAuthenticated": true,
+                        "phoneNo": null,
+                        "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                      }
+                }
+            />
+        </List>
+        <button
+            className="button"
+            onClick={[Function]}
+        >
+            Create New Group
+        </button>
+    </div>
+</div>,
+  "nodes": Array [
+    <div
+      className="bottomMargin"
+>
+      <div>
+            <List>
+                  <Subheader
+                        inset={false}
+                  >
+                        <strong>
+                              Group List
+                        </strong>
+                  </Subheader>
+                  <Group
+                        group={
+                              Object {
+                                    "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+                                    "groupName": "Test Group",
+                                    "newMessage": false,
+                                  }
+                        }
+                        loggedInUser={
+                              Object {
+                                    "displayName": "nnamisco",
+                                    "email": "nedemenang@gmail.com",
+                                    "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                    "isAuthenticated": true,
+                                    "phoneNo": null,
+                                    "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                  }
+                        }
+                  />
+                  <Group
+                        group={
+                              Object {
+                                    "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+                                    "groupName": "Test Group2",
+                                    "newMessage": false,
+                                  }
+                        }
+                        loggedInUser={
+                              Object {
+                                    "displayName": "nnamisco",
+                                    "email": "nedemenang@gmail.com",
+                                    "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                    "isAuthenticated": true,
+                                    "phoneNo": null,
+                                    "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                  }
+                        }
+                  />
+                  <Group
+                        group={
+                              Object {
+                                    "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+                                    "groupName": "Test Group3",
+                                    "newMessage": true,
+                                  }
+                        }
+                        loggedInUser={
+                              Object {
+                                    "displayName": "nnamisco",
+                                    "email": "nedemenang@gmail.com",
+                                    "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                    "isAuthenticated": true,
+                                    "phoneNo": null,
+                                    "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                  }
+                        }
+                  />
+            </List>
+            <button
+                  className="button"
+                  onClick={[Function]}
+            >
+                  Create New Group
+            </button>
+      </div>
+</div>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_instance": ShallowComponentWrapper {
+      "_calledComponentWillUnmount": false,
+      "_compositeType": 0,
+      "_context": Object {},
+      "_currentElement": <GroupList
+        groups={
+                Array [
+                        Object {
+                          "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+                          "groupName": "Test Group",
+                          "newMessage": false,
+                        },
+                        Object {
+                          "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+                          "groupName": "Test Group2",
+                          "newMessage": false,
+                        },
+                        Object {
+                          "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+                          "groupName": "Test Group3",
+                          "newMessage": true,
+                        },
+                      ]
+        }
+        loggedInUser={
+                Object {
+                        "displayName": "nnamisco",
+                        "email": "nedemenang@gmail.com",
+                        "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                        "isAuthenticated": true,
+                        "phoneNo": null,
+                        "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                      }
+        }
+        selectedGroup={
+                Object {
+                        "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+                        "groupName": "Test Group",
+                        "newMessage": false,
+                      }
+        }
+/>,
+      "_debugID": 5,
+      "_hostContainerInfo": null,
+      "_hostParent": null,
+      "_instance": GroupList {
+        "_reactInternalInstance": [Circular],
+        "context": Object {},
+        "handleToggle": [Function],
+        "props": Object {
+          "groups": Array [
+            Object {
+              "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+              "groupName": "Test Group",
+              "newMessage": false,
+            },
+            Object {
+              "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+              "groupName": "Test Group2",
+              "newMessage": false,
+            },
+            Object {
+              "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+              "groupName": "Test Group3",
+              "newMessage": true,
+            },
+          ],
+          "loggedInUser": Object {
+            "displayName": "nnamisco",
+            "email": "nedemenang@gmail.com",
+            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+            "isAuthenticated": true,
+            "phoneNo": null,
+            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+          },
+          "selectedGroup": Object {
+            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+            "groupName": "Test Group",
+            "newMessage": false,
+          },
+        },
+        "refs": Object {},
+        "state": Object {},
+        "updater": Object {
+          "enqueueCallback": [Function],
+          "enqueueCallbackInternal": [Function],
+          "enqueueElementInternal": [Function],
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+          "validateCallback": [Function],
+        },
+      },
+      "_mountOrder": 3,
+      "_pendingCallbacks": null,
+      "_pendingElement": null,
+      "_pendingForceUpdate": false,
+      "_pendingReplaceState": false,
+      "_pendingStateQueue": null,
+      "_renderedComponent": NoopInternalComponent {
+        "_currentElement": <div
+          className="bottomMargin"
+>
+          <div>
+                    <List>
+                              <Subheader
+                                        inset={false}
+                              >
+                                        <strong>
+                                                  Group List
+                                        </strong>
+                              </Subheader>
+                              <Group
+                                        group={
+                                                  Object {
+                                                            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+                                                            "groupName": "Test Group",
+                                                            "newMessage": false,
+                                                          }
+                                        }
+                                        loggedInUser={
+                                                  Object {
+                                                            "displayName": "nnamisco",
+                                                            "email": "nedemenang@gmail.com",
+                                                            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                                            "isAuthenticated": true,
+                                                            "phoneNo": null,
+                                                            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                                          }
+                                        }
+                              />
+                              <Group
+                                        group={
+                                                  Object {
+                                                            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+                                                            "groupName": "Test Group2",
+                                                            "newMessage": false,
+                                                          }
+                                        }
+                                        loggedInUser={
+                                                  Object {
+                                                            "displayName": "nnamisco",
+                                                            "email": "nedemenang@gmail.com",
+                                                            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                                            "isAuthenticated": true,
+                                                            "phoneNo": null,
+                                                            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                                          }
+                                        }
+                              />
+                              <Group
+                                        group={
+                                                  Object {
+                                                            "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+                                                            "groupName": "Test Group3",
+                                                            "newMessage": true,
+                                                          }
+                                        }
+                                        loggedInUser={
+                                                  Object {
+                                                            "displayName": "nnamisco",
+                                                            "email": "nedemenang@gmail.com",
+                                                            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                                            "isAuthenticated": true,
+                                                            "phoneNo": null,
+                                                            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                                          }
+                                        }
+                              />
+                    </List>
+                    <button
+                              className="button"
+                              onClick={[Function]}
+                    >
+                              Create New Group
+                    </button>
+          </div>
+</div>,
+        "_debugID": 6,
+        "_renderedOutput": <div
+          className="bottomMargin"
+>
+          <div>
+                    <List>
+                              <Subheader
+                                        inset={false}
+                              >
+                                        <strong>
+                                                  Group List
+                                        </strong>
+                              </Subheader>
+                              <Group
+                                        group={
+                                                  Object {
+                                                            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+                                                            "groupName": "Test Group",
+                                                            "newMessage": false,
+                                                          }
+                                        }
+                                        loggedInUser={
+                                                  Object {
+                                                            "displayName": "nnamisco",
+                                                            "email": "nedemenang@gmail.com",
+                                                            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                                            "isAuthenticated": true,
+                                                            "phoneNo": null,
+                                                            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                                          }
+                                        }
+                              />
+                              <Group
+                                        group={
+                                                  Object {
+                                                            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+                                                            "groupName": "Test Group2",
+                                                            "newMessage": false,
+                                                          }
+                                        }
+                                        loggedInUser={
+                                                  Object {
+                                                            "displayName": "nnamisco",
+                                                            "email": "nedemenang@gmail.com",
+                                                            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                                            "isAuthenticated": true,
+                                                            "phoneNo": null,
+                                                            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                                          }
+                                        }
+                              />
+                              <Group
+                                        group={
+                                                  Object {
+                                                            "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+                                                            "groupName": "Test Group3",
+                                                            "newMessage": true,
+                                                          }
+                                        }
+                                        loggedInUser={
+                                                  Object {
+                                                            "displayName": "nnamisco",
+                                                            "email": "nedemenang@gmail.com",
+                                                            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+                                                            "isAuthenticated": true,
+                                                            "phoneNo": null,
+                                                            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+                                                          }
+                                        }
+                              />
+                    </List>
+                    <button
+                              className="button"
+                              onClick={[Function]}
+                    >
+                              Create New Group
+                    </button>
+          </div>
+</div>,
+      },
+      "_renderedNodeType": 0,
+      "_rootNodeID": 0,
+      "_topLevelWrapper": null,
+      "_updateBatchNumber": null,
+      "_warnedAboutRefsInRender": false,
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <GroupList
+    groups={
+        Array [
+            Object {
+              "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+              "groupName": "Test Group",
+              "newMessage": false,
+            },
+            Object {
+              "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+              "groupName": "Test Group2",
+              "newMessage": false,
+            },
+            Object {
+              "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+              "groupName": "Test Group3",
+              "newMessage": true,
+            },
+          ]
+    }
+    loggedInUser={
+        Object {
+            "displayName": "nnamisco",
+            "email": "nedemenang@gmail.com",
+            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+            "isAuthenticated": true,
+            "phoneNo": null,
+            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+          }
+    }
+    selectedGroup={
+        Object {
+            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+            "groupName": "Test Group",
+            "newMessage": false,
+          }
+    }
+/>,
+}
+`;
+
+exports[`the group list component should match snapshot test 1`] = `
+<div
+  className="bottomMargin"
+>
+  <div>
+    <List>
+      <Subheader
+        inset={false}
+      >
+        <strong>
+          Group List
+        </strong>
+      </Subheader>
+      <Group
+        group={
+          Object {
+            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
+            "groupName": "Test Group",
+            "newMessage": false,
+          }
+        }
+        loggedInUser={
+          Object {
+            "displayName": "nnamisco",
+            "email": "nedemenang@gmail.com",
+            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+            "isAuthenticated": true,
+            "phoneNo": null,
+            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+          }
+        }
+      />
+      <Group
+        group={
+          Object {
+            "groupId": "TUsUaucS5nb5kuOP6SpvTUcX5v3",
+            "groupName": "Test Group2",
+            "newMessage": false,
+          }
+        }
+        loggedInUser={
+          Object {
+            "displayName": "nnamisco",
+            "email": "nedemenang@gmail.com",
+            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+            "isAuthenticated": true,
+            "phoneNo": null,
+            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+          }
+        }
+      />
+      <Group
+        group={
+          Object {
+            "groupId": "TUsUaucS5nb5kuOP6SpvTUdX9v3",
+            "groupName": "Test Group3",
+            "newMessage": true,
+          }
+        }
+        loggedInUser={
+          Object {
+            "displayName": "nnamisco",
+            "email": "nedemenang@gmail.com",
+            "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
+            "isAuthenticated": true,
+            "phoneNo": null,
+            "profilePic": "about:blankstatic/files/blank-profile-pic.png",
+          }
+        }
+      />
+    </List>
+    <button
+      className="button"
+      onClick={[Function]}
+    >
+      Create New Group
+    </button>
+  </div>
+</div>
+`;

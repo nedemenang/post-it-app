@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Message form component should match snapshot test 1`] = `
+<div
+  className="footer"
+>
+  <form
+    id="chatform"
+  >
+    <select
+      className="form-select"
+      onChange={[Function]}
+      value="normal"
+    >
+      <option
+        value="normal"
+      >
+        Normal
+      </option>
+      <option
+        value="urgent"
+      >
+        Urgent
+      </option>
+      <option
+        value="critical"
+      >
+        Critical
+      </option>
+    </select>
+    <textarea
+      id="message"
+      onChange={[Function]}
+      placeholder="Please type a message."
+      type="text"
+      value=""
+    />
+    <button
+      id="submit"
+      onClick={[Function]}
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;
