@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../public/style.css';
-import $ from '../public/jquery.js';
 import io from 'socket.io-client';
 import lodash from 'lodash';
 import Snackbar from 'material-ui/Snackbar';
@@ -18,7 +17,7 @@ class notification extends Component {
    */
   componentDidMount() {
     this.socket = io(`${__dirname}`);
-    this.socket.on('connect', ()=>{});
+    this.socket.on('connect', () => {});
 
     this.socket.on('messageBroadcast', (subscribers) => {
       const user = localStorage.getItem('user');

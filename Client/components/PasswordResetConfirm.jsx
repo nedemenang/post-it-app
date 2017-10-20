@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import '../public/style.css';
-import $ from '../public/jquery.js';
-import { receiveErrors, confirmPasswordReset } from '../actions/AppActions';
 import QueryString from 'query-string';
+import '../public/style.css';
+import { receiveErrors, confirmPasswordReset } from '../actions/AppActions';
 
 
 /**
  * Redirects to home page after resetting password
+ *
  * @return {void} returns void
  */
 function redirectToHome() {
@@ -17,21 +17,25 @@ function redirectToHome() {
 
 /**
  * @class PasswordResetConfirm
+ *
  * @extends {Component}
  */
 class PasswordResetConfirm extends Component {
 
 /**
  * Calls the confirm password reset function
+ *
  * @return {void} return void
+ *
  * @param {object} event event object
+ *
  * @memberof PasswordResetConfirm
  */
   reset(event) {
   //
     event.preventDefault();
-    const password = this.refs.password.value.trim();
-    const confirmPassword = this.refs.confirmPassword.value.trim();
+    const password = this.state.password.trim();
+    const confirmPassword = this.state.confirmPassword.trim();
 
     if (password === '') {
       receiveErrors('Please insert password');
@@ -52,12 +56,39 @@ class PasswordResetConfirm extends Component {
 
 
   /**
+   * Function to handle change in password reset field
+   *
+   * @param {object} event object
+   *
+   * @memberof PasswordResetConfirm
+   */
+  handlePasswordChange(event) {
+    this.setState({ password: event.target.value });
+  }
+
+
+  /**
+   *Function to handle change in password confirm field
+   *
+   * @param {object} event object
+   *
+   * @memberof PasswordResetConfirm
+   */
+  handleResetPasswordConfirmChange(event) {
+    this.setState({ confirmPassword: event.target.value });
+  }
+
+  /**
    * Creates an instance of PasswordResetConfirm.
    * @param {object} props props object
    * @memberof PasswordResetConfirm
    */
   constructor(props) {
     super(props);
+    this.state = {
+      password: '',
+      confirmPassword: ''
+    };
 
     this.reset = this.reset.bind(this);
   }
@@ -75,8 +106,14 @@ class PasswordResetConfirm extends Component {
       <div className="form">
     <form className="login-form">
     <h3>Reset Password</h3>
-      <input type="password" ref="password" placeholder="password"/>
-      <input type="password" ref="confirmPassword" placeholder="Confirm password"/>
+      <input type="password"
+      id="password"
+      onChange ={this.handlePasswordChange.bind(this)}
+      placeholder="password"/>
+      <input type="password"
+      id="confirmPassword"
+      onChange = {this.handleResetPasswordConfirmChange.bind(this)}
+      placeholder="Confirm password"/>
       <p className="success">{this.props.success}</p>
       <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.reset}>Save</button>

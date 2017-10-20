@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import '../public/style.css';
-import $ from '../public/jquery';
 import { createGroup } from '../actions/AppActions';
 
 
@@ -23,9 +23,7 @@ class GroupForm extends Component {
 
     const groupname = this.state.groupname.trim();
     const dateCreated = (new Date()).toLocaleString('en-GB');
-
     const user = localStorage.getItem('user');
-
     if (this.state.groupname !== '') {
       const group = {
         groupname,

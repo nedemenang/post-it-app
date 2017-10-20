@@ -1,27 +1,12 @@
 import React, { Component } from 'react';
 import '../public/style.css';
-import $ from '../public/jquery.js';
 import { AppBar } from 'material-ui';
+import { Link } from 'react-router-dom';
 import { signOutUser } from '../actions/AppActions';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-
-/**
- * @return {void} return void
- */
-function redirectToEdit() {
-  location.href = '/ProfileEdit';
-}
-
-/**
- *
- * @return {void} return void
- */
-function redirectToMessages() {
-  location.href = '/#';
-}
 
 /**
  * @return {void} return void
@@ -40,9 +25,19 @@ const Menu = () => (
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
   >
-    <MenuItem primaryText="Home" onTouchTap = {redirectToMessages} />
-    <MenuItem primaryText="Edit Profile" onTouchTap = {redirectToEdit} />
-    <MenuItem primaryText="Sign out" onTouchTap={signOut} />
+  <MenuItem
+            primaryText="home"
+            containerElement={<Link to="/#" />}
+          />
+          <MenuItem
+            primaryText="Edit Profile"
+            containerElement={<Link to="/ProfileEdit" />}
+          />
+          <MenuItem
+            primaryText="Sign Out"
+            containerElement={<Link to="/" />}
+            onTouchTap={signOut}
+          />
   </IconMenu>
 );
 

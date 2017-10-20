@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../public/style.css';
-import $ from '../public/jquery.js';
-import Message from './Message';
 import { List, Subheader } from 'material-ui';
+import lodash from 'lodash';
+import '../public/style.css';
+import Message from './Message';
 
 /**
  * @class MessageList
@@ -29,9 +29,9 @@ class MessageList extends Component {
   render() {
     let groupsname = '';
     let groupId = '';
-    if (this.props.selectedGroup.length !== 0) {
-      groupsname = this.props.selectedGroup[0].groupname;
-      groupId = this.props.selectedGroup[0].groupId;
+    if (!lodash.isEmpty(this.props.selectedGroup)) {
+      groupsname = this.props.selectedGroup.groupname;
+      groupId = this.props.selectedGroup.groupId;
     }
     return (
       <div className="bottomMargin">

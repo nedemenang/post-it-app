@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
+import lodash from 'lodash';
 import '../public/style.css';
-import $ from '../public/jquery.js';
 import io from 'socket.io-client';
 import { receiveGroupMessages } from '../actions/AppActions';
 import Group from './Group';
@@ -46,8 +47,8 @@ class GroupList extends Component {
 
     this.socket.on('messageAdded', (groupsMessages) => {
       const user = localStorage.getItem('user');
-      if (this.props.selectedGroup[0] !== undefined) {
-        if (this.props.selectedGroup[0].groupId ===
+      if (!lodash.isEmpty(this.props.selectedGroup)) {
+        if (this.props.selectedGroup.groupId ===
           groupsMessages.groupId && JSON.parse(user).id === groupsMessages.userId) {
           receiveGroupMessages(groupsMessages.groupMessages);
         }

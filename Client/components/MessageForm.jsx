@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../public/style.css';
-import $ from '../public/jquery.js';
 import { receiveErrors, addMessage } from '../actions/AppActions';
+import lodash from 'lodash';
 
 
 /**
@@ -21,12 +21,12 @@ class MessageForm extends Component {
     const priority = this.state.priority;
     const postedon = (new Date()).toLocaleString('en-GB');
 
-    if (this.props.selectedGroup.length === 0) {
+    if (lodash.isEmpty(this.props.selectedGroup)) {
       receiveErrors('Please select a group to post a message');
     } else if (this.state.message === '') {
       receiveErrors('Please type in a message');
     } else {
-      if (this.props.selectedGroup[0].groupId !== undefined) {
+      if (this.props.selectedGroup.groupId !== undefined) {
         const user = localStorage.getItem('user');
         const messageObject = {
           messageBody: messagebody,
@@ -35,8 +35,8 @@ class MessageForm extends Component {
           postedBy: JSON.parse(user).email,
           postedByDisplayName: JSON.parse(user).displayName,
           profilePic: JSON.parse(user).profilePic,
-          groupId: this.props.selectedGroup[0].groupId,
-          groupName: this.props.selectedGroup[0].groupname
+          groupId: this.props.selectedGroup.groupId,
+          groupName: this.props.selectedGroup.groupname
         };
         addMessage(messageObject);
       }

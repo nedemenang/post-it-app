@@ -19,13 +19,13 @@ class User extends Component {
    */
   userClicked() {
     if (confirm('Are you sure you want to add this user to group?') === true) {
-      if (this.props.selectedGroup[0].groupId !== undefined) {
+      if (this.props.selectedGroup.groupId !== undefined) {
         const userObject = {
           email: this.props.user.email,
           userId: this.props.user.id,
           username: this.props.user.username,
-          groupId: this.props.selectedGroup[0].groupId,
-          groupName: this.props.selectedGroup[0].groupname
+          groupId: this.props.selectedGroup.groupId,
+          groupName: this.props.selectedGroup.groupname
         };
         addUserToGroup(userObject);
       }

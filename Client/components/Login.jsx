@@ -4,8 +4,8 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import $ from 'jquery';
 import '../public/style.css';
-import $ from '../public/jquery';
 import { registerUser,
   receiveErrors, login,
   registerGoogleUser } from '../actions/AppActions';
@@ -41,9 +41,9 @@ class Login extends Component {
       profilePic: ''
     };
 
-    if (this.refs.loginEmail.value === '') {
+    if (this.state.loginEmail.trim() === '') {
       receiveErrors('Please insert email');
-    } else if (this.refs.loginPassword.value === '') {
+    } else if (this.state.loginPassword.trim() === '') {
       receiveErrors('Please insert password');
     } else {
       login(user);
@@ -234,6 +234,7 @@ class Login extends Component {
       email: '',
       username: '',
       password: '',
+      phoneNumber: '',
       loginEmail: '',
       loginPassword: ''
     };
@@ -266,35 +267,42 @@ class Login extends Component {
     <h3>LOG IN</h3>
       <input type="text"
       onChange={this.handleLoginEmailChange.bind(this)}
-      value={this.state.loginEmail} ref="loginEmail" placeholder="email"/>
+      value={this.state.loginEmail} ref="loginEmail"
+      id="loginEmail"
+      placeholder="email"/>
       <input type="password"
       onChange={this.handleLoginPasswordChange.bind(this)}
+      id="loginPassword"
       value={this.state.loginpassword} ref="loginPassword" placeholder="password"/>
       <p className="error">{this.props.errors}</p>
-      <button className="button" onClick={this.login}>Log In</button>
+      <button id="loginButton" className="button" onClick={this.login}>Log In</button>
             <br/>
        <br/>
       <div id="my-signin2"></div>
-      <p className="message">Not registered? <a onClick={this.handleToggle} href="#">Create an account</a></p>
+      <p className="message">Not registered? <a onClick={this.handleToggle} id="createAccount" href="#">Create an account</a></p>
       <p className="message">Forgot Password? <a href="/PasswordReset">Reset Password</a></p>
     </form>
     <form className="register-form">
     <h3>REGISTER</h3>
       <input type="text"
       onChange={this.handleEmailChange.bind(this)}
+      id="email"
       value={this.state.email} ref="email" placeholder="email address"/>
       <input type="password"
       onChange={this.handlePasswordChange.bind(this)}
+      id="password"
       value={this.state.password} ref="password" placeholder="password"/>
       <input type="text"
       onChange={this.handleUserNameChange.bind(this)}
+      id="username"
       value={this.state.username} ref="username" placeholder="username"/>
       <input type="text"
       onChange={this.handlePhoneNumberChange.bind(this)}
+      id="phoneNo"
       value={this.state.phoneNumber} ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
       <p className="success">{this.props.success}</p>
       <p className="error">{this.props.errors}</p>
-      <button className="button" onClick={this.signup}>Register</button>
+      <button id="registerButton" className="button" onClick={this.signup}>Register</button>
       <p className="message">Already registered? <a onClick={this.handleToggle} href="#">Sign In</a></p>
     </form>
   </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../public/style.css';
-import $ from '../public/jquery.js';
 import { getUserGroups } from '../utils/appAPI';
 import GroupList from './GroupList';
 import UserList from './UserList';

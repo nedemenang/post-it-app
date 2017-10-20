@@ -18,10 +18,10 @@ let groupMessages = [];
 let usersReadMessage = [];
 let errors = '';
 let success = '';
+let selectedGroup = {};
+let isAuthenticated = false;
 const loggedInUser = [];
 const registeredUser = [];
-const selectedGroup = [];
-let isAuthenticated = false;
 
 
 const AppStore = assign({}, EventEmitter.prototype, {
@@ -119,8 +119,7 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   setSelectedGroup(group) {
-    selectedGroup.pop();
-    selectedGroup.push(group);
+    selectedGroup = group;
   },
 
   setUsersInGroup(users) {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { List, Subheader } from 'material-ui';
+import lodash from 'lodash';
 import '../public/style.css';
 import User from './User';
-import { List, Subheader } from 'material-ui';
 
 
 /**
@@ -29,20 +30,20 @@ class UserList extends Component {
    */
   render() {
     let groupsname = '';
-    if (this.props.selectedGroup.length !== 0) {
-      groupsname = this.props.selectedGroup[0].groupname;
+    if (!lodash.isEmpty(this.props.selectedGroup)) {
+      groupsname = this.props.selectedGroup.groupname;
     }
     return (
       <div>
         <List>
         <Subheader><strong>Click to add user to group</strong></Subheader>
           {
-            this.props.users.map((user, i) => <User selectedGroup={this.props.selectedGroup}
+            this.props.users.map((user, i) => <User
+            selectedGroup={this.props.selectedGroup}
             user={user} key={i} />)
           }
           </List>
       </div>
-      // button to add to group....
     );
   }
 }
