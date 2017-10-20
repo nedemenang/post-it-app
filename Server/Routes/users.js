@@ -30,14 +30,14 @@ module.exports = (app, firebase, io) => {
   });
 
   app.get('/user/:userId/group/:groupId/messages', (req, res) => {
-    userController.groupMessages(req, res, firebase, io);
+    userController.getGroupMessages(req, res, firebase, io);
   });
 
   app.get('/user/:userId/group/:groupId/quickMessages', (req, res) => {
-    userController.groupMessagesQuick(req, res, firebase);
+    userController.getGroupMessagesQuick(req, res, firebase);
   });
 
   app.get('/user/:userId/groups', (req, res) => {
-    userController.groups(req, res, firebase);
+    userController.getGroups(req, res, firebase);
   });
 };

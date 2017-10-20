@@ -5,6 +5,10 @@ module.exports = (app, firebase, io) => {
     groupController.create(req, res, firebase);
   });
 
+  app.post('/group/remove', (req, res) => {
+    groupController.removeUser(req, res, firebase);
+  });
+
   app.post('/group/:groupId/user', (req, res) => {
     groupController.addUser(req, res, firebase);
   });
@@ -14,10 +18,10 @@ module.exports = (app, firebase, io) => {
   });
 
   app.get('/group/:groupId/messages/:messageId/usersRead', (req, res) => {
-    groupController.userReadMessages(req, res, firebase);
+    groupController.getUserReadMessages(req, res, firebase);
   });
 
   app.get('/group/:groupId/notusers', (req, res) => {
-    groupController.usersNotInGroups(req, res, firebase);
+    groupController.getUsersNotInGroups(req, res, firebase);
   });
 };

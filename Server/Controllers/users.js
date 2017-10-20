@@ -72,7 +72,7 @@ export default {
   passwordReset(req, res, firebase) {
     if (req.body.emailAddress !== '') {
       res.status(400).send({
-        message: 'Please insert password'
+        message: 'Please insert valid email'
       });
     } else {
       firebase.auth().sendPasswordResetEmail(req.body.emailAddress)
@@ -192,17 +192,37 @@ export default {
    */
   signIn(req, res, firebase) {
     const { email, password } = req.body;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      res.send({
-        message: `Welcome ${user.displayName}`,
-        user
+    if (!emailValidator(email)) {
+      res.status(400).send({
+        message: 'Please insert a valid email address'
       });
-    }).catch((error) => {
-      res.status(500).send({
-        message: `Error occured while login in:  ${error.message}`
+    } else if (email === '' || password === '') {
+      res.status(400).send({
+        message: 'Please insert email or password'
       });
-    });
+    } else {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        res.send({
+          message: `Welcome ${user.displayName}`,
+          user
+        });
+      }).catch((error) => {
+        if (error.code === 'auth/wrong-password') {
+          res.status(401).send({
+            message: 'Invalid Password'
+          });
+        } else if (error.code === 'auth/user-not-found') {
+          res.status(401).send({
+            message: 'Invalid email address'
+          });
+        } else {
+          res.status(500).send({
+            message: `Error occured while login in:  ${error.message}`
+          });
+        }
+      });
+    }
   },
 
   /**
@@ -218,31 +238,30 @@ export default {
   updateUserProfile(req, res, firebase) {
     const user = firebase.auth().currentUser;
     if (user) {
-      let { userName, photo, phone } = req.body;
+      let { userName, photoURL, phoneNo } = req.body;
       if (userName === '') {
         userName = user.displayName;
       }
-      if (photo === '') {
-        photo = user.photoURL;
+      if (photoURL === '') {
+        photoURL = user.photoURL;
       }
-
-      if (phone === '') {
-        phone = user.phoneNumber;
+      if (phoneNo === '') {
+        phoneNo = user.phoneNumber;
       }
       user.updateProfile({
         displayName: userName,
-        photoURL: photo,
-        phoneNumber: phone
+        photoURL
       }).then(() => {
         const userRef = firebase.database()
              .ref(`users/${user.uid}`);
         userRef.update({
-          phoneNo: phone,
+          phoneNo,
           userName,
-          profilePic: photo
+          profilePic: photoURL
         });
         res.send({
-          message: 'Profile update successful!'
+          message: 'Profile update successful!',
+          user
         });
       }).catch((error) => {
         res.status(500).send({
@@ -267,7 +286,7 @@ export default {
    *
    * @returns {Response} response object
    */
-  groupMessages(req, res, firebase, io) {
+  getGroupMessages(req, res, firebase, io) {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
       const { userId, groupId } = req.params;
@@ -301,7 +320,7 @@ export default {
       });
     } else {
       res.status(401).send({
-        message: 'Please log in to see a list of your groups'
+        message: 'Please log in to see a list of your groups messages'
       });
     }
   },
@@ -316,7 +335,7 @@ export default {
    *
    * @returns {Response} response object
    */
-  groupMessagesQuick(req, res, firebase) {
+  getGroupMessagesQuick(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
       const { userId, groupId } = req.params;
@@ -343,7 +362,7 @@ export default {
       });
     } else {
       res.status(401).send({
-        message: 'Please log in to see a list of your groups'
+        message: 'Please log in to see a list of your groups messages'
       });
     }
   },
@@ -358,7 +377,7 @@ export default {
    *
    * @returns {Response} response object
    */
-  groups(req, res, firebase) {
+  getGroups(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
       const groupRef = firebase.database()

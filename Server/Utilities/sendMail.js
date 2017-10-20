@@ -23,7 +23,8 @@ module.exports = (mailObject) => {
 
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      console.log(error);
+      return false;
     }
+    return true;
   });
 };

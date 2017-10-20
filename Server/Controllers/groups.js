@@ -64,19 +64,21 @@ export default {
   create(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
-      const { groupName, createdBy, dateCreated, createdByUserId, createdByDisplayName } = req.body;
-      const firebaseDatabase = firebase.database();
-      const newKey = firebaseDatabase.ref('groups/').push({
-        groupName,
-        createdBy,
-        dateCreated
-      }).key;
-      const groupRef = firebaseDatabase.ref(`groups/${newKey}/users/`);
-      groupRef.child(createdByUserId).set({
-        userId: createdByUserId,
-        email: createdBy,
-        userName: createdByDisplayName
-      })
+      const { groupName, createdBy, dateCreated,
+        createdByUserId, createdByDisplayName } = req.body;
+      if (groupName !== '' || createdBy !== '' || dateCreated !== '') {
+        const firebaseDatabase = firebase.database();
+        const newKey = firebaseDatabase.ref('groups/').push({
+          groupName,
+          createdBy,
+          dateCreated
+        }).key;
+        const groupRef = firebaseDatabase.ref(`groups/${newKey}/users/`);
+        groupRef.child(createdByUserId).set({
+          userId: createdByUserId,
+          email: createdBy,
+          userName: createdByDisplayName
+        })
        .then(() => {
          const userRef = firebaseDatabase
          .ref(`users/${createdByUserId}/groups/`);
@@ -94,6 +96,11 @@ export default {
            message: `Error occurred ${error.message}`,
          });
        });
+      } else {
+        res.status(400).send({
+          message: 'Incomplete parameters!'
+        });
+      }
     } else {
       res.status(401).send({
         message: 'Only logged users can create groups'
@@ -115,15 +122,16 @@ export default {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
       const { userId, groupName, username, email } = req.body;
-      const firebaseDatabase = firebase.database();
-      const { groupId } = req.params;
-      const groupRef = firebaseDatabase
+      if (userId !== '' || groupName !== '') {
+        const firebaseDatabase = firebase.database();
+        const { groupId } = req.params;
+        const groupRef = firebaseDatabase
         .ref(`groups/${groupId}/users/`);
-      groupRef.child(userId).set({
-        email,
-        userId,
-        userName: username
-      })
+        groupRef.child(userId).set({
+          email,
+          userId,
+          userName: username
+        })
        .then(() => {
          const userRef = firebaseDatabase
          .ref(`users/${userId}/groups/`);
@@ -141,6 +149,11 @@ export default {
            message: `Error occurred ${error.message}`,
          });
        });
+      } else {
+        res.status(400).send({
+          message: 'Incomplete parameters',
+        });
+      }
     } else {
       res.status(401).send({
         message: 'Only logged users can add users to groups'
@@ -148,6 +161,43 @@ export default {
     }
   },
 
+  /**
+   * Add user to group
+   * Route: POST: /group/remove
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {firebase} firebase firebase object
+   *
+   * @returns {Response} response object
+   */
+  removeUser(req, res, firebase) {
+    const userLogIn = firebase.auth().currentUser;
+    if (userLogIn) {
+      const { userId, groupId } = req.body;
+      const firebaseDatabase = firebase.database();
+      const groupRef = firebaseDatabase
+        .ref(`groups/${groupId}/users/${userId}`);
+      groupRef.remove()
+       .then(() => {
+         const userRef = firebaseDatabase
+         .ref(`users/${userId}/groups/${groupId}`);
+         userRef.remove();
+         res.send({
+           message: 'User successfully removed',
+         });
+       })
+       .catch((error) => {
+         res.status(500).send({
+           message: `Error occurred ${error.message}`,
+         });
+       });
+    } else {
+      res.status(401).send({
+        message: 'Only logged in users can remove from groups'
+      });
+    }
+  },
   /**
    * Post message to group
    * Route: POST: /group/:groupId/message
@@ -164,82 +214,89 @@ export default {
     if (userLogIn) {
       const { messageBody, groupId, postedBy, postedByDisplayName,
         postedon, priority, groupName, profilePic } = req.body;
-      const firebaseDatabase = firebase.database();
-      const subscribers = [];
-      const messageRef = firebaseDatabase
+      if (messageBody !== '' || groupId !== '' || postedBy !== '' || priority !== '') {
+        const firebaseDatabase = firebase.database();
+        const subscribers = [];
+        const messageRef = firebaseDatabase
          .ref(`groups/${groupId}/messages`);
-      const newkey = messageRef.push({
-        messageBody,
-        postedBy,
-        postedByDisplayName,
-        postedon,
-        priority,
-        profilePic
-      }).key;
-      const userRef = firebaseDatabase
+        const newkey = messageRef.push({
+          messageBody,
+          postedBy,
+          postedByDisplayName,
+          postedon,
+          priority,
+          profilePic
+        }).key;
+        const userRef = firebaseDatabase
          .ref(`groups/${groupId}/users`);
-      userRef.orderByKey().once('value', (snapshot) => {
-        snapshot.forEach((childSnapShot) => {
-          const groupRef = firebaseDatabase
+        userRef.orderByKey().once('value', (snapshot) => {
+          snapshot.forEach((childSnapShot) => {
+            const groupRef = firebaseDatabase
             .ref(`users/${childSnapShot.key}/groups/${groupId}`);
-          groupRef.update({
-            newMessage: true
-          });
-          const userRef2 = firebaseDatabase
+            groupRef.update({
+              newMessage: true
+            });
+            const userRef2 = firebaseDatabase
               .ref(`users/${childSnapShot.key}/groups/${groupId}/messages`);
-          userRef2.child(newkey).set({
-            messageBody,
-            postedBy,
-            postedByDisplayName,
-            postedon,
-            priority,
-            isRead: false,
-            profilePic
-          });
+            userRef2.child(newkey).set({
+              messageBody,
+              postedBy,
+              postedByDisplayName,
+              postedon,
+              priority,
+              isRead: false,
+              profilePic
+            });
 
-          if (priority === 'critical') {
-            const phoneRef = firebaseDatabase
+            if (priority === 'critical') {
+              const phoneRef = firebaseDatabase
               .ref(`users/${childSnapShot.key}`);
-            phoneRef.once('value', (record) => {
-              if (record.val().phoneNo !== '') {
-                const smsObject = {
-                  phoneNo: record.val().phoneNo,
+              phoneRef.once('value', (record) => {
+                if (record.val().phoneNo !== '') {
+                  const smsObject = {
+                    phoneNo: record.val().phoneNo,
+                    groupName
+                  };
+                  sendSMS(smsObject);
+                }
+              });
+            }
+            if (priority === 'critical' ||
+              priority === 'urgent') {
+              const emailRef = firebaseDatabase
+              .ref(`users/${childSnapShot.key}`);
+              emailRef.once('value', (record) => {
+                const emailObject = {
+                  To: record.val().email,
                   groupName
                 };
-                sendSMS(smsObject);
-              }
-            });
-          }
-          if (priority === 'critical' ||
-              priority === 'urgent') {
-            const emailRef = firebaseDatabase
-              .ref(`users/${childSnapShot.key}`);
-            emailRef.once('value', (record) => {
-              const emailObject = {
-                To: record.val().email,
-                groupName
-              };
-              sendEmail(emailObject);
-            });
-          }
-          subscribers.push(childSnapShot.key);
-        });
-        io.emit('messageBroadcast', {
-          subscribers,
-          groupName,
-          postedBy
-        });
-      })
+                sendEmail(emailObject);
+              });
+            }
+            subscribers.push(childSnapShot.key);
+          });
+          io.emit('messageBroadcast', {
+            subscribers,
+            groupName,
+            postedBy
+          });
+        })
        .then(() => {
          res.send({
            message: 'Message successfully added',
          });
        })
        .catch((error) => {
+         console.log(error);
          res.status(500).send({
            message: `Error occurred ${error.message}`,
          });
        });
+      } else {
+        res.status(400).send({
+          message: 'Incomplete parameters'
+        });
+      }
     } else {
       res.status(401).send({
         message: 'Only logged users can add messages to groups'
@@ -257,7 +314,7 @@ export default {
    *
    * @returns {Response} response object
    */
-  userReadMessages(req, res, firebase) {
+  getUserReadMessages(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { groupId, messageId } = req.params;
     if (userLogIn) {
@@ -285,7 +342,7 @@ export default {
           });
     } else {
       res.status(401).send({
-        message: 'Please log in to see a list of your groups'
+        message: 'Please log in to see who has read the message'
       });
     }
   },
@@ -300,7 +357,7 @@ export default {
    *
    * @returns {Response} response object
    */
-  usersNotInGroups(req, res, firebase) {
+  getUsersNotInGroups(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { groupId } = req.params;
     if (userLogIn) {
@@ -345,7 +402,7 @@ export default {
           });
     } else {
       res.status(401).send({
-        message: 'Please log in to see a list of your groups'
+        message: 'Please log in to see a list of users not in group'
       });
     }
   }
