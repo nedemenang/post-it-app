@@ -22,6 +22,7 @@ module.exports = {
   "rules": {
     "max-len":["error", 80, 2],
     "indent": ["error", 2],
+    "react/jsx-uses-vars": 2,
     "one-var": 0,
     "one-var-declaration-per-line": 0,
     "new-cap": 0,
