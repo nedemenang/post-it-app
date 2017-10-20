@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>14/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">28.57% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/7</span>
+        <span class='fraction'>7/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>14/14</span>
       </div>
     </div>
   </div>
@@ -66,50 +66,62 @@
 21
 22
 23
-24</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+24
+25
+26
+27
+28</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import groupController from '../Controllers/groups';<span class="branch-1 cbranch-no" title="branch not covered" ></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import groupController from '../Controllers/groups';
 &nbsp;
 module.exports = (app, firebase, io) =&gt; {
-  app.post('/group', <span class="fstat-no" title="function not covered" >(r</span>es, req) =&gt; {
-    groupController.create(res, req, firebase);
+  app.post('/group', (req, res) =&gt; {
+    groupController.create(req, res, firebase);
   });
 &nbsp;
-  app.post('/group/:groupId/user', <span class="fstat-no" title="function not covered" >(r</span>es, req) =&gt; {
-    groupController.addUser(res, req, firebase);
+  app.post('/group/remove', (req, res) =&gt; {
+    groupController.removeUser(req, res, firebase);
   });
 &nbsp;
-  app.post('/group/:groupId/message', <span class="fstat-no" title="function not covered" >(r</span>es, req) =&gt; {
-    groupController.postMessage(res, req, firebase, io);
+  app.post('/group/:groupId/user', (req, res) =&gt; {
+    groupController.addUser(req, res, firebase);
   });
 &nbsp;
-  app.get('/group/:groupId/messages/:messageId/usersRead', <span class="fstat-no" title="function not covered" >(r</span>es, req) =&gt; {
-    groupController.userReadMessages(res, req, firebase);
+  app.post('/group/:groupId/message', (req, res) =&gt; {
+    groupController.postMessage(req, res, firebase, io);
   });
 &nbsp;
-  app.get('/group/:groupId/notusers', <span class="fstat-no" title="function not covered" >(r</span>es, req) =&gt; {
-    groupController.usersNotInGroups(res, req, firebase);
+  app.get('/group/:groupId/messages/:messageId/usersRead', (req, res) =&gt; {
+    groupController.getUserReadMessages(req, res, firebase);
+  });
+&nbsp;
+  app.get('/group/:groupId/notusers', (req, res) =&gt; {
+    groupController.getUsersNotInGroups(req, res, firebase);
   });
 };
 &nbsp;</pre></td></tr>
@@ -118,7 +130,7 @@ module.exports = (app, firebase, io) =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Sep 03 2017 01:12:04 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Oct 20 2017 10:27:49 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

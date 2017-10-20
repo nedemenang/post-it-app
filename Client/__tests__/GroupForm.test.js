@@ -46,6 +46,13 @@ describe('the group form component', () => {
     expect(Object.keys(groupFormItem().props()).length).toBeGreaterThan(0);
   });
 
+  it('should call function on submit of form', () => {
+    const component = shallow(<GroupForm loggedInUser = {loggedInUser}/>);
+    const preventDefault = jest.fn();
+    component.find('form').simulate('submit', { preventDefault });
+    expect(preventDefault).toBeCalled();
+  });
+
   it('should update state on input field change', () => {
     const input = groupFormItem().find('input').first();
     input.simulate('change', { target: {
