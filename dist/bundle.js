@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b4596d624ef1931a0079"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "92a3696b6530ca831491"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -33862,7 +33862,7 @@ exports = module.exports = __webpack_require__(235)(undefined);
 
 
 // module
-exports.push([module.i, "\n.login-page {\n  width: 360px;\n  padding: 8% 0 0;\n  margin: auto;\n  \n}\n\n#submit {\n\theight: 60px;\n\tfloat:right;\n\ttext-align:center;\n\tbackground-color: #4CAF4F;\n\tdisplay: block;\n\tmargin: 0 auto;\n\tborder: none;\n\tbox-shadow: 3px 3px 3px #efedee;\n\tborder-radius: 2px;\n\tcolor:white;\n\tfont-weight: bold;\n\tfont-size: 17px;\n\toutline: none;\n\tcursor:pointer;\n}\n\n.topnav {\n  position: fixed;\n  z-index: 2;\n  font-size: 17px;\n  width: 100%;\n  padding: 0;\n}\n\n.footer {\n  display: block;\n\tposition:fixed;\n\tbottom:0;\n\tleft:0;\n\twidth:100%;\n\tpadding-top: 20px;\n  background-color: white;\n  border-color: #4CAF4F; \n  height: 150px;\n  z-index: 2;\n}\n#chatform {\n\twidth:700px;\n\tmargin: 0 auto;\n\tbackground-color: white;\n}\n\n#message {\n\twidth: 550px;\n\theight: 65px;\n\tdisplay: block;\n\tfloat:left;\n\tmargin: 0 auto;\n\tbackground-color: #f9f9f9;\n\tborder: 1px solid #cccccc;\n\tborder-radius: 2px;\n  padding-left: 5px;\n  margin-left: 50px;\n\tpadding-top: 10px;\n\tresize: none;\n\tfont:inherit;\n  color:inherit;\n  margin-bottom: 20px;\n  flex-grow: 2;\n}\n\n.form {\n  position: relative;\n  z-index: 1;\n  background: #FFFFFF;\n  max-width: 360px;\n  margin: 0 auto 100px;\n  padding: 35px;\n  text-align: center;\n}\n.form input {\n  font-family: \"Roboto\", sans-serif;\n  outline: 0;\n  background: #f2f2f2;\n  width: 95%;\n  border: 0;\n  margin: 0 0 15px;\n  padding: 15px;\n  box-sizing: border-box;\n  font-size: 14px;\n}\n.button {\n  font-family: \"Roboto\", sans-serif;\n  text-transform: uppercase;\n  outline: 0;\n  background: #4CAF4F;\n  width: 100%;\n  border: 0;\n  padding: 15px;\n  color: #FFFFFF;\n  font-size: 14px;\n  cursor: pointer;\n}\n\n.messageButton {\n  font-family: \"Roboto\", sans-serif;\n  text-transform: uppercase;\n  outline: 0;\n  background: #4CAF50;\n  width: 25%;\n  border: 0;\n  padding: 15px;\n  color: #FFFFFF;\n  font-size: 14px;\n  cursor: pointer;\n  margin-left: 75%;\n  margin-top: 10px\n}\n\n.error {\n  color: #F44336;\n}\n.login-image {\n  width: 38%;\n  float: left;\n}\n\n.success {\n  color:#4CAF50;\n}\n\n.googleButton {\n\n  font-family: \"Roboto\", sans-serif;\n  text-transform: uppercase;\n  outline: 0;\n  background: #F44336;\n  width: 100%;\n  border: 0;\n  padding: 15px;\n  color: #FFFFFF;\n  font-size: 14px;\n  cursor: pointer;\n}\n\nh3 {\n  font-family: \"Roboto\", sans-serif;\n  color: #43A047;\n}\n\n.button:hover,.form button:active,.form button:focus {\n  background:#43A047; \n}\n\n.messageButton:hover,.messageButton:active,.messageButton:focus {\n  background:#43A047; \n}\n\n.googleButton:hover,.googleButton:active,.googleButton:focus {\n  background: #D32F2F;\n}\n\n.form .message {\n  margin: 15px 0 0;\n  color: #b3b3b3;\n  font-size: 12px;\n}\n\n.form .register-form {\n  display: none;\n}\n\n.group-form {\n  display: none;\n  width: 93%;\n}\n\n.form .message a {\n  color: #4CAF50;\n  text-decoration: none;\n}\n\nbody {\n  font-family: \"Roboto\", sans-serif;  \n  margin: 0;  \n}\n\n.leftColumn {\n\n  flex-grow: 0;\n  width: 20%;\n}\n\n.rightColumn {\n\n  flex-grow: 2;\n  margin-left: 30px; \n  margin-right: 30px;\n  margin-top: 60px;\n  margin-bottom: 120px;\n  width: 72%;\n\n}\n\n.bottomMargin {\n  \n}\n\n.row {\n  display: flex;\n  flex-flow: row wrap;\n  max-width: 1200;\n  width: 100%;\n}\n\n.col-md-4, .col-md-8{\n  position: relative;\n  min-height: 1px;\n  padding-right: 15px;\n  padding-left: 15px;\n}\n\n.col-md-8 {\n    width: 61.66666667%;\n  }\n\n.col-md-4 {\n    width: 33.33333333%;\n  }\n\n  @media (min-width: 992px) {\n .col-md-8 {\n    float: right;\n  }\n}\n\n@media (min-width: 992px) {\n.col-md-4 {\n    float: left;\n  }\n}\n\n.form-control {\n  font-family: \"Roboto\", sans-serif;\n  display: block;\n  width: 97%;\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857143;\n  color: #555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  margin-right: 30%;\n\n}\n\n.form-select {\n  font-family: \"Roboto\", sans-serif;\n  display: block;\n  width: 575px;\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 13px;\n  line-height: 1.42857143;\n  color: #555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  margin-left: 7%;\n  margin-bottom: 15px;\n}\n\n\n.well {\n  min-height: 20px;\n  padding: 19px;\n  margin-bottom: 20px;\n  background-color: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  border-radius: 4px;\n}", ""]);
+exports.push([module.i, "\n.login-page {\n  width: 360px;\n  padding: 8% 0 0;\n  margin: auto;\n  \n}\n\n#submit {\n\theight: 60px;\n\tfloat:right;\n\ttext-align:center;\n\tbackground-color: #4CAF4F;\n\tdisplay: block;\n\tmargin: 0 auto;\n\tborder: none;\n\tbox-shadow: 3px 3px 3px #efedee;\n\tborder-radius: 2px;\n\tcolor:white;\n\tfont-weight: bold;\n\tfont-size: 17px;\n\toutline: none;\n\tcursor:pointer;\n}\n\n.topnav {\n  position: fixed;\n  z-index: 2;\n  font-size: 17px;\n  width: 100%;\n  padding: 0;\n}\n\n.footer {\n  display: block;\n\tposition:fixed;\n\tbottom:0;\n\tleft:0;\n\twidth:100%;\n\tpadding-top: 20px;\n  background-color: white;\n  border-color: #4CAF4F; \n  height: 150px;\n  z-index: 2;\n}\n#chatform {\n\twidth:700px;\n\tmargin: 0 auto;\n\tbackground-color: white;\n}\n\n#message {\n\twidth: 550px;\n\theight: 65px;\n\tdisplay: block;\n\tfloat:left;\n\tmargin: 0 auto;\n\tbackground-color: #f9f9f9;\n\tborder: 1px solid #cccccc;\n\tborder-radius: 2px;\n  padding-left: 5px;\n  margin-left: 50px;\n\tpadding-top: 10px;\n\tresize: none;\n\tfont:inherit;\n  color:inherit;\n  margin-bottom: 20px;\n  flex-grow: 2;\n}\n\n.form {\n  position: relative;\n  z-index: 1;\n  background: #FFFFFF;\n  max-width: 360px;\n  margin: 0 auto 100px;\n  padding: 35px;\n  text-align: center;\n}\n.form input {\n  font-family: \"Roboto\", sans-serif;\n  outline: 0;\n  background: #f2f2f2;\n  width: 95%;\n  border: 0;\n  margin: 0 0 15px;\n  padding: 15px;\n  box-sizing: border-box;\n  font-size: 14px;\n}\n.button {\n  font-family: \"Roboto\", sans-serif;\n  text-transform: uppercase;\n  outline: 0;\n  background: #4CAF4F;\n  width: 100%;\n  border: 0;\n  padding: 15px;\n  color: #FFFFFF;\n  font-size: 14px;\n  cursor: pointer;\n}\n\n.messageButton {\n  font-family: \"Roboto\", sans-serif;\n  text-transform: uppercase;\n  outline: 0;\n  background: #4CAF50;\n  width: 25%;\n  border: 0;\n  padding: 15px;\n  color: #FFFFFF;\n  font-size: 14px;\n  cursor: pointer;\n  margin-left: 75%;\n  margin-top: 10px\n}\n\n.error {\n  color: #F44336;\n}\n.login-image {\n  width: 38%;\n  float: left;\n  background-image: url(" + __webpack_require__(1082) + ");\n}\n\n.success {\n  color:#4CAF50;\n}\n\n.googleButton {\n\n  font-family: \"Roboto\", sans-serif;\n  text-transform: uppercase;\n  outline: 0;\n  background: #F44336;\n  width: 100%;\n  border: 0;\n  padding: 15px;\n  color: #FFFFFF;\n  font-size: 14px;\n  cursor: pointer;\n}\n\nh3 {\n  font-family: \"Roboto\", sans-serif;\n  color: #43A047;\n}\n\n.button:hover,.form button:active,.form button:focus {\n  background:#43A047; \n}\n\n.messageButton:hover,.messageButton:active,.messageButton:focus {\n  background:#43A047; \n}\n\n.googleButton:hover,.googleButton:active,.googleButton:focus {\n  background: #D32F2F;\n}\n\n.form .message {\n  margin: 15px 0 0;\n  color: #b3b3b3;\n  font-size: 12px;\n}\n\n.form .register-form {\n  display: none;\n}\n\n.group-form {\n  display: none;\n  width: 93%;\n}\n\n.form .message a {\n  color: #4CAF50;\n  text-decoration: none;\n}\n\nbody {\n  font-family: \"Roboto\", sans-serif;  \n  margin: 0;  \n}\n\n.leftColumn {\n\n  flex-grow: 0;\n  width: 20%;\n}\n\n.rightColumn {\n\n  flex-grow: 2;\n  margin-left: 30px; \n  margin-right: 30px;\n  margin-top: 60px;\n  margin-bottom: 120px;\n  width: 72%;\n\n}\n\n.bottomMargin {\n  \n}\n\n.row {\n  display: flex;\n  flex-flow: row wrap;\n  max-width: 1200;\n  width: 100%;\n}\n\n.col-md-4, .col-md-8{\n  position: relative;\n  min-height: 1px;\n  padding-right: 15px;\n  padding-left: 15px;\n}\n\n.col-md-8 {\n    width: 61.66666667%;\n  }\n\n.col-md-4 {\n    width: 33.33333333%;\n  }\n\n  @media (min-width: 992px) {\n .col-md-8 {\n    float: right;\n  }\n}\n\n@media (min-width: 992px) {\n.col-md-4 {\n    float: left;\n  }\n}\n\n.form-control {\n  font-family: \"Roboto\", sans-serif;\n  display: block;\n  width: 97%;\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 14px;\n  line-height: 1.42857143;\n  color: #555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  margin-right: 30%;\n\n}\n\n.form-select {\n  font-family: \"Roboto\", sans-serif;\n  display: block;\n  width: 575px;\n  height: 34px;\n  padding: 6px 12px;\n  font-size: 13px;\n  line-height: 1.42857143;\n  color: #555;\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  margin-left: 7%;\n  margin-bottom: 15px;\n}\n\n\n.well {\n  min-height: 20px;\n  padding: 19px;\n  margin-bottom: 20px;\n  background-color: #f5f5f5;\n  border: 1px solid #e3e3e3;\n  border-radius: 4px;\n}", ""]);
 
 // exports
 
@@ -61255,11 +61255,7 @@ var Menu = function Menu() {
       containerElement: _react2.default.createElement(_reactRouterDom.Link, { to: '/ProfileEdit' })
     }),
     _react2.default.createElement(_MenuItem2.default, {
-      primaryText: 'Edit Profile',
-      containerElement: _react2.default.createElement(_reactRouterDom.Link, { to: '/ProfileEdit' })
-    }),
-    _react2.default.createElement(_MenuItem2.default, {
-      primaryText: 'home',
+      primaryText: 'Sign Out',
       containerElement: _react2.default.createElement(_reactRouterDom.Link, { to: '/' }),
       onTouchTap: signOut
     })
@@ -115076,10 +115072,6 @@ __webpack_require__(40);
 
 var _AppActions = __webpack_require__(58);
 
-var _logo = __webpack_require__(1082);
-
-var _logo2 = _interopRequireDefault(_logo);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -115122,9 +115114,9 @@ var Login = function (_Component) {
         profilePic: ''
       };
 
-      if (this.refs.loginEmail.value === '') {
+      if (this.state.loginEmail.trim() === '') {
         (0, _AppActions.receiveErrors)('Please insert email');
-      } else if (this.refs.loginPassword.value === '') {
+      } else if (this.state.loginPassword.trim() === '') {
         (0, _AppActions.receiveErrors)('Please insert password');
       } else {
         (0, _AppActions.login)(user);
@@ -115354,6 +115346,7 @@ var Login = function (_Component) {
       email: '',
       username: '',
       password: '',
+      phoneNumber: '',
       loginEmail: '',
       loginPassword: ''
     };
@@ -115382,11 +115375,7 @@ var Login = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'div',
-          { className: 'login-image' },
-          _react2.default.createElement('img', { src: _logo2.default })
-        ),
+        _react2.default.createElement('div', { className: 'login-image' }),
         _react2.default.createElement(
           'div',
           { className: 'login-page' },
@@ -115403,9 +115392,12 @@ var Login = function (_Component) {
               ),
               _react2.default.createElement('input', { type: 'text',
                 onChange: this.handleLoginEmailChange.bind(this),
-                value: this.state.loginEmail, ref: 'loginEmail', placeholder: 'email' }),
+                value: this.state.loginEmail, ref: 'loginEmail',
+                id: 'loginEmail',
+                placeholder: 'email' }),
               _react2.default.createElement('input', { type: 'password',
                 onChange: this.handleLoginPasswordChange.bind(this),
+                id: 'loginPassword',
                 value: this.state.loginpassword, ref: 'loginPassword', placeholder: 'password' }),
               _react2.default.createElement(
                 'p',
@@ -115414,7 +115406,7 @@ var Login = function (_Component) {
               ),
               _react2.default.createElement(
                 'button',
-                { className: 'button', onClick: this.login },
+                { id: 'loginButton', className: 'button', onClick: this.login },
                 'Log In'
               ),
               _react2.default.createElement('br', null),
@@ -115426,7 +115418,7 @@ var Login = function (_Component) {
                 'Not registered? ',
                 _react2.default.createElement(
                   'a',
-                  { onClick: this.handleToggle, href: '#' },
+                  { onClick: this.handleToggle, id: 'createAccount', href: '#' },
                   'Create an account'
                 )
               ),
@@ -115451,15 +115443,19 @@ var Login = function (_Component) {
               ),
               _react2.default.createElement('input', { type: 'text',
                 onChange: this.handleEmailChange.bind(this),
+                id: 'email',
                 value: this.state.email, ref: 'email', placeholder: 'email address' }),
               _react2.default.createElement('input', { type: 'password',
                 onChange: this.handlePasswordChange.bind(this),
+                id: 'password',
                 value: this.state.password, ref: 'password', placeholder: 'password' }),
               _react2.default.createElement('input', { type: 'text',
                 onChange: this.handleUserNameChange.bind(this),
+                id: 'username',
                 value: this.state.username, ref: 'username', placeholder: 'username' }),
               _react2.default.createElement('input', { type: 'text',
                 onChange: this.handlePhoneNumberChange.bind(this),
+                id: 'phoneNo',
                 value: this.state.phoneNumber, ref: 'phoneNo', placeholder: 'Phone number (+2348012345678)' }),
               _react2.default.createElement(
                 'p',
@@ -115473,7 +115469,7 @@ var Login = function (_Component) {
               ),
               _react2.default.createElement(
                 'button',
-                { className: 'button', onClick: this.signup },
+                { id: 'registerButton', className: 'button', onClick: this.signup },
                 'Register'
               ),
               _react2.default.createElement(

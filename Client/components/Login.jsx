@@ -9,8 +9,6 @@ import '../public/style.css';
 import { registerUser,
   receiveErrors, login,
   registerGoogleUser } from '../actions/AppActions';
-import logo from '../public/images/logo.png';
-
 
 /**
  * @class Login
@@ -258,7 +256,6 @@ class Login extends Component {
     return (
       <div>
       <div className="login-image">
-               <img src = {logo} />
               </div>
       <div className="login-page">
 
