@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../public/style.css';
 import { addUserToGroup } from '../actions/AppActions';
 import { ListItem } from 'material-ui/List';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 
 
@@ -18,18 +21,37 @@ class User extends Component {
    * @memberof User
    */
   userClicked() {
-    if (confirm('Are you sure you want to add this user to group?') === true) {
-      if (this.props.selectedGroup.groupId !== undefined) {
-        const userObject = {
-          email: this.props.user.email,
-          userId: this.props.user.id,
-          username: this.props.user.username,
-          groupId: this.props.selectedGroup.groupId,
-          groupName: this.props.selectedGroup.groupname
-        };
-        addUserToGroup(userObject);
-      }
+    this.setState({ open: true });
+  }
+
+
+  /**
+   * 
+   * 
+   * @memberof User
+   */
+  handleClose() {
+    this.setState({ open: false });
+  }
+
+
+  /**
+   * 
+   * 
+   * @memberof User
+   */
+  handleSave() {
+    if (this.props.selectedGroup.groupId !== undefined) {
+      const userObject = {
+        email: this.props.user.email,
+        userId: this.props.user.id,
+        username: this.props.user.username,
+        groupId: this.props.selectedGroup.groupId,
+        groupName: this.props.selectedGroup.groupname
+      };
+      addUserToGroup(userObject);
     }
+    this.setState({ open: false });
   }
 
   /**
@@ -39,8 +61,12 @@ class User extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      open: false
+    };
     this.userClicked = this.userClicked.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   /**
@@ -50,7 +76,32 @@ class User extends Component {
    * @memberof User
    */
   render() {
+    const actions = [
+      <FlatButton
+        label="No"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Yes"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleSave}
+      />,
+    ];
+
     return (
+      <div>
+        <Dialog
+          title="Confirmation"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+          Are you sure you want to add this user?
+        </Dialog>
+
         <ListItem leftAvatar={
         <Avatar
           src={this.props.user.profilePic}
@@ -60,6 +111,7 @@ class User extends Component {
       } onTouchTap={this.userClicked}>
          <strong>{this.props.user.username}</strong>
      </ListItem>
+     </div>
     );
   }
 }
