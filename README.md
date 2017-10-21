@@ -3,7 +3,7 @@
 
 
 
-# PostIt Application
+# Post-It Application
 
 
 ## Background Information 
