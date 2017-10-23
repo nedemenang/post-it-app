@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "45a394d5e0e58d9e794f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3e13c75d49f55aeeaaa3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -115172,7 +115172,7 @@ var Login = function (_Component) {
     value: function signup(event) {
       event.preventDefault();
       var str = location.href;
-      var str2 = str.replace('#', ' ');
+      var str2 = str.replace('#', '');
       var user = {
         email: this.state.email.trim(),
         password: this.state.password.trim(),
