@@ -11,6 +11,9 @@ import AppStore from '../stores/AppStore';
 import { AppBar } from 'material-ui';
 import Notification from './notification';
 import Drawer from 'material-ui/Drawer';
+import io from 'socket.io-client';
+import lodash from 'lodash';
+import toastr from 'toastr';
 
 /**
  * Gets initial state of the app
@@ -45,7 +48,9 @@ class MessageBoard extends Component {
    * @memberof MessageBoard
    */
   onChange() {
-    this.setState(getAppState());
+    if (this.mounted) {
+      this.setState(getAppState());
+    }
   }
 
   /**
@@ -71,6 +76,19 @@ class MessageBoard extends Component {
     const user = localStorage.getItem('user');
     getUserGroups(JSON.parse(user).id);
     AppStore.addChangeListener(this.onChange.bind(this));
+    this.mounted = true;
+
+    this.socket = io(`${__dirname}`);
+    this.socket.on('connect', () => {});
+
+    this.socket.on('messageBroadcast', (subscribers) => {
+      const user = localStorage.getItem('user');
+      if (JSON.parse(user).email !== subscribers.postedBy) {
+        if (lodash.indexOf(subscribers.subscribers, String(JSON.parse(user).id), true) !== -1) {
+          toastr.info(`Message posted in ${subscribers.groupName} group`);
+        }
+      }
+    });
   }
 
 /**
@@ -81,6 +99,7 @@ class MessageBoard extends Component {
  * @memberof MessageBoard
  */
   componentWillUnmount() {
+    this.mounted = false;
     AppStore.removeChangeListener(this.onChange.bind(this));
   }
 
@@ -94,7 +113,7 @@ class MessageBoard extends Component {
   constructor(props) {
     super(props);
     this.handleRequestClose = this.handleRequestClose.bind(this);
-
+    this.mounted = false;
     this.state = getAppState();
   }
 
@@ -117,6 +136,9 @@ class MessageBoard extends Component {
           groups = {this.state.groups}
           loggedInUser = {this.state.loggedInUser} />
           <GroupForm loggedInUser = {this.state.loggedInUser}/>
+          <hr/>
+          <strong>&nbsp; &nbsp;User List</strong>
+          <hr/>
           <UserList {...this.state} />
           </Drawer>
         </div>

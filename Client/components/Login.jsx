@@ -78,7 +78,7 @@ class Login extends Component {
   signup(event) {
     event.preventDefault();
     const str = location.href;
-    const str2 = str.replace('#', ' ');
+    const str2 = str.replace('#', '');
     const user = {
       email: this.state.email.trim(),
       password: this.state.password.trim(),

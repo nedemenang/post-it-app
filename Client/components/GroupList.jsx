@@ -54,6 +54,7 @@ class GroupList extends Component {
         }
       }
     });
+    this.mounted = true;
     AppStore.addChangeListener(this.onChange.bind(this));
   }
 
@@ -62,7 +63,8 @@ class GroupList extends Component {
    * @return {void} return void
    * @memberof GroupList
    */
-  componentUnmount() {
+  componentWillUnmount() {
+    this.mounted = false;
     AppStore.removeChangeListener(this.onChange.bind(this));
   }
 
@@ -84,7 +86,7 @@ class GroupList extends Component {
   constructor(props) {
     super(props);
     this.handleToggle = this.handleToggle.bind(this);
-   // this.groupClicked = this.groupClicked.bind(this);
+    this.mounted = false;
     this.state = {};
   }
 
@@ -94,7 +96,9 @@ class GroupList extends Component {
    * @memberof GroupList
    */
   onChange() {
-    this.setState(getAppState());
+    if (this.mounted) {
+      this.setState(getAppState());
+    }
   }
 
   /**
