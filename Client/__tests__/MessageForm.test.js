@@ -53,7 +53,7 @@ describe('the Message form component', () => {
   it('should call function on submit of form', () => {
     const component = shallow(<MessageForm loggedInUser = {loggedInUser}/>);
     const preventDefault = jest.fn();
-    component.find('button').simulate('click', { preventDefault });
+    component.find('FlatButton').simulate('click', { preventDefault });
     expect(preventDefault).toBeCalled();
   });
 

@@ -217,6 +217,7 @@ ShallowWrapper {
         "_reactInternalInstance": [Circular],
         "context": Object {},
         "handleToggle": [Function],
+        "mounted": false,
         "props": Object {
           "groups": Array [
             Object {

@@ -32,6 +32,11 @@ exports[`the Message board component should match snapshot test 1`] = `
         <GroupForm
           loggedInUser={Array []}
         />
+        <hr />
+        <strong>
+             User List
+        </strong>
+        <hr />
         <UserList
           errors=""
           groups={Array []}

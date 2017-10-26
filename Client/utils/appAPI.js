@@ -25,10 +25,9 @@ export const registerNewUser = (user) => {
     };
     receiveSuccess(response.data.message);
     receiveAuthenticatedUser(authuser);
-    receiveErrors('');
   })
   .catch((error) => {
-    receiveErrors(error.message);
+    receiveErrors(error.response.data.message);
   });
 };
 
@@ -39,10 +38,9 @@ export const updateUserProfile = (user) => {
     phoneNo: user.phoneNo
   }).then((response) => {
     receiveSuccess(response.data.message);
-    receiveErrors('');
   })
   .catch((error) => {
-    receiveErrors(error.message);
+    receiveErrors(error.response.data.message);
   });
 };
 
@@ -61,10 +59,9 @@ export const signinUser = (user) => {
     };
     receiveSuccess(response.data.message);
     receiveAuthenticatedUser(authuser);
-    receiveErrors('');
   })
   .catch((error) => {
-    receiveErrors(error.message);
+    receiveErrors(error.response.data.message);
   });
 };
 
@@ -73,10 +70,9 @@ export const resetPassword = (emailAddress) => {
     emailAddress
   }).then((response) => {
     receiveSuccess(response.data.message);
-    receiveErrors('');
   })
     .catch((error) => {
-      receiveErrors(error.message);
+      receiveErrors(error.response.data.message);
     });
 };
 
@@ -86,10 +82,9 @@ export const confirmResetPassword = (resetObject) => {
     newPassword: resetObject.newPassword
   }).then((response) => {
     receiveSuccess(response.data.message);
-    receiveErrors('');
   })
     .catch((error) => {
-      receiveErrors(error.message);
+      receiveErrors(error.response.data.message);
     });
 };
 
@@ -106,10 +101,9 @@ export const signinGoogleUser = (idToken) => {
     };
     receiveSuccess(response.data.message);
     receiveAuthenticatedUser(authuser);
-    receiveErrors('');
   })
   .catch((error) => {
-    receiveErrors(error.message);
+    receiveErrors(error.response.data.message);
   });
 };
 
@@ -119,7 +113,7 @@ export const signoutUser = () => {
     receiveSuccess(response.data.message);
   })
     .catch((error) => {
-      receiveErrors(error.message);
+      receiveErrors(error.response.data.message);
     });
 };
 
@@ -135,7 +129,7 @@ export const createNewGroup = (group) => {
     receiveSuccess(response.data.message);
   })
     .catch((error) => {
-      receiveErrors(error.message);
+      receiveErrors(error.response.data.message);
     });
 };
 
@@ -149,7 +143,7 @@ export const addUserToGroup = (user) => {
     receiveSuccess(response.data.message);
   })
   .catch((error) => {
-    receiveErrors(error.message);
+    receiveErrors(error.response.data.message);
   });
 };
 
@@ -167,7 +161,7 @@ export const postMessage = (message) => {
     receiveSuccess(response.data.message);
   })
     .catch((error) => {
-      receiveErrors(error.message);
+      receiveErrors(error.response.data.message);
     });
 };
 
@@ -180,7 +174,7 @@ export const updateMessageFlag = (updateObject) => {
     receiveSuccess(response.data.message);
   })
     .catch((error) => {
-      receiveErrors(error.message);
+      receiveErrors(error.response.data.message);
     });
 };
 
@@ -191,7 +185,7 @@ export const getUserGroups = (userId) => {
      receiveUserGroups(response.data.groups);
    })
    .catch((error) => {
-     receiveErrors(error.message);
+     receiveErrors(error.response.data.message);
    });
 };
 
@@ -206,7 +200,7 @@ export const getQuickGroupMessages = (userGroup) => {
       receiveGroupMessages(response.data.groupMessages);
     })
    .catch((error) => {
-     receiveErrors(error.message);
+     receiveErrors(error.response.data.message);
    });
 };
 
@@ -217,7 +211,7 @@ export const getUsersReadMessage = (item) => {
       receiveUserReadMessages(response.data.usersRead);
     })
    .catch((error) => {
-     receiveErrors(error.message);
+     receiveErrors(error.response.data.message);
    });
 };
 
@@ -228,7 +222,7 @@ export const getUsersInGroups = (group) => {
      receiveUserInGroupResults(response.data.users);
    })
    .catch((error) => {
-     receiveErrors(error.message);
+     receiveErrors(error.response.data.message);
    });
 };
 
@@ -239,7 +233,7 @@ export const getUsersNotInGroups = (group) => {
      receiveUserNotInGroupResults(response.data.userNotInGroup);
    })
    .catch((error) => {
-     receiveErrors(error.message);
+     receiveErrors(error.response.data.message);
    });
 };
 
