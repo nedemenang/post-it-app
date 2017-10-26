@@ -70,22 +70,32 @@ export default {
    * @returns {Response} response object
    */
   passwordReset(req, res, firebase) {
-    if (req.body.emailAddress !== '') {
+    const email = req.body.emailAddress;
+    if (!emailValidator(email)) {
       res.status(400).send({
-        message: 'Please insert valid email'
+        message: 'Please insert valid email address'
+      });
+    } else if (email === '') {
+      res.status(400).send({
+        message: 'Please insert valid email address'
       });
     } else {
-      firebase.auth().sendPasswordResetEmail(req.body.emailAddress)
+      firebase.auth().sendPasswordResetEmail(email)
     .then(() => {
       res.status(200).send({
         message: 'Email successfully. Kindly check your inbox for reset link.'
       });
     // Email sent.
     }).catch((error) => {
-      res.status(500).send({
-        message: `Error occured while sending:  ${error.message}`
-      });
-      // An error happened.
+      if (error.code === 'auth/user-not-found') {
+        res.status(401).send({
+          message: 'The email address does not exist'
+        });
+      } else {
+        res.status(500).send({
+          message: `Error occured while sending:  ${error.message}`
+        });
+      }
     });
     }
   },
