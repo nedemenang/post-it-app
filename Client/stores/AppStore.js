@@ -8,6 +8,7 @@ postMessage, updateMessageFlag,
 signoutUser } from '../utils/appAPI';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
+import toastr from 'toastr';
 
 const CHANGE_EVENT = 'change';
 
@@ -16,8 +17,8 @@ let usersNotInGroup = [];
 let userGroups = [];
 let groupMessages = [];
 let usersReadMessage = [];
-let errors = '';
-let success = '';
+const errors = '';
+const success = '';
 let selectedGroup = {};
 let isAuthenticated = false;
 const loggedInUser = [];
@@ -55,11 +56,15 @@ const AppStore = assign({}, EventEmitter.prototype, {
   },
 
   receiveErrors(error) {
-    errors = error;
+    if (error !== '' && typeof error !== 'undefined') {
+      toastr.error(error);
+    }
   },
 
   receiveSuccess(message) {
-    success = message;
+    if (message !== '' && typeof message !== 'undefined') {
+      toastr.success(message);
+    }
   },
 
   getErrors() {

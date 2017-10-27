@@ -75,5 +75,5 @@ postitappnnam.herokuapp.com
 
 ## License
 
-This project is licensed under the ISC License 
+This project is licensed under the MIT License 
 

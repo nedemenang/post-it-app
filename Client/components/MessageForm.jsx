@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import '../public/style.css';
 import { receiveErrors, addMessage } from '../actions/AppActions';
 import lodash from 'lodash';
+import FlatButton from 'material-ui/FlatButton';
+import FontIcon from 'material-ui/FontIcon';
+import Icon from 'react-icons-kit';
+import { send } from 'react-icons-kit/fa/send'; 
 
+const style = {
+  minWidth: 40
+};
 
 /**
  * @class MessageForm
@@ -103,7 +110,11 @@ class MessageForm extends Component {
            onChange={ this.handleMessageChange.bind(this) }
            id="message" value={this.state.message}
            placeholder="Please type a message." />
-              <button id="submit" onClick={this.submit}>Submit</button>
+           <FlatButton
+           style={style}
+            icon={<Icon style={{ color: '#4CAF4F' }} icon={send} />}
+            onClick={this.submit}
+            />
          </form>
       </div>
     );

@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-watch server.js",
-    "start": "NODE_ENV=development webpack && babel-node ./Server/server.js",
+    "startdev": "NODE_ENV=development npm run build-dev && babel-node ./Server/server.js",
+    "start": "npm run build && babel-node ./Server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
-    "build": "babel server/ -d dist",
+    "build": "webpack --config=webpack.config.prod.js",
+    "build-dev": "webpack --config=webpack.config.js",
     "coverage": "nyc report --reporter=lcov > coverage.lcov && codecov --token=b9101838-51a4-4e9d-bf62-c8b3ec65eb0b",
     "testServer": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./Server/test/*.test.js && npm run coverage",
-    "testClient": "NODE_ENV=test jest ./Client/__tests__/ --coverage && npm run coverage",
+    "testClient": "NODE_ENV=test jest --u ./Client/__tests__/ --coverage && npm run coverage",
     "test": "npm run testServer && npm run testClient"
   },
   "author": "Nnamso Edemenang",

@@ -30,6 +30,26 @@ describe('Sign up Route', () => {
             });
   });
 
+  it('should return 400 for empty password and username', (done) => {
+    chai.request(server)
+            .post('/users/signup')
+            .send({
+              userName: '',
+              email: 'validUserEmail@email.com',
+              password: '',
+              photoURL: '',
+              phoneNo: ''
+            })
+            .end((err, res) => {
+              res.status.should.equal(400);
+              res.body.should.be.a('object');
+              res.body.should.have.property('message');
+              res.body.message.should
+              .equal('Please insert email or password');
+              done();
+            });
+  });
+
   it('should return 400 for an empty email address', (done) => {
     chai.request(server)
             .post('/users/signup')
@@ -243,6 +263,9 @@ describe('Update user profile Route', () => {
 });
 
 describe('Update user profile Route', () => {
+  const userName = faker.name.firstName();
+  const phoneNo = faker.phone.phoneNumber();
+
   before((done) => {
     chai.request(server)
     .post('/users/signin')
@@ -256,14 +279,31 @@ describe('Update user profile Route', () => {
   });
 
   it('should return 200 for logged in users', (done) => {
-    const userName = faker.name.firstName();
-    const phoneNo = faker.phone.phoneNumber();
     chai.request(server)
     .post('/users/updateUserProfile')
     .send({
       userName,
       photoURL: `/${userName}.jpg`,
       phoneNo
+    })
+    .end((err, res) => {
+      res.status.should.equal(200);
+      res.body.should.be.a('object');
+      res.body.message.should.equal('Profile update successful!');
+      res.body.should.have.property('message');
+      res.body.user.displayName.should.equal(userName);
+      res.body.user.photoURL.should.equal(`/${userName}.jpg`);
+      done();
+    });
+  });
+
+  it('should return 200 for logged in users and make no changes if no changes are required', (done) => {
+    chai.request(server)
+    .post('/users/updateUserProfile')
+    .send({
+      userName: '',
+      photoURL: '',
+      phoneNo: ''
     })
     .end((err, res) => {
       res.status.should.equal(200);
@@ -396,3 +436,64 @@ describe('Get group messages route', () => {
   });
 });
 
+describe('Password Reset', () => {
+  it('should return 400 for invalid email address', (done) => {
+    chai.request(server)
+    .post('/users/passwordReset')
+    .send({
+      emailAddress: 'invalidemail',
+    })
+    .end((err, res) => {
+      res.status.should.equal(400);
+      res.body.should.be.a('object');
+      res.body.message.should.equal('Please insert valid email address');
+      res.body.should.have.property('message');
+      done();
+    });
+  });
+
+  it('should return 400 for empty email address', (done) => {
+    chai.request(server)
+    .post('/users/passwordReset')
+    .send({
+      emailAddress: '',
+    })
+    .end((err, res) => {
+      res.status.should.equal(400);
+      res.body.should.be.a('object');
+      res.body.message.should.equal('Please insert valid email address');
+      res.body.should.have.property('message');
+      done();
+    });
+  });
+
+  it('should return 401 for valid unregistered email', (done) => {
+    chai.request(server)
+    .post('/users/passwordReset')
+    .send({
+      emailAddress: 'somebody.validemail@email.com',
+    })
+    .end((err, res) => {
+      res.status.should.equal(401);
+      res.body.should.be.a('object');
+      res.body.message.should.equal('The email address does not exist');
+      res.body.should.have.property('message');
+      done();
+    });
+  });
+
+  it('should return 200 for valid registered email', (done) => {
+    chai.request(server)
+    .post('/users/passwordReset')
+    .send({
+      emailAddress: 'Wava40@hotmail.com',
+    })
+    .end((err, res) => {
+      res.status.should.equal(200);
+      res.body.should.be.a('object');
+      res.body.message.should.equal('Email successfully. Kindly check your inbox for reset link.');
+      res.body.should.have.property('message');
+      done();
+    });
+  });
+});
