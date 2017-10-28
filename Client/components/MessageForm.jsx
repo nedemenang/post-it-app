@@ -8,7 +8,7 @@ import Icon from 'react-icons-kit';
 import { send } from 'react-icons-kit/fa/send'; 
 
 const style = {
-  minWidth: 40
+  minWidth: 35
 };
 
 /**
