@@ -44,7 +44,8 @@
   z-index: 2;
 }
 #chatform {
-	width:700px;
+  width:75%;
+  padding-left: 230px;
 	margin: 0 auto;
 	background-color: white;
 }
@@ -195,11 +196,11 @@ body {
 .rightColumn {
 
   flex-grow: 2;
-  margin-left: 30px; 
   margin-right: 30px;
   margin-top: 60px;
   margin-bottom: 120px;
-  width: 72%;
+  padding-left: 25%;
+  width: 75%;
 
 }
 
@@ -271,7 +272,7 @@ body {
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-left: 7%;
+  margin-left: 5%;
   margin-bottom: 15px;
 }
 
