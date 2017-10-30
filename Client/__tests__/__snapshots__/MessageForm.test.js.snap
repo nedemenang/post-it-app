@@ -73,7 +73,7 @@ exports[`the Message form component should match snapshot test 1`] = `
       secondary={false}
       style={
         Object {
-          "minWidth": 40,
+          "minWidth": 35,
         }
       }
     />
