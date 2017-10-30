@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import lodash from 'lodash';
-import '../public/style.css';
+import '../public/style.scss';
 import io from 'socket.io-client';
 import { receiveGroupMessages } from '../actions/AppActions';
 import Group from './Group';

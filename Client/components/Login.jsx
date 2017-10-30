@@ -5,7 +5,7 @@ import {
   Link
 } from 'react-router-dom';
 import $ from 'jquery';
-import '../public/style.css';
+import '../public/style.scss';
 import { registerUser,
   receiveErrors, login,
   registerGoogleUser } from '../actions/AppActions';

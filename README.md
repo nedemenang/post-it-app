@@ -45,9 +45,9 @@ Clone this repository on that directory.
 
 Ensure node is installed
 
-Install all app Dependencies
+Install all app Dependencies by running npm install
 
-Run the application using npm start 
+Run the application using npm startdev 
 
 
 ## Built With

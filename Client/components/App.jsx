@@ -9,7 +9,7 @@ import PasswordReset from './passwordReset';
 import LoginMessageBoard from './LoginMessageBoard';
 import PasswordResetConfirm from './PasswordResetConfirm';
 import ProfileEdit from './ProfileEdit';
-import '../public/style.css';
+import '../public/style.scss';
 
 const muiTheme = getMuiTheme({
   palette: {

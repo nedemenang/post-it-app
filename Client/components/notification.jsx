@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../public/style.css';
+import '../public/style.scss';
 import io from 'socket.io-client';
 import lodash from 'lodash';
 import Snackbar from 'material-ui/Snackbar';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import '../public/style.css';
+import '../public/style.scss';
 import { createGroup } from '../actions/AppActions';
 
 

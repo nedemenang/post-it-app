@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List, Subheader } from 'material-ui';
 import lodash from 'lodash';
-import '../public/style.css';
+import '../public/style.scss';
 import User from './User';
 
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../public/style.css';
+import '../public/style.scss';
 import { receiveErrors, addMessage } from '../actions/AppActions';
 import lodash from 'lodash';
 import FlatButton from 'material-ui/FlatButton';
