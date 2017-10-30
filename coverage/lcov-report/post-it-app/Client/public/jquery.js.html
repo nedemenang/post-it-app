@@ -25780,7 +25780,7 @@ jQuery( <span class="fstat-no" title="function not covered" >fu</span>nction() {
 	// Setup
 	d<span class="cstat-no" title="statement not covered" >iv = document.createElement( "div" );</span>
 	c<span class="cstat-no" title="statement not covered" >ontainer = document.createElement( "div" );</span>
-	c<span class="cstat-no" title="statement not covered" >ontainer.style.cssText = "position:absolute;border:0;width:0;height:0;top:0;left:-9999px";</span>
+	c<span class="cstat-no" title="statement not covered" >ontainer.style.scssText = "position:absolute;border:0;width:0;height:0;top:0;left:-9999px";</span>
 	b<span class="cstat-no" title="statement not covered" >ody.appendChild( container ).appendChild( div </span>);
 &nbsp;
 	i<span class="cstat-no" title="statement not covered" >f ( typeof div.style.zoom !== "undefined" ) {</span>
@@ -25789,7 +25789,7 @@ jQuery( <span class="fstat-no" title="function not covered" >fu</span>nction() {
 		// Check if natively block-level elements act like inline-block
 		// elements when setting their display to 'inline' and giving
 		// them layout
-		d<span class="cstat-no" title="statement not covered" >iv.style.cssText = "display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1";</span>
+		d<span class="cstat-no" title="statement not covered" >iv.style.scssText = "display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1";</span>
 &nbsp;
 		s<span class="cstat-no" title="statement not covered" >upport.inlineBlockNeedsLayout = val = div.offsetWidth === 3;</span>
 		i<span class="cstat-no" title="statement not covered" >f ( val ) {</span>
@@ -26329,7 +26329,7 @@ jQuery.fn.extend( {
 		// Setup
 		d<span class="cstat-no" title="statement not covered" >iv = document.createElement( "div" );</span>
 		c<span class="cstat-no" title="statement not covered" >ontainer = document.createElement( "div" );</span>
-		c<span class="cstat-no" title="statement not covered" >ontainer.style.cssText = "position:absolute;border:0;width:0;height:0;top:0;left:-9999px";</span>
+		c<span class="cstat-no" title="statement not covered" >ontainer.style.scssText = "position:absolute;border:0;width:0;height:0;top:0;left:-9999px";</span>
 		b<span class="cstat-no" title="statement not covered" >ody.appendChild( container ).appendChild( div </span>);
 &nbsp;
 		// Support: IE6
@@ -26337,7 +26337,7 @@ jQuery.fn.extend( {
 		i<span class="cstat-no" title="statement not covered" >f ( typeof div.style.zoom !== "undefined" ) {</span>
 &nbsp;
 			// Reset CSS: box-sizing; display; margin; border
-			d<span class="cstat-no" title="statement not covered" >iv.style.cssText =</span>
+			d<span class="cstat-no" title="statement not covered" >iv.style.scssText =</span>
 &nbsp;
 				// Support: Firefox&lt;29, Android 2.3
 				// Vendor-prefix box-sizing
@@ -28587,7 +28587,7 @@ var documentElement = document.documentElement;
 		r<span class="cstat-no" title="statement not covered" >eturn;</span>
 	}
 &nbsp;
-	div.style.cssText = "float:left;opacity:.5";
+	div.style.scssText = "float:left;opacity:.5";
 &nbsp;
 	// Support: IE&lt;9
 	// Make sure that element opacity exists (as opposed to filter)
@@ -28595,14 +28595,14 @@ var documentElement = document.documentElement;
 &nbsp;
 	// Verify style float existence
 	// (IE uses styleFloat instead of cssFloat)
-	support.cssFloat = !!div.style.cssFloat;
+	support.cssFloat = !!div.style.scssFloat;
 &nbsp;
 	div.style.backgroundClip = "content-box";
 	div.cloneNode( true ).style.backgroundClip = "";
 	support.clearCloneStyle = div.style.backgroundClip === "content-box";
 &nbsp;
 	container = document.createElement( "div" );
-	container.style.cssText = "border:0;width:8px;height:0;top:0;left:-9999px;" +
+	container.style.scssText = "border:0;width:8px;height:0;top:0;left:-9999px;" +
 		"padding:0;margin-top:1px;position:absolute";
 	div.innerHTML = "";
 	container.appendChild( div );
@@ -28672,7 +28672,7 @@ var documentElement = document.documentElement;
 		// Setup
 		d<span class="cstat-no" title="statement not covered" >ocumentElement.appendChild( container );</span>
 &nbsp;
-		d<span class="cstat-no" title="statement not covered" >iv.style.cssText =</span>
+		d<span class="cstat-no" title="statement not covered" >iv.style.scssText =</span>
 &nbsp;
 			// Support: Android 2.3
 			// Vendor-prefix box-sizing
@@ -28705,7 +28705,7 @@ var documentElement = document.documentElement;
 			c<span class="cstat-no" title="statement not covered" >ontents = div.appendChild( document.createElement( "div" ) </span>);
 &nbsp;
 			// Reset CSS: box-sizing; display; margin; border; padding
-			c<span class="cstat-no" title="statement not covered" >ontents.style.cssText = div.style.cssText =</span>
+			c<span class="cstat-no" title="statement not covered" >ontents.style.scssText = div.style.scssText =</span>
 &nbsp;
 				// Support: Android 2.3
 				// Vendor-prefix box-sizing
@@ -28735,7 +28735,7 @@ var documentElement = document.documentElement;
 			d<span class="cstat-no" title="statement not covered" >iv.innerHTML = "&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;t&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;";</span>
 			d<span class="cstat-no" title="statement not covered" >iv.childNodes[ 0 ].style.borderCollapse = "separate";</span>
 			c<span class="cstat-no" title="statement not covered" >ontents = div.getElementsByTagName( "td" );</span>
-			c<span class="cstat-no" title="statement not covered" >ontents[ 0 ].style.cssText = "margin:0;border:0;padding:0;display:none";</span>
+			c<span class="cstat-no" title="statement not covered" >ontents[ 0 ].style.scssText = "margin:0;border:0;padding:0;display:none";</span>
 			r<span class="cstat-no" title="statement not covered" >eliableHiddenOffsetsVal = contents[ 0 ].offsetHeight === 0;</span>
 			i<span class="cstat-no" title="statement not covered" >f ( reliableHiddenOffsetsVal ) {</span>
 				c<span class="cstat-no" title="statement not covered" >ontents[ 0 ].style.display = "";</span>
@@ -30205,7 +30205,7 @@ jQuery.fn.delay = f<span class="fstat-no" title="function not covered" >un</span
 	a = div.getElementsByTagName( "a" )[ 0 ];
 &nbsp;
 	// First batch of tests.
-	a.style.cssText = "top:1px";
+	a.style.scssText = "top:1px";
 &nbsp;
 	// Test setAttribute on camelCase class.
 	// If it works, we need attrFixes when doing get/setAttribute (ie6/7)
@@ -30697,10 +30697,10 @@ i<span class="missing-if-branch" title="if path not taken" >I</span>f ( !support
 			// Return undefined in the case of empty string
 			// Note: IE uppercases css property names, but if we were to .toLowerCase()
 			// .cssText, that would destroy case sensitivity in URL's, like in "background"
-			r<span class="cstat-no" title="statement not covered" >eturn elem.style.cssText || undefined;</span>
+			r<span class="cstat-no" title="statement not covered" >eturn elem.style.scssText || undefined;</span>
 		},
 		set: function( elem, value ) {<span class="fstat-no" title="function not covered" ></span>
-			r<span class="cstat-no" title="statement not covered" >eturn ( elem.style.cssText = value + "" </span>);
+			r<span class="cstat-no" title="statement not covered" >eturn ( elem.style.scssText = value + "" </span>);
 		}
 	};
 }

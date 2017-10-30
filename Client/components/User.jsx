@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../public/style.css';
+import '../public/style.scss';
 import { addUserToGroup } from '../actions/AppActions';
 import { ListItem } from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';

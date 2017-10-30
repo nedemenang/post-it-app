@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../public/style.css';
+import '../public/style.scss';
 import { getUsersReadMessage } from '../utils/appAPI';
 import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';

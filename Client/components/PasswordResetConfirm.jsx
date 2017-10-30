@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import QueryString from 'query-string';
-import '../public/style.css';
+import '../public/style.scss';
 import { receiveErrors, confirmPasswordReset } from '../actions/AppActions';
 
 

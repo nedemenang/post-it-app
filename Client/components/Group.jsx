@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../public/style.css';
+import '../public/style.scss';
 import { selectGroup } from '../actions/AppActions';
 import { ListItem } from 'material-ui/List';
 import {getGroupMessages, getQuickGroupMessages,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../public/style.css';
+import '../public/style.scss';
 import { receiveErrors, resetPassword } from '../actions/AppActions';
 
 
