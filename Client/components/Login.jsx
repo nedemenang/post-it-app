@@ -256,6 +256,7 @@ class Login extends Component {
     return (
       <div>
       <div className="login-image">
+      <img src={require('../public/images/logo.png')} alt="Smiley face" height="inherit" width="inherit"/>
               </div>
       <div className="login-page">
 
