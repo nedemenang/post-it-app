@@ -4,7 +4,14 @@ exports[`the Login form component should match snapshot test 1`] = `
 <div>
   <div
     className="login-image"
-  />
+  >
+    <img
+      alt="Smiley face"
+      height="inherit"
+      src={Object {}}
+      width="inherit"
+    />
+  </div>
   <div
     className="login-page"
   >
