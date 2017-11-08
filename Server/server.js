@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
 
 indexRoute(app, io);
 
-export { app };
+export { app};
 
 server.listen(port, () => {
   console.log(`We are live on ${port}`);
@@ -60,4 +60,4 @@ app.get('/*', (req, res) => {
 });
 
 // module.exports = app;
-export default app;
+export default io;

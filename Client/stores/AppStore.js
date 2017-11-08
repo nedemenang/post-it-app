@@ -1,6 +1,6 @@
-
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
+import toastr from 'toastr';
 import { registerNewUser, updateUserProfile,
 signinGoogleUser, resetPassword, confirmResetPassword,
 signinUser, createNewGroup, addUserToGroup,
@@ -8,7 +8,6 @@ postMessage, updateMessageFlag,
 signoutUser } from '../utils/appAPI';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
-import toastr from 'toastr';
 
 const CHANGE_EVENT = 'change';
 

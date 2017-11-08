@@ -1,6 +1,4 @@
 import axios from 'axios';
-
-// const AppActions = require('../actions/AppActions');
 import { receiveErrors, receiveAuthenticatedUser,
   receiveUserGroups, receiveSuccess, receiveUserReadMessages,
   receiveUserInGroupResults,
@@ -190,11 +188,13 @@ export const getUserGroups = (userId) => {
 };
 
 export const getGroupMessages = (userGroup) => {
-  axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/messages`);
+  axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/messages`)
+  .catch(() => {});
 };
 
 export const getQuickGroupMessages = (userGroup) => {
-  axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/quickMessages`)
+  axios
+  .get(`/user/${userGroup.userId}/group/${userGroup.groupId}/quickMessages`)
     .then((response) => {
       receiveSuccess(response.data.message);
       receiveGroupMessages(response.data.groupMessages);
