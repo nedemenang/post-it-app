@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 // import path from 'path';
 // import webpack from 'webpack';
 
@@ -15,6 +16,10 @@ const config = {
     filename: 'bundle.js',
   },
   plugins: [
+    new Dotenv({
+      path: '.env',
+      safe: false,
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
@@ -24,6 +29,9 @@ const config = {
     inline: true,
     hot: true,
     port: 8080
+  },
+  node: {
+    fs: 'empty'
   },
   module: {
     loaders: [

@@ -58,6 +58,47 @@ export default {
         });
     }
   },
+  /**
+   * Google Sign In
+   * Route: POST: /users/googleSignin
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {firebase} firebase firebase object
+   *
+   * @returns {Response} response object
+   */
+
+  googleSignin(req, res, firebase) {
+    const idToken = req.body.idToken;
+    const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+    firebase.auth().signInWithCredential(credential)
+  .then((user) => {
+    const ref = firebase.database()
+          .ref(`users/${user.uid}`);
+    ref.once('value')
+    .then((snapshot) => {
+      if (!snapshot.exists()) {
+        firebase.database()
+         .ref('users/').child(user.uid).set({
+           userName: user.displayName,
+           email: user.email,
+           phoneNo: '',
+           profilePic: user.photoURL
+         });
+      }
+    });
+    res.send({
+      message: `Welcome ${user.email}`,
+      user
+    });
+  })
+  .catch((error) => {
+    res.status(500).send({
+      message: `Error occured while login in: ${error.message}`
+    });
+  });
+  },
 
   /**
    * Password Reset
@@ -123,48 +164,6 @@ export default {
       });
       // An error happened.
     });
-  },
-
-  /**
-   * Google Sign In
-   * Route: POST: /users/googleSignin
-   *
-   * @param {Object} req request object
-   * @param {Object} res response object
-   * @param {firebase} firebase firebase object
-   *
-   * @returns {Response} response object
-   */
-
-  googleSignin(req, res, firebase) {
-    const idToken = req.body.idToken;
-    const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-    firebase.auth().signInWithCredential(credential)
-  .then((user) => {
-    const ref = firebase.database()
-          .ref(`users/${user.uid}`);
-    ref.once('value')
-    .then((snapshot) => {
-      if (!snapshot.exists()) {
-        firebase.database()
-         .ref('users/').child(user.uid).set({
-           userName: user.displayName,
-           email: user.email,
-           phoneNo: '',
-           profilePic: user.photoURL
-         });
-      }
-    });
-    res.send({
-      message: `Welcome ${user.email}`,
-      user
-    });
-  })
-  .catch((error) => {
-    res.status(500).send({
-      message: `Error occured while login in: ${error.message}`
-    });
-  });
   },
 
   /**

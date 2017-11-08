@@ -13,6 +13,9 @@ const config = {
     publicPath: '/',
     filename: 'bundle.js',
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     loaders: [
       {
