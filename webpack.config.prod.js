@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 // import path from 'path';
 // import webpack from 'webpack';
 
@@ -13,6 +14,12 @@ const config = {
     publicPath: '/',
     filename: 'bundle.js',
   },
+  plugins: [
+    new Dotenv({
+      path: '.env',
+      safe: false,
+    })
+  ],
   node: {
     fs: 'empty'
   },
