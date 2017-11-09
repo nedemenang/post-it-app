@@ -119,6 +119,7 @@ class Login extends Component {
  * @memberof Login
  */
   googleSignIn(event) {
+    $('#googleloginButton').attr('disabled', true);
     event.preventDefault();
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
@@ -131,6 +132,7 @@ class Login extends Component {
     });
     promise.catch((error) => {
       toastr.error(`Error occured while login in: ${error.message}`);
+      $('#googleloginButton').attr('disabled', false);
     });
   }
 
