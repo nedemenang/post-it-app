@@ -12,7 +12,7 @@ import { registerUser,
   receiveErrors, login,
   registerGoogleUser,
   receiveAuthenticatedUser } from '../actions/AppActions';
-import firebase from '../../Server/Utilities/config';
+import { firebase, config } from '../../Server/Utilities/config';
 
 dotenv.load();
 /**
@@ -119,6 +119,7 @@ class Login extends Component {
  * @memberof Login
  */
   googleSignIn(event) {
+    console.log(config);
     $('#googleloginButton').attr('disabled', true);
     event.preventDefault();
     const provider = new firebase.auth.GoogleAuthProvider();
