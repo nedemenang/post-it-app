@@ -1,9 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
-// import path from 'path';
-// import webpack from 'webpack';
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
   entry: [
@@ -16,9 +13,9 @@ const config = {
     filename: 'bundle.js',
   },
   plugins: [
-    new Dotenv({
-      path: '.env',
-      safe: false,
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      debug: false
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -31,25 +28,18 @@ const config = {
         messagingSenderId: JSON.stringify(process.env.MESSAGESENDERID)
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: true,
+    new UglifyJsPlugin({
       sourceMap: true
-    })
+    }),
   ],
   node: {
-    fs: 'empty'
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   },
   module: {
     loaders: [
-      {
-        test: /\.(js)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-
-        query: {
-          presets: ['es2015']
-        }
-      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
