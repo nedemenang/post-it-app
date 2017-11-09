@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-watch server.js",
-    "startdev": "NODE_ENV=development npm run build-dev && babel-node ./Server/server.js",
-    "start": "npm run build && babel-node ./Server/server.js",
+    "startdev": "NODE_ENV=production NODE_ENV=development npm run build-dev && babel-node ./Server/server.js",
+    "start": "NODE_ENV=production npm run build && babel-node ./Server/server.js",
     "server": "nodemon --watch server --exec babel-node -- server/server.js",
     "build": "webpack --config=webpack.config.prod.js",
     "build-dev": "webpack --config=webpack.config.js",
