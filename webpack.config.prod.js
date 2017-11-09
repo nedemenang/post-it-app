@@ -9,6 +9,7 @@ const config = {
   entry: [
     path.join(__dirname, './Client/index.jsx')
   ],
+  devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -21,11 +22,18 @@ const config = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production'),
+        apiKey: JSON.stringify(process.env.APIKEY),
+        authDomain: JSON.stringify(process.env.AUTHDOMAIN),
+        databaseURL: JSON.stringify(process.env.DATABASEURL),
+        projectId: JSON.stringify(process.env.PROJECTID),
+        storageBucket: JSON.stringify(process.env.STORAGEBUCKET),
+        messagingSenderId: JSON.stringify(process.env.MESSAGESENDERID)
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: true
+      compress: true,
+      sourceMap: true
     })
   ],
   node: {
