@@ -43,6 +43,13 @@ if (process.env.NODE_ENV !== 'production') {
     `${__dirname}/static/files`
 ));
 } else {
+  const webpackConfig = require('../../webpack.config.prod.js');
+  const compiler = webpack(webpackConfig);
+  app.use(webpackMiddleWare(compiler, {
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+  }));
   app.use('/static', express.static('../Server/static'));
   app.use(corsPrefetch);
 
@@ -65,8 +72,13 @@ server.listen(port, () => {
 });
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../Client/public/index.html'));
+  if (process.env.NODE_ENV !== 'production') {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  } else {
+    res.sendFile(path.join(__dirname, '../../dist/index.html'));
+  }
 });
 
 // module.exports = app;
 export default io;
+

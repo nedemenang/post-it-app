@@ -119,7 +119,6 @@ class Login extends Component {
  * @memberof Login
  */
   googleSignIn(event) {
-    console.log(firebase);
     $('#googleloginButton').attr('disabled', true);
     event.preventDefault();
     const provider = new firebase.auth.GoogleAuthProvider();

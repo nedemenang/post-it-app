@@ -45,20 +45,16 @@ var _webpackHotMiddleware = require('webpack-hot-middleware');
 
 var _webpackHotMiddleware2 = _interopRequireDefault(_webpackHotMiddleware);
 
-var _webpack3 = require('../../webpack.config');
-
-var _webpack4 = _interopRequireDefault(_webpack3);
-
 var _index = require('./Routes/index');
 
 var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import * as dotenv from 'dotenv';
 require('dotenv').config();
 // dotenv.load();
 
+// import * as dotenv from 'dotenv';
 require('es6-promise').polyfill();
 
 var app = (0, _express2.default)();
@@ -70,10 +66,11 @@ app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
 
 if (process.env.NODE_ENV !== 'production') {
-  var compiler = (0, _webpack2.default)(_webpack4.default);
+  var webpackConfig = require('../webpack.config');
+  var compiler = (0, _webpack2.default)(webpackConfig);
   app.use((0, _webpackDevMiddleware2.default)(compiler, {
     hot: true,
-    publicPath: _webpack4.default.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
     noInfo: true
   }));
   app.use((0, _webpackHotMiddleware2.default)(compiler));
@@ -83,6 +80,13 @@ if (process.env.NODE_ENV !== 'production') {
 
   app.post('/profilePictures', (0, _imagesUploadMiddleware2.default)('./server/static/files', __dirname + '/static/files'));
 } else {
+  var _webpackConfig = require('../../webpack.config.prod.js');
+  var _compiler = (0, _webpack2.default)(_webpackConfig);
+  app.use((0, _webpackDevMiddleware2.default)(_compiler, {
+    hot: true,
+    publicPath: _webpackConfig.output.publicPath,
+    noInfo: true
+  }));
   app.use('/static', _express2.default.static('../Server/static'));
   app.use(_corsPrefetchMiddleware2.default);
 
@@ -102,7 +106,11 @@ server.listen(port, function () {
 });
 
 app.get('/*', function (req, res) {
-  res.sendFile(_path2.default.join(__dirname, '../../Client/public/index.html'));
+  if (process.env.NODE_ENV !== 'production') {
+    res.sendFile(_path2.default.join(__dirname, '../dist/index.html'));
+  } else {
+    res.sendFile(_path2.default.join(__dirname, '../../dist/index.html'));
+  }
 });
 
 // module.exports = app;
