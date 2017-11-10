@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the group form component should match snapshot test 1`] = `
+<div
+  className="bottomMargin"
+>
+  <form
+    className="group-form"
+    onSubmit={[Function]}
+  >
+    <input
+      className="form-control"
+      onChange={[Function]}
+      placeholder="Press enter to submit"
+      type="text"
+      value=""
+    />
+    <p />
+  </form>
+</div>
+`;
