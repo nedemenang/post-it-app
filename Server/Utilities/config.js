@@ -1,5 +1,5 @@
-import * as firebase from 'firebase';
-import * as dotenv from 'dotenv';
+import firebase from 'firebase';
+import dotenv from 'dotenv';
 
 dotenv.load();
 

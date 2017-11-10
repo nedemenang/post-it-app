@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: [
@@ -9,7 +10,7 @@ const config = {
   ],
   devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/client'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -18,16 +19,14 @@ const config = {
     new webpack.LoaderOptionsPlugin({
       debug: false
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-        apiKey: JSON.stringify(process.env.APIKEY),
-        authDomain: JSON.stringify(process.env.AUTHDOMAIN),
-        databaseURL: JSON.stringify(process.env.DATABASEURL),
-        projectId: JSON.stringify(process.env.PROJECTID),
-        storageBucket: JSON.stringify(process.env.STORAGEBUCKET),
-        messagingSenderId: JSON.stringify(process.env.MESSAGESENDERID)
-      }
+    new HtmlWebpackPlugin({
+      title: 'Production',
+      template: './Client/public/index.html',
+      inject:false
+    }),
+    new Dotenv({
+      path: '.env',
+      safe: false,
     }),
     new UglifyJsPlugin({
       sourceMap: true
@@ -44,8 +43,7 @@ const config = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: ['react-hot-loader',
-          'babel-loader']
+        loaders: ['babel-loader']
       },
       {
         test: /\.(scss|css)$/,

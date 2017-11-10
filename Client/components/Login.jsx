@@ -1,3 +1,5 @@
+dotenv.load();
+
 import React, { Component } from 'react';
 import * as dotenv from 'dotenv';
 import toastr from 'toastr';
@@ -14,7 +16,6 @@ import { registerUser,
   receiveAuthenticatedUser } from '../actions/AppActions';
 import firebase from '../../Server/Utilities/config';
 
-dotenv.load();
 /**
  * @class Login
  *

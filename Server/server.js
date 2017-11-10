@@ -9,12 +9,11 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleWare from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import indexRoute from './Routes/index';
+import indexRoute from './Routes';
 
 require('dotenv').config();
 // dotenv.load();
 
-require('es6-promise').polyfill();
 
 const app = express();
 const server = http.Server(app);
@@ -33,31 +32,14 @@ if (process.env.NODE_ENV !== 'production') {
     noInfo: true
   }));
   app.use(webpackHotMiddleware(compiler));
-
-
-  app.use('/static', express.static('./Server/static'));
-  app.use(corsPrefetch);
-
-  app.post('/profilePictures', imagesUpload(
-    './server/static/files',
-    `${__dirname}/static/files`
-));
 } else {
-  const webpackConfig = require('../../webpack.config.prod.js');
-  const compiler = webpack(webpackConfig);
-  app.use(webpackMiddleWare(compiler, {
-    hot: true,
-    publicPath: webpackConfig.output.publicPath,
-    noInfo: true
-  }));
-  app.use('/static', express.static('../Server/static'));
-  app.use(corsPrefetch);
-
-  app.post('/profilePictures', imagesUpload(
-      './server/static/files',
-      `${__dirname}/static/files`
-  ));
+  app.use(express.static(path.resolve(__dirname, '../client')));
 }
+
+app.use('/static', express.static(path.resolve(__dirname, './static')));
+app.use(corsPrefetch);
+app.post('/profilePictures', imagesUpload('./static/files', `${__dirname}/static/files`));
+
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {
   });
@@ -73,9 +55,9 @@ server.listen(port, () => {
 
 app.get('/*', (req, res) => {
   if (process.env.NODE_ENV !== 'production') {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
+    res.sendFile(path.join(__dirname, '../Client/public/index.html'));
   } else {
-    res.sendFile(path.join(__dirname, '../../dist/index.html'));
+    res.sendFile(path.join(__dirname, '../client/index.html'));
   }
 });
 
