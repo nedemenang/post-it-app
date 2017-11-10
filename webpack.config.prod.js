@@ -1,9 +1,10 @@
+const dotenv = require('dotenv');
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
+dotenv.load();
 const config = {
   entry: [
     path.join(__dirname, './Client/index.jsx')
@@ -22,11 +23,18 @@ const config = {
     new HtmlWebpackPlugin({
       title: 'Production',
       template: './Client/public/index.html',
-      inject:false
+      inject: false
     }),
-    new Dotenv({
-      path: '.env',
-      safe: false,
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+        APIKEY: JSON.stringify(process.env.APIKEY),
+        AUTHDOMAIN: JSON.stringify(process.env.AUTHDOMAIN),
+        DATABASEURL: JSON.stringify(process.env.DATABASEURL),
+        PROJECTID: JSON.stringify(process.env.PROJECTID),
+        STORAGEBUCKET: JSON.stringify(process.env.STORAGEBUCKET),
+        MESSAGESENDERID: JSON.stringify(process.env.MESSAGESENDERID)
+      }
     }),
     new UglifyJsPlugin({
       sourceMap: true
