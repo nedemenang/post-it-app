@@ -9,13 +9,11 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleWare from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack.config';
-import indexRoute from './Routes/index';
+import indexRoute from './Routes';
 
 require('dotenv').config();
 // dotenv.load();
 
-require('es6-promise').polyfill();
 
 const app = express();
 const server = http.Server(app);
@@ -25,27 +23,25 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const compiler = webpack(webpackConfig);
-app.use(webpackMiddleWare(compiler, {
-  hot: true,
-  publicPath: webpackConfig.output.publicPath,
-  noInfo: true
-}));
-app.use(webpackHotMiddleware(compiler));
+if (process.env.NODE_ENV !== 'production') {
+  const webpackConfig = require('../webpack.config');
+  const compiler = webpack(webpackConfig);
+  app.use(webpackMiddleWare(compiler, {
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+  }));
+  app.use(webpackHotMiddleware(compiler));
+} else {
+  app.use(express.static(path.resolve(__dirname, '../client')));
+}
 
-
-app.use('/static', express.static('./server/static'));
+app.use('/static', express.static(path.resolve(__dirname, './static')));
 app.use(corsPrefetch);
-
-app.post('/profilePictures', imagesUpload(
-    './server/static/files',
-    `${__dirname}/static/files`
-));
+app.post('/profilePictures', imagesUpload('./static/files', `${__dirname}/static/files`));
 
 io.on('connection', (socket) => {
-  console.log('Connected');
   socket.on('disconnect', () => {
-    console.log('Disconnected');
   });
 });
 
@@ -58,8 +54,13 @@ server.listen(port, () => {
 });
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Client/public/index.html'));
+  if (process.env.NODE_ENV !== 'production') {
+    res.sendFile(path.join(__dirname, '../Client/public/index.html'));
+  } else {
+    res.sendFile(path.join(__dirname, '../client/index.html'));
+  }
 });
 
 // module.exports = app;
-export default app;
+export default io;
+

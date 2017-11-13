@@ -1,4 +1,8 @@
+dotenv.load();
+
 import React, { Component } from 'react';
+import * as dotenv from 'dotenv';
+import toastr from 'toastr';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,7 +12,9 @@ import $ from 'jquery';
 import '../public/style.scss';
 import { registerUser,
   receiveErrors, login,
-  registerGoogleUser } from '../actions/AppActions';
+  registerGoogleUser,
+  receiveAuthenticatedUser } from '../actions/AppActions';
+import firebase from '../../Server/Utilities/config';
 
 /**
  * @class Login
@@ -113,48 +119,23 @@ class Login extends Component {
  *
  * @memberof Login
  */
-  onSignIn(googleUser) {
-    const idtoken = googleUser.getAuthResponse().id_token;
-    registerGoogleUser(idtoken);
-  }
+  googleSignIn(event) {
+    $('#googleloginButton').attr('disabled', true);
+    event.preventDefault();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    const promise = firebase.auth().signInWithPopup(provider);
 
-
-/**
- * Renders google login button
- *
- * @return {void} return void
- *
- * @memberof Login
- */
-  renderGoogleLoginButton() {
-    gapi.signin2.render('my-signin2', {
-      scope: 'https://www.googleapis.com/auth/plus.login',
-      width: 293,
-      height: 50,
-      longtitle: true,
-      theme: 'dark',
-      onsuccess: this.onSignIn
+    promise.then((result) => {
+      const token = result.credential.idToken;
+      registerGoogleUser(token);
+    });
+    promise.catch((error) => {
+      toastr.error(`Error occured while login in: ${error.message}`);
+      $('#googleloginButton').attr('disabled', false);
     });
   }
-
-  /**
-   * Adds an event listener after component mounts
-   * @return {void} return void
-   * @memberof Login
-   */
-  componentDidMount() {
-    window.addEventListener('google-loaded', this.renderGoogleLoginButton);
-  }
-
-
-  /**
-   *
-   * @memberof Login
-   */
-  componentWillUnmount() {
-    window.removeEventListener('google-loaded', this.renderGoogleLoginButton);
-  }
-
 
   /**
    * @param {event} event event object
@@ -240,8 +221,7 @@ class Login extends Component {
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
-    this.onSignIn = this.onSignIn.bind(this);
-    this.renderGoogleLoginButton = this.renderGoogleLoginButton.bind(this);
+    this.googleSignIn = this.googleSignIn.bind(this);
   }
 
   /**
@@ -274,6 +254,9 @@ class Login extends Component {
       value={this.state.loginpassword} ref="loginPassword" placeholder="password"/>
       <p className="error">{this.props.errors}</p>
       <button id="loginButton" className="button" onClick={this.login}>Log In</button>
+      <br/>
+      <br/>
+      <button id="googleloginButton" className="googleButton" onClick={this.googleSignIn}>Google Signin</button>
             <br/>
        <br/>
       <div id="my-signin2"></div>

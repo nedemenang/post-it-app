@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 // import path from 'path';
 // import webpack from 'webpack';
 
@@ -10,11 +10,15 @@ const config = {
     'webpack-hot-middleware/client'
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, './Client/public'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   plugins: [
+    new Dotenv({
+      path: '.env',
+      safe: false,
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
@@ -25,17 +29,11 @@ const config = {
     hot: true,
     port: 8080
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     loaders: [
-      {
-        test: /\.(js)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-
-        query: {
-          presets: ['es2015']
-        }
-      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
