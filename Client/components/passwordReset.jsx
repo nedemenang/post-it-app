@@ -7,7 +7,7 @@ import { receiveErrors, resetPassword } from '../actions/AppActions';
  * @class passwordReset
  * @extends {Component}
  */
-class passwordReset extends Component {
+class PasswordReset extends Component {
 
 /**
  * Calls reset password action
@@ -61,8 +61,6 @@ class passwordReset extends Component {
       <input type="text" ref="resetEmail"
       onChange = {this.handleResetEmailChange.bind(this)}
       placeholder="email"/>
-      <p className="success">{this.props.success}</p>
-      <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.reset}>Send Email</button>
             <br/>
        <br/>
@@ -75,4 +73,4 @@ class passwordReset extends Component {
 
 }
 
-export default passwordReset;
+export default PasswordReset;

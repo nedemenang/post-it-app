@@ -29,6 +29,7 @@ class LoginMessageBoard extends Component {
    * @memberof LoginMessageBoard
    */
   componentDidMount() {
+    this.mounted = true;
     AppStore.addChangeListener(this.onChange.bind(this));
   }
 
@@ -38,6 +39,7 @@ class LoginMessageBoard extends Component {
    * @memberof LoginMessageBoard
    */
   componentWillUnmount() {
+    this.mounted = false;
     AppStore.removeChangeListener(this.onChange.bind(this));
   }
 
@@ -47,7 +49,9 @@ class LoginMessageBoard extends Component {
      * @memberof LoginMessageBoard
      */
   onChange() {
-    this.setState(getAppState());
+    if (this.mounted) {
+      this.setState(getAppState());
+    }
   }
 
 
@@ -58,6 +62,7 @@ class LoginMessageBoard extends Component {
    */
   constructor(props) {
     super(props);
+    this.mounted = false;
     this.state = getAppState();
   }
 
@@ -74,7 +79,7 @@ class LoginMessageBoard extends Component {
 
     let componentToMount;
     if (localStorage.getItem('user') == null) {
-      componentToMount = <Login {...this.state} />;
+      componentToMount = <Login />;
     } else {
       componentToMount = <MessageBoard />;
     }

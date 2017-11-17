@@ -15,7 +15,6 @@ exports[`the group form component should match snapshot test 1`] = `
       type="text"
       value=""
     />
-    <p />
   </form>
 </div>
 `;

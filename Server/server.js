@@ -1,4 +1,3 @@
-// import * as dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
 import corsPrefetch from 'cors-prefetch-middleware';
@@ -9,10 +8,10 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleWare from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import dotenv from 'dotenv';
 import indexRoute from './Routes';
 
-require('dotenv').config();
-// dotenv.load();
+dotenv.load();
 
 
 const app = express();
@@ -38,7 +37,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use('/static', express.static(path.resolve(__dirname, './static')));
 app.use(corsPrefetch);
-app.post('/profilePictures', imagesUpload('./static/files', `${__dirname}/static/files`));
+app.post('/profilePictures',
+imagesUpload('./static/files', `${__dirname}/static/files`));
 
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {
@@ -47,11 +47,11 @@ io.on('connection', (socket) => {
 
 indexRoute(app, io);
 
-export { app };
-
 server.listen(port, () => {
   console.log(`We are live on ${port}`);
 });
+
+export default app;
 
 app.get('/*', (req, res) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -60,7 +60,3 @@ app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/index.html'));
   }
 });
-
-// module.exports = app;
-export default io;
-

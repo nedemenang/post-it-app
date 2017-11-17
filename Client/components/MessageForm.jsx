@@ -26,7 +26,7 @@ class MessageForm extends Component {
     event.preventDefault();
     const messagebody = this.state.message;
     const priority = this.state.priority;
-    const postedon = (new Date()).toLocaleString('en-GB');
+    const postedOn = (new Date()).toLocaleString('en-GB');
 
     if (lodash.isEmpty(this.props.selectedGroup)) {
       receiveErrors('Please select a group to post a message');
@@ -37,11 +37,11 @@ class MessageForm extends Component {
         const user = localStorage.getItem('user');
         const messageObject = {
           messageBody: messagebody,
-          postedon,
+          postedOn,
           priority,
           postedBy: JSON.parse(user).email,
           postedByDisplayName: JSON.parse(user).displayName,
-          profilePic: JSON.parse(user).profilePic,
+          profilePic: JSON.parse(user).photoURL,
           groupId: this.props.selectedGroup.groupId,
           groupName: this.props.selectedGroup.groupname
         };

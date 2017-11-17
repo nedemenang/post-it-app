@@ -1,12 +1,10 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
 
- // console.log('Logging user....');
 export const login = (user) => {
   AppDispatcher.handleViewAction({
     actionType: AppConstants.LOGIN_USER,
     user
-
   });
 };
 
@@ -19,7 +17,6 @@ export const registerUser = (user) => {
 };
 
 export const receiveErrors = (errors) => {
-    // console.log(errors);
   AppDispatcher.handleViewAction({
     actionType: AppConstants.RECEIVE_ERRORS,
     errors
@@ -27,7 +24,6 @@ export const receiveErrors = (errors) => {
 };
 
 export const updateUserProfile = (user) => {
-    // console.log(errors);
   AppDispatcher.handleViewAction({
     actionType: AppConstants.UPDATE_USER_PROFILE,
     user
@@ -52,7 +48,6 @@ export const createGroup = (group) => {
 };
 
 export const addUserToGroup = (user) => {
-    // console.log(usergroup);
   AppDispatcher.handleViewAction({
     actionType: AppConstants.ADDUSER_GROUP,
     user
@@ -61,7 +56,6 @@ export const addUserToGroup = (user) => {
 };
 
 export const addMessage = (message) => {
-    // console.log(message);
   AppDispatcher.handleViewAction({
     actionType: AppConstants.ADD_MESSAGE,
     message
@@ -69,7 +63,6 @@ export const addMessage = (message) => {
 };
 
 export const updateMessageFlags = (updateObject) => {
-    // console.log(message);
   AppDispatcher.handleViewAction({
     actionType: AppConstants.UPDATE_MESSAGE_FLAGS,
     updateObject
@@ -117,7 +110,6 @@ export const receiveGroupMessages = (messages) => {
 };
 
 export const receiveUserReadMessages = (usersRead) => {
-   // console.log(usersRead);
   AppDispatcher.handleViewAction({
     actionType: AppConstants.RECEIVE_USER_READ_MESSAGES_RESULTS,
     usersRead

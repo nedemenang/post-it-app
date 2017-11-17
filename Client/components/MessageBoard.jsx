@@ -9,7 +9,7 @@ import MessageForm from './MessageForm';
 import GroupForm from './GroupForm';
 import AppStore from '../stores/AppStore';
 import { AppBar } from 'material-ui';
-import Notification from './notification';
+import Notification from './Notification';
 import Drawer from 'material-ui/Drawer';
 import io from 'socket.io-client';
 import lodash from 'lodash';
@@ -82,9 +82,9 @@ class MessageBoard extends Component {
     this.socket.on('connect', () => {});
 
     this.socket.on('messageBroadcast', (subscribers) => {
-      const user = localStorage.getItem('user');
       if (JSON.parse(user).email !== subscribers.postedBy) {
-        if (lodash.indexOf(subscribers.subscribers, String(JSON.parse(user).id), true) !== -1) {
+        if (lodash.indexOf(subscribers.subscribers,
+          String(JSON.parse(user).id), true) !== -1) {
           toastr.info(`Message posted in ${subscribers.groupName} group`);
         }
       }
@@ -128,10 +128,11 @@ class MessageBoard extends Component {
   render() {
     return (
       <div>
-        <TitleBar />
+        <TitleBar {...this.state} />
       <div className="row">
         <div className="leftColumn">
-          <Drawer containerStyle={{ height: 'calc(100% - 64px)', top: 64 }}>
+          <Drawer docked={true} containerStyle={{
+            height: 'calc(100% - 64px)', top: 64 }}>
           <GroupList selectedGroup= {this.state.selectedGroup}
           groups = {this.state.groups}
           loggedInUser = {this.state.loggedInUser} />

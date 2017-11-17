@@ -50,12 +50,6 @@ exports[`the profile Edit component should match snapshot test 1`] = `
         styles={Object {}}
         url="about:blank/profilePictures"
       />
-      <p
-        className="success"
-      />
-      <p
-        className="error"
-      />
       <button
         className="button"
         onClick={[Function]}

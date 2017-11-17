@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import '../public/style.scss';
 import { selectGroup } from '../actions/AppActions';
 import { ListItem } from 'material-ui/List';
-import {getGroupMessages, getQuickGroupMessages,
-getUsersNotInGroups } from '../utils/appAPI';
 import Icon from 'react-icons-kit';
 import { bubble } from 'react-icons-kit/icomoon/bubble';
+import { getGroupMessages, getQuickGroupMessages } from '../utils/appAPI';
 
 /**
  * @class Group
@@ -27,7 +26,7 @@ class Group extends Component {
     selectGroup(this.props.group);
     getGroupMessages(userGroup);
     getQuickGroupMessages(userGroup);
-    getUsersNotInGroups(this.props.group);
+    // getUsersNotInGroups(this.props.group);
   }
  /**
   * @param {object} props props object
@@ -50,7 +49,7 @@ class Group extends Component {
     return (
       <div >
         <ListItem onTouchTap={this.groupClicked}>
-          <strong>{this.props.group.groupname} {newM}</strong>
+          <strong>{this.props.group.groupName} {newM}</strong>
         </ListItem>
       </div>
     );

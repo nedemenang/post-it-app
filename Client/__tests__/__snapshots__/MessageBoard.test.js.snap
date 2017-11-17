@@ -2,7 +2,19 @@
 
 exports[`the Message board component should match snapshot test 1`] = `
 <div>
-  <TitleBar />
+  <TitleBar
+    errors=""
+    groups={Array []}
+    loggedInUser={Array []}
+    messages={Array []}
+    notifiedGroup=""
+    open={false}
+    registeredUser={Array []}
+    selectedGroup={Object {}}
+    success=""
+    userReadMessages={Array []}
+    users={Array []}
+  />
   <div
     className="row"
   >
@@ -81,7 +93,7 @@ exports[`the Message board component should match snapshot test 1`] = `
         userReadMessages={Array []}
         users={Array []}
       />
-      <notification />
+      <Notification />
     </div>
   </div>
 </div>

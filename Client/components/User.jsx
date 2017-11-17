@@ -4,7 +4,6 @@ import { addUserToGroup } from '../actions/AppActions';
 import { ListItem } from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 
 
@@ -45,9 +44,9 @@ class User extends Component {
       const userObject = {
         email: this.props.user.email,
         userId: this.props.user.id,
-        username: this.props.user.username,
+        userName: this.props.user.userName,
         groupId: this.props.selectedGroup.groupId,
-        groupName: this.props.selectedGroup.groupname
+        groupName: this.props.selectedGroup.groupName
       };
       addUserToGroup(userObject);
     }
@@ -109,7 +108,7 @@ class User extends Component {
           style={style}
            />
       } onTouchTap={this.userClicked}>
-         <strong>{this.props.user.username}</strong>
+         <strong>{this.props.user.userName}</strong>
      </ListItem>
      </div>
     );

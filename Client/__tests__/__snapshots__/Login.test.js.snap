@@ -37,15 +37,21 @@ exports[`the Login form component should match snapshot test 1`] = `
           placeholder="password"
           type="password"
         />
-        <p
-          className="error"
-        />
         <button
           className="button"
           id="loginButton"
           onClick={[Function]}
         >
           Log In
+        </button>
+        <br />
+        <br />
+        <button
+          className="googleButton"
+          id="googleloginButton"
+          onClick={[Function]}
+        >
+          Google Signin
         </button>
         <br />
         <br />
@@ -67,7 +73,7 @@ exports[`the Login form component should match snapshot test 1`] = `
         <p
           className="message"
         >
-          Forgot Password? 
+          Forgot Password?
           <a
             href="/PasswordReset"
           >
@@ -109,12 +115,6 @@ exports[`the Login form component should match snapshot test 1`] = `
           type="text"
           value=""
         />
-        <p
-          className="success"
-        />
-        <p
-          className="error"
-        />
         <button
           className="button"
           id="registerButton"
@@ -125,7 +125,7 @@ exports[`the Login form component should match snapshot test 1`] = `
         <p
           className="message"
         >
-          Already registered? 
+          Already registered?
           <a
             href="#"
             onClick={[Function]}

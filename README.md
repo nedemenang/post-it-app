@@ -65,6 +65,32 @@ Clone the project to your own machine
 Commit changes to your own branch
 Push your work back up to your fork
 
+## Branch and Commit messages naming convention
+### Branch
+ Type / <3 to 4 word story description>
+ Type should be:
+
+    *  feature
+    *   bug-fix
+    *   chore
+    *   release
+    *   refactor
+    *   documentation
+    *   style
+    *   test
+
+### Commit Messages
+  Type / <3 to 4 word story description>
+
+  Blank - space
+  
+  Body / Description
+
+## Project Limitations
+
+ Currently, The project does not include a Direct Messaging feature. This feature could enable users to send messages directly to users in 
+ in groups they belong to. The application also doesn't include a friendship module. Allowing users to send friend request to other users.
+
 ## Authors
 
 * **Nnamso Edemenang** - *Post It App* - (https://github.com/nedemenang)
@@ -77,3 +103,5 @@ postitappnnam.herokuapp.com
 
 This project is licensed under the MIT License 
 
+
+"FAQ", "installating" and a "limitations" sections, a real license and also work on improving the "how to contribute section"

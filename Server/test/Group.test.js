@@ -1,5 +1,3 @@
-
-// Require the dev-dependencies
 import chai from 'chai';
 import faker from 'faker';
 import chaiHttp from 'chai-http';
@@ -51,7 +49,8 @@ describe('Create group route', () => {
     });
   });
 
-  it('should return 400 for empty group name or created by or date created', (done) => {
+  it('should return 400 for empty group name or created by or date created',
+  (done) => {
     chai.request(server)
     .post('/group')
     .send({
@@ -64,13 +63,13 @@ describe('Create group route', () => {
     .end((err, res) => {
       res.status.should.equal(400);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Incomplete parameters!');
+      res.body.message.should.equal('Please insert groupname or createdby or datecreated');
       res.body.should.have.property('message');
       done();
     });
   });
 
-  it('should return 200 for valid users with valid inputs', (done) => {
+  it('should return 201 for valid users with valid inputs', (done) => {
     chai.request(server)
     .post('/group')
     .send({
@@ -81,7 +80,7 @@ describe('Create group route', () => {
       createdByDisplayName: 'Alec'
     })
     .end((err, res) => {
-      res.status.should.equal(200);
+      res.status.should.equal(201);
       res.body.should.be.a('object');
       res.body.message.should.equal('New group successfully created');
       res.body.should.have.property('message');
@@ -91,7 +90,6 @@ describe('Create group route', () => {
 });
 
 describe('Add user to group route', () => {
-    // userId, groupName, username, email
   before((done) => {
     chai.request(server)
     .post('/users/signout')
@@ -101,7 +99,6 @@ describe('Add user to group route', () => {
   });
 
   it('should return 401 for users that are not logged in', (done) => {
-    // userId, groupName, username, email
     chai.request(server)
     .post('/group/-Kwetw__qC1ogqKZDAx7/user')
     .send({
@@ -113,7 +110,8 @@ describe('Add user to group route', () => {
     .end((err, res) => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Only logged users can add users to groups');
+      res.body.message.should
+      .equal('Only logged users can add users to groups');
       res.body.should.have.property('message');
       done();
     });
@@ -121,7 +119,6 @@ describe('Add user to group route', () => {
 });
 
 describe('Add user to group route', () => {
-    // userId, groupName, username, email
   beforeEach((done) => {
     chai.request(server)
         .post('/users/signin')
@@ -135,7 +132,6 @@ describe('Add user to group route', () => {
   });
 
   it('should return 400 for incomplete parameters', (done) => {
-    // userId, groupName, username, email
     chai.request(server)
     .post('/group/-Kwetw__qC1ogqKZDAx7/user')
     .send({
@@ -147,20 +143,20 @@ describe('Add user to group route', () => {
     .end((err, res) => {
       res.status.should.equal(400);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Incomplete parameters');
+      res.body.message.should.equal('Please insert userId or groupName');
       res.body.should.have.property('message');
       done();
     });
   });
 
-  it('should return 200 for logged in users and complete parameters', (done) => {
-    // userId, groupName, username, email
+  it('should return 200 for logged in users and complete parameters',
+  (done) => {
     chai.request(server)
     .post('/group/-Kwetw__qC1ogqKZDAx7/user')
     .send({
       userId: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
       groupName: 'Denesik - Stiedemann',
-      username: 'Beulah',
+      userName: 'Beulah',
       email: 'Onie89@yahoo.com',
     })
     .end((err, res) => {
@@ -170,18 +166,6 @@ describe('Add user to group route', () => {
       res.body.should.have.property('message');
       done();
     });
-  });
-
-  after((done) => {
-    chai.request(server)
-        .post('/group/remove')
-        .send({
-          userId: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
-          groupId: '-Kwetw__qC1ogqKZDAx7'
-        })
-        .end(() => {
-          done();
-        });
   });
 });
 
@@ -210,7 +194,8 @@ describe('Post message route', () => {
     .end((err, res) => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Only logged users can add messages to groups');
+      res.body.message.should
+      .equal('Only logged users can add messages to groups');
       res.body.should.have.property('message');
       done();
     });
@@ -230,7 +215,8 @@ describe('Post message route', () => {
         });
   });
 
-  it('should return 400 for logged in users with incomplete parameters', (done) => {
+  it('should return 400 for logged in users with incomplete parameters',
+  (done) => {
     chai.request(server)
     .post('/group/-Kwetw__qC1ogqKZDAx7/message')
     .send({
@@ -246,7 +232,7 @@ describe('Post message route', () => {
     .end((err, res) => {
       res.status.should.equal(400);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Incomplete parameters');
+      res.body.message.should.equal('Please insert messageBody, groupId, postedBy or priority');
       res.body.should.have.property('message');
       done();
     });
@@ -266,7 +252,8 @@ describe('Post message route', () => {
         });
   });
 
-  it('should return 200 for logged in users with correct parameters', (done) => {
+  it('should return 200 for logged in users with correct parameters',
+  (done) => {
     chai.request(server)
     .post('/group/-Kwetw__qC1ogqKZDAx7/message')
     .send({
@@ -274,7 +261,7 @@ describe('Post message route', () => {
       groupId: '-Kwetw__qC1ogqKZDAx7',
       postedBy: '',
       postedByDisplayName: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
-      postedon: (new Date()).toLocaleString('en-GB'),
+      postedOn: (new Date()).toLocaleString('en-GB'),
       priority: 'critical',
       groupName: 'Denesik - Stiedemann',
       profilePic: ''
@@ -304,7 +291,8 @@ describe('Get users read message route', () => {
     .end((err, res) => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Please log in to see who has read the message');
+      res.body.message.should
+      .equal('Please log in to see who has read the message');
       res.body.should.have.property('message');
       done();
     });
@@ -324,13 +312,16 @@ describe('Get users read message route', () => {
         });
   });
 
-  it('should return 200 for users that are logged in', (done) => {
+  it('should return 200 for users that are logged in with correct payload',
+  (done) => {
     chai.request(server)
-    .get('/group/-Kwetw__qC1ogqKZDAx7/messages/-KweuV1BV76xb5ZNh9n9/usersRead')
+    .get('/group/-Kwetw__qC1ogqKZDAx7/messages/-Kwf_gHOQvzfwQrfU7xf/usersRead')
     .end((err, res) => {
       res.status.should.equal(200);
       res.body.should.be.a('object');
       res.body.should.have.property('usersRead');
+      res.body.usersRead[0].email.should.equal('Onie89@yahoo.com');
+      res.body.usersRead.length.should.equal(1);
       res.body.usersRead.should.be.a('array');
       done();
     });
@@ -352,7 +343,8 @@ describe('Get users not in group route', () => {
     .end((err, res) => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Please log in to see a list of users not in group');
+      res.body.message.should
+      .equal('Please log in to see a list of users not in group');
       res.body.should.have.property('message');
       done();
     });
@@ -373,7 +365,7 @@ describe('Get users not in group route', () => {
   });
   it('should return 200 for users that are logged in', (done) => {
     chai.request(server)
-    .get('/group/-Kwetw__qC1ogqKZDAx7/notusers')
+    .get('/group/-KwfBymwEk1rFCAhODSq/notusers')
     .end((err, res) => {
       res.status.should.equal(200);
       res.body.should.be.a('object');

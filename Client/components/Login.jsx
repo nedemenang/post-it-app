@@ -1,5 +1,4 @@
 dotenv.load();
-
 import React, { Component } from 'react';
 import * as dotenv from 'dotenv';
 import toastr from 'toastr';
@@ -12,9 +11,9 @@ import $ from 'jquery';
 import '../public/style.scss';
 import { registerUser,
   receiveErrors, login,
-  registerGoogleUser,
-  receiveAuthenticatedUser } from '../actions/AppActions';
-import firebase from '../../Server/Utilities/config';
+  registerGoogleUser } from '../actions/AppActions';
+import firebase from '../../server/Utilities/config';
+
 
 /**
  * @class Login
@@ -236,7 +235,8 @@ class Login extends Component {
     return (
       <div>
       <div className="login-image">
-      <img src={require('../public/images/logo.png')} alt="Smiley face" height="inherit" width="inherit"/>
+      <img src={require('../public/images/logo.png')}
+      alt="Smiley face" height="inherit" width="inherit"/>
               </div>
       <div className="login-page">
 
@@ -251,17 +251,21 @@ class Login extends Component {
       <input type="password"
       onChange={this.handleLoginPasswordChange.bind(this)}
       id="loginPassword"
-      value={this.state.loginpassword} ref="loginPassword" placeholder="password"/>
-      <p className="error">{this.props.errors}</p>
-      <button id="loginButton" className="button" onClick={this.login}>Log In</button>
+      value={this.state.loginpassword} ref="loginPassword"
+      placeholder="password"/>
+      <button id="loginButton" className="button"
+      onClick={this.login}>Log In</button>
       <br/>
       <br/>
-      <button id="googleloginButton" className="googleButton" onClick={this.googleSignIn}>Google Signin</button>
+      <button id="googleloginButton" className="googleButton"
+      onClick={this.googleSignIn}>Google Signin</button>
             <br/>
        <br/>
       <div id="my-signin2"></div>
-      <p className="message">Not registered? <a onClick={this.handleToggle} id="createAccount" href="#">Create an account</a></p>
-      <p className="message">Forgot Password? <a href="/PasswordReset">Reset Password</a></p>
+      <p className="message">Not registered? <a onClick={this.handleToggle}
+      id="createAccount" href="#">Create an account</a></p>
+      <p className="message">Forgot Password?
+      <a href="/PasswordReset">Reset Password</a></p>
     </form>
     <form className="register-form">
     <h3>REGISTER</h3>
@@ -280,11 +284,12 @@ class Login extends Component {
       <input type="text"
       onChange={this.handlePhoneNumberChange.bind(this)}
       id="phoneNo"
-      value={this.state.phoneNumber} ref="phoneNo" placeholder="Phone number (+2348012345678)"/>
-      <p className="success">{this.props.success}</p>
-      <p className="error">{this.props.errors}</p>
-      <button id="registerButton" className="button" onClick={this.signup}>Register</button>
-      <p className="message">Already registered? <a onClick={this.handleToggle} href="#">Sign In</a></p>
+      value={this.state.phoneNumber} ref="phoneNo"
+      placeholder="Phone number (+2348012345678)"/>
+      <button id="registerButton" className="button"
+      onClick={this.signup}>Register</button>
+      <p className="message">Already registered?
+      <a onClick={this.handleToggle} href="#">Sign In</a></p>
     </form>
   </div>
 </div>

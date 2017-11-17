@@ -89,7 +89,7 @@ class Message extends Component {
       }>
           <strong>{isRead} {this.props.message.messageBody}</strong><br/>
           <p><small>
-            {this.props.message.postedBy} - {this.props.message.postedon}
+            {this.props.message.postedBy} - {this.props.message.postedOn}
             </small></p>
         </ListItem>
         <Popover

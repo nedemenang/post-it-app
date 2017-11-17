@@ -9,6 +9,7 @@ exports[`the message list component should match snapshot test 1`] = `
       inset={false}
     >
       <strong>
+        Test Group
          Message List 
       </strong>
     </Subheader>
@@ -52,8 +53,5 @@ exports[`the message list component should match snapshot test 1`] = `
       }
     />
   </List>
-  <p
-    className="error"
-  />
 </div>
 `;

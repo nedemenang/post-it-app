@@ -7,7 +7,7 @@ describe('the group item component', () => {
   let mountedComponent;
   const group = {
     groupId: '-KrAwfM16qbLOig_mSOc',
-    groupname: 'Test',
+    groupName: 'Test',
     newMessage: false
   };
 
@@ -22,7 +22,8 @@ describe('the group item component', () => {
 
   const groupItem = () => {
     if (!mountedComponent) {
-      mountedComponent = shallow(<Group group = {group} loggedInUser = {loggedInUser} key = {1}/>);
+      mountedComponent = shallow(<Group group = {group}
+        loggedInUser = {loggedInUser} key = {1}/>);
     }
     return mountedComponent;
   };
@@ -39,7 +40,7 @@ describe('the group item component', () => {
 
   it('should render without throwing an error', () => {
     const component = groupItem();
-    expect(component.contains(group.groupname)).toBe(true);
+    expect(component.contains(group.groupName)).toBe(true);
   });
 
   it('should match snapshot test', () => {

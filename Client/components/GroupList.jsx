@@ -5,7 +5,8 @@ import '../public/style.scss';
 import io from 'socket.io-client';
 import { receiveGroupMessages } from '../actions/AppActions';
 import Group from './Group';
-import { List, Subheader } from 'material-ui';
+import List from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
 import AppStore from '../stores/AppStore';
 
 /**
@@ -49,7 +50,8 @@ class GroupList extends Component {
       const user = localStorage.getItem('user');
       if (!lodash.isEmpty(this.props.selectedGroup)) {
         if (this.props.selectedGroup.groupId ===
-          groupsMessages.groupId && JSON.parse(user).id === groupsMessages.userId) {
+          groupsMessages.groupId &&
+          JSON.parse(user).id === groupsMessages.userId) {
           receiveGroupMessages(groupsMessages.groupMessages);
         }
       }
@@ -75,7 +77,6 @@ class GroupList extends Component {
    */
   handleToggle() {
     $('.group-form').slideToggle();
-    // this.props.errors = '';
   }
 
   /**

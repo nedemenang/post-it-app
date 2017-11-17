@@ -9,16 +9,17 @@ export const registerNewUser = (user) => {
   axios.post('/users/signup', {
     email: user.email,
     password: user.password,
-    userName: user.username,
+    userName: user.userName,
     photoURL: user.profilePic,
     phoneNo: user.phoneNo
   }).then((response) => {
+    const { uid, photoURL, displayName, phoneNumber } = response.data.user;
     const authuser = {
-      id: response.data.user.uid,
+      id: uid,
       email: user.email,
-      profilePic: response.data.user.photoURL,
-      displayName: response.data.user.displayName,
-      phoneNo: response.data.user.phoneNumber,
+      photoURL,
+      displayName,
+      phoneNumber,
       isAuthenticated: true
     };
     receiveSuccess(response.data.message);
@@ -35,7 +36,26 @@ export const updateUserProfile = (user) => {
     photoURL: user.profilePic,
     phoneNo: user.phoneNo
   }).then((response) => {
+    const { uid, photoURL, displayName,
+      phoneNumber } = response.data.user;
+    const authuser = {
+      id: uid,
+      email: user.email,
+      photoURL,
+      displayName,
+      phoneNumber,
+      isAuthenticated: true
+    };
+    receiveAuthenticatedUser(authuser);
     receiveSuccess(response.data.message);
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (user.userName !== '') {
+      storedUser.displayName = user.userName;
+    }
+    if (user.profilePic !== '') {
+      storedUser.profilePic = user.profilePic;
+    }
+    localStorage.setItem('user', JSON.stringify(storedUser));
   })
   .catch((error) => {
     receiveErrors(error.response.data.message);
@@ -47,12 +67,15 @@ export const signinUser = (user) => {
     email: user.email,
     password: user.password
   }).then((response) => {
+    const { uid, photoURL, displayName,
+      phoneNumber } = response.data.user;
+
     const authuser = {
-      id: response.data.user.uid,
+      id: uid,
       email: user.email,
-      profilePic: response.data.user.photoURL,
-      displayName: response.data.user.displayName,
-      phoneNo: response.data.user.phoneNumber,
+      photoURL,
+      displayName,
+      phoneNumber,
       isAuthenticated: true
     };
     receiveSuccess(response.data.message);
@@ -90,11 +113,12 @@ export const signinGoogleUser = (idToken) => {
   axios.post('/users/googleSignin', {
     idToken
   }).then((response) => {
+    const { uid, email, photoURL, displayName } = response.data.user;
     const authuser = {
-      id: response.data.user.uid,
-      email: response.data.user.email,
-      profilePic: response.data.user.photoURL,
-      displayName: response.data.user.displayName,
+      id: uid,
+      email,
+      photoURL,
+      displayName,
       isAuthenticated: true
     };
     receiveSuccess(response.data.message);
@@ -117,8 +141,8 @@ export const signoutUser = () => {
 
 export const createNewGroup = (group) => {
   axios.post('/group', {
-    groupName: group.groupname,
-    dateCreated: group.datecreated,
+    groupName: group.groupName,
+    dateCreated: group.dateCreated,
     createdBy: group.createdBy,
     createdByDisplayName: group.createdByDisplayName,
     createdByProfilePic: group.createdByProfilePic,
@@ -135,7 +159,7 @@ export const addUserToGroup = (user) => {
   axios.post(`/group/${user.groupId}/user`, {
     email: user.email,
     userId: user.userId,
-    username: user.username,
+    userName: user.userName,
     groupName: user.groupName
   }).then((response) => {
     receiveSuccess(response.data.message);
@@ -150,7 +174,7 @@ export const postMessage = (message) => {
     groupId: message.groupId,
     messageBody: message.messageBody,
     priority: message.priority,
-    postedon: message.postedon,
+    postedOn: message.postedOn,
     postedBy: message.postedBy,
     postedByDisplayName: message.postedByDisplayName,
     profilePic: message.profilePic,

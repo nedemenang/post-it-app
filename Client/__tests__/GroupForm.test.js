@@ -22,7 +22,8 @@ describe('the group form component', () => {
 
   const groupFormItem = () => {
     if (!mountedComponent) {
-      mountedComponent = shallow(<GroupForm loggedInUser = {loggedInUser} key = {1}/>);
+      mountedComponent = shallow(<GroupForm
+      loggedInUser = {loggedInUser} key = {1}/>);
     }
     return mountedComponent;
   };
@@ -58,6 +59,6 @@ describe('the group form component', () => {
     input.simulate('change', { target: {
       value: 'New Group'
     } });
-    expect(groupFormItem().state().groupname).toBe('New Group');
+    expect(groupFormItem().state().groupName).toBe('New Group');
   });
 });

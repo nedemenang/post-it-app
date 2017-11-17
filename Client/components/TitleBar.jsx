@@ -3,10 +3,14 @@ import '../public/style.scss';
 import { AppBar } from 'material-ui';
 import { Link } from 'react-router-dom';
 import { signOutUser } from '../actions/AppActions';
+import { ListItem } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+
+const style = { margin: 5 };
 
 /**
  * @return {void} return void
@@ -55,7 +59,17 @@ class TitleBar extends Component {
   render() {
     return (
       <div className="topnav">
-          <AppBar title="Post It App" iconElementRight={< Menu />} />
+          <AppBar title={ <ListItem leftAvatar={
+        <Avatar
+          src={JSON.parse(localStorage.getItem('user')) !== null
+          ? JSON.parse(localStorage.getItem('user')).profilePic : ''}
+          size={30}
+          style={style}
+           />
+      }>
+         <strong>{JSON.parse(localStorage.getItem('user')) !== null
+         ? JSON.parse(localStorage.getItem('user')).displayName : ''}</strong>
+     </ListItem>} iconElementRight={< Menu />} />
       </div>
     );
   }

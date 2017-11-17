@@ -93,7 +93,7 @@ class App extends Component {
             <PasswordResetConfirm {...this.state} />
           )} />
           <Route path = '/ProfileEdit' render = {() => (
-            <ProfileEdit {...this.state} />
+            <ProfileEdit />
           )} />
           <Route render = { () => (
             <p> Sorry, something went wrong... </p>

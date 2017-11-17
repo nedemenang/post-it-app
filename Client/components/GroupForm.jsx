@@ -21,13 +21,13 @@ class GroupForm extends Component {
   submit(event) {
     event.preventDefault();
 
-    const groupname = this.state.groupname.trim();
+    const groupName = this.state.groupName.trim();
     const dateCreated = (new Date()).toLocaleString('en-GB');
     const user = localStorage.getItem('user');
-    if (this.state.groupname !== '') {
+    if (this.state.groupName !== '') {
       const group = {
-        groupname,
-        datecreated: dateCreated,
+        groupName,
+        dateCreated,
         createdBy: JSON.parse(user).email,
         createdByDisplayName: JSON.parse(user).displayName,
         createdByProfilePic: JSON.parse(user).profilePic,
@@ -35,7 +35,7 @@ class GroupForm extends Component {
       };
       createGroup(group);
       this.setState({
-        groupname: ''
+        groupName: ''
       });
       $('.group-form').slideToggle();
     }
@@ -51,7 +51,7 @@ class GroupForm extends Component {
    * @returns {void} returns void
    */
   handleGroupNameChange(event) {
-    this.setState({ groupname: event.target.value });
+    this.setState({ groupName: event.target.value });
   }
 
   /**
@@ -64,7 +64,7 @@ class GroupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupname: ''
+      groupName: ''
     };
     this.submit = this.submit.bind(this);
   }
@@ -80,9 +80,8 @@ class GroupForm extends Component {
               <input
               onChange={this.handleGroupNameChange.bind(this)}
               type="text" className="form-control"
-              value={this.state.groupname}
+              value={this.state.groupName}
               placeholder="Press enter to submit" />
-              <p>{this.props.errors}</p>
          </form>
       </div>
     );

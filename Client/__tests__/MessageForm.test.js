@@ -22,11 +22,12 @@ describe('the Message form component', () => {
   const group = {
     groupId: 'TUsUaucS5nb5kuOP6SpvTUcX9vD3',
     groupname: 'Test Group'
-  }
+  };
 
   const messageFormItem = () => {
     if (!mountedComponent) {
-      mountedComponent = shallow(<MessageForm loggedInUser = {loggedInUser} selectedGroup={group} key = {1}/>);
+      mountedComponent = shallow(<MessageForm loggedInUser = {loggedInUser}
+        selectedGroup={group} key = {1}/>);
     }
     return mountedComponent;
   };

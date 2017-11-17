@@ -129,8 +129,6 @@ class ProfileEdit extends Component {
                 }}
                 label="Upload a profile picture"
                 />
-      <p className="success">{this.props.success}</p>
-      <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.save}>Save</button>
     </form>
   </div>

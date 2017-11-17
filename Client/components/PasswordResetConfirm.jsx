@@ -114,8 +114,6 @@ class PasswordResetConfirm extends Component {
       id="confirmPassword"
       onChange = {this.handleResetPasswordConfirmChange.bind(this)}
       placeholder="Confirm password"/>
-      <p className="success">{this.props.success}</p>
-      <p className="error">{this.props.errors}</p>
       <button className="button" onClick={this.reset}>Save</button>
             <br/>
        <br/>

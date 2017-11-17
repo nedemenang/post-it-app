@@ -8,7 +8,7 @@ import Snackbar from 'material-ui/Snackbar';
  * @class notification
  * @extends {Component}
  */
-class notification extends Component {
+class Notification extends Component {
 
   /**
    * Adds a sockect listener when component is mounted
@@ -22,7 +22,8 @@ class notification extends Component {
     this.socket.on('messageBroadcast', (subscribers) => {
       const user = localStorage.getItem('user');
       if (JSON.parse(user).email !== subscribers.postedBy) {
-        if (lodash.indexOf(subscribers.subscribers, String(JSON.parse(user).id), true) !== -1) {
+        if (lodash.indexOf(subscribers.subscribers,
+          String(JSON.parse(user).id), true) !== -1) {
           this.setState({
             notifiedGroup: subscribers.groupName,
             open: true,
@@ -81,4 +82,4 @@ class notification extends Component {
   }
 }
 
-export default notification;
+export default Notification;

@@ -21,7 +21,7 @@ describe('the user item component', () => {
   };
 
   const user = {
-    username: 'nnamisco',
+    userName: 'nnamisco',
     email: 'nedemenang@gmail.com',
     id: 'TUsUaucS5nb5kuOP6SpvTUcX9vD3',
     profilePic: 'postitappnnam.herokuapp.com/static/files/blank-profile-pic.png'
@@ -47,7 +47,7 @@ describe('the user item component', () => {
 
   it('should render without throwing an error', () => {
     const component = userItem();
-    expect(component.contains(user.username)).toBe(true);
+    expect(component.contains(user.userName)).toBe(true);
   });
 
   it('should match snapshot test', () => {

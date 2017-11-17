@@ -2,6 +2,13 @@
 
 exports[`the User list component should match snapshot test 1`] = `
 <div>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="Search for Users"
+    type="text"
+    value=""
+  />
   <List>
     <Subheader
       inset={false}
@@ -10,40 +17,6 @@ exports[`the User list component should match snapshot test 1`] = `
         Click to add user to group
       </strong>
     </Subheader>
-    <User
-      selectedGroup={
-        Object {
-          "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
-          "groupName": "Test Group",
-          "newMessage": false,
-        }
-      }
-      user={
-        Object {
-          "displayName": "nnamisco",
-          "email": "nedemenang@gmail.com",
-          "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
-          "profilePic": "about:blankstatic/files/blank-profile-pic.png",
-        }
-      }
-    />
-    <User
-      selectedGroup={
-        Object {
-          "groupId": "TUsUaucS5nb5kuOP6SpvTUcX9v3",
-          "groupName": "Test Group",
-          "newMessage": false,
-        }
-      }
-      user={
-        Object {
-          "displayName": "nnamisco",
-          "email": "nedemenang@gmail.com",
-          "id": "TUsUaucS5nb5kuOP6SpvTUcX9vD3",
-          "profilePic": "about:blankstatic/files/blank-profile-pic.png",
-        }
-      }
-    />
   </List>
 </div>
 `;

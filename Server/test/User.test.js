@@ -45,7 +45,7 @@ describe('Sign up Route', () => {
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               res.body.message.should
-              .equal('Please insert email or password');
+              .equal('Please insert email, password or username');
               done();
             });
   });
@@ -101,7 +101,7 @@ describe('Sign up Route', () => {
               phoneNo: faker.phone.phoneNumber()
             })
             .end((err, res) => {
-              res.status.should.equal(200);
+              res.status.should.equal(201);
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               res.body.message.should
@@ -297,7 +297,8 @@ describe('Update user profile Route', () => {
     });
   });
 
-  it('should return 200 for logged in users and make no changes if no changes are required', (done) => {
+  it('should return 200 for logged in users and make no changes if no changes are required',
+  (done) => {
     chai.request(server)
     .post('/users/updateUserProfile')
     .send({
@@ -333,7 +334,8 @@ describe('Get group route', () => {
     .end((err, res) => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Please log in to see a list of your groups');
+      res.body.message.should
+      .equal('Please log in to see a list of your groups');
       res.body.should.have.property('message');
       done();
     });
@@ -345,7 +347,7 @@ describe('Get group route', () => {
     chai.request(server)
     .post('/users/signin')
     .send({
-      email: 'alec_hartmann94@yahoo.com',
+      email: 'Onie89@yahoo.com',
       password: 'Password1'
     })
     .end(() => {
@@ -353,14 +355,17 @@ describe('Get group route', () => {
     });
   });
 
-  it('should return 200 for users that are logged in', (done) => {
-    const userId = '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2';
+  it('should return 200 for users that are logged in and return correct payload', (done) => {
+    const userId = '6BBjJaFIwca6VXZSjmIF2JI8nbv2';
     chai.request(server)
     .get(`/user/${userId}/groups`)
     .end((err, res) => {
       res.status.should.equal(200);
       res.body.should.be.a('object');
       res.body.should.have.property('groups');
+      res.body.groups[0].groupName.should.equal('Daniel, Feil and Hammes');
+      res.body.groups[0].groupId.should.equal('-KweuV1BV76xb5ZNh9n9');
+      res.body.groups.length.should.equal(1);
       done();
     });
   });
@@ -401,13 +406,22 @@ describe('Get group messages quick route', () => {
     });
   });
 
-  it('should return 200 for users that are logged in', (done) => {
+  it('should return 200 for users that are logged in and return correct payload', (done) => {
     chai.request(server)
-    .get('/user/6OWdy7WUyoSqxYoKSUkUIMI8ZWr2/group/-KrAwfM16qbLOig_mSOc/quickMessages')
+    .get('/user/6OWdy7WUyoSqxYoKSUkUIMI8ZWr2/group/-KweuV1BV76xb5ZNh9n9/quickMessages')
     .end((err, res) => {
       res.status.should.equal(200);
       res.body.should.be.a('object');
       res.body.should.have.property('groupMessages');
+      res.body.groupMessages.length.should.equal(1);
+      res.body.groupMessages[0].messageBody.should
+      .equal('Lorem ipsum dolor sit amet, consectetur adipisc');
+      res.body.groupMessages[0].postedBy.should
+      .equal('Alec_Hartmann94@yahoo.com');
+      res.body.groupMessages[0].postedByDisplayName.should
+      .equal('Alec_Hartmann');
+      res.body.groupMessages[0].priority.should
+      .equal('critical');
       res.body.groupMessages.should.be.a('array');
       done();
     });
@@ -429,7 +443,8 @@ describe('Get group messages route', () => {
     .end((err, res) => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Please log in to see a list of your groups messages');
+      res.body.message.should
+      .equal('Please log in to see a list of your groups messages');
       res.body.should.have.property('message');
       done();
     });
@@ -491,7 +506,8 @@ describe('Password Reset', () => {
     .end((err, res) => {
       res.status.should.equal(200);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Email successfully. Kindly check your inbox for reset link.');
+      res.body.message.should
+      .equal('Email successfully. Kindly check your inbox for reset link.');
       res.body.should.have.property('message');
       done();
     });

@@ -41,7 +41,8 @@ describe('the password reset component', () => {
     input.simulate('change', { target: {
       value: 'password1'
     } });
-    expect(PasswordResetConfirmItem().state().confirmPassword).toBe('password1');
+    expect(PasswordResetConfirmItem().state()
+    .confirmPassword).toBe('password1');
   });
 
   it('should call function on submit of form', () => {

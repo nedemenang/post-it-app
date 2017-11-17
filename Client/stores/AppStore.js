@@ -16,8 +16,8 @@ let usersNotInGroup = [];
 let userGroups = [];
 let groupMessages = [];
 let usersReadMessage = [];
-const errors = '';
-const success = '';
+let errors = '';
+let success = '';
 let selectedGroup = {};
 let isAuthenticated = false;
 const loggedInUser = [];
@@ -57,12 +57,14 @@ const AppStore = assign({}, EventEmitter.prototype, {
   receiveErrors(error) {
     if (error !== '' && typeof error !== 'undefined') {
       toastr.error(error);
+      errors = error;
     }
   },
 
   receiveSuccess(message) {
     if (message !== '' && typeof message !== 'undefined') {
       toastr.success(message);
+      success = message;
     }
   },
 

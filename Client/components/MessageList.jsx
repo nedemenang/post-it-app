@@ -30,7 +30,7 @@ class MessageList extends Component {
     let groupsname = '';
     let groupId = '';
     if (!lodash.isEmpty(this.props.selectedGroup)) {
-      groupsname = this.props.selectedGroup.groupname;
+      groupsname = this.props.selectedGroup.groupName;
       groupId = this.props.selectedGroup.groupId;
     }
     return (
@@ -38,11 +38,11 @@ class MessageList extends Component {
         <List>
         <Subheader><strong>{groupsname} Message List </strong></Subheader>
         {
-            this.props.messages.map((message, i) => <Message userRead = {this.props.userReadMessages}
+            this.props.messages.map((message, i) =>
+            <Message userRead = {this.props.userReadMessages}
                   groupId={groupId} message={message} key={i} />)
         }
         </List>
-          <p className="error">{this.props.errors}</p>
       </div>
     );
   }

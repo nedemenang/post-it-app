@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { List, Subheader } from 'material-ui';
 import lodash from 'lodash';
+import toastr from 'toastr';
+import { getUsersNotInGroups } from '../utils/appAPI';
 import '../public/style.scss';
 import User from './User';
+
+require('underscore-query')(lodash);
 
 
 /**
@@ -19,7 +23,28 @@ class UserList extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {};
+    this.handleUserSearchChange = this.handleUserSearchChange.bind(this);
+    this.state = {
+      searchedArray: [],
+      searchParameter: ''
+    };
+  }
+
+  /**
+   *
+   *
+   * @memberof UserList
+   */
+  handleUserSearchChange(event) {
+    if (!lodash.isEmpty(this.props.selectedGroup)) {
+      this.setState({ searchedArray:
+        getUsersNotInGroups(this.props.selectedGroup) });
+      this.setState({ searchParameter: event.target.value });
+      this.setState({ searchedArray: lodash.query(this.props.users,
+      { userName: { $like: this.state.searchParameter } }) });
+    } else {
+      toastr.error('Please select a group!');
+    }
   }
 
   /**
@@ -29,16 +54,21 @@ class UserList extends Component {
    * @memberof UserList
    */
   render() {
-    let groupsname = '';
+    let groupsName = '';
     if (!lodash.isEmpty(this.props.selectedGroup)) {
-      groupsname = this.props.selectedGroup.groupname;
+      groupsName = this.props.selectedGroup.groupName;
     }
     return (
       <div>
+         <input
+              onChange={this.handleUserSearchChange}
+              type="text" className="form-control"
+              value={this.state.searchParameter}
+              placeholder="Search for Users" />
         <List>
         <Subheader><strong>Click to add user to group</strong></Subheader>
           {
-            this.props.users.map((user, i) => <User
+            this.state.searchedArray.map((user, i) => <User
             selectedGroup={this.props.selectedGroup}
             user={user} key={i} />)
           }

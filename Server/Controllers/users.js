@@ -22,7 +22,7 @@ export default {
       });
     } else if (email === '' || password === '' || userName === '') {
       res.status(400).send({
-        message: 'Please insert email or password'
+        message: 'Please insert email, password or username'
       });
     } else {
       firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -46,14 +46,14 @@ export default {
               phoneNo,
               profilePic: photoURL
             });
-            res.send({
+            res.status(201).send({
               message: `Welcome ${user.email}. Please proceed to log in`,
               user
             });
           });
         }).catch((error) => {
           res.status(500).send({
-            message: `Error occured ${error.message}`
+            message: 'An error occured while signing up user'
           });
         });
     }
@@ -88,14 +88,14 @@ export default {
          });
       }
     });
-    res.send({
+    res.status(201).send({
       message: `Welcome ${user.email}`,
       user
     });
   })
   .catch((error) => {
     res.status(500).send({
-      message: `Error occured while login in: ${error.message}`
+      message: 'An error occurred during google sign in'
     });
   });
   },
@@ -134,7 +134,7 @@ export default {
         });
       } else {
         res.status(500).send({
-          message: `Error occured while sending:  ${error.message}`
+          message: 'An error occured during password reset'
         });
       }
     });
@@ -160,7 +160,7 @@ export default {
     // Email sent.
     }).catch((error) => {
       res.status(500).send({
-        message: `Error occured while resetting password:  ${error.message}`
+        message: 'An error occured while confirming password reset'
       });
       // An error happened.
     });
@@ -184,7 +184,7 @@ export default {
       });
     }).catch((error) => {
       res.status(500).send({
-        message: `Error occured while signing out :  ${error.message}`
+        message: 'An error occured whild signing out'
       });
     });
   },
@@ -227,7 +227,7 @@ export default {
           });
         } else {
           res.status(500).send({
-            message: `Error occured while login in:  ${error.message}`
+            message: 'An error occured while signing in'
           });
         }
       });
@@ -274,7 +274,7 @@ export default {
         });
       }).catch((error) => {
         res.status(500).send({
-          message: `Error occured ${error.message}`
+          message: 'An error occured while updating user profile'
         });
       });
     } else {
@@ -312,7 +312,7 @@ export default {
             postedBy: values.postedBy,
             postedByDisplayName: values.postedByDisplayName,
             profilePic: values.profilePic,
-            postedon: values.postedon,
+            postedOn: values.postedon,
             priority: values.priority,
             isRead: values.isRead,
           };
@@ -359,7 +359,7 @@ export default {
             postedBy: childSnapShot.val().postedBy,
             postedByDisplayName: childSnapShot.val().postedByDisplayName,
             profilePic: childSnapShot.val().profilePic,
-            postedon: childSnapShot.val().postedon,
+            postedOn: childSnapShot.val().postedon,
             priority: childSnapShot.val().priority,
             isRead: childSnapShot.val().isRead,
           };
@@ -396,7 +396,7 @@ export default {
         snapshot.forEach((childSnapShot) => {
           const group = {
             groupId: childSnapShot.key,
-            groupname: childSnapShot.val().groupName,
+            groupName: childSnapShot.val().groupName,
             newMessage: childSnapShot.val().newMessage
               // createdby: childSnapShot.val().createdby
           };

@@ -87,18 +87,18 @@ export default {
            groupName,
            newMessage: false
          });
-         res.send({
+         res.status(201).send({
            message: 'New group successfully created',
          });
        })
        .catch((error) => {
          res.status(500).send({
-           message: `Error occurred ${error.message}`,
+           message: 'Error occured while creating groups',
          });
        });
       } else {
         res.status(400).send({
-          message: 'Incomplete parameters!'
+          message: 'Please insert groupname or createdby or datecreated'
         });
       }
     } else {
@@ -121,7 +121,7 @@ export default {
   addUser(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
-      const { userId, groupName, username, email } = req.body;
+      const { userId, groupName, userName, email } = req.body;
       if (userId !== '' || groupName !== '') {
         const firebaseDatabase = firebase.database();
         const { groupId } = req.params;
@@ -130,7 +130,7 @@ export default {
         groupRef.child(userId).set({
           email,
           userId,
-          userName: username
+          userName
         })
        .then(() => {
          const userRef = firebaseDatabase
@@ -146,12 +146,12 @@ export default {
        })
        .catch((error) => {
          res.status(500).send({
-           message: `Error occurred ${error.message}`,
+           message: 'Error occurred while adding user',
          });
        });
       } else {
         res.status(400).send({
-          message: 'Incomplete parameters',
+          message: 'Please insert userId or groupName',
         });
       }
     } else {
@@ -189,7 +189,7 @@ export default {
        })
        .catch((error) => {
          res.status(500).send({
-           message: `Error occurred ${error.message}`,
+           message: 'An error occured while removing user',
          });
        });
     } else {
@@ -213,8 +213,9 @@ export default {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
       const { messageBody, groupId, postedBy, postedByDisplayName,
-        postedon, priority, groupName, profilePic } = req.body;
-      if (messageBody !== '' || groupId !== '' || postedBy !== '' || priority !== '') {
+        postedOn, priority, groupName, profilePic } = req.body;
+      if (messageBody !== '' ||
+      groupId !== '' || postedBy !== '' || priority !== '') {
         const firebaseDatabase = firebase.database();
         const subscribers = [];
         const messageRef = firebaseDatabase
@@ -223,7 +224,7 @@ export default {
           messageBody,
           postedBy,
           postedByDisplayName,
-          postedon,
+          postedOn,
           priority,
           profilePic
         }).key;
@@ -242,7 +243,7 @@ export default {
               messageBody,
               postedBy,
               postedByDisplayName,
-              postedon,
+              postedOn,
               priority,
               isRead: false,
               profilePic
@@ -287,14 +288,13 @@ export default {
          });
        })
        .catch((error) => {
-         console.log(error);
          res.status(500).send({
-           message: `Error occurred ${error.message}`,
+           message: 'An error occurred while posting message.',
          });
        });
       } else {
         res.status(400).send({
-          message: 'Incomplete parameters'
+          message: 'Please insert messageBody, groupId, postedBy or priority'
         });
       }
     } else {
@@ -337,7 +337,7 @@ export default {
             })
           .catch((error) => {
             res.status(500).send({
-              message: `Error occurred ${error.message}`,
+              message: 'An error occurred while getting users read messages',
             });
           });
     } else {
@@ -373,7 +373,7 @@ export default {
           const user = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
-            username: childSnapShot.val().userName,
+            userName: childSnapShot.val().userName,
             profilePic: childSnapShot.val().profilePic
           };
           usersInGroup.push(user);
@@ -384,7 +384,7 @@ export default {
           const users = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
-            username: childSnapShot.val().userName,
+            userName: childSnapShot.val().userName,
             profilePic: childSnapShot.val().profilePic
           };
           allUsers.push(users);
@@ -397,7 +397,7 @@ export default {
       })
           .catch((error) => {
             res.status(500).send({
-              message: `Error occurred ${error.message}`,
+              message: 'Error occured while getting user list',
             });
           });
     } else {
