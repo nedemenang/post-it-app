@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../public/style.scss';
+import $ from 'jquery';
 import { AppBar } from 'material-ui';
 import { Link } from 'react-router-dom';
 import { signOutUser } from '../actions/AppActions';
@@ -50,6 +51,10 @@ const Menu = () => (
  * @extends {Component}
  */
 class TitleBar extends Component {
+  handleToggle() {
+    // alert('Stone cold');
+    $('.leftColumn').toggle();
+  }
   /**
    *
    * Renders title bar page
@@ -59,7 +64,7 @@ class TitleBar extends Component {
   render() {
     return (
       <div className="topnav">
-          <AppBar title={ <ListItem leftAvatar={
+          <AppBar onLeftIconButtonTouchTap = {this.handleToggle.bind(this)} title={<ListItem leftAvatar={
         <Avatar
           src={JSON.parse(localStorage.getItem('user')) !== null
           ? JSON.parse(localStorage.getItem('user')).profilePic : ''}

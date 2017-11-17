@@ -34,11 +34,9 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  padding-top: 20px;
+  width: 96%;
   background-color: white;
   border-color: #4CAF4F;
-  height: 150px;
   z-index: 2;
 }
 
@@ -50,7 +48,7 @@
 }
 
 #message {
-  width: 550px;
+  width: 50%;
   height: 35px;
   display: block;
   float: left;
@@ -211,8 +209,6 @@ body {
   width: 75%;
 }
 
-.bottomMargin {}
-
 .row {
   display: flex;
   flex-flow: row wrap;
@@ -239,15 +235,125 @@ body {
   width: 33.33333333%;
 }
 
-@media (min-width: 992px) {
+@media only screen and (min-width: 1010px) {
   .col-md-8 {
     float: right;
   }
+  div.footer {
+    margin-left: -200px;
+  }
+  .form-select {
+    margin-left: 30%!important;
+    width: 70%!important;
+  }
+
+  .rightColumn {
+    padding-left: 26%!important;
+  }
+
+  textarea#message {
+    width: 60%!important;
+    margin-left: 30%!important;
+  }
+  div.bottomMargin {
+    margin-left: -10px!important;       
+  }
 }
 
-@media (min-width: 992px) {
-  .col-md-4 {
-    float: left;
+@media only screen and (max-width: 1000px) {
+  .col-md-8 {
+    float: right;
+  }
+  div.footer {
+    margin-left: -200px;
+  }
+  .form-select {
+    margin-left: 28%!important;
+    width: 60%!important;
+  }
+
+  .rightColumn {
+    padding-left: 27%
+  }
+
+  textarea#message {
+    width: 60%!important;
+    margin-left: 32%!important;
+  }
+  div.bottomMargin {
+    margin-left: -10px!important;       
+  }
+}
+
+@media only screen and (max-width: 970px) {
+  .col-md-8 {
+    float: right;
+  }
+  .leftColumn {
+    display: none;
+  }
+  div.footer {
+    margin-left: -200px;
+  }
+  .form-select {
+    margin-left: 5%!important;
+    width: 80%!important;
+  }
+
+  .rightColumn {
+    padding-left: 35px
+  }
+
+  textarea#message {
+    width: 85%!important;
+    margin-left: 5%!important;
+  }
+  div.bottomMargin {
+    margin-left: -10px!important;       
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .col-md-8 {
+    float: right;
+  }
+  .leftColumn {
+    display: none;
+  }
+  div.footer {
+    margin-left: -200px;
+  }
+  .form-select {
+    width: 100%!important;
+  }
+  textarea#message {
+    width: 65%!important;
+    margin-left: 20px!important;
+  }
+  div.bottomMargin {
+    margin-left: -10px!important;       
+  }
+}
+
+@media only screen and (max-width: 270px) {
+  .col-md-8 {
+    float: right;
+  }
+  .leftColumn {
+    display: none;
+  }
+  div.footer {
+    margin-left: -200px;
+  }
+  .form-select {
+    width: 100%!important;
+  }
+  textarea#message {
+    width: 65%!important;
+    margin-left: 15px!important;
+  }
+  div.bottomMargin {
+    margin-left: -10px!important;       
   }
 }
 
@@ -270,7 +376,7 @@ body {
 .form-select {
   font-family: "Roboto", sans-serif;
   display: block;
-  width: 575px;
+  width: 50%;
   height: 34px;
   padding: 6px 12px;
   font-size: 13px;
