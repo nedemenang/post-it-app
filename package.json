@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-watch server.js",
-    "startdev": "NODE_ENV=development npm run build-dev && babel-node ./Server/server.js",
+    "startdev": "NODE_ENV=development npm run build-dev && babel-node ./server/server.js",
     "start": "NODE_ENV=production node ./dist/server/server.js",
     "build-client": "webpack --config=webpack.config.prod.js",
     "build-dev": "webpack --config=webpack.config.js",
     "build": "rimraf /dist && concurrently \" npm run build-client\" \"npm run build-server\"",
-    "build-server": "babel ./Server --out-dir ./dist/server --copy-files",
+    "build-server": "babel ./server --out-dir ./dist/server --copy-files",
     "coverage": "nyc report --reporter=lcov > coverage.lcov && codecov --token=b9101838-51a4-4e9d-bf62-c8b3ec65eb0b",
-    "testServer": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./Server/test/*.test.js && npm run coverage",
-    "testClient": "NODE_ENV=test jest --u ./Client/__tests__/ --coverage && npm run coverage",
+    "testServer": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register --timeout 10000 ./server/test/*.test.js && npm run coverage",
+    "testClient": "NODE_ENV=test jest --u ./client/__tests__/ --coverage && npm run coverage",
     "postinstall": "[\"$NODE_ENV\" != production] && exit 0; npm run build",
     "test": "npm run testServer && npm run testClient"
   },
@@ -33,8 +33,8 @@
       ".*": "<rootDir>/node_modules/jest-css-modules"
     },
     "moduleNameMapper": {
-      "\\.(css|scss|less)$": "<rootDir>/Client/jest/styleMock.js",
-      "\\.(png|jpg|gif|ttf|eot|svg)$": "<rootDir>/Client/jest/fileMock.js"
+      "\\.(css|scss|less)$": "<rootDir>/client/jest/styleMock.js",
+      "\\.(png|jpg|gif|ttf|eot|svg)$": "<rootDir>/client/jest/fileMock.js"
     }
   },
   "dependencies": {

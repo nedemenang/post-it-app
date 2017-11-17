@@ -55,7 +55,7 @@ export default app;
 
 app.get('/*', (req, res) => {
   if (process.env.NODE_ENV !== 'production') {
-    res.sendFile(path.join(__dirname, '../Client/public/index.html'));
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
   } else {
     res.sendFile(path.join(__dirname, '../client/index.html'));
   }
