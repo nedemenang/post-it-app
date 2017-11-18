@@ -26,6 +26,11 @@ describe('the Login form component', () => {
     mountedComponent = undefined;
   });
 
+  it('should render', () => {
+    const component = loginFormItem();
+    expect(component).toBeDefined();
+  });
+
   it('should match snapshot test', () => {
     const component = loginFormItem();
     const tree = toJson(component);
