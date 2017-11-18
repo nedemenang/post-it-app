@@ -6,6 +6,7 @@ exports[`the title bar component should match snapshot test 1`] = `
 >
   <AppBar
     iconElementRight={<Menu />}
+    onLeftIconButtonTouchTap={[Function]}
     showMenuIconButton={true}
     title={
       <ListItem
