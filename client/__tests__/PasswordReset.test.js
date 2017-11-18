@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import PasswordReset from '../components/passwordReset.jsx';
+import PasswordReset from '../components/PasswordReset.jsx';
 
 describe('the password reset component', () => {
   let mountedComponent;

@@ -48,6 +48,7 @@ const config = {
   },
   module: {
     loaders: [
+      { loader: 'file-loader', test: /\.(ttf|png|eot|svg)$/ },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

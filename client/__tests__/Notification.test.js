@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import NotificationItem from '../components/notification.jsx';
+import NotificationItem from '../components/Notification.jsx';
 
 describe('the notificaiton component', () => {
   let mountedComponent;
