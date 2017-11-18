@@ -1,6 +1,6 @@
 import lodash from 'lodash';
-import sendSMS from '../Utilities/sendSms';
-import sendEmail from '../Utilities/sendMail';
+import sendSMS from '../utilities/sendSms';
+import sendEmail from '../utilities/sendMail';
 
 export default {
 

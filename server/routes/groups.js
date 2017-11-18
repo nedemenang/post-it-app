@@ -1,4 +1,4 @@
-import groupController from '../Controllers/groups';
+import groupController from '../controllers/groups';
 
 module.exports = (app, firebase, io) => {
   app.post('/group', (req, res) => {

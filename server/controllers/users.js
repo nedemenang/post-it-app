@@ -1,6 +1,6 @@
 import lodash from 'lodash';
 import groupController from './groups';
-import emailValidator from '../Utilities/emailValidator';
+import emailValidator from '../utilities/emailValidator';
 
 export default {
 /**

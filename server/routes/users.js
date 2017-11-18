@@ -1,4 +1,4 @@
-import userController from '../Controllers/users';
+import userController from '../controllers/users';
 
 module.exports = (app, firebase, io) => {
   app.post('/users/signin', (req, res) => {

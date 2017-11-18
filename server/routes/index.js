@@ -1,4 +1,4 @@
-import firebase from '../Utilities/config';
+import firebase from '../utilities/config';
 import userRoutes from './users';
 import groupRoutes from './groups';
 
