@@ -22,7 +22,7 @@ describe('the Login form component', () => {
     mockery.enable();
     mockery.registerMock('../public/images/logo.png', 'office smiley');
     mockery.registerMock('../public/images/8b6c67595d0f851d12e743fd3fe694ab.png',
-    'office smiley');ß
+    'office smiley');
     mountedComponent = undefined;
   });
 
