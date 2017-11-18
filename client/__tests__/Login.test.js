@@ -4,8 +4,6 @@ import toJson from 'enzyme-to-json';
 import Login from '../components/Login.jsx';
 import mockery from 'mockery';
 
-mockery.enable();
-mockery.registerMock('../public/images/logo.png', 0);
 
 describe('the Login form component', () => {
   let mountedComponent;
@@ -21,6 +19,10 @@ describe('the Login form component', () => {
   };
 
   beforeEach(() => {
+    mockery.enable();
+    mockery.registerMock('../public/images/logo.png', 'office smiley');
+    mockery.registerMock('../public/images/8b6c67595d0f851d12e743fd3fe694ab.png',
+    'office smiley');ß
     mountedComponent = undefined;
   });
 
