@@ -12,7 +12,7 @@ import '../public/style.scss';
 import { registerUser,
   receiveErrors, login,
   registerGoogleUser } from '../actions/AppActions';
-import firebase from '../../server/Utilities/config';
+import firebase from '../../server/utilities/config';
 
 
 /**
