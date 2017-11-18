@@ -5,7 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { green100, green500, green700 } from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppStore from '../stores/AppStore';
-import PasswordReset from './passwordReset';
+import PasswordReset from './PasswordReset';
 import LoginMessageBoard from './LoginMessageBoard';
 import PasswordResetConfirm from './PasswordResetConfirm';
 import ProfileEdit from './ProfileEdit';
