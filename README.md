@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nedemenang/post-it-app.svg?branch=develop)](https://travis-ci.org/nedemenang/post-it-app) [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+[![Build Status](https://travis-ci.org/nedemenang/post-it-app.svg?branch=bug-fix%2FFix-directory-naming)](https://travis-ci.org/nedemenang/post-it-app) [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 [![codecov.io Code Coverage](https://codecov.io/github/nedemenang/post-it-app/branch/bug-fix%2FFix-directory-naming/graphs/badge.svg)](https://codecov.io/gh/nedemenang/post-it-app/branch/bug-fix%2FFix-directory-naming)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
