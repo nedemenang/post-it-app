@@ -235,8 +235,7 @@ class Login extends Component {
     return (
       <div>
       <div className="login-image">
-      <img src={require('../public/images/logo.png')}
-      alt="Smiley face" height="inherit" width="inherit"/>
+      <img src="https://github.com/nedemenang/post-it-app/blob/bug-fix/Fix-directory-naming/client/public/images/logo.png?raw=true" alt="Smiley face" height="inherit" width="inherit"/>
               </div>
       <div className="login-page">
 

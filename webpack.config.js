@@ -45,9 +45,9 @@ const config = {
         loader: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|otf|eot|svg|ttf|woff)$/i,
         use: [
-          'url-loader?limit=10000',
+          'url-loader?limit=100000',
           'img-loader'
         ]
       }
