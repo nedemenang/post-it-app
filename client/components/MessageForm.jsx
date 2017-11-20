@@ -43,7 +43,7 @@ class MessageForm extends Component {
           postedByDisplayName: JSON.parse(user).displayName,
           profilePic: JSON.parse(user).photoURL,
           groupId: this.props.selectedGroup.groupId,
-          groupName: this.props.selectedGroup.groupname
+          groupName: this.props.selectedGroup.groupName
         };
         addMessage(messageObject);
       }
