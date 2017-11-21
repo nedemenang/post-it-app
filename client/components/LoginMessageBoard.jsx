@@ -73,7 +73,8 @@ class LoginMessageBoard extends Component {
     * @memberof LoginMessageBoard
     */
   render() {
-    if (this.state.isAuthenticated === true) {
+    if (this.state.isAuthenticated === true &&
+      localStorage.getItem('user') == null) {
       localStorage.setItem('user', JSON.stringify(this.state.loggedInUser[0]));
     }
 
