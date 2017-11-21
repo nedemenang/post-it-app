@@ -219,11 +219,11 @@ export default {
       }).catch((error) => {
         if (error.code === 'auth/wrong-password') {
           res.status(401).send({
-            message: 'Invalid Password'
+            message: 'Invalid email or Password'
           });
         } else if (error.code === 'auth/user-not-found') {
           res.status(401).send({
-            message: 'Invalid email address'
+            message: 'Invalid email or Password'
           });
         } else {
           res.status(500).send({

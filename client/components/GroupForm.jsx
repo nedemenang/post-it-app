@@ -24,7 +24,7 @@ class GroupForm extends Component {
     const groupName = this.state.groupName.trim();
     const dateCreated = (new Date()).toLocaleString('en-GB');
     const user = localStorage.getItem('user');
-    if (this.state.groupName !== '') {
+    if (this.state.groupName.trim() !== '') {
       const group = {
         groupName,
         dateCreated,

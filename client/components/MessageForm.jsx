@@ -30,7 +30,7 @@ class MessageForm extends Component {
 
     if (lodash.isEmpty(this.props.selectedGroup)) {
       receiveErrors('Please select a group to post a message');
-    } else if (this.state.message === '') {
+    } else if (this.state.message.trim() === '') {
       receiveErrors('Please type in a message');
     } else {
       if (this.props.selectedGroup.groupId !== undefined) {

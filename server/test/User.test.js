@@ -171,7 +171,7 @@ describe('Sign in route', () => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
       res.body.should.have.property('message');
-      res.body.message.should.equal('Invalid email address');
+      res.body.message.should.equal('Invalid email or Password');
       done();
     });
   });
@@ -187,7 +187,7 @@ describe('Sign in route', () => {
       res.status.should.equal(401);
       res.body.should.be.a('object');
       res.body.should.have.property('message');
-      res.body.message.should.equal('Invalid Password');
+      res.body.message.should.equal('Invalid email or Password');
       done();
     });
   });
