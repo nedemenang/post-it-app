@@ -8,7 +8,7 @@ exports[`the Login form component should match snapshot test 1`] = `
     <img
       alt="Smiley face"
       height="inherit"
-      src="test-file-stub"
+      src="https://github.com/nedemenang/post-it-app/blob/bug-fix/Fix-directory-naming/client/public/images/logo.png?raw=true"
       width="inherit"
     />
   </div>

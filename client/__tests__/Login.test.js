@@ -62,7 +62,7 @@ describe('the Login form component', () => {
     loginFormItem().find('#username').simulate('change', { target: {
       value: 'newUsername'
     } });
-    expect(loginFormItem().state().username).toBe('newUsername');
+    expect(loginFormItem().state().userName).toBe('newUsername');
   });
 
   it('should update state on password field change', () => {

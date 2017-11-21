@@ -105,7 +105,7 @@ describe('Sign up Route', () => {
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               res.body.message.should
-              .equal(`Welcome ${email.toLowerCase()}. Please proceed to log in`);
+              .equal(`Welcome ${email.toLowerCase()}!`);
               done();
             });
   });
