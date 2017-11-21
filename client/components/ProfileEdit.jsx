@@ -4,6 +4,7 @@ import 'react-images-uploader/styles.css';
 import 'react-images-uploader/font.css';
 import '../public/style.scss';
 import TitleBar from './TitleBar';
+import History from '../utils/history';
 import { updateUserProfile } from '../actions/AppActions';
 
 /**
@@ -70,6 +71,9 @@ class ProfileEdit extends Component {
       userName: '',
       phoneNumber: ''
     });
+    setTimeout(() => {
+      History.push('/');
+    }, 2000);
   }
 
 

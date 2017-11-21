@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { green100, green500, green700 } from 'material-ui/styles/colors';
@@ -10,6 +10,7 @@ import LoginMessageBoard from './LoginMessageBoard';
 import PasswordResetConfirm from './PasswordResetConfirm';
 import ProfileEdit from './ProfileEdit';
 import '../public/style.scss';
+import History from '../utils/history';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -79,7 +80,7 @@ class App extends Component {
   */
   render() {
     return (
-        <BrowserRouter>
+        <Router history={History}>
          <div>
          <MuiThemeProvider muiTheme={muiTheme}>
         <Switch>
@@ -101,7 +102,7 @@ class App extends Component {
         </Switch>
         </MuiThemeProvider>
       </div>
-        </BrowserRouter>
+        </Router>
     );
   }
 

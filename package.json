@@ -67,6 +67,7 @@
     "firebase-admin": "^5.2.1",
     "firebase-server": "^0.11.0",
     "flux": "*",
+    "history": "^4.7.2",
     "html-webpack-plugin": "^2.30.1",
     "http": "0.0.0",
     "images-upload-middleware": "^1.1.1",
