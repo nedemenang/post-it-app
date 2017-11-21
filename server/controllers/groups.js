@@ -373,7 +373,7 @@ export default {
           const user = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
-            userName: childSnapShot.val().userName,
+            userName: childSnapShot.val().userName.toLowerCase(),
             profilePic: childSnapShot.val().profilePic
           };
           usersInGroup.push(user);
@@ -384,7 +384,7 @@ export default {
           const users = {
             id: childSnapShot.key,
             email: childSnapShot.val().email,
-            userName: childSnapShot.val().userName,
+            userName: childSnapShot.val().userName.toLowerCase(),
             profilePic: childSnapShot.val().profilePic
           };
           allUsers.push(users);

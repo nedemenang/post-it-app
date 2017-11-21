@@ -35,7 +35,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword(email, password)
             .catch((error) => {
               res.status(500).send({
-                message: `Error occured ${error.message}`
+                message: 'An error occured while signing up user'
               });
             });
             const userRef = firebase.database()
@@ -47,7 +47,7 @@ export default {
               profilePic: photoURL
             });
             res.status(201).send({
-              message: `Welcome ${user.email}. Please proceed to log in`,
+              message: `Welcome ${user.email}!`,
               user
             });
           });

@@ -65,7 +65,7 @@ class Login extends Component {
     receiveErrors('');
     this.setState({
       email: '',
-      username: '',
+      userName: '',
       password: '',
       loginEmail: '',
       loginPassword: ''
@@ -87,7 +87,7 @@ class Login extends Component {
     const user = {
       email: this.state.email.trim(),
       password: this.state.password.trim(),
-      username: this.state.username.trim(),
+      userName: this.state.userName.trim(),
       phoneNo: this.state.phoneNumber.trim(),
       profilePic: `${str2}static/files/blank-profile-pic.png`
     };
@@ -96,13 +96,13 @@ class Login extends Component {
       receiveErrors('Please insert email');
     } else if (this.state.password.trim() === '') {
       receiveErrors('Please insert password');
-    } else if (this.state.username.trim() === '') {
+    } else if (this.state.userName.trim() === '') {
       receiveErrors('Please insert username');
     } else {
       registerUser(user);
       this.setState({
         email: '',
-        username: '',
+        userName: '',
         password: '',
         phoneNumber: ''
       });
@@ -155,7 +155,7 @@ class Login extends Component {
    * @returns {void} returns void
    */
   handleUserNameChange(event) {
-    this.setState({ username: event.target.value });
+    this.setState({ userName: event.target.value });
   }
 
   /**
@@ -210,7 +210,7 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      username: '',
+      userName: '',
       password: '',
       phoneNumber: '',
       loginEmail: '',
@@ -279,7 +279,7 @@ class Login extends Component {
       <input type="text"
       onChange={this.handleUserNameChange.bind(this)}
       id="username"
-      value={this.state.username} ref="username" placeholder="username"/>
+      value={this.state.userName} ref="username" placeholder="username"/>
       <input type="text"
       onChange={this.handlePhoneNumberChange.bind(this)}
       id="phoneNo"
