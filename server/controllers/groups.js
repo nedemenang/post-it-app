@@ -162,7 +162,7 @@ export default {
   },
 
   /**
-   * Add user to group
+   * Remove user from group
    * Route: POST: /group/remove
    *
    * @param {Object} req request object
