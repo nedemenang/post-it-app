@@ -10,15 +10,6 @@ describe('the profile Edit component', () => {
   const str = location.href;
   const str2 = str.replace('#', ' ');
 
-  const loggedInUser = {
-    displayName: 'nnamisco',
-    email: 'nedemenang@gmail.com',
-    id: 'TUsUaucS5nb5kuOP6SpvTUcX9vD3',
-    isAuthenticated: true,
-    phoneNo: null,
-    profilePic: `${str2}static/files/blank-profile-pic.png`
-  };
-
   const ProfileEditItem = () => {
     if (!mountedComponent) {
       mountedComponent = shallow(<ProfileEdit />);

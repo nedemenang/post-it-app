@@ -65,5 +65,8 @@ describe('the group list component', () => {
 
   it('should recieve props', () => {
     expect(Object.keys(groupListItem().props()).length).toBeGreaterThan(0);
+    expect(groupListItem().instance().props.groups).toEqual(groups);
+    expect(groupListItem().instance().props.selectedGroup).toEqual(group);
+    expect(groupListItem().instance().props.loggedInUser).toEqual(loggedInUser);
   });
 });

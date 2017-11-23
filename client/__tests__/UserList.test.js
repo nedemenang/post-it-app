@@ -59,5 +59,8 @@ describe('the User list component', () => {
 
   it('should recieve props', () => {
     expect(Object.keys(userListItem().props()).length).toBeGreaterThan(0);
+    expect(userListItem().instance().props.loggedInUser).toEqual(loggedInUser);
+    expect(userListItem().instance().props.selectedGroup).toEqual(group);
+    expect(userListItem().instance().props.users).toEqual(users);
   });
 });

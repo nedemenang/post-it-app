@@ -59,5 +59,8 @@ describe('the user item component', () => {
 
   it('should recieve props', () => {
     expect(Object.keys(userItem().props()).length).toBeGreaterThan(0);
+    expect(userItem().instance().props.loggedInUser).toEqual(loggedInUser);
+    expect(userItem().instance().props.selectedGroup).toEqual(group);
+    expect(userItem().instance().props.user).toEqual(user);
   });
 });

@@ -45,6 +45,7 @@ describe('the group form component', () => {
 
   it('should recieve props', () => {
     expect(Object.keys(groupFormItem().props()).length).toBeGreaterThan(0);
+    expect(groupFormItem().instance().props.loggedInUser).toEqual(loggedInUser);
   });
 
   it('should call function on submit of form', () => {

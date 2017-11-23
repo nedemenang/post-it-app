@@ -52,5 +52,6 @@ describe('the message item component', () => {
 
   it('should recieve props', () => {
     expect(Object.keys(messageItem().props()).length).toBeGreaterThan(0);
+    expect(messageItem().instance().props.message).toEqual(message);
   });
 });

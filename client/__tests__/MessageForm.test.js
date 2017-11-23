@@ -49,6 +49,9 @@ describe('the Message form component', () => {
 
   it('should recieve props', () => {
     expect(Object.keys(messageFormItem().props()).length).toBeGreaterThan(0);
+    expect(messageFormItem().instance().props.selectedGroup).toEqual(group);
+    expect(messageFormItem().instance().props.loggedInUser)
+    .toEqual(loggedInUser);
   });
 
   it('should call function on submit of form', () => {

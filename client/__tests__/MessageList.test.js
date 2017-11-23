@@ -68,5 +68,9 @@ describe('the message list component', () => {
 
   it('should recieve props', () => {
     expect(Object.keys(messageListItem().props()).length).toBeGreaterThan(0);
+    expect(messageListItem().instance().props.selectedGroup).toEqual(group);
+    expect(messageListItem().instance().props.loggedInUser)
+    .toEqual(loggedInUser);
+    expect(messageListItem().instance().props.messages).toEqual(messages);
   });
 });
