@@ -63,7 +63,8 @@ describe('Create group route', () => {
     .end((err, res) => {
       res.status.should.equal(400);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Please insert groupname or createdby or datecreated');
+      res.body.message
+      .should.equal('Please insert groupname or createdby or datecreated');
       res.body.should.have.property('message');
       done();
     });
@@ -232,7 +233,8 @@ describe('Post message route', () => {
     .end((err, res) => {
       res.status.should.equal(400);
       res.body.should.be.a('object');
-      res.body.message.should.equal('Please insert messageBody, groupId, postedBy or priority');
+      res.body.message
+      .should.equal('Please insert messageBody, groupId, postedBy or priority');
       res.body.should.have.property('message');
       done();
     });
