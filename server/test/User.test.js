@@ -65,7 +65,7 @@ describe('Sign up Route', () => {
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               res.body.message.should
-              .equal('Please insert a valid email address');
+              .equal('Please insert email, password or username');
               done();
             });
   });
@@ -85,7 +85,7 @@ describe('Sign up Route', () => {
               res.body.should.be.a('object');
               res.body.should.have.property('message');
               res.body.message.should
-              .equal('Please insert a valid email address');
+              .equal('Please insert email, password or username');
               done();
             });
   });
@@ -139,7 +139,7 @@ describe('Sign in route', () => {
       res.status.should.equal(400);
       res.body.should.be.a('object');
       res.body.should.have.property('message');
-      res.body.message.should.equal('Please insert a valid email address');
+      res.body.message.should.equal('Please insert email, password or username');
       done();
     });
   });

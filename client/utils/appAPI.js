@@ -24,7 +24,7 @@ export const registerNewUser = (user) => {
     };
     receiveSuccess(response.data.message);
     receiveAuthenticatedUser(authuser);
-    localStorage.setItem('user', authuser);
+    localStorage.setItem('user', JSON.stringify(authuser));
   })
   .catch((error) => {
     receiveErrors(error.response.data.message);

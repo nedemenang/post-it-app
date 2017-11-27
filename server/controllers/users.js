@@ -1,6 +1,5 @@
 import lodash from 'lodash';
 import groupController from './groups';
-import emailValidator from '../utilities/emailValidator';
 
 export default {
 /**
@@ -102,16 +101,7 @@ export default {
    */
   passwordReset(req, res, firebase) {
     const email = req.body.emailAddress;
-    if (!emailValidator(email)) {
-      res.status(400).send({
-        message: 'Please insert valid email address'
-      });
-    } else if (email === '') {
-      res.status(400).send({
-        message: 'Please insert valid email address'
-      });
-    } else {
-      firebase.auth().sendPasswordResetEmail(email)
+    firebase.auth().sendPasswordResetEmail(email)
     .then(() => {
       res.status(200).send({
         message: 'Email successfully. Kindly check your inbox for reset link.'
@@ -128,7 +118,6 @@ export default {
         });
       }
     });
-    }
   },
 
   /**
@@ -191,16 +180,7 @@ export default {
    */
   signIn(req, res, firebase) {
     const { email, password } = req.body;
-    if (!emailValidator(email)) {
-      res.status(400).send({
-        message: 'Please insert a valid email address'
-      });
-    } else if (email === '' || password === '') {
-      res.status(400).send({
-        message: 'Please insert email or password'
-      });
-    } else {
-      firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
         res.send({
           message: `Welcome ${user.displayName}`,
@@ -221,7 +201,6 @@ export default {
           });
         }
       });
-    }
   },
 
   /**

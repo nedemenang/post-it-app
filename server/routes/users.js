@@ -2,11 +2,11 @@ import userController from '../controllers/users';
 import Validator from '../utilities/Validator';
 
 module.exports = (app, firebase, io) => {
-  app.post('/users/signin', (req, res) => {
+  app.post('/users/signin', Validator, (req, res) => {
     userController.signIn(req, res, firebase);
   });
 
-  app.post('/users/passwordReset', (req, res) => {
+  app.post('/users/passwordReset', Validator, (req, res) => {
     userController.passwordReset(req, res, firebase);
   });
 

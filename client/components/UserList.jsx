@@ -41,7 +41,7 @@ class UserList extends Component {
         getUsersNotInGroups(this.props.selectedGroup) });
       this.setState({ searchParameter: event.target.value });
       this.setState({ searchedArray: lodash.query(this.props.users,
-      { userName: { $like: this.state.searchParameter } }) });
+      { userName: { $like: this.state.searchParameter.trim() } }) });
     } else {
       toastr.error('Please select a group!');
     }
