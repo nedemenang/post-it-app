@@ -1,0 +1,18 @@
+
+engines:
+  eslint:
+    enabled: true
+    checks:
+      linebreak-style:
+        enabled: false
+    config:
+        languages:
+          - javascript
+    fixme:
+      enabled: true
+ratings:
+exclude_paths:
+  - Client/__tests__/
+  - node_modules/
+  - dist/
+  - Server/test

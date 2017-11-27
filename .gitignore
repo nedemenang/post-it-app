@@ -1,0 +1,8 @@
+node_modules/*
+coverage/*
+settings.json
+package-lock.json
+.env
+dist/*
+.vscode/*
+.nyc_output/*

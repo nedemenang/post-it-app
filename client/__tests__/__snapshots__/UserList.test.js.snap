@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the User list component should match snapshot test 1`] = `
+<div>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    placeholder="Search for Users"
+    type="text"
+    value=""
+  />
+  <List>
+    <Subheader
+      inset={false}
+    >
+      <strong>
+        Click to add user to group
+      </strong>
+    </Subheader>
+  </List>
+</div>
+`;
