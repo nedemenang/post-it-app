@@ -89,7 +89,7 @@ describe('Sign up Route', () => {
               done();
             });
   });
-  it('should return 200 for correct username and password', (done) => {
+  it('should return 201 for correct username and password', (done) => {
     const email = faker.internet.email();
     chai.request(server)
             .post('/users/signup')
@@ -501,7 +501,7 @@ describe('Password Reset', () => {
     chai.request(server)
     .post('/users/passwordReset')
     .send({
-      emailAddress: 'Wava40@hotmail.com',
+      emailAddress: 'Lorenza_Hahn@hotmail.com',
     })
     .end((err, res) => {
       res.status.should.equal(200);

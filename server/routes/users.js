@@ -1,4 +1,5 @@
 import userController from '../controllers/users';
+import Validator from '../utilities/Validator';
 
 module.exports = (app, firebase, io) => {
   app.post('/users/signin', (req, res) => {
@@ -21,7 +22,7 @@ module.exports = (app, firebase, io) => {
     userController.signOut(req, res, firebase);
   });
 
-  app.post('/users/signup', (req, res) => {
+  app.post('/users/signup', Validator, (req, res) => {
     userController.signUp(req, res, firebase);
   });
 

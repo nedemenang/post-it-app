@@ -16,16 +16,7 @@ export default {
 
   signUp(req, res, firebase) {
     const { email, password, userName, photoURL, phoneNo } = req.body;
-    if (!emailValidator(email)) {
-      res.status(400).send({
-        message: 'Please insert a valid email address'
-      });
-    } else if (email === '' || password === '' || userName === '') {
-      res.status(400).send({
-        message: 'Please insert email, password or username'
-      });
-    } else {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => {
           user.updateProfile({
             displayName: userName,
@@ -56,7 +47,6 @@ export default {
             message: 'An error occured while signing up user'
           });
         });
-    }
   },
   /**
    * Google Sign In
@@ -312,7 +302,7 @@ export default {
             postedBy: values.postedBy,
             postedByDisplayName: values.postedByDisplayName,
             profilePic: values.profilePic,
-            postedOn: values.postedon,
+            postedOn: values.postedOn,
             priority: values.priority,
             isRead: values.isRead,
           };
@@ -359,7 +349,7 @@ export default {
             postedBy: childSnapShot.val().postedBy,
             postedByDisplayName: childSnapShot.val().postedByDisplayName,
             profilePic: childSnapShot.val().profilePic,
-            postedOn: childSnapShot.val().postedon,
+            postedOn: childSnapShot.val().postedOn,
             priority: childSnapShot.val().priority,
             isRead: childSnapShot.val().isRead,
           };

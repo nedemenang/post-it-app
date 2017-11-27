@@ -4,4 +4,5 @@ settings.json
 package-lock.json
 .env
 dist/*
-.vscode
+.vscode/*
+.nyc_output/*

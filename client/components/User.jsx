@@ -41,14 +41,14 @@ class User extends Component {
    */
   handleSave() {
     if (this.props.selectedGroup.groupId !== undefined) {
-      const userObject = {
+      const user = {
         email: this.props.user.email,
         userId: this.props.user.id,
         userName: this.props.user.userName,
         groupId: this.props.selectedGroup.groupId,
         groupName: this.props.selectedGroup.groupName
       };
-      addUserToGroup(userObject);
+      addUserToGroup(user);
     }
     this.setState({ open: false });
   }

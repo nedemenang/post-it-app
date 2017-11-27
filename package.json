@@ -60,6 +60,7 @@
     "es6-promise": "^4.1.1",
     "events": "^1.1.1",
     "express": "*",
+    "express-validator": "^4.3.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "faker": "^4.1.0",
     "file-loader": "^0.11.2",

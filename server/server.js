@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import corsPrefetch from 'cors-prefetch-middleware';
 import imagesUpload from 'images-upload-middleware';
+import expressValidator from 'express-validator';
 import http from 'http';
 import sockio from 'socket.io';
 import path from 'path';
@@ -21,7 +22,7 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(expressValidator());
 if (process.env.NODE_ENV !== 'production') {
   const webpackConfig = require('../webpack.config');
   const compiler = webpack(webpackConfig);
