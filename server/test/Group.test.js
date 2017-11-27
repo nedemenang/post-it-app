@@ -185,12 +185,12 @@ describe('Post message route', () => {
     .send({
       messageBody: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       groupId: '-Kwetw__qC1ogqKZDAx7',
-      postedBy: '',
+      postedBy: 'alec_hartmann94@yahoo.com',
       postedByDisplayName: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
-      postedon: (new Date()).toLocaleString('en-GB'),
+      postedOn: (new Date()).toLocaleString('en-GB'),
       priority: 'normal',
       groupName: 'Denesik - Stiedemann',
-      profilePic: ''
+      profilePic: 'postitappnnam.herokuapp.com/static/files/blank-profile-pic.png'
     })
     .end((err, res) => {
       res.status.should.equal(401);
@@ -225,7 +225,7 @@ describe('Post message route', () => {
       groupId: '',
       postedBy: '',
       postedByDisplayName: '',
-      postedon: '',
+      postedOn: '',
       priority: '',
       groupName: '',
       profilePic: ''
@@ -261,12 +261,12 @@ describe('Post message route', () => {
     .send({
       messageBody: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       groupId: '-Kwetw__qC1ogqKZDAx7',
-      postedBy: '',
+      postedBy: 'alec_hartmann94@yahoo.com',
       postedByDisplayName: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
       postedOn: (new Date()).toLocaleString('en-GB'),
       priority: 'critical',
       groupName: 'Denesik - Stiedemann',
-      profilePic: ''
+      profilePic: 'postitappnnam.herokuapp.com/static/files/blank-profile-pic.png'
     })
     .end((err, res) => {
       res.status.should.equal(200);

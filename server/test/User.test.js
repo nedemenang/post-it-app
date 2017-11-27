@@ -501,7 +501,7 @@ describe('Password Reset', () => {
     chai.request(server)
     .post('/users/passwordReset')
     .send({
-      emailAddress: 'Ron.Johnson8@hotmail.com',
+      emailAddress: 'Natalie.Veum34@gmail.com',
     })
     .end((err, res) => {
       res.status.should.equal(200);

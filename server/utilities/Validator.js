@@ -6,6 +6,31 @@ const Validator = (req, res, next) => {
       .notEmpty();
       req.check('email', 'Please insert a valid email address').isEmail();
       break;
+    case 'messageBody':
+      req.check('messageBody',
+      'Please insert messageBody, groupId, postedBy or priority')
+      .notEmpty();
+      break;
+    case 'postedBy':
+      req.check('postedBy',
+      'Please insert messageBody, groupId, postedBy or priority')
+      .notEmpty();
+      break;
+    case 'postedByDisplayName':
+      req.check('postedByDisplayName',
+      'Please insert messageBody, groupId, postedBy or priority')
+      .notEmpty();
+      break;
+    case 'postedOn':
+      req.check('postedOn',
+      'Please insert messageBody, groupId, postedBy or priority')
+      .notEmpty();
+      break;
+    case 'profilePic':
+      req.check('profilePic',
+      'Please insert messageBody, groupId, postedBy or priority')
+      .notEmpty();
+      break;
     case 'userName':
       req.check('userName', 'Please insert email, password or username')
       .notEmpty();
