@@ -6,11 +6,11 @@ const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: [
-    path.join(__dirname, './Client/index.jsx'),
+    path.join(__dirname, './client/index.jsx'),
     'webpack-hot-middleware/client'
   ],
   output: {
-    path: path.resolve(__dirname, './Client/public'),
+    path: path.resolve(__dirname, './client/public'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -24,7 +24,7 @@ const config = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: './Client/public',
+    contentBase: './client/public',
     inline: true,
     hot: true,
     port: 8080
@@ -45,9 +45,9 @@ const config = {
         loader: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|otf|eot|svg|ttf|woff)$/i,
         use: [
-          'url-loader?limit=10000',
+          'url-loader?limit=100000',
           'img-loader'
         ]
       }

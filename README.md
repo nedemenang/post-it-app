@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/nedemenang/post-it-app.svg?branch=develop)](https://travis-ci.org/nedemenang/post-it-app) [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
-[![codecov.io Code Coverage](https://codecov.io/github/nedemenang/post-it-app/branch/bug-fix%2Fimplement-defense-feedback/graphs/badge.svg)](https://codecov.io/gh/nedemenang/post-it-app/branch/bug-fix%2Fimplement-defense-feedback)
+[![Build Status](https://travis-ci.org/nedemenang/post-it-app.svg?branch=bug-fix%2FFix-directory-naming)](https://travis-ci.org/nedemenang/post-it-app) [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+[![codecov.io Code Coverage](https://codecov.io/github/nedemenang/post-it-app/branch/bug-fix%2FFix-directory-naming/graphs/badge.svg)](https://codecov.io/gh/nedemenang/post-it-app/branch/bug-fix%2FFix-directory-naming)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 
@@ -64,6 +65,32 @@ Fork the repo on GitHub
 Clone the project to your own machine
 Commit changes to your own branch
 Push your work back up to your fork
+
+## Branch and Commit messages naming convention
+### Branch
+ Type / <3 to 4 word story description>
+ Type should be:
+
+    *  feature
+    *   bug-fix
+    *   chore
+    *   release
+    *   refactor
+    *   documentation
+    *   style
+    *   test
+
+### Commit Messages
+  Type / <3 to 4 word story description>
+
+  Blank - space
+  
+  Body / Description
+
+## Project Limitations
+
+ Currently, The project does not include a Direct Messaging feature. This feature could enable users to send messages directly to users in 
+ in groups they belong to. The application also doesn't include a friendship module. Allowing users to send friend request to other users.
 
 ## Authors
 

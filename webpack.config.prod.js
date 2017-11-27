@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 dotenv.load();
 const config = {
   entry: [
-    path.join(__dirname, './Client/index.jsx')
+    path.join(__dirname, './client/index.jsx')
   ],
   devtool: 'source-map',
   output: {
@@ -22,7 +22,7 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       title: 'Production',
-      template: './Client/public/index.html',
+      template: './client/public/index.html',
       inject: false
     }),
     new webpack.DefinePlugin({
