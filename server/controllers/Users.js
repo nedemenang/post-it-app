@@ -1,5 +1,5 @@
 import lodash from 'lodash';
-import groupController from './groups';
+import Groups from './Groups';
 
 export default {
 /**
@@ -287,7 +287,7 @@ export default {
             isRead: values.isRead,
           };
           ununiquegroupMessages.push(message);
-          groupController
+          Groups
           .updateMessageFlag(firebase, userId, groupId, childSnapShot.key);
         });
         groupMessages = lodash.uniqBy(ununiquegroupMessages, 'id');
