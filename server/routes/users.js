@@ -10,11 +10,11 @@ module.exports = (app, firebase, io) => {
     Users.resetPassword(req, res, firebase);
   });
 
-  app.post('/users/confirmPasswordReset', (req, res) => {
+  app.post('/users/confirmPasswordReset', Validator, (req, res) => {
     Users.confirmPasswordReset(req, res, firebase);
   });
 
-  app.post('/users/googleSignin', (req, res) => {
+  app.post('/users/googleSignin', Validator, (req, res) => {
     Users.googleSignin(req, res, firebase);
   });
 
@@ -30,15 +30,16 @@ module.exports = (app, firebase, io) => {
     Users.updateUserProfile(req, res, firebase);
   });
 
-  app.get('/user/:userId/group/:groupId/messages', (req, res) => {
+  app.get('/user/:userId/group/:groupId/messages', Validator, (req, res) => {
     Users.getUserGroupMessagesWithEventListener(req, res, firebase, io);
   });
 
-  app.get('/user/:userId/group/:groupId/quickMessages', (req, res) => {
+  app.get('/user/:userId/group/:groupId/quickMessages',
+  Validator, (req, res) => {
     Users.getUserGroupMessagesWithoutEventListener(req, res, firebase);
   });
 
-  app.get('/user/:userId/groups', (req, res) => {
+  app.get('/user/:userId/groups', Validator, (req, res) => {
     Users.getGroups(req, res, firebase);
   });
 };
