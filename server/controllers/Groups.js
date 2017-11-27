@@ -174,8 +174,7 @@ export default {
   removeUser(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { userId, groupId } = req.body;
-    if (userLogIn && typeof (groupId) === 'string'
-    && typeof (userId) === 'string') {
+    if (userLogIn) {
       const firebaseDatabase = firebase.database();
       const groupRef = firebaseDatabase
         .ref(`groups/${groupId}/users/${userId}`);
@@ -318,8 +317,7 @@ export default {
   getUserReadMessages(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { groupId, messageId } = req.params;
-    if (userLogIn && typeof (groupId) === 'string'
-  && typeof (messageId) === 'string') {
+    if (userLogIn) {
       const isReadRef = firebase.database()
             .ref(`groups/${groupId}/messages/${messageId}/isRead`);
       const usersRead = [];
@@ -362,7 +360,7 @@ export default {
   getUsersNotInGroups(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { groupId } = req.params;
-    if (userLogIn && typeof (groupId) === 'string') {
+    if (userLogIn) {
       const userRef = firebase.database()
         .ref(`groups/${groupId}/users/`);
       const allUserRef = firebase.database()
