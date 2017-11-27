@@ -1,5 +1,5 @@
 import lodash from 'lodash';
-import sendSMS from '../utilities/sendSms';
+import sendSMS from '../utilities/sendSMS';
 import sendEmail from '../utilities/sendMail';
 
 export default {
@@ -65,7 +65,7 @@ export default {
     const userLogIn = firebase.auth().currentUser;
     if (userLogIn) {
       const { groupName, createdBy, dateCreated,
-        createdByUserId, createdByDisplayName } = req.body;
+        creatorId, creatorName } = req.body;
       if (groupName !== '' || createdBy !== '' || dateCreated !== '') {
         const firebaseDatabase = firebase.database();
         const newKey = firebaseDatabase.ref('groups/').push({
@@ -74,14 +74,14 @@ export default {
           dateCreated
         }).key;
         const groupRef = firebaseDatabase.ref(`groups/${newKey}/users/`);
-        groupRef.child(createdByUserId).set({
-          userId: createdByUserId,
+        groupRef.child(creatorId).set({
+          userId: creatorId,
           email: createdBy,
-          userName: createdByDisplayName
+          userName: creatorName
         })
        .then(() => {
          const userRef = firebaseDatabase
-         .ref(`users/${createdByUserId}/groups/`);
+         .ref(`users/${creatorId}/groups/`);
          userRef.child(newKey).set({
            groupId: newKey,
            groupName,
@@ -173,8 +173,9 @@ export default {
    */
   removeUser(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
-    if (userLogIn) {
-      const { userId, groupId } = req.body;
+    const { userId, groupId } = req.body;
+    if (userLogIn && typeof (groupId) === 'string'
+    && typeof (userId) === 'string') {
       const firebaseDatabase = firebase.database();
       const groupRef = firebaseDatabase
         .ref(`groups/${groupId}/users/${userId}`);
@@ -317,7 +318,8 @@ export default {
   getUserReadMessages(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { groupId, messageId } = req.params;
-    if (userLogIn) {
+    if (userLogIn && typeof (groupId) === 'string'
+  && typeof (messageId) === 'string') {
       const isReadRef = firebase.database()
             .ref(`groups/${groupId}/messages/${messageId}/isRead`);
       const usersRead = [];
@@ -360,7 +362,7 @@ export default {
   getUsersNotInGroups(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { groupId } = req.params;
-    if (userLogIn) {
+    if (userLogIn && typeof (groupId) === 'string') {
       const userRef = firebase.database()
         .ref(`groups/${groupId}/users/`);
       const allUserRef = firebase.database()

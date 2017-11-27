@@ -99,7 +99,7 @@ export default {
    *
    * @returns {Response} response object
    */
-  passwordReset(req, res, firebase) {
+  resetPassword(req, res, firebase) {
     const email = req.body.emailAddress;
     firebase.auth().sendPasswordResetEmail(email)
     .then(() => {
@@ -264,10 +264,11 @@ export default {
    *
    * @returns {Response} response object
    */
-  getGroupMessages(req, res, firebase, io) {
+  getUserGroupMessagesWithEventListener(req, res, firebase, io) {
     const userLogIn = firebase.auth().currentUser;
-    if (userLogIn) {
-      const { userId, groupId } = req.params;
+    const { userId, groupId } = req.params;
+    if (userLogIn && typeof (groupId) === 'string'
+    && typeof (userId) === 'string') {
       const messageRef = firebase.database()
         .ref(`users/${userId}/groups/${groupId}/messages/`);
       const ununiquegroupMessages = [];
@@ -313,10 +314,11 @@ export default {
    *
    * @returns {Response} response object
    */
-  getGroupMessagesQuick(req, res, firebase) {
+  getUserGroupMessagesWithoutEventListener(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
-    if (userLogIn) {
-      const { userId, groupId } = req.params;
+    const { userId, groupId } = req.params;
+    if (userLogIn && typeof (groupId) === 'string'
+    && typeof (userId) === 'string') {
       const messageRef = firebase.database()
       .ref(`users/${userId}/groups/${groupId}/messages/`);
       const groupMessages = [];
@@ -367,7 +369,6 @@ export default {
             groupId: childSnapShot.key,
             groupName: childSnapShot.val().groupName,
             newMessage: childSnapShot.val().newMessage
-              // createdby: childSnapShot.val().createdby
           };
           groups.push(group);
         });

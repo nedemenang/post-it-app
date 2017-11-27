@@ -158,26 +158,26 @@ describe('App store', () => {
     groupName: 'Test Group Name',
     dateCreated: '10/17/2017, 4:15:54 PM',
     createdBy: 'validuser@email.com',
-    createdByDisplayName: 'validuser',
+    creatorName: 'validuser',
     createdByProfilePic: '',
-    createdByUserId: '-kW3o43WpdoI903dw'
+    creatorId: '-kW3o43WpdoI903dw'
   };
 
   const groups = [{
     groupName: 'Test Group Name2',
     dateCreated: '10/15/2017, 4:15:54 PM',
     createdBy: 'valid@email.com',
-    createdByDisplayName: 'valid',
+    creatorName: 'valid',
     createdByProfilePic: '',
-    createdByUserId: '-kW3o43Wpf4roI903dw'
+    creatorId: '-kW3o43Wpf4roI903dw'
   },
   {
     groupName: 'Test Group Name',
     dateCreated: '10/17/2017, 4:15:54 PM',
     createdBy: 'validuser@email.com',
-    createdByDisplayName: 'validuser',
+    creatorName: 'validuser',
     createdByProfilePic: '',
-    createdByUserId: '-kW3o43WpdoI903dw'
+    creatorId: '-kW3o43WpdoI903dw'
   }];
 
   const receiveGroup = {

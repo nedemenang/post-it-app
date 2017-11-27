@@ -4,6 +4,7 @@ import { receiveErrors, receiveAuthenticatedUser,
   receiveUserInGroupResults,
   receiveUserNotInGroupResults,
   receiveGroupMessages } from '../actions/AppActions';
+import History from './history';
 
 export const registerNewUser = (user) => {
   axios.post('/users/signup', {
@@ -145,9 +146,9 @@ export const createNewGroup = (group) => {
     groupName: group.groupName,
     dateCreated: group.dateCreated,
     createdBy: group.createdBy,
-    createdByDisplayName: group.createdByDisplayName,
+    creatorName: group.creatorName,
     createdByProfilePic: group.createdByProfilePic,
-    createdByUserId: group.createdByUserId
+    creatorId: group.creatorId
   }).then((response) => {
     receiveSuccess(response.data.message);
   })
@@ -209,15 +210,22 @@ export const getUserGroups = (userId) => {
    })
    .catch((error) => {
      receiveErrors(error.response.data.message);
+     if (error.response.data.message ===
+      'Please log in to see a list of your groups') {
+       localStorage.removeItem('user');
+       setTimeout(() => {
+         History.push('/');
+       }, 1000);
+     }
    });
 };
 
-export const getGroupMessages = (userGroup) => {
+export const getUserGroupMessagesWithEventLister = (userGroup) => {
   axios.get(`/user/${userGroup.userId}/group/${userGroup.groupId}/messages`)
   .catch(() => {});
 };
 
-export const getQuickGroupMessages = (userGroup) => {
+export const getUserGroupMessagesWithoutEventLister = (userGroup) => {
   axios
   .get(`/user/${userGroup.userId}/group/${userGroup.groupId}/quickMessages`)
     .then((response) => {

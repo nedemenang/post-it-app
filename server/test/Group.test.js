@@ -23,8 +23,8 @@ describe('Create group route', () => {
       groupName: faker.company.companyName(),
       createdBy: 'alec_hartmann94@yahoo.com',
       dateCreated: (new Date()).toLocaleString('en-GB'),
-      createdByUserId: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
-      createdByDisplayName: 'Alec'
+      creatorId: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
+      creatorName: 'Alec'
     })
     .end((err, res) => {
       res.status.should.equal(401);
@@ -57,8 +57,8 @@ describe('Create group route', () => {
       groupName: '',
       createdBy: '',
       dateCreated: '',
-      createdByUserId: '',
-      createdByDisplayName: ''
+      creatorId: '',
+      creatorName: ''
     })
     .end((err, res) => {
       res.status.should.equal(400);
@@ -77,8 +77,8 @@ describe('Create group route', () => {
       groupName: faker.company.companyName(),
       createdBy: 'alec_hartmann94@yahoo.com',
       dateCreated: (new Date()).toLocaleString('en-GB'),
-      createdByUserId: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
-      createdByDisplayName: 'Alec'
+      creatorId: '6OWdy7WUyoSqxYoKSUkUIMI8ZWr2',
+      creatorName: 'Alec'
     })
     .end((err, res) => {
       res.status.should.equal(201);

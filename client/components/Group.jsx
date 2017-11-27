@@ -4,7 +4,8 @@ import { selectGroup } from '../actions/AppActions';
 import { ListItem } from 'material-ui/List';
 import Icon from 'react-icons-kit';
 import { bubble } from 'react-icons-kit/icomoon/bubble';
-import { getGroupMessages, getQuickGroupMessages } from '../utils/appAPI';
+import { getUserGroupMessagesWithEventLister,
+  getUserGroupMessagesWithoutEventLister } from '../utils/appAPI';
 
 /**
  * @class Group
@@ -24,9 +25,8 @@ class Group extends Component {
     };
 
     selectGroup(this.props.group);
-    getGroupMessages(userGroup);
-    getQuickGroupMessages(userGroup);
-    // getUsersNotInGroups(this.props.group);
+    getUserGroupMessagesWithEventLister(userGroup);
+    getUserGroupMessagesWithoutEventLister(userGroup);
   }
  /**
   * @param {object} props props object

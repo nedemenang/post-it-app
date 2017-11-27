@@ -1,7 +1,7 @@
 import { login, registerUser,
 receiveErrors, receiveSuccess,
 updateUserProfile, createGroup,
-addMessage, addUserToGroup, updateMessageFlags,
+addMessage, addUserToGroup,
 signOutUser, registerGoogleUser,
 receiveUserNotInGroupResults, receiveGroupMessages,
 receiveUserReadMessages, receiveUserGroups,
@@ -90,9 +90,9 @@ describe('PostIt Actions', () => {
       groupName: 'Test Group Name',
       dateCreated: '10/17/2017, 4:15:54 PM',
       createdBy: 'validuser@email.com',
-      createdByDisplayName: 'validuser',
+      creatorName: 'validuser',
       createdByProfilePic: '',
-      createdByUserId: '-kW3o43WpdoI903dw'
+      creatorId: '-kW3o43WpdoI903dw'
     };
     createGroup(group);
     expect(AppDispatcher.handleViewAction).toHaveBeenCalledWith({
@@ -196,9 +196,9 @@ describe('PostIt Actions', () => {
       groupName: 'Test Group Name',
       dateCreated: '10/17/2017, 4:15:54 PM',
       createdBy: 'validuser@email.com',
-      createdByDisplayName: 'validuser',
+      creatorName: 'validuser',
       createdByProfilePic: '',
-      createdByUserId: '-kW3o43WpdoI903dw'
+      creatorId: '-kW3o43WpdoI903dw'
     }];
     receiveUserGroups(groups);
     expect(AppDispatcher.handleViewAction).toHaveBeenCalledWith({

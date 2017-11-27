@@ -29,9 +29,9 @@ class GroupForm extends Component {
         groupName,
         dateCreated,
         createdBy: JSON.parse(user).email,
-        createdByDisplayName: JSON.parse(user).displayName,
+        creatorName: JSON.parse(user).displayName,
         createdByProfilePic: JSON.parse(user).profilePic,
-        createdByUserId: JSON.parse(user).id
+        creatorId: JSON.parse(user).id
       };
       createGroup(group);
       this.setState({
