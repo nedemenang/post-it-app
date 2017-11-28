@@ -267,8 +267,7 @@ export default {
   getUserGroupMessagesWithEventListener(req, res, firebase, io) {
     const userLogIn = firebase.auth().currentUser;
     const { userId, groupId } = req.params;
-    if (userLogIn && typeof (groupId) === 'string'
-    && typeof (userId) === 'string') {
+    if (userLogIn) {
       const messageRef = firebase.database()
         .ref(`users/${userId}/groups/${groupId}/messages/`);
       const ununiquegroupMessages = [];
@@ -317,8 +316,7 @@ export default {
   getUserGroupMessagesWithoutEventListener(req, res, firebase) {
     const userLogIn = firebase.auth().currentUser;
     const { userId, groupId } = req.params;
-    if (userLogIn && typeof (groupId) === 'string'
-    && typeof (userId) === 'string') {
+    if (userLogIn) {
       const messageRef = firebase.database()
       .ref(`users/${userId}/groups/${groupId}/messages/`);
       const groupMessages = [];
