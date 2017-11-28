@@ -64,7 +64,7 @@ describe('Create group route', () => {
       res.status.should.equal(400);
       res.body.should.be.a('object');
       res.body.message
-      .should.equal('Please insert groupname or createdby or datecreated');
+      .should.equal('Please insert groupname or other parameters');
       res.body.should.have.property('message');
       done();
     });

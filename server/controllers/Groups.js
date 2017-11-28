@@ -98,7 +98,7 @@ export default {
        });
       } else {
         res.status(400).send({
-          message: 'Please insert groupname or createdby or datecreated'
+          message: 'Please insert groupname or other parameters'
         });
       }
     } else {
@@ -151,7 +151,7 @@ export default {
        });
       } else {
         res.status(400).send({
-          message: 'Please insert userId or groupName',
+          message: 'Please insert groupname or other parameters',
         });
       }
     } else {

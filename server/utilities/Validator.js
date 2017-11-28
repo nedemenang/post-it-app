@@ -21,6 +21,31 @@ const Validator = (req, res, next) => {
       'Please insert messageBody, groupId, postedBy or priority')
       .notEmpty();
       break;
+    case 'creatorId':
+      req.check('creatorId',
+      'Please insert creatorId')
+      .notEmpty();
+      break;
+    case 'creatorName':
+      req.check('creatorName',
+      'Please insert creator name')
+      .notEmpty();
+      break;
+    case 'dateCreated':
+      req.check('dateCreated',
+      'Please insert date created')
+      .notEmpty();
+      break;
+    case 'createdBy':
+      req.check('createdBy',
+      'Please insert groupname or createdby or datecreated')
+      .notEmpty();
+      break;
+    case 'groupName':
+      req.check('groupName',
+      'Please insert groupname or other parameters')
+      .notEmpty();
+      break;
     case 'postedOn':
       req.check('postedOn',
       'Please insert messageBody, groupId, postedBy or priority')
